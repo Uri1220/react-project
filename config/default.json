@@ -1,0 +1,10 @@
+{
+    "port": 5000,
+    "jwtSecret": "vladilen youtube mern",
+    "mongoUri": "mongodb+srv://Uri:ryioP45!@cluster0.r1qwc.mongodb.net/reactDB?retryWrites=true&w=majority",
+
+    "baseUrl": "http://localhost:5000"
+  }
+
+
+  
