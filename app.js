@@ -11,9 +11,7 @@ const pensRoute = require('./routes/pens')
 
 app.use('/pens',pensRoute)
 
-app.get('/pens',(req,res) => {
-    res.send('pens page')
-})
+
 app.get('/',(req,res) => {
     res.send('Home page')
 })
