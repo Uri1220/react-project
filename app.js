@@ -11,12 +11,12 @@ const pensRoute = require('./routes/pens')
 
 app.use('/pens',pensRoute)
 
-app.get('/pens',(req,res) => {
-    res.send('pens page')
-})
-app.get('/',(req,res) => {
-    res.send('Home page')
-})
+// app.get('/pens',(req,res) => {
+//     res.send('pens page')
+// })
+// app.get('/',(req,res) => {
+//     res.send('Home page !!!')
+// })
 
 // app.use('/api/auth', require('./routes/auth.routes'))
 // app.use('/api/link', require('./routes/link.routes'))

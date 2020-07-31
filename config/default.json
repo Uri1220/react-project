@@ -1,7 +1,7 @@
 {
     "port": 5000,
     "jwtSecret": "vladilen youtube mern",
-    "mongoUri": "mongodb+srv://Goga:rtyu789@cluster0.o4z5d.azure.mongodb.net/reactDB?retryWrites=true&w=majority",
+    "mongoUri": "mongodb+srv://ura:657kkk@cluster0.xtwit.azure.mongodb.net/ggg333?retryWrites=true&w=majority",
     "baseUrl": "http://localhost:5000"
   }
 
