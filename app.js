@@ -2,10 +2,12 @@ const express = require('express')
 const config = require('config')
 // const path = require('path')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
 
-  app.use(express.json({ extended: true }))
+app.use(cors())
+app.use(express.json({ extended: true }))
 
 const pensRoute = require('./routes/pens')
 
