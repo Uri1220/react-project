@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Pens = require('../models/Pens')
 
-router.get('/',async(req,res) => {
+router.get('/list',async(req,res) => {
     try {
         const pens = await Pens.find() 
         res.json(pens)     

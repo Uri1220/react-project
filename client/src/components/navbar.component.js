@@ -9,11 +9,11 @@ export default class Navbar extends Component {
         <Link to="/" className="navbar-brand">ExcerTracker</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
-          <li className="navbar-item">
+          {/* <li className="navbar-item">
           <Link to="/" className="nav-link">Exercises</Link>
-          </li>
+          </li> */}
           <li className="navbar-item">
-          <Link to="/create" className="nav-link">Create Exercise Log</Link>
+          <Link to="/pens/list" className="nav-link">ListUser</Link>
           </li>
           <li className="navbar-item">
           <Link to="/pens" className="nav-link">Create User</Link>
