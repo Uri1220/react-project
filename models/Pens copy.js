@@ -9,20 +9,9 @@ const PensSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    price:{
-        type:Number,
-    },
-    color_id:{
-        type:Number,
-    },
-    position:{
-        type:Number,
-    },
-    url:{
+    des:{
         type:String,
-    },
-    pictures:{
-        type:Array,
+        required:true
     },
     date:{
         type:Date,
