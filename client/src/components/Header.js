@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import logo from  '../Logo-1.png'
  import { BrowserRouter as Router, Route,Switch,Link} from "react-router-dom";
- import CreateUser from "./create-user.component";
- import ListUser from "./list-user.component";
+ import CreateHandle from "../pages/CreateHandle";
+ import ListHandles from "../pages/Handles.page";
 
 export default class Header extends Component {
     render() {
@@ -22,7 +22,8 @@ export default class Header extends Component {
                        /> React Site
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                   <Navbar.Collapse id="responsive-navbar-nav"> //то что видно при наж на кнопку
+                   <Navbar.Collapse id="responsive-navbar-nav"> 
+                   {/* то что видно при наж на кнопку */}
                        <Nav className="mr-auto">
                            <Nav.Link href="/">Home</Nav.Link>
                            <Nav.Link href="/pens/list">List</Nav.Link>
@@ -43,8 +44,8 @@ export default class Header extends Component {
            </Navbar>
            <Router>
                <Switch>
-                   <Route path="/pens" exact component={CreateUser} />
-                   <Route path="/pens/list" exact component={ListUser} />
+                   <Route path="/pens" exact component={CreateHandle} />
+                   <Route path="/pens/list" exact component={ListHandles} />
                </Switch>
            </Router>
          </>  
