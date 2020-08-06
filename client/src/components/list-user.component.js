@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Card, Button, Carousel } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 const Exercise = props => (
   <Card style={{ width: '18rem' }} className="mt-3">
@@ -21,10 +21,10 @@ const Exercise = props => (
       </Carousel.Item>
 
     </Carousel> */}
-    
+
     <Card.Img variant="top" src={props.thumbnail} />
     <Card.Body>
-      
+
       <Card.Title>{props.exercise.title}</Card.Title>
       <Card.Subtitle>{props.exercise.price}</Card.Subtitle>
       <Card.Text>
@@ -75,11 +75,11 @@ export default class ListUser extends Component {
       const thumbnail = { ...currentexercise.pictures[0] }.thumbnail
       const original = { ...currentexercise.pictures[0] }.original
 
-      return <Exercise exercise={currentexercise}
+      return <li key={currentexercise._id}> <Exercise exercise={currentexercise}
         medium={medium}
         thumbnail={thumbnail}
         original={original}
-        key={currentexercise._id} />;
+      /></li>
     })
   }
 
@@ -88,21 +88,24 @@ export default class ListUser extends Component {
     return (
       <>
         <h3>Logged Exercises</h3>
-        {/* <table className="table">
-            <thead className="thead-light">
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody> */}
-        {this.exerciseList()}
-        {/* </tbody>
-          </table>
-         */}
+        <ul className="list-unstyled ulstyle"  style={styles.ul} >
 
+          {this.exerciseList()}
+
+        </ul>
       </>
     )
   }
 }
+
+const styles ={ 
+  ul:{
+    display: 'flex',
+  flexWrap:'wrap',
+  justifyContent:' space-around',
+  alignItems: 'center' }
+
+}
+ 
+  
+
