@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import logo from  '../Logo-1.png'
- import { BrowserRouter as Router, Route,Switch,Link} from "react-router-dom";
- import CreateHandle from "../pages/CreateHandle";
- import ListHandles from "../pages/Handles.page";
+//  import { BrowserRouter as Router, Route,Switch,Link} from "react-router-dom";
+//  import CreateHandle from "../pages/CreateHandle";
+//  import ListHandles from "../pages/Handles.page";
 
 export default class Header extends Component {
     render() {
@@ -42,12 +42,12 @@ export default class Header extends Component {
                </Container>
 
            </Navbar>
-           <Router>
+           {/* <Router>
                <Switch>
                    <Route path="/pens" exact component={CreateHandle} />
                    <Route path="/pens/list" exact component={ListHandles} />
                </Switch>
-           </Router>
+           </Router> */}
          </>  
         )
     }
