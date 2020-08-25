@@ -3,7 +3,7 @@ import HandleCart from '../components/HandleCart'
 
 function ListHandles({handles}) {
 
-       console.log (handles)    
+      // console.log (handles)    
    
     return (
     <div>
