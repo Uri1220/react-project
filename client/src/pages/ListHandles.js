@@ -1,14 +1,20 @@
 import React from 'react'
 import HandleCart from '../components/HandleCart'
+import {useSelector} from 'react-redux'
 
-function ListHandles({handles}) {
+function ListHandles() {
+  const {items} = useSelector(({handles})=>{
+    return{      
+      items : handles.items
+    }
+  })
 
-      // console.log (handles)    
+      //  console.log (items)    
    
     return (
     <div>
       <ul className="list-unstyled ulstyle"  style={styles.ul}>
-       {handles.map
+       { items.map
        (
          (handleItem)=>
         <HandleCart key={handleItem._id}
