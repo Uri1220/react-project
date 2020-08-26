@@ -4,32 +4,16 @@ import { Route } from "react-router-dom";
 import ListHandles from "./pages/ListHandles";
 import Header from './components/Header';
 import CreateHandle from '../src/pages/CreateHandle';
-import {setPens} from './redux/actions/handlesA'
+import {fetchPens} from './redux/actions/handlesA'
 import {useDispatch} from 'react-redux'
-import axios from 'axios';
 
 
 function App() {
 
-  const dispatch = useDispatch()
-  // const ss = useSelector(state=>state)
-  // console.log(ss)
-
-  //  const hranilishe = useSelector(({handles})=>{
-  //    return{
-       // handles - так обозвали в редюсере handlesR
-       // useSelector возвр д. в хранилище 
-   //    items : handles.items
-  //    }
-  //  })
-  // console.log(hranilishe)
-
+  const dispatch = useDispatch() 
 
   React.useEffect(() => {
-    axios.get('http://localhost:5000/pens/list').then(({data})=>{
-      // console.log(data)
-      dispatch(setPens(data))  
-     })
+       dispatch(fetchPens())  
   }, [])
 
   return (

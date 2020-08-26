@@ -1,4 +1,11 @@
-// import axios from 'axios';
+ import axios from 'axios';
+
+export const fetchPens = ()=>(dispatch)=>{
+  axios.get('http://localhost:5000/pens/list').then(({data})=>{
+    // console.log(data)
+    dispatch(setPens(data))  
+   })
+}
 
 // export const setLoaded = (payload) => ({
 //   type: 'SET_LOADED',
