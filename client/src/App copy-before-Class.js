@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Route } from "react-router-dom";
 import ListHandles from "./pages/ListHandles";
 import Header from './components/Header';
-import CreateHandle from '../src/pages/CreateHandle';
+import CreateHandle from './pages/CreateHandle';
 
 
 function App() {
