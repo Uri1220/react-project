@@ -1,14 +1,20 @@
 import React from 'react'
 import HandleCart from '../components/HandleCart'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import {fetchPens} from '../redux/actions/handlesA'
+
 
 function ListHandles() {
+  const dispatch = useDispatch() 
+  React.useEffect(() => {
+    dispatch(fetchPens())  
+}, [])
+
   const {items} = useSelector(({handles})=>{
     return{      
       items : handles.items
     }
   })
-
       //  console.log (items)    
    
     return (

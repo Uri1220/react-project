@@ -4,17 +4,17 @@ import { Route } from "react-router-dom";
 import ListHandles from "./pages/ListHandles";
 import Header from './components/Header';
 import CreateHandle from '../src/pages/CreateHandle';
-import {fetchPens} from './redux/actions/handlesA'
-import {useDispatch} from 'react-redux'
+// import {fetchPens} from './redux/actions/handlesA'
+ // import {useDispatch} from 'react-redux'
 
 
 function App() {
 
-  const dispatch = useDispatch() 
+  // const dispatch = useDispatch() 
 
-  React.useEffect(() => {
-       dispatch(fetchPens())  
-  }, [])
+  // React.useEffect(() => {
+  //      dispatch(fetchPens())  
+  // }, [])
 
   return (
     <div className="container">
