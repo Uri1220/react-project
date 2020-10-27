@@ -11,7 +11,10 @@ function App() {
     // <Router>
     <div className="container">
      {/* <Navbar /> */}
-     <Header/>
+
+     {/* <Header/> */}
+     <h1>Start</h1>
+
      {/* <Route path="/pens" exact component={CreateUser} />
      <Route path="/pens/list" exact component={ListUser} /> */}
      
