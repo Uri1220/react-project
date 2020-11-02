@@ -1,25 +1,44 @@
-import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-// import { BrowserRouter as Router, Route} from "react-router-dom";
-// import CreateUser from "./components/create-user.component";
-// import ListUser from "./components/list-user.component";
-//  import Navbar from "./components/navbar.component"
-import Header from './components/Header';
+import React, {useState} from 'react';
+import Header from '../src/components/my/Header'
+import Sidebar from '../src/components/my/Sidebar'
+import Aside from '../src/components/my/Aside'
+import Content from '../src/components/my/Content'
+import Footer from '../src/components/my/Footer'
+
 
 function App() {
+  function openMenu() {
+    document.querySelector(".sidebar").classList.add("open");
+  }
+  function closeMenu() {
+    document.querySelector(".sidebar").classList.remove("open");
+  }
+
+  const [categories, setCategories] = useState(['Фурнитура','Плинтус','Двери']);
+    // console.log(categories)
+
+    const [activeCategory, setActiveCategory] = React.useState(0)
+    // console.log(categories[activeCategory])
+    const category = categories[activeCategory]
   return (
-    // <Router>
-    <div className="container">
-     {/* <Navbar /> */}
-
-     {/* <Header/> */}
-     <h1>Start</h1>
-
-     {/* <Route path="/pens" exact component={CreateUser} />
-     <Route path="/pens/list" exact component={ListUser} /> */}
-     
+    <div className="wrapper">
+      <div className="grid-container">
+        <Header openMenu = {openMenu}/>
+        <Sidebar
+         closeMenu = {closeMenu}
+         categories = {categories}
+         activeCategory = {activeCategory}
+         setActiveCategory ={setActiveCategory}
+         />
+        <Aside 
+        activeCategory = {activeCategory}
+        categories = {categories}
+        setActiveCategory ={setActiveCategory}
+        />
+        <Content category = {category}/> 
+        <Footer/> 
+      </div>
     </div>
-    // </Router>
   );
 }
 
