@@ -10,6 +10,8 @@ router.get('/list',async(req,res) => {
         res.json({message:error})
     } 
     // fetch('http://localhost:5000/pens').then(result=>{console.log(result)})  
+
+    //fetch('http://localhost:5000/pens/list').then(result=>result.json()).then(json=>console.log(json))
 })
 router.post('/',async(req,res) => {
     const pens = new Pens({

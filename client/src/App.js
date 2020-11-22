@@ -14,6 +14,16 @@ function App() {
     document.querySelector(".sidebar").classList.remove("open");
   }
 
+  const [pens, setPens] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://localhost:5000/pens/list')
+      .then(result => result.json())
+      .then(json => setPens(json));
+
+  }, [])
+  // console.log(pens)
+
   const [categories, setCategories] = useState(['Фурнитура','Плинтус','Двери']);
     // console.log(categories)
 
@@ -35,7 +45,7 @@ function App() {
         categories = {categories}
         setActiveCategory ={setActiveCategory}
         />
-        <Content category = {category}/> 
+        <Content  pens={pens} category = {category}/> 
         <Footer/> 
       </div>
     </div>

@@ -174,14 +174,14 @@ grid-area: m;
 }
 .products li{
   flex: 0 1 34rem;
-  height: 50rem;
   margin: 1rem;
-  height: 42rem;
+  height: 24rem;
   border: 1px solid black;
 }
 .product-image{
-  min-width: 34rem;
-  min-height: 34rem;
+  /* min-width: 34rem;
+  min-height: 34rem; */
+  width: 18rem;
 
 }
 .product-name {
