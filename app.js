@@ -48,4 +48,7 @@ async function start() {
   }
 }
 
+// "mongoUri": "mongodb+srv://shop:shop12345@cluster0-fokk9.mongodb.net/star?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true",
+// "baseUrl": "http://localhost:5000"
+
 start()

@@ -1,7 +1,11 @@
 import React from 'react'
-// import classNames from 'classnames'
+import { useDispatch } from 'react-redux'
+import { setPenCategory } from '../../redux/actions/penFiltersA'
 
-const CategoriesList = ({ categories,activeCategory,setActiveCategory  }) => {
+
+const CategoriesList = ({ categories, activeCategory}) => {
+
+    const dispatch = useDispatch();
 
     const styles = {
         ul: {
@@ -13,10 +17,11 @@ const CategoriesList = ({ categories,activeCategory,setActiveCategory  }) => {
             marginTop: 15
         }
     }
-    //  const [activeCategory, setActiveCategory] = React.useState(0)
-     const onClickCategory =(index) =>{
-        setActiveCategory(index)
-     }
+
+
+    const onClickCategory = (index) => {
+        dispatch(setPenCategory(index))
+    }
     return (
         <div className="categories-list">
             <h2 style={styles.h2}>Categories</h2>
@@ -25,18 +30,11 @@ const CategoriesList = ({ categories,activeCategory,setActiveCategory  }) => {
                     categories &&
                     categories.map((item, index) =>
                         <li
-                        className={ activeCategory === index ? 'active' : 'sidebar-link'}
+                            className={activeCategory === index ? 'active' : 'sidebar-link'}
 
-                        // className={`sidebar-link ${ activeCategory === index ? 'active' : ''}` }
+                            onClick={() => onClickCategory(index)}
 
-                        //  className={classNames( 'sidebar-link',
-                        //   {active: activeCategory === index})}
-
-                        //  onClick={() => setActiveCategory(index)}
-
-                         onClick={() => onClickCategory(index)}
-
-                         key={`${item}_${index}`}>                       
+                            key={`${item}_${index}`}>
                             {item}
                         </li>)}
             </ul>
@@ -45,4 +43,3 @@ const CategoriesList = ({ categories,activeCategory,setActiveCategory  }) => {
     )
 }
 export default CategoriesList;
-// className={ activeCategory === index ? 'active' : 'sidebar-link'}

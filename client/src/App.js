@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import Header from '../src/components/my/Header'
 import Sidebar from '../src/components/my/Sidebar'
 import Aside from '../src/components/my/Aside'
 import Content from '../src/components/my/Content'
 import Footer from '../src/components/my/Footer'
-
+import axios from 'axios'
+import { setPens } from '../src/redux/actions/pensA'
 
 function App() {
   function openMenu() {
@@ -14,39 +16,47 @@ function App() {
     document.querySelector(".sidebar").classList.remove("open");
   }
 
-  const [pens, setPens] = React.useState([])
+  const dispatch = useDispatch();
+  
+  // const hranilishe = useSelector(state => state)
+  // console.log(hranilishe)
+
+  const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => { 
+    //достаем данн из redux
+    return {
+      redux_items: pens.pens,
+      redux_category: penFilters.category
+    }
+  })
+
 
   React.useEffect(() => {
-    fetch('http://localhost:5000/pens/list')
-      .then(result => result.json())
-      .then(json => setPens(json));
-
+    axios.get('http://localhost:5000/pens/list')
+    //запихиваем в redux массив с данными 
+      .then(data => { dispatch(setPens(data.data)) });
   }, [])
-  // console.log(pens)
 
-  const [categories, setCategories] = useState(['Фурнитура','Плинтус','Двери']);
-    // console.log(categories)
+  const categories = ['Фурнитура', 'Плинтус', 'Двери'];
 
-    const [activeCategory, setActiveCategory] = React.useState(0)
-    // console.log(categories[activeCategory])
-    const category = categories[activeCategory]
+  const category = categories[redux_category]
   return (
     <div className="wrapper">
       <div className="grid-container">
-        <Header openMenu = {openMenu}/>
+        <Header openMenu={openMenu} />
+
         <Sidebar
-         closeMenu = {closeMenu}
-         categories = {categories}
-         activeCategory = {activeCategory}
-         setActiveCategory ={setActiveCategory}
-         />
-        <Aside 
-        activeCategory = {activeCategory}
-        categories = {categories}
-        setActiveCategory ={setActiveCategory}
+          closeMenu={closeMenu}
+          categories={categories}
+          activeCategory={redux_category}
         />
-        <Content  pens={pens} category = {category}/> 
-        <Footer/> 
+
+        <Aside
+          activeCategory={redux_category}
+          categories={categories}
+        />
+
+        <Content pens={redux_items} category={category} />
+        <Footer />
       </div>
     </div>
   );

@@ -1,0 +1,6 @@
+export const PENS_LIST_REQUEST = 'PENS_LIST_REQUEST';
+export const PENS_LIST_SUCCESS = 'PENS_LIST_SUCCESS';
+export const PENS_LIST_FAIL = 'PENS_LIST_FAIL';
+
+export const  LOAD_CATEGORY = 'LOAD_CATEGORY';
+export const  LOAD_SORT_BY= 'LOAD_SORT_BY';
