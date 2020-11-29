@@ -11,8 +11,8 @@ const Header = ({openMenu}) => {
          </div>
 
          <div className="header__right">
-            <div className="header__link "><a href="#">About the shelter</a></div>
-            <div className="header__link "><a href="#">Our pets</a></div>
+            {/* <div className="header__link "><a href="#">About the shelter</a></div>
+            <div className="header__link "><a href="#">Our pets</a></div> */}
          </div>
       </div>
 

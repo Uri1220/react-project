@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoriesList from './Categories-list'
 
-const Sidebar = ({ closeMenu, categories,activeCategory,setActiveCategory  }) => {
+const Sidebar = ({ closeMenu, categories,activeCategory}) => {
     return (
         <div className="sidebar ">
             <button
@@ -12,7 +12,6 @@ const Sidebar = ({ closeMenu, categories,activeCategory,setActiveCategory  }) =>
             <CategoriesList
              categories={categories}
              activeCategory = {activeCategory}
-             setActiveCategory ={setActiveCategory}
               />
         </div>
 

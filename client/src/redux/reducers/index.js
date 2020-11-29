@@ -1,9 +1,10 @@
 import { penFilters } from './penFiltersR'
-import { pensListReducer } from './pensListReducer'
+import { pensListReducer, penDetailReducer } from './pensListReducer'
 import {combineReducers} from 'redux';
 
 
 export const rootReducer = combineReducers({
       pens: pensListReducer,
-      penFilters:penFilters
+      penFilters:penFilters,
+      pen: penDetailReducer
    })

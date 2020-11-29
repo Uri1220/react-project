@@ -2,25 +2,17 @@ import {
    PENS_LIST_REQUEST,
    PENS_LIST_SUCCESS,
    PENS_LIST_FAIL,
-   // PRODUCT_DETAILS_REQUEST,
-   // PRODUCT_DETAILS_SUCCESS,
-   // PRODUCT_DETAILS_FAIL,
-   // PRODUCT_SAVE_REQUEST,
-   // PRODUCT_SAVE_SUCCESS,
-   // PRODUCT_SAVE_FAIL,
-   // PRODUCT_DELETE_REQUEST,
-   // PRODUCT_DELETE_SUCCESS,
-   // PRODUCT_DELETE_FAIL,
-   // PRODUCT_REVIEW_SAVE_SUCCESS,
-   // PRODUCT_REVIEW_SAVE_REQUEST,
-   // PRODUCT_REVIEW_SAVE_FAIL,
-   // PRODUCT_REVIEW_SAVE_RESET,
+
+   PEN_DETAILS_REQUEST,
+   PEN_DETAILS_SUCCESS,
+   PEN_DETAILS_FAIL,
+
 } from '../constants/pensConstants';
 
 const initialState = {
    pens: [],
-   loading: false,
-   error: false
+   isLoading: false,
+   //  error: ''
 
 }
 
@@ -30,20 +22,50 @@ function pensListReducer(state = initialState, action) {
       case PENS_LIST_REQUEST:
          return {
             ...state,
-            loading: true
+            isLoading: true
          };
 
       case PENS_LIST_SUCCESS:
          return {
             ...state,
-            loading: false,
+            isLoading: false,
             pens: action.payload
          };
 
       case PENS_LIST_FAIL:
          return {
             ...state,
-            loading: false,
+            isLoading: false,
+            error: action.payload
+         };
+
+      default:
+         return state;
+
+
+   }
+
+}
+function penDetailReducer(state = { pen: {} }, action) {
+
+   switch (action.type) {
+      case PEN_DETAILS_REQUEST:
+         return {
+            ...state,
+            isLoading: true
+         };
+
+      case PEN_DETAILS_SUCCESS:
+         return {
+            ...state,
+            isLoading: false,
+            pen: action.payload
+         };
+
+      case PEN_DETAILS_FAIL:
+         return {
+            ...state,
+            isLoading: false,
             error: action.payload
          };
 
@@ -55,4 +77,7 @@ function pensListReducer(state = initialState, action) {
 
 }
 
-export { pensListReducer } 
+export {
+   pensListReducer,
+   penDetailReducer
+} 

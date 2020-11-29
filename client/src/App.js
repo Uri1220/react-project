@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import Header from '../src/components/my/Header'
 import Sidebar from '../src/components/my/Sidebar'
 import Aside from '../src/components/my/Aside'
 import Content from '../src/components/my/Content'
 import Footer from '../src/components/my/Footer'
-import axios from 'axios'
-import { setPens } from '../src/redux/actions/pensA'
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   function openMenu() {
@@ -16,12 +15,11 @@ function App() {
     document.querySelector(".sidebar").classList.remove("open");
   }
 
-  const dispatch = useDispatch();
-  
+
   // const hranilishe = useSelector(state => state)
   // console.log(hranilishe)
 
-  const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => { 
+  const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
     //достаем данн из redux
     return {
       redux_items: pens.pens,
@@ -29,36 +27,55 @@ function App() {
     }
   })
 
+  //теперь получаем д. асинхронно урок 8 пицца
+  // React.useEffect(() => {
 
-  React.useEffect(() => {
-    axios.get('http://localhost:5000/pens/list')
-    //запихиваем в redux массив с данными 
-      .then(data => { dispatch(setPens(data.data)) });
-  }, [])
+  //   if (!redux_items.length) {
+  //     dispatch(fetchPens())
+  //   }
 
-  const categories = ['Фурнитура', 'Плинтус', 'Двери'];
+  // }, [])
 
-  const category = categories[redux_category]
+  // React.useEffect(() => {
+  //   axios.get('http://localhost:5000/pens/list')
+  //   //запихиваем в redux массив с данными 
+  //     .then(data => { dispatch(setPens(data.data)) });
+  // }, [])
+
+  const categories = [
+    { name:'Главная', url:'/'},
+    { name:'Фурнитура', url:'/pens'},
+    { name:'Плинтус', url:'/plintus'},
+    { name:'Двери', url:'/doors'}
+  ];
+
+  const category = categories[redux_category].name
   return (
-    <div className="wrapper">
-      <div className="grid-container">
-        <Header openMenu={openMenu} />
+    <BrowserRouter>
+      <div className="wrapper">
+        <div className="grid-container">
+          <Header openMenu={openMenu} />
 
-        <Sidebar
-          closeMenu={closeMenu}
-          categories={categories}
-          activeCategory={redux_category}
-        />
+          <Sidebar
+            closeMenu={closeMenu}
+            categories={categories}
+            activeCategory={redux_category}
+          />
 
-        <Aside
-          activeCategory={redux_category}
-          categories={categories}
-        />
+          <Aside
+            activeCategory={redux_category}
+            categories={categories}
+          />
 
-        <Content pens={redux_items} category={category} />
-        <Footer />
+            {/* Route here */}
+          <Content
+            category={category}
+          />
+
+          <Footer />
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,31 +1,78 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-// import { BrowserRouter as Router, Route} from "react-router-dom";
-// import CreateUser from "./components/create-user.component";
-// import ListUser from "./components/list-user.component";
-//  import Navbar from "./components/navbar.component"
-import Header from './components/Header';
-import Basir from './components/Basir';
+import { useSelector, useDispatch } from 'react-redux'
+import Header from '../src/components/my/Header'
+import Sidebar from '../src/components/my/Sidebar'
+import Aside from '../src/components/my/Aside'
+import Content from '../src/components/my/Content'
+import Footer from '../src/components/my/Footer'
+import { fetchPens } from '../src/redux/actions/pensA'
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
+  function openMenu() {
+    document.querySelector(".sidebar").classList.add("open");
+  }
+  function closeMenu() {
+    document.querySelector(".sidebar").classList.remove("open");
+  }
+
+  const dispatch = useDispatch();
+
+  // const hranilishe = useSelector(state => state)
+  // console.log(hranilishe)
+
+  const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
+    //достаем данн из redux
+    return {
+      redux_items: pens.pens,
+      redux_category: penFilters.category
+    }
+  })
+
+  //теперь получаем д. асинхронно урок 8 пицца
+  React.useEffect(() => {
+
+    if (!redux_items.length) {
+      dispatch(fetchPens())
+    }
+
+  }, [])
+
+  // React.useEffect(() => {
+  //   axios.get('http://localhost:5000/pens/list')
+  //   //запихиваем в redux массив с данными 
+  //     .then(data => { dispatch(setPens(data.data)) });
+  // }, [])
+
+  const categories = ['Фурнитура', 'Плинтус', 'Двери'];
+
+  const category = categories[redux_category]
   return (
-    // <Router>
-    <div className="container">
-     {/* <Navbar /> */}
+    <BrowserRouter>
+      <div className="wrapper">
+        <div className="grid-container">
+          <Header openMenu={openMenu} />
 
-     {/* <Header/> */}
-     {/* подключить и все по старому */}
-    <Basir/>
-     {/* <h1>Start</h1>
-     <div className="content">
-       ggggg
-     </div> */}
+          <Sidebar
+            closeMenu={closeMenu}
+            categories={categories}
+            activeCategory={redux_category}
+          />
 
-     {/* <Route path="/pens" exact component={CreateUser} />
-     <Route path="/pens/list" exact component={ListUser} /> */}
-     
-    </div>
-    // </Router>
+          <Aside
+            activeCategory={redux_category}
+            categories={categories}
+          />
+
+          <Content
+            pens={redux_items}
+            category={category}
+          />
+
+          <Footer />
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

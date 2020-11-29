@@ -1,5 +1,11 @@
 import React from 'react'
-import Doorhandle from './Doorhandle'
+import Pens from '../../pages/Pens'
+import Plintus from '../../pages/Plintus'
+import Doors from '../../pages/Doors'
+import Main from '../../pages/Main'
+import { Route, Switch } from 'react-router-dom'
+import PenOne from '../../pages/PenOne'
+
 
 // const styles ={ 
 //   ul:{
@@ -11,7 +17,7 @@ import Doorhandle from './Doorhandle'
 
 // style={styles.ul}
 
-const Content = ({ category, pens }) => {
+const Content = ({ category }) => {
 
   //  console.log(pens)
   return (
@@ -19,7 +25,15 @@ const Content = ({ category, pens }) => {
 
       <div className="content">
         <h3>{category}</h3>
-        <ul className="products" >
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/pens" exact component={Pens}  />
+          <Route path="/pens/:id" component={PenOne}  />
+          <Route path="/plintus" component={Plintus} />
+          <Route path="/doors" component={Doors} />
+        </Switch>
+
+        {/* <ul className="products" >
           {
             pens &&
             pens.map((item) =>
@@ -29,7 +43,7 @@ const Content = ({ category, pens }) => {
                 <Doorhandle pen={item} />
               </li>)
           }
-        </ul>
+        </ul> */}
       </div>
     </main>
 
