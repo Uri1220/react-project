@@ -8,7 +8,8 @@ const Doorhandle = ({ pen }) => {
 
     <div className="product">
       <Link to={'/pens/' + pen._id}>
-        <img className="product-image" src={{ ...pen.pictures[0] }.medium} alt="11" />
+        <img className="product-image" src={pen.url} alt="11" />
+        {/* <img className="product-image" src={{ ...pen.pictures[0] }.medium} alt="11" /> */}
       </Link>
       <div className="product-name">
         <Link to={'/pens/' + pen._id}>

@@ -11,7 +11,8 @@ app.use(express.json({ extended: true }))
 
 const pensRoute = require('./routes/pens')
 
-app.use('/pens',pensRoute)
+// app.use('/pens',pensRoute)
+ app.use('/pens',pensRoute)
 
 // app.get('/pens',(req,res) => {
 //     res.send('pens page')

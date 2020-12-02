@@ -5,6 +5,7 @@ import Doors from '../../pages/Doors'
 import Main from '../../pages/Main'
 import { Route, Switch } from 'react-router-dom'
 import PenOne from '../../pages/PenOne'
+import Cart from '../../pages/Cart'
 
 
 // const styles ={ 
@@ -29,6 +30,7 @@ const Content = ({ category }) => {
           <Route path="/" exact component={Main} />
           <Route path="/pens" exact component={Pens}  />
           <Route path="/pens/:id" component={PenOne}  />
+          <Route path="/cart/:id?" component={Cart}  />
           <Route path="/plintus" component={Plintus} />
           <Route path="/doors" component={Doors} />
         </Switch>

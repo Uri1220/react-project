@@ -26,7 +26,7 @@ export const fetchPens = () => async (dispatch) => {
 //// асинх получаем  Один  ч-з thunk////////////
 export const fetchPenDetail = (penId) => async (dispatch) => {
    try {
-      dispatch({ type: PEN_DETAILS_REQUEST,payload: penId })
+      dispatch({ type: PEN_DETAILS_REQUEST, payload: penId })
       await axios.get('http://localhost:5000/pens/' + penId)
          .then(data => { dispatch({ type: PEN_DETAILS_SUCCESS, payload: data.data }) });
 

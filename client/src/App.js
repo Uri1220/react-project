@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Header from '../src/components/my/Header'
 import Sidebar from '../src/components/my/Sidebar'
 import Aside from '../src/components/my/Aside'
@@ -19,7 +19,8 @@ function App() {
   // const hranilishe = useSelector(state => state)
   // console.log(hranilishe)
 
-  const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
+  // const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
+  const {  redux_category } = useSelector(({ pens, penFilters }) => {
     //достаем данн из redux
     return {
       redux_items: pens.pens,

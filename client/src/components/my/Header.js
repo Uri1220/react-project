@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Header = ({openMenu}) => {
    return (
@@ -11,8 +12,8 @@ const Header = ({openMenu}) => {
          </div>
 
          <div className="header__right">
-            {/* <div className="header__link "><a href="#">About the shelter</a></div>
-            <div className="header__link "><a href="#">Our pets</a></div> */}
+            {/* <div className="header__link "><a href="#">About the shelter</a></div> */}
+            <Link to={"/cart/"}>Cart</Link>
          </div>
       </div>
 
