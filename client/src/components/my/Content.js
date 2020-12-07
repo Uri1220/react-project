@@ -5,6 +5,7 @@ import Doors from '../../pages/Doors'
 import Main from '../../pages/Main'
 import { Route, Switch } from 'react-router-dom'
 import PenOne from '../../pages/PenOne'
+import DoorOne from '../../pages/DoorOne'
 import Cart from '../../pages/Cart'
 
 
@@ -32,7 +33,8 @@ const Content = ({ category }) => {
           <Route path="/pens/:id" component={PenOne}  />
           <Route path="/cart/:id?" component={Cart}  />
           <Route path="/plintus" component={Plintus} />
-          <Route path="/doors" component={Doors} />
+          <Route path="/doors" exact component={Doors} />
+          <Route path="/doors/:id" exact component={DoorOne}  />
         </Switch>
 
         {/* <ul className="products" >
