@@ -7,13 +7,14 @@ import { CART_ADD_ITEM,
    }
     from "../constants/cartConstans";
 
-
-const addToCart = (penId, qty) => async (dispatch, getState) => {
+// const ddd = 'pens/'
+const addToCart = (penId, qty,ur) => async (dispatch, getState) => {
    try {
-     const { data } = await Axios.get('http://localhost:5000/pens/' + penId);
+    //  const { data } = await Axios.get('http://localhost:5000/doors/' + penId);
+     const { data } = await Axios.get('http://localhost:5000/'+ ur + penId);
     //  console.log(data)
     //  console.log(data.url)
-    //  console.log(data.title)
+    //  console.log(data.color_id)
      dispatch({
        type: CART_ADD_ITEM,
         payload: {
@@ -22,6 +23,7 @@ const addToCart = (penId, qty) => async (dispatch, getState) => {
          image: data.url,
          price: data.price,
          countInStock: data.countInStock,
+         path: data.color_id,
          qty
        }
      });
@@ -36,8 +38,8 @@ const addToCart = (penId, qty) => async (dispatch, getState) => {
  const removeFromCart = (productId) => (dispatch, getState) => {
   dispatch({ type: CART_REMOVE_ITEM, payload: productId });
 
-//   const { cart: { cartItems } } = getState();
-//   Cookie.set("cartItems", JSON.stringify(cartItems));
+  const { cart: { cartItems } } = getState();
+  Cookie.set("cartItems", JSON.stringify(cartItems));
  }
 
  export { addToCart,removeFromCart }

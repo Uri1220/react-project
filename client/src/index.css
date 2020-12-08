@@ -183,7 +183,7 @@ grid-area: m;
 .product-image{
   /* min-width: 34rem;
   min-height: 34rem; */
-  width: 18rem;
+  width: 7rem;
 
 }
 .product-name {
@@ -247,7 +247,7 @@ border: 1px solid blue;
   padding: 1rem;
 }
 .details-image {
-  flex: 2 1 60rem;
+  flex: 2 1 15rem;
 }
 .details-image img {
   max-width: 60rem;

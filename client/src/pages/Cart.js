@@ -9,10 +9,33 @@ function Cart(props) {
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
 
+  const cat = useSelector(state => state.penFilters);
+  const { category } = cat;
+  // console.log('cat:',category);
+////////////////////
+let ur = ''
+ if (category === 1 ) {
+   ur = 'pens/'
+ } else if( category === 3) {
+   ur = 'doors/'   
+ }
+ else{
+   ur = ''
+ } 
+ //////////////// 
+//  console.log(ur); 
+ 
+
   const dispatch = useDispatch();
 
   const productId = props.match.params.id;
+  //  const productId = props.match.url;
+  // console.log('qty',props.match.url);
+
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
+
+  // console.log('prodId',productId);
+  // console.log('qty',qty);
 
   const removeFromCartHandler = (productId) => {
     dispatch(removeFromCart(productId));
@@ -20,7 +43,8 @@ function Cart(props) {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty));
+      // dispatch(addToCart(productId, qty));
+      dispatch(addToCart(productId, qty,ur));
     }
   }, []);
 
@@ -54,18 +78,20 @@ function Cart(props) {
                   </div>
                   <div className="cart-name">
                     <div>
-                      <Link to={"/pens/" + item.productId}>
+                      <Link to={"/"+item.path + item.productId}>
+                      {/* <Link to={"/pens/" + item.productId}> */}
                         {item.name}
                       </Link>
 
                     </div>
                     <div>
                       Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, e.target.value))}>
+                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, e.target.value,item.path))}>
                         {[...Array(item.countInStock).keys()].map(x =>
                           <option key={x + 1} value={x + 1}>{x + 1}</option>
                         )}
                       </select>
+                      
                       <button type="button" className="button"
                         onClick={() => removeFromCartHandler(item.productId)} >
                         Delete

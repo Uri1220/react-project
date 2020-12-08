@@ -28,8 +28,8 @@ export const fetchDoorDetail = (doorId) => async (dispatch) => {
    try {
       dispatch({ type: DOOR_DETAILS_REQUEST, payload: doorId })
       await axios.get('http://localhost:5000/doors/' + doorId)
-         // .then(data => { dispatch({ type: DOOR_DETAILS_SUCCESS, payload: data.data }) });
-         .then(data =>  console.log(data));
+         .then(data => { dispatch({ type: DOOR_DETAILS_SUCCESS, payload: data.data }) })
+         //  .then(data =>  console.log('ddooors',data.data.title));
      
    } catch (error) {
       dispatch({ type: DOOR_DETAILS_FAIL, payload: error.message })

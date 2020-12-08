@@ -6,21 +6,25 @@ const DoorSchema = mongoose.Schema({
         type:String,
         required:true
     },
-   //  price:{
-   //      type:Number,
-   //  },
-    parent_id:{
+    price:{
+        type:Number,
+    },
+    color_id:{
         type:String,
     },
     position:{
+        type:Number,
+    },
+    url:{
         type:String,
     },
-   //  url:{
-   //      type:String,
-   //  },
-   //  pictures:{
-   //      type:Array,
-   //  },
+    pictures:{
+        type:Array,
+    },
+    date:{
+        type:Date,
+        default:Date.now
+    },
    
 
 })

@@ -28,8 +28,8 @@ export const fetchPenDetail = (penId) => async (dispatch) => {
    try {
       dispatch({ type: PEN_DETAILS_REQUEST, payload: penId })
       await axios.get('http://localhost:5000/pens/' + penId)
-         .then(data => { dispatch({ type: PEN_DETAILS_SUCCESS, payload: data.data }) });
-
+         .then(data => { dispatch({ type: PEN_DETAILS_SUCCESS, payload: data.data }) })
+         // .then(data =>  console.log('peens',data.data));
    } catch (error) {
       dispatch({ type: PEN_DETAILS_FAIL, payload: error.message })
    }
