@@ -86,12 +86,12 @@ let ur = ''
                     </div>
                     <div>
                       Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, e.target.value,item.path))}>
+                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value),item.path))}>
                         {[...Array(item.countInStock).keys()].map(x =>
                           <option key={x + 1} value={x + 1}>{x + 1}</option>
                         )}
                       </select>
-                      
+                    
                       <button type="button" className="button"
                         onClick={() => removeFromCartHandler(item.productId)} >
                         Delete
@@ -111,7 +111,7 @@ let ur = ''
         <h3>
           Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
         :
-         $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+         $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)}
         </h3>
         <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
           Proceed to Checkout

@@ -18,8 +18,8 @@ const DoorSchema = mongoose.Schema({
     url:{
         type:String,
     },
-    pictures:{
-        type:Array,
+    countInStock:{
+        type:Number,
     },
     date:{
         type:Date,

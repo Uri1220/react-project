@@ -18,12 +18,12 @@ const PensSchema = mongoose.Schema({
     position:{
         type:Number,
     },
+    countInStock:{
+        type:Number,
+    },
     url:{
         type:String,
-    },
-    pictures:{
-        type:Array,
-    },
+    },   
     date:{
         type:Date,
         default:Date.now
