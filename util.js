@@ -1,5 +1,8 @@
-import jwt from 'jsonwebtoken';
-import config from './config';
+// import jwt from 'jsonwebtoken';
+ const jwt = require( 'jsonwebtoken');
+// import config from './config';
+const config = require('config')
+
 const getToken = (user) => {
   return jwt.sign(
     {
@@ -8,7 +11,8 @@ const getToken = (user) => {
       email: user.email,
       isAdmin: user.isAdmin,
     },
-    config.JWT_SECRET,
+    // config.JWT_SECRET,
+    config.get('jwtSecret'),
     {
       expiresIn: '48h',
     }

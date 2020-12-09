@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import PenOne from '../../pages/PenOne'
 import DoorOne from '../../pages/DoorOne'
 import Cart from '../../pages/Cart'
+import SigninScreen from '../../pages/SigninScreen'
 
 
 // const styles ={ 
@@ -29,6 +30,7 @@ const Content = ({ category }) => {
         <h3>{category}</h3>
         <Switch>
           <Route path="/" exact component={Main} />
+          <Route path="/signin" component={SigninScreen} />
           <Route path="/pens" exact component={Pens}  />
           <Route path="/pens/:id" component={PenOne}  />
           <Route path="/cart/:id?" component={Cart}  />

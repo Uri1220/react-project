@@ -17,7 +17,7 @@ const doorRoute = require('./routes/doorRoute')
  app.use('/doors',doorRoute)
  app.use('/user',userRoute)
 
-// app.get('/pens',(req,res) => {
+//  app.get('/pens',(req,res) => {
 //     res.send('pens page')
 // })
 // app.get('/',(req,res) => {
