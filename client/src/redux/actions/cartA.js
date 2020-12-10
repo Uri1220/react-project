@@ -11,7 +11,7 @@ import { CART_ADD_ITEM,
 const addToCart = (penId, qty,ur) => async (dispatch, getState) => {
    try {
     //  const { data } = await Axios.get('http://localhost:5000/doors/' + penId);
-     const { data } = await Axios.get('http://localhost:5000/'+ ur + penId);
+     const { data } = await Axios.get('http://localhost:5000/api/'+ ur + penId);
     //  console.log(data)
     //  console.log(data.url)
     //  console.log(data.color_id)

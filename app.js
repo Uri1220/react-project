@@ -13,9 +13,9 @@ const pensRoute = require('./routes/pens')
 const userRoute = require('./routes/userRoute')
 const doorRoute = require('./routes/doorRoute')
 
- app.use('/pens',pensRoute)
- app.use('/doors',doorRoute)
- app.use('/user',userRoute)
+ app.use('/api/pens',pensRoute)
+ app.use('/api/doors',doorRoute)
+ app.use('/api/user',userRoute)
 
 // app.get('/pens',(req,res) => {
 //     res.send('pens page')

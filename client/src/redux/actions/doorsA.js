@@ -16,7 +16,7 @@ import {
 export const fetchDoors = () => async (dispatch) => {
    try {
       dispatch({ type: DOORS_LIST_REQUEST })
-      await axios.get('http://localhost:5000/doors/list')
+      await axios.get('http://localhost:5000/api/doors/list')
          .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
 
    } catch (error) {
@@ -27,7 +27,7 @@ export const fetchDoors = () => async (dispatch) => {
 export const fetchDoorDetail = (doorId) => async (dispatch) => {
    try {
       dispatch({ type: DOOR_DETAILS_REQUEST, payload: doorId })
-      await axios.get('http://localhost:5000/doors/' + doorId)
+      await axios.get('http://localhost:5000/api/doors/' + doorId)
          .then(data => { dispatch({ type: DOOR_DETAILS_SUCCESS, payload: data.data }) })
          //  .then(data =>  console.log('ddooors',data.data.title));
      

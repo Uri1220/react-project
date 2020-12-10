@@ -16,7 +16,7 @@ import {
 export const fetchPens = () => async (dispatch) => {
    try {
       dispatch({ type: PENS_LIST_REQUEST })
-      await axios.get('http://localhost:5000/pens/list')
+      await axios.get('http://localhost:5000/api/pens/list')
          .then(data => { dispatch({ type: PENS_LIST_SUCCESS, payload: data.data }) });
 
    } catch (error) {
@@ -27,7 +27,7 @@ export const fetchPens = () => async (dispatch) => {
 export const fetchPenDetail = (penId) => async (dispatch) => {
    try {
       dispatch({ type: PEN_DETAILS_REQUEST, payload: penId })
-      await axios.get('http://localhost:5000/pens/' + penId)
+      await axios.get('http://localhost:5000/api/pens/' + penId)
          .then(data => { dispatch({ type: PEN_DETAILS_SUCCESS, payload: data.data }) })
          // .then(data =>  console.log('peens',data.data));
    } catch (error) {

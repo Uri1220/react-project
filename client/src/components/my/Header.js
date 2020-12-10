@@ -1,6 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+const styles ={ 
+//   ul:{
+//   display: 'flex',
+//   flexWrap:'wrap',
+//   justifyContent:' space-around',
+//   alignItems: 'center' }
+     marginRight: '2rem'
+  }
+
+// style={styles.ul}
+
 const Header = ({openMenu}) => {
    return (
       <div className="header">
@@ -13,6 +24,9 @@ const Header = ({openMenu}) => {
 
          <div className="header__right">
             {/* <div className="header__link "><a href="#">About the shelter</a></div> */}
+           
+            <Link  style={styles} to="/signin">SignIn</Link>
+
             <Link to={"/cart/"}>Cart</Link>
          </div>
       </div>
