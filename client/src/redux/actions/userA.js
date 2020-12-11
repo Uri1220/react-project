@@ -27,12 +27,12 @@ const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post("/api/users/signin", { email, password });
-    // const {data}= await Axios.post("http://localhost:5000/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     //вижу в том числе и токен
     console.log(data)
 
-    // Cookie.set('userInfo', JSON.stringify(data));
+    //загружаю в куки далее  в store.js  userInfo подгружается в initialstate
+     Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
   }

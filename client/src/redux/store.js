@@ -5,12 +5,12 @@ import Cookie from 'js-cookie';
 // const initialState = {}
 
 const cartItems = Cookie.getJSON('cartItems') || [];
+const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {
-  cart: { cartItems },
-  // userSignin: { userInfo },
-}
-
+  cart: { cartItems, shipping: {}, payment: {} },
+  userSignin: { userInfo },
+};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(

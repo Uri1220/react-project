@@ -12,15 +12,16 @@ function SigninScreen(props) {
   const dispatch = useDispatch();
   // const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
   
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     // props.history.push(redirect);
-  //     props.history.push("/");
-  //   }
-  //   return () => {
-  //     //
-  //   };
-  // }, [userInfo]);
+  // в куках есть userInfo поэтому страница не отображся идет редирект
+  useEffect(() => {
+    if (userInfo) {
+      // props.history.push(redirect);
+      props.history.push("/");
+    }
+    return () => {
+      //
+    };
+  }, [userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
