@@ -8,6 +8,7 @@ import PenOne from '../../pages/PenOne'
 import DoorOne from '../../pages/DoorOne'
 import Cart from '../../pages/Cart'
 import SigninScreen from '../../pages/SigninScreen'
+import RegisterScreen from '../../pages/RegisterScreen'
 
 
 // const styles ={ 
@@ -32,6 +33,7 @@ const Content = ({ category }) => {
           <Route path="/" exact component={Main} />
           <Route path="/pens" exact component={Pens}  />
           <Route path="/signin" exact component={SigninScreen}  />
+          <Route path="/register" component={RegisterScreen} />
           <Route path="/pens/:id" component={PenOne}  />
           <Route path="/cart/:id?" component={Cart}  />
           <Route path="/plintus" component={Plintus} />

@@ -14,5 +14,6 @@ export const rootReducer = combineReducers({
       doors: doorsListReducer,
       door: doorDetailReducer,
       cart:cartReducer,
-      userSignin:userSigninReducer
+      userSignin:userSigninReducer,
+      userRegister: userRegisterReducer,
    })
