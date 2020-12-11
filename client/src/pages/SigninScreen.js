@@ -8,20 +8,23 @@ function SigninScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const userSignin = useSelector(state => state.userSignin);
-  // const { loading, userInfo, error } = userSignin;
+   const { loading, userInfo, error } = userSignin;
   const dispatch = useDispatch();
-  const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+  // const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+  
   // useEffect(() => {
   //   if (userInfo) {
-  //     props.history.push(redirect);
+  //     // props.history.push(redirect);
+  //     props.history.push("/");
   //   }
   //   return () => {
-      
+  //     //
   //   };
   // }, [userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // console.log('fgffggf')
      dispatch(signin(email, password));
 
   }
@@ -32,8 +35,8 @@ function SigninScreen(props) {
           <h2>Sign-In</h2>
         </li>
         <li>
-          {/* {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>} */}
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
         </li>
         <li>
           <label htmlFor="email">
@@ -54,7 +57,7 @@ function SigninScreen(props) {
           New to amazona?
         </li>
         <li>
-          <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your amazona account</Link>
+          {/* <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your amazona account</Link> */}
         </li>
       </ul>
     </form>

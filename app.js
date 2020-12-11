@@ -2,9 +2,11 @@ const express = require('express')
 const config = require('config')
 // const path = require('path')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const app = express()
+app.use(bodyParser.json())
 
 app.use(cors())
 app.use(express.json({ extended: true }))
@@ -15,7 +17,7 @@ const doorRoute = require('./routes/doorRoute')
 
  app.use('/api/pens',pensRoute)
  app.use('/api/doors',doorRoute)
- app.use('/api/user',userRoute)
+ app.use('/api/users',userRoute)
 
 // app.get('/pens',(req,res) => {
 //     res.send('pens page')

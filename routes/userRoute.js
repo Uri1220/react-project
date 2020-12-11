@@ -3,8 +3,28 @@ const express = require('express')
 const router = express.Router();
 // import User from '../models/userModal';
 const User = require('../models/userModal')
-// import { getToken, isAuth } from '../util';
+//  import { getToken, isAuth } from '../util';
+  const {getToken,isAuth} = require('../util');
 
+//  const jwt = require('jsonwebtoken');
+// const config = require('config')
+
+
+
+// const getToken = (user) => {
+//   return jwt.sign(
+//     {
+//       _id: user._id,
+//       name: user.name,
+//       email: user.email,
+//       isAdmin: user.isAdmin,
+//     },
+//     config.get('jwtSecret'),
+//     {
+//       expiresIn: '48h',
+//     }
+//   );
+// };
 
 
 // router.get('/createadmin', async (req, res) => {
@@ -34,7 +54,7 @@ router.get('/createadmin', async (req, res) => {
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
-      token: getToken(signinUser),
+       token: getToken(signinUser),
     });
   } else {
     res.status(401).send({ message: 'Invalid Email or Password.' });
