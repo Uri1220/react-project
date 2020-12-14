@@ -13,9 +13,10 @@ import {
    DOOR_DELETE_SUCCESS,
    DOOR_DELETE_FAIL,
    DOOR_DELETE_REQUEST,
-   // DOOR_REVIEW_SAVE_REQUEST,
-   // DOOR_REVIEW_SAVE_FAIL,
-   // DOOR_REVIEW_SAVE_SUCCESS,
+
+   DOOR_REVIEW_SAVE_REQUEST,
+   DOOR_REVIEW_SAVE_FAIL,
+   DOOR_REVIEW_SAVE_SUCCESS,
 
 } from '../constants/doorsConstants';
 
@@ -85,6 +86,8 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
 //      const {
 //        userSignin: { userInfo },
 //      } = getState();
+
+
 //      if (!product._id) {
 //        const { data } = await axios.post('/api/doors/', product, {
 //          headers: {
@@ -104,6 +107,8 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
 //        );
 //        dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
 //      }
+
+
 //    } catch (error) {
 //      dispatch({ type: DOOR_SAVE_FAIL, payload: error.message });
 //    }
@@ -115,25 +120,66 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
    try {
      dispatch({ type: DOOR_SAVE_REQUEST, payload: product });
     
-    
-       const { data } = await axios.post('/api/doors/', product );
-       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+              // без PUT
+      //  const { data } = await axios.post('/api/doors/', product );
+      //  dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+
+
+
+     if (!product._id) {
+      const { data } = await axios.post('/api/doors/', product );
+      dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+    } else {
+      const { data } = await axios.put(
+        '/api/doors/' + product._id,        product  );
+      dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+    }
      
    } catch (error) {
      dispatch({ type: DOOR_SAVE_FAIL, payload: error.message });
    }
  };
-
-//  const register = (name, email, password) => async (dispatch) => {
-//   dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
+  //////Update
+//  export const saveProductReview = (productId, review) => async (dispatch, getState) => {
 //   try {
-//     const { data } = await Axios.post("/api/users/register", { name, email, password });
-//     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-//      Cookie.set('userInfo', JSON.stringify(data));
+//     const {
+//       userSignin: {
+//         userInfo: { token },
+//       },
+//     } = getState();
+//     dispatch({ type: PRODUCT_REVIEW_SAVE_REQUEST, payload: review });
+//     const { data } = await axios.post(
+//       `/api/products/${productId}/reviews`,
+//       review,
+//       {
+//         headers: {
+//           Authorization: 'Bearer ' + token,
+//         },
+//       }
+//     );
+//     dispatch({ type: PRODUCT_REVIEW_SAVE_SUCCESS, payload: data });
 //   } catch (error) {
-//     dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
+//     // report error
+//     dispatch({ type: PRODUCT_REVIEW_SAVE_FAIL, payload: error.message });
 //   }
-// }
+// };
+  //////Update
+ export const saveProductReview = (productId, review) => async (dispatch, getState) => {
+  try {
+   
+    dispatch({ type: DOOR_REVIEW_SAVE_REQUEST, payload: review });
+    const { data } = await axios.post(
+      `/api/doors/${productId}/reviews`,
+      review,
+     
+    );
+    dispatch({ type: DOOR_REVIEW_SAVE_SUCCESS, payload: data });
+  } catch (error) {
+    // report error
+    dispatch({ type: DOOR_REVIEW_SAVE_FAIL, payload: error.message });
+  }
+};
+
 
 
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import Door from './Door'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchDoors} from '../redux/actions/doorsA'
 
@@ -23,6 +24,9 @@ function Doors() {
   return (
     <div>
       <h2>Doors Page</h2>
+      <div className="back-to-result">
+        <Link to="/makedoor/">Редактирование</Link>
+      </div>
       {
       isLoading ? (
       <div>Loading...</div>

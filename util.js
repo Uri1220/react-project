@@ -48,6 +48,6 @@ const isAdmin = (req, res, next) => {
 module.exports = {
   getToken:getToken,
   isAuth:isAuth,
-  isAdmin
+  isAdmin:isAdmin
 }
 // export { getToken, isAuth, isAdmin };

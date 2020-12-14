@@ -1,6 +1,6 @@
 import { penFilters } from './penFiltersR'
 import { pensListReducer, penDetailReducer } from './pensListReducer'
-import { doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,} from './doorsListReducer'
+import { doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,doorReviewSaveReducer} from './doorsListReducer'
 import {  userSigninReducer, userRegisterReducer, userUpdateReducer } from './userReducers'
 import { cartReducer } from './cartReducer'
 
@@ -18,5 +18,5 @@ export const rootReducer = combineReducers({
       userRegister: userRegisterReducer,
       doorSave: doorSaveReducer,
       doorDelete: doorDeleteReducer,
-      // doorReviewSave: doorReviewSaveReducer,
+       doorReviewSave: doorReviewSaveReducer,
    })

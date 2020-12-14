@@ -77,6 +77,7 @@ function MakeDoorScreen(props) {
       })
     );
   };
+    //Delete
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
   };

@@ -13,9 +13,10 @@ import {
    DOOR_DELETE_SUCCESS,
    DOOR_DELETE_FAIL,
    DOOR_DELETE_REQUEST,
-   // DOOR_REVIEW_SAVE_REQUEST,
-   // DOOR_REVIEW_SAVE_FAIL,
-   // DOOR_REVIEW_SAVE_SUCCESS,
+
+   DOOR_REVIEW_SAVE_REQUEST,
+   DOOR_REVIEW_SAVE_FAIL,
+   DOOR_REVIEW_SAVE_SUCCESS,
 
 } from '../constants/doorsConstants';
 
@@ -113,20 +114,20 @@ function doorDeleteReducer(state = { door: {} }, action) {
        return state;
    }
  }
-//  function doorReviewSaveReducer(state = {}, action) {
-//    switch (action.type) {
-//      case DOOR_REVIEW_SAVE_REQUEST:
-//        return { isLoading: true };
-//      case DOOR_REVIEW_SAVE_SUCCESS:
-//        return { isLoading: false, review: action.payload, success: true };
-//      case DOOR_REVIEW_SAVE_FAIL:
-//        return { isLoading: false, errror: action.payload };
-//      case DOOR_REVIEW_SAVE_RESET:
-//        return {};
-//      default:
-//        return state;
-//    }
-//  }
+ function doorReviewSaveReducer(state = {}, action) {
+   switch (action.type) {
+     case DOOR_REVIEW_SAVE_REQUEST:
+       return { isLoading: true };
+     case DOOR_REVIEW_SAVE_SUCCESS:
+       return { isLoading: false, review: action.payload, success: true };
+     case DOOR_REVIEW_SAVE_FAIL:
+       return { isLoading: false, errror: action.payload };
+   //   case DOOR_REVIEW_SAVE_RESET:
+   //     return {};
+     default:
+       return state;
+   }
+ }
  
 
 export {
@@ -134,5 +135,5 @@ export {
    doorDetailReducer,
    doorDeleteReducer,
    doorSaveReducer,
-   // doorReviewSaveReducer
+   doorReviewSaveReducer
 } 

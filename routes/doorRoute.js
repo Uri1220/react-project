@@ -28,7 +28,7 @@ router.get('/list',async(req,res) => {
 //     }
 // })
             //Создать
- router.post('/', async (req, res) => {
+  router.post('/', async (req, res) => {
 // router.post('/',  isAuth, isAdmin, async (req, res) => {
     const product = new Door({
       title: req.body.title,
@@ -69,17 +69,51 @@ router.delete('/:doorId',async(req,res) => {
         res.json({message:error})
     }   
 })
-router.patch('/:doorId',async(req,res) => {
-    try {
-        const updatedDoor = await Door.updateOne(
-            {_id:req.params.doorId},
-            {$set:{title:req.body.title}},
-            ) 
-        res.json(updatedDoor)     
-    } catch (error) {
-        res.json({message:error})
-    }   
-})
+
+
+router.put('/:id', async (req, res) => {
+    const productId = req.params.id;
+    const product = await Door.findById(productId);
+    if (product) {
+      product.title = req.body.title;
+      product.price = req.body.price;
+      product.url = req.body.url;
+      product.color_id = req.body.color_id;
+      product.category = req.body.category;
+      product.countInStock = req.body.countInStock;
+      product.position = req.body.position;
+      product.description = req.body.description;
+
+    //   title: req.body.title,
+    //   price: req.body.price,
+    //   url: req.body.url,
+    //   color_id:req.body.color_id,
+    //   category: req.body.category,
+    //   countInStock: req.body.countInStock,
+    //   position: req.body.position,
+    //   description: req.body.description,
+
+      const updatedProduct = await product.save();
+      if (updatedProduct) {
+        return res
+          .status(200)
+          .send({ message: 'Product Updated', data: updatedProduct });
+      }
+    }
+    return res.status(500).send({ message: ' Error in Updating Product.' });
+  });
+
+// router.patch('/:doorId',async(req,res) => {
+//     try {
+//         const updatedDoor = await Door.updateOne(
+//             {_id:req.params.doorId},
+//             {$set:{title:req.body.title}},
+//             ) 
+//         res.json(updatedDoor)     
+//     } catch (error) {
+//         res.json({message:error})
+//     }   
+// })
 
 
 module.exports=router 
