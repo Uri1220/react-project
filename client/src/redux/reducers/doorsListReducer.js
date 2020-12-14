@@ -7,6 +7,16 @@ import {
    DOOR_DETAILS_SUCCESS,
    DOOR_DETAILS_FAIL,
 
+   DOOR_SAVE_REQUEST,
+   DOOR_SAVE_SUCCESS,
+   DOOR_SAVE_FAIL,
+   DOOR_DELETE_SUCCESS,
+   DOOR_DELETE_FAIL,
+   DOOR_DELETE_REQUEST,
+   // DOOR_REVIEW_SAVE_REQUEST,
+   // DOOR_REVIEW_SAVE_FAIL,
+   // DOOR_REVIEW_SAVE_SUCCESS,
+
 } from '../constants/doorsConstants';
 
 const initialState = {
@@ -77,7 +87,52 @@ function doorDetailReducer(state = { door: {} }, action) {
 
 }
 
+
+function doorDeleteReducer(state = { door: {} }, action) {
+   switch (action.type) {
+     case DOOR_DELETE_REQUEST:
+       return { isLoading: true };
+     case DOOR_DELETE_SUCCESS:
+       return { isLoading: false, door: action.payload, success: true };
+     case DOOR_DELETE_FAIL:
+       return { isLoading: false, error: action.payload };
+     default:
+       return state;
+   }
+ }
+ 
+ function doorSaveReducer(state = { door: {} }, action) {
+   switch (action.type) {
+     case DOOR_SAVE_REQUEST:
+       return { isLoading: true };
+     case DOOR_SAVE_SUCCESS:
+       return { isLoading: false, success: true, door: action.payload };
+     case DOOR_SAVE_FAIL:
+       return { isLoading: false, error: action.payload };
+     default:
+       return state;
+   }
+ }
+//  function doorReviewSaveReducer(state = {}, action) {
+//    switch (action.type) {
+//      case DOOR_REVIEW_SAVE_REQUEST:
+//        return { isLoading: true };
+//      case DOOR_REVIEW_SAVE_SUCCESS:
+//        return { isLoading: false, review: action.payload, success: true };
+//      case DOOR_REVIEW_SAVE_FAIL:
+//        return { isLoading: false, errror: action.payload };
+//      case DOOR_REVIEW_SAVE_RESET:
+//        return {};
+//      default:
+//        return state;
+//    }
+//  }
+ 
+
 export {
    doorsListReducer,
-   doorDetailReducer
+   doorDetailReducer,
+   doorDeleteReducer,
+   doorSaveReducer,
+   // doorReviewSaveReducer
 } 

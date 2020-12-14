@@ -4,7 +4,7 @@ const router = express.Router();
 // import User from '../models/userModal';
 const User = require('../models/userModal')
 //  import { getToken, isAuth } from '../util';
-  const {getToken,isAuth} = require('../util');
+  const {getToken} = require('../util');
 
 //  const jwt = require('jsonwebtoken');
 // const config = require('config')

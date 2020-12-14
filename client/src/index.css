@@ -70,6 +70,9 @@ a:hover{
   font-size: 20px;
   color: bisque;
 }
+.content-margined {
+  margin: 1rem;
+}
 
 /* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
 

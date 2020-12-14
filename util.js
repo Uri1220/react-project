@@ -22,7 +22,7 @@ const isAuth = (req, res, next) => {
 
   if (token) {
     const onlyToken = token.slice(7, token.length);
-    jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
+    jwt.verify(onlyToken, config.get('jwtSecret'), (err, decode) => {
       if (err) {
         return res.status(401).send({ message: 'Invalid Token' });
       }
@@ -35,18 +35,19 @@ const isAuth = (req, res, next) => {
   }
 };
 
-// const isAdmin = (req, res, next) => {
-//   console.log(req.user);
-//   if (req.user && req.user.isAdmin) {
-//     return next();
-//   }
-//   return res.status(401).send({ message: 'Admin Token is not valid.' });
-// };
+const isAdmin = (req, res, next) => {
+  console.log(req.user);
+  if (req.user && req.user.isAdmin) {
+    return next();
+  }
+  return res.status(401).send({ message: 'Admin Token is not valid.' });
+};
 
 // export { getToken };
 
 module.exports = {
   getToken:getToken,
-  isAuth:isAuth
+  isAuth:isAuth,
+  isAdmin
 }
 // export { getToken, isAuth, isAdmin };

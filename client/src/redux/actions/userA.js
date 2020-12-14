@@ -29,7 +29,7 @@ const signin = (email, password) => async (dispatch) => {
     const { data } = await Axios.post("/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     //вижу в том числе и токен
-    console.log(data)
+    // console.log(data)
 
     //загружаю в куки далее  в store.js  userInfo подгружается в initialstate
      Cookie.set('userInfo', JSON.stringify(data));

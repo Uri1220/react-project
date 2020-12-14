@@ -9,6 +9,7 @@ import DoorOne from '../../pages/DoorOne'
 import Cart from '../../pages/Cart'
 import SigninScreen from '../../pages/SigninScreen'
 import RegisterScreen from '../../pages/RegisterScreen'
+import MakeDoorScreen from '../../pages/MakeDoorScreen'
 
 
 // const styles ={ 
@@ -39,6 +40,7 @@ const Content = ({ category }) => {
           <Route path="/plintus" component={Plintus} />
           <Route path="/doors" exact component={Doors} />
           <Route path="/doors/:id" exact component={DoorOne}  />
+          <Route path="/makedoor" component={MakeDoorScreen} />
         </Switch>
 
         {/* <ul className="products" >
