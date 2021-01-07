@@ -2,8 +2,9 @@ import Axios from "axios";
 import Cookie from "js-cookie";
 import { CART_ADD_ITEM,
     CART_REMOVE_ITEM,   
-  //  CART_SAVE_SHIPPING,
-   //  CART_SAVE_PAYMENT
+    CART_SAVE_SHIPPING_ADDRESS,
+    CART_SAVE_PAYMENT_METHOD,
+    CART_ADD_ITEM_FAIL,
    }
     from "../constants/cartConstans";
 
@@ -55,4 +56,12 @@ const addToCart = (penId, qty,ur) => async (dispatch, getState) => {
 //   } catch (error) {
 //      dispatch({ type: PEN_DETAILS_FAIL, payload: error.message })
 //   }
+// };
+export const saveShippingAddress = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
+};
+
+// export const savePaymentMethod = (data) => (dispatch) => {
+//   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
 // };

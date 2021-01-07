@@ -2,18 +2,21 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-const styles ={ 
-//   ul:{
-//   display: 'flex',
-//   flexWrap:'wrap',
-//   justifyContent:' space-around',
-//   alignItems: 'center' }
-     marginRight: '2rem'
-  }
+const styles = {
+   //   ul:{
+   //   display: 'flex',
+   //   flexWrap:'wrap',
+   //   justifyContent:' space-around',
+   //   alignItems: 'center' }
+   marginRight: '2rem'
+}
 
 // style={styles.ul}
 
-const Header = ({openMenu}) => {
+const Header = ({ openMenu }) => {
+
+   const cart = useSelector((state) => state.cart);
+   const { cartItems } = cart;
 
    const userSignin = useSelector((state) => state.userSignin);
    const { userInfo } = userSignin;
@@ -30,17 +33,22 @@ const Header = ({openMenu}) => {
 
          <div className="header__right">
             {/* <div className="header__link "><a href="#">About the shelter</a></div> */}
-           
+
             {/* <Link  style={styles} to="/signin">SignIn</Link> */}
 
 
             {userInfo ? (
-              <Link  style={styles} to="/profile">{userInfo.name}</Link>
+               <Link style={styles} to="/profile">{userInfo.name}</Link>
             ) : (
-              <Link  style={styles} to="/signin">Sign In</Link>
-            )}
+                  <Link style={styles} to="/signin">Sign In</Link>
+               )}
 
-            <Link to={"/cart/"}>Cart</Link>
+            <Link to={"/cart/"}>
+               Cart
+               {cartItems.length > 0 && (
+                  <span className="badge">{cartItems.length}</span>
+               )}
+            </Link>
          </div>
       </div>
 

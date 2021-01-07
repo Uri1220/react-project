@@ -70,7 +70,7 @@ router.delete('/:doorId',async(req,res) => {
     }   
 })
 
-
+                //Update PUT
 router.put('/:id', async (req, res) => {
     const productId = req.params.id;
     const product = await Door.findById(productId);

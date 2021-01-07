@@ -18,5 +18,5 @@ export const rootReducer = combineReducers({
       userRegister: userRegisterReducer,
       doorSave: doorSaveReducer,
       doorDelete: doorDeleteReducer,
-       doorReviewSave: doorReviewSaveReducer,
+      doorReviewSave: doorReviewSaveReducer,
    })

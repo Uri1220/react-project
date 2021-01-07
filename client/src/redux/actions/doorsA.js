@@ -125,7 +125,7 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
       //  dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
 
 
-
+                      //PUT
      if (!product._id) {
       const { data } = await axios.post('/api/doors/', product );
       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
