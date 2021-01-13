@@ -1,4 +1,11 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_SHIPPING_ADDRESS, CART_SAVE_PAYMENT } from "../constants/cartConstans";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_SHIPPING_ADDRESS,
+  CART_SAVE_PAYMENT,
+  CART_ADD_ITEM_FAIL,
+  CART_EMPTY
+} from "../constants/cartConstans";
 
 function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, action) {
 
@@ -13,7 +20,7 @@ function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, actio
         return {
           cartItems:
             state.cartItems.map(x => x.productId === product.productId ? item : x)
-            //заменили старый на новый item иначе оставили старый x
+          //заменили старый на новый item иначе оставили старый x
         };
       }
       /////////////////////////////////////////////
@@ -27,6 +34,11 @@ function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, actio
 
     case CART_SAVE_PAYMENT:
       return { ...state, payment: action.payload };
+
+    case CART_ADD_ITEM_FAIL:
+      return { ...state, error: action.payload };
+    case CART_EMPTY:
+      return { ...state, error: '', cartItems: [] };
 
     default:
       return state

@@ -56,6 +56,7 @@ export default function ShippingAddressScreen(props) {
         })
        );
     //   props.history.push('/payment');
+       props.history.push('/order');
     // }
   };
   // const chooseOnMap = () => {
@@ -82,7 +83,7 @@ export default function ShippingAddressScreen(props) {
           <h1>Shipping Address</h1>
         </div>
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">Ф.И.О.</label>
           <input
             type="text"
             id="fullName"
@@ -93,7 +94,7 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">Адрес</label>
           <input
             type="text"
             id="address"
@@ -103,7 +104,7 @@ export default function ShippingAddressScreen(props) {
             required
           ></input>
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="city">City</label>
           <input
             type="text"
@@ -113,9 +114,9 @@ export default function ShippingAddressScreen(props) {
              onChange={(e) => setCity(e.target.value)}
             required
           ></input>
-        </div>
+        </div> */}
         <div>
-          <label htmlFor="postalCode">Postal Code</label>
+          <label htmlFor="postalCode">Телефон</label>
           <input
             type="text"
             id="postalCode"
@@ -125,7 +126,7 @@ export default function ShippingAddressScreen(props) {
             required
           ></input>
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="country">Country</label>
           <input
             type="text"
@@ -135,7 +136,7 @@ export default function ShippingAddressScreen(props) {
              onChange={(e) => setCountry(e.target.value)}
             required
           ></input>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="chooseOnMap">Location</label>
           <button type="button"

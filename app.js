@@ -14,10 +14,12 @@ app.use(express.json({ extended: true }))
 const pensRoute = require('./routes/pens')
 const userRoute = require('./routes/userRoute')
 const doorRoute = require('./routes/doorRoute')
+const orderRoute = require('./routes/orderRouter')
 
  app.use('/api/pens',pensRoute)
  app.use('/api/doors',doorRoute)
  app.use('/api/users',userRoute)
+ app.use('/api/orders',orderRoute)
 
 // app.get('/pens',(req,res) => {
 //     res.send('pens page')

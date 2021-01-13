@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { addToCart, removeFromCart } from '../redux/actions/cartA';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ShippingAddressScreen from './ShippingAddressScreen';
 
 
 function Cart(props) {
@@ -118,7 +119,7 @@ let ur = ''
       </button>
 
       </div>
-
+          {/* <ShippingAddressScreen/> */}
     </div>
   )
 }

@@ -11,6 +11,7 @@ import SigninScreen from '../../pages/SigninScreen'
 import RegisterScreen from '../../pages/RegisterScreen'
 import MakeDoorScreen from '../../pages/MakeDoorScreen'
 import ShippingAddressScreen from '../../pages/ShippingAddressScreen'
+import PlaceOrderScreen from '../../pages/PlaceOrderScreen'
 
 
 // const styles ={ 
@@ -43,6 +44,7 @@ const Content = ({ category }) => {
           <Route path="/doors/:id" exact component={DoorOne}  />
           <Route path="/makedoor" component={MakeDoorScreen} />
           <Route path="/shipping" component={ShippingAddressScreen} />
+          <Route path="/order" component={PlaceOrderScreen} />
         </Switch>
 
         {/* <ul className="products" >
