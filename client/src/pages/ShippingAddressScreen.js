@@ -7,8 +7,9 @@ export default function ShippingAddressScreen(props) {
   // const userSignin = useSelector((state) => state.userSignin);
 
   // const { userInfo } = userSignin;
-  // const cart = useSelector((state) => state.cart);
-  // const { shippingAddress } = cart;
+  const cart = useSelector((state) => state.cart);
+  const { shipping } = cart;
+  // debugger
   //  const [lat, setLat] = useState(shippingAddress.lat);
   //  const [lng, setLng] = useState(shippingAddress.lng);
   // const userAddressMap = useSelector((state) => state.userAddressMap);
@@ -17,7 +18,7 @@ export default function ShippingAddressScreen(props) {
   // if (!userInfo) {
   //   props.history.push('/signin');
   // }
-  // const [fullName, setFullName] = useState(shippingAddress.fullName);
+  // const [fullName, setFullName] = useState(shipping.fullName);
    const [fullName, setFullName] = useState('');
   // const [address, setAddress] = useState(shippingAddress.address);
    const [address, setAddress] = useState('');
@@ -28,6 +29,7 @@ export default function ShippingAddressScreen(props) {
   // const [country, setCountry] = useState(shippingAddress.country);
    const [country, setCountry] = useState('');
    const dispatch = useDispatch();
+  //  debugger
 
   const submitHandler = (e) => {
     e.preventDefault();

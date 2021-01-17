@@ -21,4 +21,6 @@ export const rootReducer = combineReducers({
       doorDelete: doorDeleteReducer,
       doorReviewSave: doorReviewSaveReducer,
       orderCreate:orderCreateReducer,
+      orderList:orderListReducer,
+      orderDelete:orderDeleteReducer
    })

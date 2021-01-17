@@ -22,7 +22,7 @@ function MakeDoorScreen(props) {
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
 
-  // console.log('doors:',doors)
+   //console.log('doors:',doors)
   // console.log('isLoading:',isLoading)
 
   const doorSave = useSelector((state) => state.doorSave);
@@ -38,6 +38,8 @@ function MakeDoorScreen(props) {
     success: successDelete,
     error: errorDelete,
   } = productDelete;
+  // console.log(productDelete.success)
+
   const dispatch = useDispatch();
 
   useEffect(() => {

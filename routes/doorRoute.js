@@ -63,7 +63,8 @@ router.get('/:doorId',async(req,res) => {
             //Удалить
 router.delete('/:doorId',async(req,res) => {
     try {
-        const removedDoor = await Door.remove({_id:req.params.doorId}) 
+        // const removedDoor = await Door.remove({_id:req.params.doorId}) 
+        const removedDoor = await Door.deleteOne({_id:req.params.doorId}) 
         res.json(removedDoor)     
     } catch (error) {
         res.json({message:error})

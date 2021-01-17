@@ -1,4 +1,10 @@
 /* Common */
+.dd {
+  color:red
+}
+.smaller{
+  width: 20px;
+}
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;

@@ -1,52 +1,60 @@
 import Axios from "axios";
 import Cookie from "js-cookie";
-import { CART_ADD_ITEM,
-    CART_REMOVE_ITEM,   
-    CART_SAVE_SHIPPING_ADDRESS,
-    CART_SAVE_PAYMENT_METHOD,
-    CART_ADD_ITEM_FAIL,
-   }
-    from "../constants/cartConstans";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_SHIPPING_ADDRESS,
+  CART_SAVE_PAYMENT_METHOD,
+  CART_ADD_ITEM_FAIL,
+}
+  from "../constants/cartConstans";
 
 // const ddd = 'pens/'
-const addToCart = (penId, qty,ur) => async (dispatch, getState) => {
-   try {
+const addToCart = (penId, qty, ur) => async (dispatch, getState) => {
+  try {
     //  const { data } = await Axios.get('http://localhost:5000/doors/' + penId);
-     const { data } = await Axios.get('http://localhost:5000/api/'+ ur + penId);
+    const { data } = await Axios.get('http://localhost:5000/api/' + ur + penId);
     //  console.log(data)
     //  console.log(data.url)
     //  console.log(data.color_id)
-     dispatch({
-       type: CART_ADD_ITEM,
-        payload: {
-         productId: data._id,
-         name: data.title,
-         image: data.url,
-         price: data.price,
-         countInStock: data.countInStock,
-         path: data.color_id,
-         qty
-       }
-     });
-      const { cart: { cartItems } } = getState();
-     Cookie.set("cartItems", JSON.stringify(cartItems));
- 
-   } catch (error) {
- 
-   }
- }
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: {
+        productId: data._id,
+        name: data.title,
+        image: data.url,
+        price: data.price,
+        countInStock: data.countInStock,
+        path: data.color_id,
+        qty
+      }
+    });
+    ///COOKIE
+    // const { cart: { cartItems } } = getState();
+    // Cookie.set("cartItems", JSON.stringify(cartItems));
 
- const removeFromCart = (productId) => (dispatch, getState) => {
+    ////LOCALSTORAGE
+    localStorage.setItem(
+      'cartItems',
+      JSON.stringify(getState().cart.cartItems)
+    );
+
+  } catch (error) {
+
+  }
+}
+
+const removeFromCart = (productId) => (dispatch, getState) => {
   dispatch({ type: CART_REMOVE_ITEM, payload: productId });
 
   const { cart: { cartItems } } = getState();
   Cookie.set("cartItems", JSON.stringify(cartItems));
- }
+}
 
- export { addToCart,removeFromCart }
+export { addToCart, removeFromCart }
 
 
- //// асинх получаем  Один  ч-з thunk////////////
+//// асинх получаем  Один  ч-з thunk////////////
 // export const fetchPenDetail = (penId) => async (dispatch) => {
 //   try {
 //      dispatch({ type: PEN_DETAILS_REQUEST, payload: penId })

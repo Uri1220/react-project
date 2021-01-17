@@ -1,4 +1,5 @@
-// import expressAsyncHandler from 'express-async-handler';
+//  import expressAsyncHandler from 'express-async-handler';
+ const expressAsyncHandler = require ('express-async-handler');
 // import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 
 const express = require('express')
@@ -45,7 +46,8 @@ orderRouter.post('/', async (req, res) => {
        const order = new Order({
         orderItems: req.body.orderItems,
         ratings: req.body.ratings,
-        shippingAddress: req.body.shippingAddress,
+        // shippingAddress: req.body.shippingAddress,
+        shipping: req.body.shipping,
       //   paymentMethod: req.body.paymentMethod,
       //   itemsPrice: req.body.itemsPrice,
       //   shippingPrice: req.body.shippingPrice,
@@ -124,20 +126,30 @@ orderRouter.post('/', async (req, res) => {
 //   })
 // );
 
-// orderRouter.delete(
-//   '/:id',
-//   isAuth,
-//   isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const order = await Order.findById(req.params.id);
-//     if (order) {
-//       const deleteOrder = await order.remove();
-//       res.send({ message: 'Order Deleted', order: deleteOrder });
-//     } else {
-//       res.status(404).send({ message: 'Order Not Found' });
-//     }
-//   })
-// );
+orderRouter.delete(
+  '/:id',
+  // isAuth,
+  // isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      const deleteOrder = await order.remove();
+      res.send({ message: 'Order Deleted', order: deleteOrder });
+    } else {
+      res.status(404).send({ message: 'Order Not Found' });
+    }
+  })
+);
+
+// orderRouter.delete('/:doorId',async(req,res) => {
+//   try {
+//       // const removedDoor = await Door.remove({_id:req.params.doorId}) 
+//       const removedOrder = await Order.deleteOne({_id:req.params.doorId}) 
+//       res.json(removedOrder)     
+//   } catch (error) {
+//       res.json({message:error})
+//   }   
+// })
 
 // orderRouter.put(
 //   '/:id/deliver',
