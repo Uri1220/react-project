@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { listOrders, deleteOrder } from '../redux/actions/orderActions';
 
 function OrdersList(props) {
   const dispatch = useDispatch();
-
 
   const orderslist = useSelector((state) => state.orderList);
   const { loading, orders, error } = orderslist;
@@ -52,9 +50,10 @@ function OrdersList(props) {
                         key={item._id}
                       >
                         <div>{item._id}</div>
+                        <div>{item.orderDate}</div>
                         <div> Name:{item.shipping.fullName}</div>
                         <div> Adress:  {item.shipping.address}</div>
-                        <div> {item.shipping.postalCode}</div>
+                        <div> Phone:{item.shipping.postalCode}</div>
                         <div>
                           <button
                             className="button"
@@ -69,7 +68,7 @@ function OrdersList(props) {
                             item.orderItems &&
                             item.orderItems.map((item) =>
                               <div key={item._id}>
-                                <div className="dd">{item._id}</div>
+                                {/* <div className="dd">{item._id}</div> */}
                                 <span className="dd">price:{item.price}</span>
                                 <span className="dd">qty:{item.qty}</span>
                                 {/* <span className="dd">Total:{item.qty}</span> */}

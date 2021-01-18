@@ -1,7 +1,7 @@
 //  import expressAsyncHandler from 'express-async-handler';
  const expressAsyncHandler = require ('express-async-handler');
 // import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
-
+const {isAuth} = require('../util');
 const express = require('express')
 const orderRouter = express.Router()
 const Order = require('../models/orderModel')
@@ -41,22 +41,25 @@ orderRouter.get('/list',async(req,res) => {
 //     res.send(orders);
 //   })
 // );
-orderRouter.post('/', async (req, res) => {
+orderRouter.post('/', isAuth,async (req, res) => {
    // router.post('/',  isAuth, isAdmin, async (req, res) => {
        const order = new Order({
         orderItems: req.body.orderItems,
         ratings: req.body.ratings,
-        // shippingAddress: req.body.shippingAddress,
-        shipping: req.body.shipping,
+       
+         shipping: req.body.shipping,
+         orderDate: Date.now(),
+         user: req.user._id
+         
+         // shippingAddress: req.body.shippingAddress,
       //   paymentMethod: req.body.paymentMethod,
       //   itemsPrice: req.body.itemsPrice,
       //   shippingPrice: req.body.shippingPrice,
       //   taxPrice: req.body.taxPrice,
-        totalPrice: req.body.totalPrice,
-      //   user: req.user._id,
-              
+      // totalPrice: req.body.totalPrice,             
          
        });
+
        const newOrder = await order.save();
        if (newOrder) {
          return res

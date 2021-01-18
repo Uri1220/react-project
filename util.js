@@ -19,7 +19,6 @@ const getToken = (user) => {
 
 const isAuth = (req, res, next) => {
   const token = req.headers.authorization;
-
   if (token) {
     const onlyToken = token.slice(7, token.length);
     jwt.verify(onlyToken, config.get('jwtSecret'), (err, decode) => {
@@ -33,21 +32,21 @@ const isAuth = (req, res, next) => {
   } else {
     return res.status(401).send({ message: 'Token is not supplied.' });
   }
-};
+}
 
-const isAdmin = (req, res, next) => {
-  console.log(req.user);
-  if (req.user && req.user.isAdmin) {
-    return next();
-  }
-  return res.status(401).send({ message: 'Admin Token is not valid.' });
-};
+// const isAdmin = (req, res, next) => {
+//   console.log(req.user);
+//   if (req.user && req.user.isAdmin) {
+//     return next();
+//   }
+//   return res.status(401).send({ message: 'Admin Token is not valid.' });
+// };
 
 // export { getToken };
 
 module.exports = {
   getToken:getToken,
   isAuth:isAuth,
-  isAdmin:isAdmin
+  // isAdmin:isAdmin
 }
 // export { getToken, isAuth, isAdmin };
