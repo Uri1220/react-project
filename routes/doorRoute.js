@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Door = require('../models/doorModal')
 const {isAdmin,isAuth} = require('../util');
-
+    
 router.get('/list',async(req,res) => {
     try {
         const doors = await Door.find() 
@@ -15,21 +15,9 @@ router.get('/list',async(req,res) => {
     // fetch('http://localhost:5000/doors/list')
     // .then(result=>result.json()).then(json=>console.log(json))
 })
-// router.post('/',async(req,res) => {
-//     const doors = new Door({
-//         title:req.body.title,
-//         // des:req.body.des
-//     })
-//     try {
-//         const saveDoors = await doors.save()
-//         res.json(saveDoors)
-//     } catch (error) {
-//         res.json({message:error})
-//     }
-// })
+
             //Создать
-  router.post('/', async (req, res) => {
-// router.post('/',  isAuth, isAdmin, async (req, res) => {
+ router.post('/',  isAuth, isAdmin, async (req, res) => {
     const product = new Door({
       title: req.body.title,
       price: req.body.price,
@@ -39,7 +27,6 @@ router.get('/list',async(req,res) => {
       countInStock: req.body.countInStock,
       position: req.body.position,
       description: req.body.description,
-    //   numReviews: req.body.numReviews,
     });
     const newProduct = await product.save();
     if (newProduct) {
@@ -61,7 +48,7 @@ router.get('/:doorId',async(req,res) => {
 })
 
             //Удалить
-router.delete('/:doorId',async(req,res) => {
+router.delete('/:doorId',isAuth, isAdmin,async(req,res) => {
     try {
         // const removedDoor = await Door.remove({_id:req.params.doorId}) 
         const removedDoor = await Door.deleteOne({_id:req.params.doorId}) 
@@ -72,7 +59,7 @@ router.delete('/:doorId',async(req,res) => {
 })
 
                 //Update PUT
-router.put('/:id', async (req, res) => {
+router.put('/:id',isAuth,isAdmin, async (req, res) => {
     const productId = req.params.id;
     const product = await Door.findById(productId);
     if (product) {
@@ -83,16 +70,7 @@ router.put('/:id', async (req, res) => {
       product.category = req.body.category;
       product.countInStock = req.body.countInStock;
       product.position = req.body.position;
-      product.description = req.body.description;
-
-    //   title: req.body.title,
-    //   price: req.body.price,
-    //   url: req.body.url,
-    //   color_id:req.body.color_id,
-    //   category: req.body.category,
-    //   countInStock: req.body.countInStock,
-    //   position: req.body.position,
-    //   description: req.body.description,
+      product.description = req.body.description;    
 
       const updatedProduct = await product.save();
       if (updatedProduct) {

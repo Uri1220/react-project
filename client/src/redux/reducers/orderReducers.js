@@ -109,18 +109,18 @@ import {
 //        return state;
 //    }
 //  };
-//  export const orderDetailsReducer = (state = { loading: true }, action) => {
-//    switch (action.type) {
-//      case ORDER_DETAILS_REQUEST:
-//        return { loading: true };
-//      case ORDER_DETAILS_SUCCESS:
-//        return { loading: false, order: action.payload };
-//      case ORDER_DETAILS_FAIL:
-//        return { loading: false, error: action.payload };
-//      default:
-//        return state;
-//    }
-//  };
+ export const orderDetailsReducer = (state = { loading: true }, action) => {
+   switch (action.type) {
+     case ORDER_DETAILS_REQUEST:
+       return { loading: true };
+     case ORDER_DETAILS_SUCCESS:
+       return { loading: false, order: action.payload };
+     case ORDER_DETAILS_FAIL:
+       return { loading: false, error: action.payload };
+     default:
+       return state;
+   }
+ };
  
 //  export const orderPayReducer = (state = {}, action) => {
 //    switch (action.type) {
@@ -136,15 +136,15 @@ import {
 //        return state;
 //    }
 //  };
-//  export const orderMineListReducer = (state = { orders: [] }, action) => {
-//    switch (action.type) {
-//      case ORDER_MINE_LIST_REQUEST:
-//        return { loading: true };
-//      case ORDER_MINE_LIST_SUCCESS:
-//        return { loading: false, orders: action.payload };
-//      case ORDER_MINE_LIST_FAIL:
-//        return { loading: false, error: action.payload };
-//      default:
-//        return state;
-//    }
-//  };
+ export const orderMineListReducer = (state = { orders: [] }, action) => {
+   switch (action.type) {
+     case ORDER_MINE_LIST_REQUEST:
+       return { loading: true };
+     case ORDER_MINE_LIST_SUCCESS:
+       return { loading: false, orders: action.payload };
+     case ORDER_MINE_LIST_FAIL:
+       return { loading: false, error: action.payload };
+     default:
+       return state;
+   }
+ };

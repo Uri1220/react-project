@@ -13,6 +13,9 @@ import MakeDoorScreen from '../../pages/MakeDoorScreen'
 import ShippingAddressScreen from '../../pages/ShippingAddressScreen'
 import PlaceOrderScreen from '../../pages/PlaceOrderScreen'
 import OrdersList from '../../pages/OrdersList'
+import OrderHistoryScreen from '../../pages/OrderHistoryScreen'
+import OrderScreen from '../../pages/OrderScreen'
+import ProfileScreen from '../../pages/ProfileScreen'
 
 
 // const styles ={ 
@@ -46,7 +49,10 @@ const Content = ({ category }) => {
           <Route path="/makedoor" component={MakeDoorScreen} />
           <Route path="/orders" component={OrdersList} />
           <Route path="/shipping" component={ShippingAddressScreen} />
-          <Route path="/order" component={PlaceOrderScreen} />
+          <Route path="/order" exact component={PlaceOrderScreen} />
+          <Route path="/order/:id" component={OrderScreen} />
+          <Route path="/orderhistory" component={OrderHistoryScreen} />
+          <Route path="/profile" component={ProfileScreen} />
         </Switch>
 
         {/* <ul className="products" >

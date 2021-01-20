@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config')
 
-// const getToken = (user) => {
 const getToken = (user) => {
   return jwt.sign(
     {
@@ -34,19 +33,17 @@ const isAuth = (req, res, next) => {
   }
 }
 
-// const isAdmin = (req, res, next) => {
-//   console.log(req.user);
-//   if (req.user && req.user.isAdmin) {
-//     return next();
-//   }
-//   return res.status(401).send({ message: 'Admin Token is not valid.' });
-// };
+const isAdmin = (req, res, next) => {
+  // console.log(req.user);
+  if (req.user && req.user.isAdmin) {
+    return next();
+  }
+  return res.status(401).send({ message: 'Admin Token is not valid.' });
+};
 
-// export { getToken };
 
 module.exports = {
   getToken:getToken,
   isAuth:isAuth,
-  // isAdmin:isAdmin
+   isAdmin:isAdmin
 }
-// export { getToken, isAuth, isAdmin };

@@ -1,7 +1,7 @@
 import { penFilters } from './penFiltersR'
 import { pensListReducer, penDetailReducer } from './pensListReducer'
 import { doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,doorReviewSaveReducer} from './doorsListReducer'
-import {  userSigninReducer, userRegisterReducer, userUpdateReducer } from './userReducers'
+import {  userSigninReducer, userRegisterReducer,  userDetailsReducer,userUpdateProfileReducer, userUpdateReducer } from './userReducers'
 import { orderCreateReducer,orderDetailsReducer,orderListReducer,orderDeleteReducer,orderDeliverReducer,orderMineListReducer } from './orderReducers'
 import { cartReducer } from './cartReducer'
 
@@ -22,5 +22,9 @@ export const rootReducer = combineReducers({
       doorReviewSave: doorReviewSaveReducer,
       orderCreate:orderCreateReducer,
       orderList:orderListReducer,
-      orderDelete:orderDeleteReducer
+      orderDelete:orderDeleteReducer,
+      orderMineList:orderMineListReducer,
+      order:orderDetailsReducer,
+      userDetails:userDetailsReducer,
+      userUpdateProfile:userUpdateProfileReducer,
    })
