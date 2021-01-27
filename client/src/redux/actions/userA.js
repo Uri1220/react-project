@@ -1,5 +1,5 @@
 import Axios from "axios";
-import Cookie from 'js-cookie';
+// import Cookie from 'js-cookie';
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -42,7 +42,7 @@ const signin = (email, password) => async (dispatch) => {
     // console.log(data)
 
     //загружаю в куки далее  в store.js  userInfo подгружается в initialstate
-     Cookie.set('userInfo', JSON.stringify(data));
+    //  Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
   }
@@ -53,14 +53,15 @@ const register = (name, email, password) => async (dispatch) => {
   try {
     const { data } = await Axios.post("/api/users/register", { name, email, password });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-     Cookie.set('userInfo', JSON.stringify(data));
+    //  Cookie.set('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
   }
 }
 
 const logout = () => (dispatch) => {
-  Cookie.remove("userInfo");
+  // Cookie.remove("userInfo");
   dispatch({ type: USER_LOGOUT })
 }
 
@@ -73,6 +74,7 @@ const logout = () => (dispatch) => {
     const { data } = await Axios.put(`/api/users/profile`, user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
+    // debugger
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));

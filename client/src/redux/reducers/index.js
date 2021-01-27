@@ -27,4 +27,5 @@ export const rootReducer = combineReducers({
       order:orderDetailsReducer,
       userDetails:userDetailsReducer,
       userUpdateProfile:userUpdateProfileReducer,
+      orderDeliver:orderDeliverReducer
    })

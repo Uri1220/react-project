@@ -1,11 +1,11 @@
 import Axios from "axios";
-import Cookie from "js-cookie";
+// import Cookie from "js-cookie";
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
-  CART_SAVE_PAYMENT_METHOD,
-  CART_ADD_ITEM_FAIL,
+  // CART_SAVE_PAYMENT_METHOD,
+  // CART_ADD_ITEM_FAIL,
 }
   from "../constants/cartConstans";
 
@@ -48,10 +48,17 @@ const removeFromCart = (productId) => (dispatch, getState) => {
   dispatch({ type: CART_REMOVE_ITEM, payload: productId });
 
   const { cart: { cartItems } } = getState();
-  Cookie.set("cartItems", JSON.stringify(cartItems));
+  // Cookie.set("cartItems", JSON.stringify(cartItems));
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 }
 
-export { addToCart, removeFromCart }
+
+ const saveShippingAddress = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
+};
+
+export { addToCart, removeFromCart ,saveShippingAddress}
 
 
 //// асинх получаем  Один  ч-з thunk////////////
@@ -65,10 +72,7 @@ export { addToCart, removeFromCart }
 //      dispatch({ type: PEN_DETAILS_FAIL, payload: error.message })
 //   }
 // };
-export const saveShippingAddress = (data) => (dispatch) => {
-  dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
-  localStorage.setItem('shippingAddress', JSON.stringify(data));
-};
+
 
 // export const savePaymentMethod = (data) => (dispatch) => {
 //   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });

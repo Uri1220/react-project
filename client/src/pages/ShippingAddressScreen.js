@@ -8,7 +8,7 @@ export default function ShippingAddressScreen(props) {
 
   // const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
-  const { shipping } = cart;
+  const {shippingAddress } = cart;
   // debugger
   //  const [lat, setLat] = useState(shippingAddress.lat);
   //  const [lng, setLng] = useState(shippingAddress.lng);
@@ -18,18 +18,15 @@ export default function ShippingAddressScreen(props) {
   // if (!userInfo) {
   //   props.history.push('/signin');
   // }
-  // const [fullName, setFullName] = useState(shipping.fullName);
-   const [fullName, setFullName] = useState('');
-  // const [address, setAddress] = useState(shippingAddress.address);
-   const [address, setAddress] = useState('');
+  const [fullName, setFullName] = useState(shippingAddress.fullName);
+  //  const [fullName, setFullName] = useState('');
+  const [address, setAddress] = useState(shippingAddress.address);
+  //  const [address, setAddress] = useState('');
   // const [city, setCity] = useState(shippingAddress.city);
-   const [city, setCity] = useState('');
-  // const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-   const [postalCode, setPostalCode] = useState('');
-  // const [country, setCountry] = useState(shippingAddress.country);
-   const [country, setCountry] = useState('');
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  //  const [postalCode, setPostalCode] = useState('');
    const dispatch = useDispatch();
-  //  debugger
+    // debugger
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -50,9 +47,7 @@ export default function ShippingAddressScreen(props) {
         saveShippingAddress({
           fullName,
            address,
-          city,
           postalCode,
-          country,
           //  lat: newLat,
           //  lng: newLng,
         })

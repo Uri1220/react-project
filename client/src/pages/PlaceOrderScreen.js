@@ -42,7 +42,7 @@ export default function PlaceOrderScreen(props) {
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [dispatch, order, props.history, success]);
-  // debugger
+  //  debugger
   return (
     <div>
       {/* <CheckoutSteps step1 step2 step3 step4></CheckoutSteps> */}
@@ -54,9 +54,9 @@ export default function PlaceOrderScreen(props) {
                 <h2>Shipping</h2>
                 <p>
                  
-                  <strong>Name:</strong> {cart.shipping.fullName} <br />
-                  <strong>Address: </strong> {cart.shipping.address},
-                  <strong>Phone: </strong>  {cart.shipping.postalCode},
+                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
+                  <strong>Address: </strong> {cart.shippingAddress.address},
+                  <strong>Phone: </strong>  {cart.shippingAddress.postalCode},
                   
                   
                 </p>

@@ -7,7 +7,7 @@ import {
   CART_EMPTY
 } from "../constants/cartConstans";
 
-function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, action) {
+function cartReducer(state = { cartItems: [], shippingAddress: {}, payment: {} }, action) {
 
   switch (action.type) {
     case CART_ADD_ITEM:
@@ -18,19 +18,19 @@ function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, actio
       // нашли совпадающий product
       if (product) {
         return {
+          ...state,
           cartItems:
             state.cartItems.map(x => x.productId === product.productId ? item : x)
           //заменили старый на новый item иначе оставили старый x
         };
       }
-      /////////////////////////////////////////////
-      return { cartItems: [...state.cartItems, item] };
+      return {...state, cartItems: [...state.cartItems, item] };
 
     case CART_REMOVE_ITEM:
       return { cartItems: state.cartItems.filter(x => x.productId !== action.payload) };
 
     case CART_SAVE_SHIPPING_ADDRESS:
-      return { ...state, shipping: action.payload };
+      return { ...state, shippingAddress: action.payload };
 
     case CART_SAVE_PAYMENT:
       return { ...state, payment: action.payload };

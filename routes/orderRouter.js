@@ -58,10 +58,12 @@ orderRouter.post('/', isAuth, async (req, res) => {
   const order = new Order({
 
     orderItems: req.body.orderItems,
-    shipping: req.body.shipping,
+    shipping: req.body.shippingAddress,
     orderDate: Date.now(),
-    deliveredAt:Date.now(),
-    user: req.user._id
+    // deliveredAt:Date.now(),
+    user: req.user._id,
+    // description:  req.body.description,
+    // completed: req.body.completed,
 
     // shippingAddress: req.body.shippingAddress,
     //   paymentMethod: req.body.paymentMethod,
@@ -136,22 +138,24 @@ orderRouter.post('/', isAuth, async (req, res) => {
 
 
 
-// orderRouter.put(
-//   '/:id/deliver',
-//   isAuth,
-//   isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const order = await Order.findById(req.params.id);
-//     if (order) {
-//       order.isDelivered = true;
-//       order.deliveredAt = Date.now();
+orderRouter.put(
+  '/:id/deliver',
+  // '/deliver',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+       order.completed = true;
+       order. description = req.body.description || order.description;
+      order.deliveredAt = Date.now();
 
-//       const updatedOrder = await order.save();
-//       res.send({ message: 'Order Delivered', order: updatedOrder });
-//     } else {
-//       res.status(404).send({ message: 'Order Not Found' });
-//     }
-//   })
-// );
+      const updatedOrder = await order.save();
+      res.send({ message: 'Order Delivered', order: updatedOrder });
+    } else {
+      res.status(404).send({ message: 'Order Not Found' });
+    }
+  })
+);
 
 module.exports = orderRouter;

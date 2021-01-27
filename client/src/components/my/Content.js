@@ -15,6 +15,7 @@ import PlaceOrderScreen from '../../pages/PlaceOrderScreen'
 import OrdersList from '../../pages/OrdersList'
 import OrderHistoryScreen from '../../pages/OrderHistoryScreen'
 import OrderScreen from '../../pages/OrderScreen'
+import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 
 
@@ -27,6 +28,7 @@ import ProfileScreen from '../../pages/ProfileScreen'
 //   }
 
 // style={styles.ul}
+
 
 const Content = ({ category }) => {
 
@@ -50,7 +52,8 @@ const Content = ({ category }) => {
           <Route path="/orders" component={OrdersList} />
           <Route path="/shipping" component={ShippingAddressScreen} />
           <Route path="/order" exact component={PlaceOrderScreen} />
-          <Route path="/order/:id" component={OrderScreen} />
+          <Route path="/order/:id" exact component={OrderScreen} />
+          <Route path="/order/:id/deliver" exact component={OrderDeliverScreen} />
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
         </Switch>

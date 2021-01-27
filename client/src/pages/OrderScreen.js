@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsOrder } from '../redux/actions/orderActions'
@@ -7,7 +7,7 @@ import MessageBox from '../components/my/MessageBox';
 
 function OrderScreen(props) {
 
-   // const [qty, setQty] = useState(1)
+  // const [qty, setQty] = useState(1)
   //Получаю д отдельной ручки  из Redux Работает но картинка не грузится
   const dispatch = useDispatch()
   React.useEffect(() => {
@@ -19,77 +19,81 @@ function OrderScreen(props) {
 
   const isDelivered = true
 
-   console.log("order", order)
+  //  console.log("order", order)
   // console.log('isLoading', isLoading)
   // console.log('error', error)
 
-  
 
-       
 
-   return  loading ? (
-      <LoadingBox></LoadingBox>
-    ) : error ? (
-      <MessageBox variant="danger">{error}</MessageBox>
-    ) : (
-       <div>
-           <Link to="/orderhistory">Вернуть к сниску заказов</Link>
+
+
+  return loading ? (
+    <LoadingBox></LoadingBox>
+  ) : error ? (
+    <MessageBox variant="danger">{error}</MessageBox>
+  ) : (
+        <div>
+         <button onClick={props.history.goBack}>Back</button>
+          {/* <Link to="/orderhistory">Вернуть к сниску заказов</Link> */}   
+
+         
+
           <h1>Order {order._id}</h1>
           <div className="row top">
-        <div className="col-2">
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Shippring</h2>
-                <p>
-                  <strong>Name:</strong> {order.shipping.fullName} <br />
-                  <strong>Address: </strong> {order.shipping.address},
-                  <strong>Phone: </strong> {order.shipping.postalCode},
+            <div className="col-2">
+              <ul>
+                <li>
+                  <div className="card card-body">
+                    <h2>Shippring</h2>
+                    <p>
+                      <strong>Name:</strong> {order.shippingAddress.fullName} <br />
+                      <strong>Address: </strong> {order.shippingAddress.address},
+                  <strong>Phone: </strong> {order.shippingAddress.postalCode},
                 </p>
-                {/* {order.isDelivered ? ( */}
-                {isDelivered ? (
-                  <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
-                  </MessageBox>
-                ) : (
-                  <MessageBox variant="danger">Not Delivered</MessageBox>
-                )}
-              </div>
-            </li>
-            
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item._id}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="small"
-                          ></img>
-                        </div>
-                        <div className="min-30">
-                          {/* <Link to={`/product/${item.product}`}> */}
-                            {item.name}
-                          {/* </Link> */}
-                        </div>
+                    {/* {order.isDelivered ? ( */}
+                    {isDelivered ? (
+                      <MessageBox variant="success">
+                        Delivered at {order.deliveredAt}
+                      </MessageBox>
+                    ) : (
+                        <MessageBox variant="danger">Not Delivered</MessageBox>
+                      )}
+                  </div>
+                </li>
 
-                        <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
+                <li>
+                  <div className="card card-body">
+                    <h2>Order Items</h2>
+                    <ul>
+                      {order.orderItems.map((item) => (
+                        <li key={item._id}>
+                          <div className="row">
+                            <div>
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="small"
+                              ></img>
+                            </div>
+                            <div className="min-30">
+                              {/* <Link to={`/product/${item.product}`}> */}
+                              {item.name}
+                              {/* </Link> */}
+                            </div>
 
-        {/* <div className="col-1">           
+                            <div>
+                              {item.qty} x ${item.price} = ${item.qty * item.price}
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* <div className="col-1">           
           <div className="card card-body">
             <ul>
               <li>
@@ -160,9 +164,9 @@ function OrderScreen(props) {
             </ul>
           </div>
         </div> */}
-      </div>
-       </div>
-    )
+          </div>
+        </div>
+      )
 }
 
 export default OrderScreen
