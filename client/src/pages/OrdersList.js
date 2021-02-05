@@ -4,6 +4,28 @@ import { listOrders, deleteOrder } from '../redux/actions/orderActions';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 
+
+////Select
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
+////////
+
+
 function OrdersList(props) {
 
   const [description, setDescription] = useState('');
@@ -17,21 +39,51 @@ function OrdersList(props) {
   const {
     success: successDelete,
   } = productDelete;
-  // console.log(productDelete)
+  //  console.log('succsess',successDelete)
 
   React.useEffect(() => {
-    //  if (!doors.length) {
-    dispatch(listOrders())
-
+      dispatch(listOrders())
   }, [successDelete])
-
-  // debugger
-
 
   // Delete
   const deleteHandler = (order) => {
     dispatch(deleteOrder(order._id));
   };
+
+  //Select//////////////////////////////
+  const [filteredOrders, setFilteredOrders] = React.useState([]);
+  const classes = useStyles();
+  const [age, setAge] = React.useState(10);
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    switch (age) {
+      case 20:
+        setFilteredOrders(orders.filter(order => order.completed === true))
+        break
+      case 30:
+        setFilteredOrders(orders.filter(order => order.completed === false))
+        break
+      default:
+        setFilteredOrders(orders)
+        break
+    }
+  }, [age, orders,])
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  ////////EndSelect///
+
+
 
   return (
     <div>
@@ -41,58 +93,88 @@ function OrdersList(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>DATE</th>
-                  <th>User</th>
-                  {/* <th>TOTAL</th>
+            <>
+              <div>
+                <Button className={classes.button} onClick={handleOpen}>
+                  Open the select
+                </Button>
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
+                  <Select
+                    labelId="demo-controlled-open-select-label"
+                    id="demo-controlled-open-select"
+                    open={open}
+                    // defaultValue={age}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    value={age}
+                    onChange={handleChange}
+                  >
+                    {/* <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem> */}
+                    <MenuItem value={10}> <em>All</em></MenuItem>
+                    <MenuItem value={20}>Доставленные</MenuItem>
+                    {/* <MenuItem value={completed}>Доставленные</MenuItem> */}
+                    <MenuItem value={30}>Нет</MenuItem>
+                    {/* <MenuItem value={uncompleted}>Нет</MenuItem> */}
+                  </Select>
+                </FormControl>
+              </div>
+
+
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>User</th>
+                    {/* <th>TOTAL</th>
               <th>PAID</th> */}
-                  <th>DELIVERED</th>
-                  <th>ACTIONS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td>{order._id}</td>
-                    {/* <td>{order.createdAt.substring(0, 10)}</td> */}
-                    <td>{order.orderDate.substring(0, 10)}</td>
-                    <td>{order.user}</td>
-                    {/* <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : 'No'}
-                </td> */}
-                    <td>{order.deliveredAt.substring(0, 10)}</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="small"
-                        onClick={() => {
-                          props.history.push(`/order/${order._id}/deliver`);
-                          // props.history.push(`/order/${order._id}`);
-                        }}
-                      >
-                        Details
-                  </button>
-                    </td>
-                    <td>
-                      <button
-                        className="small"
-                        onClick={() => deleteHandler(order)}
-                      >
-                        Delete
-                         </button>
-                    </td>
+                    <th>DELIVERED</th>
+                    <th>ACTIONS</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                </thead>
+                <tbody>
+                  {filteredOrders.map((order) => (
+
+                    <tr key={order._id}>
+                      <td>{order._id}</td>
+                      {/* <td>{order.createdAt.substring(0, 10)}</td> */}
+                      <td>{order.orderDate.substring(0, 10)}</td>
+                      <td>{order.user}</td>
+                      {/* <td>{order.totalPrice.toFixed(2)}</td>
+                
+                    </td> */}
+
+
+                      <td>{order.deliveredAt ? order.deliveredAt.substring(0, 10) : 'No'}</td>
+
+                      <td>
+                        <button
+                          type="button"
+                          className="small"
+                          onClick={() => {
+                            props.history.push(`/order/${order._id}/deliver`);
+                            // props.history.push(`/order/${order._id}`);
+                          }}
+                        >
+                          Details
+                         </button>
+                      </td>
+                      <td>
+                        <button
+                          className="small"
+                          onClick={() => deleteHandler(order)}
+                        >
+                          Delete
+                         </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>)}
     </div>
   );
   // return (

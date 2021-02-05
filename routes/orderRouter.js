@@ -146,9 +146,9 @@ orderRouter.put(
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
-       order.completed = true;
+       order.completed = req.body.completed;
        order. description = req.body.description || order.description;
-      order.deliveredAt = Date.now();
+       order.deliveredAt = req.body.deliverDate || null
 
       const updatedOrder = await order.save();
       res.send({ message: 'Order Delivered', order: updatedOrder });

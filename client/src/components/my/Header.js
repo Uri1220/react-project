@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
+import {signout} from '../../redux/actions/userA'
 import { Link } from 'react-router-dom';
 
 const styles = {
@@ -22,6 +23,12 @@ const Header = ({ openMenu }) => {
    const { userInfo } = userSignin;
    // console.log(userInfo.name)
 
+   const dispatch = useDispatch();
+
+   const signoutHandler = () => {
+      dispatch(signout());
+   }
+
    return (
       <div className="header">
          <div className="header-left">
@@ -33,22 +40,17 @@ const Header = ({ openMenu }) => {
 
          <div >
             {/* <div className="header__link "><a href="#">About the shelter</a></div> */}
+            <Link style={styles} to={"/register"}>
+               Register
+              
+            </Link>
 
-            {/* <Link  style={styles} to="/signin">SignIn</Link> */}
-
-            {/* 
-            {userInfo ? (
-               <Link style={styles} to="/profile">{userInfo.name}</Link>
-            ) : (
-                  <Link style={styles} to="/signin">Sign In</Link>
-               )} */}
-
-            {userInfo ? (
+            {userInfo? (
                <div className="dropdown">
                   <Link style={styles} to="#">
                      {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                   </Link>
-                  <ul className="dropdown-content">
+                  <ul className="dropdown-content1">
                      <li>
                         <Link to="/profile">User Profile</Link>
                      </li>
@@ -56,9 +58,9 @@ const Header = ({ openMenu }) => {
                         <Link to="/orderhistory">Order History</Link>
                      </li>
                      <li>
-                        {/* <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link> */}
+                        <Link to="#signout" onClick={signoutHandler}>
+                           Sign Out
+                    </Link>
                      </li>
                   </ul>
                </div>

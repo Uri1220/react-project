@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState,useCallback } from 'react';
+// import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
  import { signin } from '../redux/actions/userA';
+ import {useMessage} from '../hooks/message.hook'
 
 function SigninScreen(props) {
 
@@ -10,7 +11,7 @@ function SigninScreen(props) {
 
   const userSignin = useSelector(state => state.userSignin);
    const { loading, userInfo, error } = userSignin;
-   
+
   const dispatch = useDispatch();
    const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
   
@@ -18,12 +19,31 @@ function SigninScreen(props) {
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
-      // props.history.push("/");
+      //  props.history.push("/");
     }
     return () => {
       //
     };
   }, [userInfo]);
+
+  //////////Message//////
+
+  // const [error, setError] = useState(null)
+  // const clearError = useCallback(() => setError(null), [])
+
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+    //  clearError()
+  }, [error, message])
+  // }, [error, message, clearError])
+
+  useEffect(() => {
+    window.M.updateTextFields()
+  }, [])
+  //////////////EndMessage
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -56,12 +76,12 @@ function SigninScreen(props) {
         <li>
           <button type="submit" className="button primary">Signin</button>
         </li>
-        <li>
+        {/* <li>
           New to amazona?
         </li>
         <li>
           <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your amazona account</Link>
-        </li>
+        </li> */}
       </ul>
     </form>
   </div>

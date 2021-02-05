@@ -7,12 +7,7 @@ function Pens() {
 
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
-     if (!pens.length) {
-    dispatch(fetchPens())
-     }
-  }, [])
+  
 
   // const { pens_items } = useSelector(({ pens }) => {
   //   return {
@@ -25,6 +20,12 @@ function Pens() {
   // console.log("pens", pens)
   // console.log('isLoading', isLoading)
   // console.log('error', error)
+  React.useEffect(() => {
+    // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
+     if (!pens.length) {
+    dispatch(fetchPens())
+     }
+  }, [        dispatch,pens.length])
 
   return (
     <div>

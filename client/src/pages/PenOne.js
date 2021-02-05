@@ -10,7 +10,7 @@ function PenOne(props) {
   const dispatch = useDispatch()
   React.useEffect(() => {
     dispatch(fetchPenDetail(props.match.params.id))
-  }, [])
+  }, [    dispatch,props.match.params.id])
 
   const penDetail = useSelector(state => state.pen)
   const { pen, isLoading, error } = penDetail;

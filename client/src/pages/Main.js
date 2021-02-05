@@ -1,13 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector} from 'react-redux'
+
 
 function Main() {
+   const [isAdm, setIsAdm] = React.useState(false);
+
+   const userS = useSelector(state => state.userSignin)
+  const { userInfo } = userS;
+
+
+  React.useEffect(() => {
+   
+   if (userInfo) {
+      // console.log("doors", userInfo.isAdmin)
+     setIsAdm(userInfo.isAdmin)
+   }
+  },[isAdm,    userInfo])
+
    return (
       <div>
          <h2>Main page</h2>
+         { isAdm ? (
+        <div className="back-to-result">
+          <Link to="/orders/">Заказы</Link>
+        </div> ) : ('')
+
+        }
+         {/* <div className="back-to-result">
+            <Link to="/orders/">Заказы</Link>
+         </div> */}
          <div className="back-to-result">
-        <Link to="/orders/">Заказы</Link>
-      </div>
+            <Link to="/deved/">DevEd</Link>
+         </div>
       </div>
    )
 }

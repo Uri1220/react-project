@@ -17,6 +17,7 @@ import OrderHistoryScreen from '../../pages/OrderHistoryScreen'
 import OrderScreen from '../../pages/OrderScreen'
 import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
+import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
 
 
 // const styles ={ 
@@ -56,6 +57,7 @@ const Content = ({ category }) => {
           <Route path="/order/:id/deliver" exact component={OrderDeliverScreen} />
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
+          <Route path="/deved" component={DevRdReactToDo} />
         </Switch>
 
         {/* <ul className="products" >

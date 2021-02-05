@@ -5,7 +5,8 @@ import Sidebar from '../src/components/my/Sidebar'
 import Aside from '../src/components/my/Aside'
 import Content from '../src/components/my/Content'
 import Footer from '../src/components/my/Footer'
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'
+import 'materialize-css'
 
 function App() {
   function openMenu() {

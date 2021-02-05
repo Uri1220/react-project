@@ -46,9 +46,9 @@ function OrderScreen(props) {
                   <div className="card card-body">
                     <h2>Shippring</h2>
                     <p>
-                      <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                      <strong>Address: </strong> {order.shippingAddress.address},
-                  <strong>Phone: </strong> {order.shippingAddress.postalCode},
+                      <strong>Name:</strong> {order.shipping.fullName} <br />
+                      <strong>Address: </strong> {order.shipping.address},
+                  <strong>Phone: </strong> {order.shipping.postalCode},
                 </p>
                     {/* {order.isDelivered ? ( */}
                     {isDelivered ? (

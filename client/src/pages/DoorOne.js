@@ -9,7 +9,7 @@ function DoorOne(props) {
   const dispatch = useDispatch()
   React.useEffect(() => {
     dispatch(fetchDoorDetail(props.match.params.id))
-  }, [])
+  }, [      dispatch,props.match.params.id])
 
   const doorDetail = useSelector(state => state.door)
   const { door, isLoading, error } = doorDetail;

@@ -10,10 +10,11 @@ import {
   USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
   USER_SIGNIN_FAIL, USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, 
-  USER_LOGOUT,
-   USER_UPDATE_REQUEST,
-    USER_UPDATE_SUCCESS,
-    USER_UPDATE_FAIL,
+  USER_SIGNOUT,
+  // USER_LOGOUT,
+  //  USER_UPDATE_REQUEST,
+  //   USER_UPDATE_SUCCESS,
+  //   USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 
 // const update = ({ userId, name, email, password }) => async (dispatch, getState) => {
@@ -36,34 +37,74 @@ import {
 const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
+    //то что прилетает {data} прописано в userRoute.js стр92-100:
+    // res.json({     
+    //   _id: user._id,
+    //   name: user.name,
+    //   email: user.email,
+    //   isAdmin: user.isAdmin,
+    //   token: getToken(user),
+    // })
+
     const { data } = await Axios.post("/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     //вижу в том числе и токен
-    // console.log(data)
-
+    //  console.log(data)
+    localStorage.setItem('userInfo', JSON.stringify(data));
     //загружаю в куки далее  в store.js  userInfo подгружается в initialstate
     //  Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
-    dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
+    dispatch({ type: USER_SIGNIN_FAIL,
+      //  payload: error.message 
+      payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+      });
   }
 }
 
 const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
   try {
+    //то что прилетает {data} прописано в userRoute.js стр92-100:
+    // res.status(201).json({ message: 'Пользователь создан' })
+
     const { data } = await Axios.post("/api/users/register", { name, email, password });
+       console.log(data)
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     //  Cookie.set('userInfo', JSON.stringify(data));
-    localStorage.setItem('userInfo', JSON.stringify(data));
+
+    //  { message: 'Пользователь создан' }
+    //почему с записью в localStorage 'Пользователь создан'
+    //прилетает в State.userSignin  так и не понял
+    // localStorage.setItem('userInfo', JSON.stringify(data));
+
   } catch (error) {
-    dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
+    dispatch({ type: USER_REGISTER_FAIL, 
+      // payload: error.message 
+      payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    
+    });
   }
 }
 
-const logout = () => (dispatch) => {
+// const logout = () => (dispatch) => {
   // Cookie.remove("userInfo");
-  dispatch({ type: USER_LOGOUT })
-}
+  // dispatch({ type: USER_LOGOUT })
+// }
+
+ const signout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  //этот диспатч не создает стэйт
+  dispatch({ type: USER_SIGNOUT });
+   document.location.href = '/';
+};
 
  const updateUserProfile = (user) => async (dispatch, getState) => {
   dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
@@ -105,4 +146,4 @@ const logout = () => (dispatch) => {
     dispatch({ type: USER_DETAILS_FAIL, payload: message });
   }
 };
-export { signin, register, logout,updateUserProfile, detailsUser  };
+export { signin, register, signout,updateUserProfile, detailsUser  };

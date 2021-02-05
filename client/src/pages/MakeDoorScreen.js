@@ -32,6 +32,25 @@ function MakeDoorScreen(props) {
     error: errorSave,
   } = doorSave;
 
+  // const dd = useSelector((state) => state.doorSave.door);
+  // const {
+  //   message:mm
+  
+  // } = dd;
+  // console.log(mm)
+
+
+  // const [dd, setDd] = useState({});
+
+  // useEffect(() => {
+  //   setDd(dddd)
+  // }, [dddd]);
+
+
+ 
+
+
+
   const productDelete = useSelector((state) => state.doorDelete);
   const {
     isLoading: isLoadingDelete,

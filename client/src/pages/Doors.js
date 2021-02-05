@@ -2,50 +2,77 @@ import React from 'react'
 import Door from './Door'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchDoors} from '../redux/actions/doorsA'
+import { fetchDoors } from '../redux/actions/doorsA'
 
 function Doors() {
 
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
-     if (!doors.length) {
-    dispatch(fetchDoors())
-     }
-  }, [])
 
-  
+
+  const [isAdm, setIsAdm] = React.useState(false);
+
+
   const doorDetail = useSelector(state => state.doors)
   const { doors, isLoading, error } = doorDetail;
-   // console.log("doors", doors)
- 
+
+  const userS = useSelector(state => state.userSignin)
+  const { userInfo } = userS;
+
+  React.useEffect(() => {
+    // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
+    if (!doors.length) {
+      dispatch(fetchDoors())
+    }
+    if (userInfo) {
+      // console.log("doors", userInfo.isAdmin)
+      setIsAdm(userInfo.isAdmin)
+    }
+
+  }, [])
+
+  // React.useEffect(() => {
+  //   // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
+  //   if (!doors.length) {
+  //     dispatch(fetchDoors())
+  //   }    
+  // }, [])
+
+
 
   return (
     <div>
       <h2>Doors Page</h2>
-      <div className="back-to-result">
+      { isAdm ? (
+        <div className="back-to-result">
+          <Link to="/makedoor/">Редактирование</Link>
+        </div>) : ('')
+
+      }
+
+      {/* <div className="back-to-result">        
         <Link to="/makedoor/">Редактирование</Link>
-      </div>
+      </div> */}
+
       {
-      isLoading ? (
-      <div>Loading...</div>
+        isLoading ? (
+          <div>Loading...</div>
         ) : error ? (
-      <div>{error} </div>
+          <div>{error} </div>
         ) : (
-      <ul className="products" >
-        {
-          doors &&
-          doors.map((item) =>
-            <li
-              key={item._id}
-            >
-              <Door door = {item} />
-            </li>)
-        }
-      </ul>
-        )
-        }
+              <ul className="products" >
+                {
+                  doors &&
+                  doors.map((item) =>
+                    <li
+                      key={item._id}
+                    >
+                      <Door door={item} />
+                    </li>)
+                }
+              </ul>
+            )
+      }
     </div>
   )
 }

@@ -2,16 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../redux/actions/userA';
+import {useMessage} from '../hooks/message.hook'
+
 
 function RegisterScreen(props) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-   const [rePassword, setRePassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+
   const userRegister = useSelector(state => state.userRegister);
   const { loading, userInfo, error } = userRegister;
+
   const dispatch = useDispatch();
+
+  //////////Message//////
+  const message = useMessage()
+  //  const {loading_m, request, error_m, clearError} = useHttp()
+
+  useEffect(() => {
+    message(error)
+    //  clearError()
+  }, [error, message])
+  // }, [error, message, clearError])
+
+  useEffect(() => {
+    window.M.updateTextFields()
+  }, [])
+  //////////////EndMessage
 
   const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
   useEffect(() => {
@@ -21,11 +40,21 @@ function RegisterScreen(props) {
     return () => {
       //
     };
-  }, [userInfo]);
+  }, [userInfo,     redirect,props.history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (password !== rePassword) {
+      alert('Password and confirm password are not match');
+    } else {
     dispatch(register(name, email, password));
+    }
+    // мой вариант редиректа
+    //  document.location.href = '/';
+    if (userInfo) {
+      props.history.push('/');
+    }
+    // props.history.push("/")
   }
   return <div className="form">
     <form onSubmit={submitHandler} >

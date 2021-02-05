@@ -44,7 +44,10 @@ export default function OrderHistoryScreen(props) {
                     ? order.deliveredAt.substring(0, 10)
                     : 'No'}
                 </td> */}
-                  <td>{order.deliveredAt.substring(0, 10)}</td>
+
+
+                  {/* <td>{order.deliveredAt.substring(0, 10)}</td> */}
+                  <td>{order.deliveredAt ? order.deliveredAt.substring(0, 10) : 'No'}</td>
                 <td>
                   <button
                     type="button"
