@@ -18,6 +18,7 @@ import OrderScreen from '../../pages/OrderScreen'
 import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
+import MuMenu from '../../pages/dev_ed/MuMenu'
 
 
 // const styles ={ 
@@ -58,6 +59,7 @@ const Content = ({ category }) => {
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/deved" component={DevRdReactToDo} />
+          <Route path="/mu-menu" component={MuMenu} />
         </Switch>
 
         {/* <ul className="products" >

@@ -33,6 +33,9 @@ function Main() {
          <div className="back-to-result">
             <Link to="/deved/">DevEd</Link>
          </div>
+         <div className="back-to-result">
+            <Link to="/mu-menu">Mu Memu</Link>
+         </div>
       </div>
    )
 }

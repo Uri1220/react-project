@@ -29,20 +29,7 @@ function App() {
     }
   })
 
-  //теперь получаем д. асинхронно урок 8 пицца
-  // React.useEffect(() => {
-
-  //   if (!redux_items.length) {
-  //     dispatch(fetchPens())
-  //   }
-
-  // }, [])
-
-  // React.useEffect(() => {
-  //   axios.get('http://localhost:5000/pens/list')
-  //   //запихиваем в redux массив с данными 
-  //     .then(data => { dispatch(setPens(data.data)) });
-  // }, [])
+  
 
   const categories = [
     { name:'Главная', url:'/'},
@@ -52,6 +39,7 @@ function App() {
   ];
 
   const category = categories[redux_category].name
+
   return (
     <BrowserRouter>
       <div className="wrapper">

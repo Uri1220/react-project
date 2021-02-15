@@ -17,6 +17,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
+//   USER_REGISTER_CLEAR_MESSAGE
 } from "../constants/userConstants";
 
 
@@ -27,6 +28,8 @@ function userSigninReducer(state = {}, action) {
          return { loading: true };
       case USER_SIGNIN_SUCCESS:
          return { loading: false, userInfo: action.payload };
+      // case  USER_REGISTER_CLEAR_MESSAGE:
+      //    return { loading: false, userInfo: action.payload };
       case USER_SIGNIN_FAIL:
          return { loading: false, error: action.payload };
       case  USER_SIGNOUT:

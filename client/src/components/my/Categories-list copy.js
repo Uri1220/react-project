@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setCategory } from '../../redux/actions/penFiltersA'
+import { setPenCategory } from '../../redux/actions/penFiltersA'
 import { Link } from 'react-router-dom'
 
 // а здесь приходит выбранная категория, она идет из redux
@@ -15,7 +15,7 @@ const CategoriesList = ({ categories, activeCategory }) => {
     const dispatch = useDispatch();
     //здесь запись в redux выбранной категории
     const onClickCategory = (ind) => {
-        dispatch(setCategory(ind))
+        dispatch(setPenCategory(ind))
     }
     return (
         <div className="categories-list">

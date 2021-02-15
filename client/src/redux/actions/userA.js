@@ -11,6 +11,7 @@ import {
   USER_SIGNIN_FAIL, USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, 
   USER_SIGNOUT,
+  // USER_REGISTER_CLEAR_MESSAGE
   // USER_LOGOUT,
   //  USER_UPDATE_REQUEST,
   //   USER_UPDATE_SUCCESS,
@@ -71,8 +72,10 @@ const register = (name, email, password) => async (dispatch) => {
     // res.status(201).json({ message: 'Пользователь создан' })
 
     const { data } = await Axios.post("/api/users/register", { name, email, password });
-       console.log(data)
+      //  console.log(data)
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+
+    // dispatch({ type: USER_REGISTER_CLEAR_MESSAGE , payload});
     //  Cookie.set('userInfo', JSON.stringify(data));
 
     //  { message: 'Пользователь создан' }

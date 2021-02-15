@@ -1,11 +1,13 @@
 import {
    LOAD_CATEGORY,
-   LOAD_SORT_BY
+   LOAD_SUB2_CAT,
+   LOAD_SUB_CATEGORY
 } from '../constants/pensConstants';
 
 const initialState = {
    category: 0,
-   sortBy: 'popular'
+   subCat:0,
+   subSubCat: 0
 }
 
 function penFilters(state = initialState, action) {
@@ -16,10 +18,15 @@ function penFilters(state = initialState, action) {
             ...state,
             category: action.payload
          };
-      case LOAD_SORT_BY:
+      case LOAD_SUB_CATEGORY:
          return {
             ...state,
-            sortBy: action.payload
+            subCat: action.payload
+         };
+      case LOAD_SUB2_CAT:
+         return {
+            ...state,
+            subSubCat: action.payload
          };
 
       default:

@@ -9,7 +9,7 @@ const styles = {
    //   flexWrap:'wrap',
    //   justifyContent:' space-around',
    //   alignItems: 'center' }
-  // marginRight: '0rem'
+   marginRight: '2rem'
 }
 
 // style={styles.ul}

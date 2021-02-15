@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../redux/actions/userA';
-import {useMessage} from '../hooks/message.hook'
+import { useMessage } from '../hooks/message.hook'
 
 
 function RegisterScreen(props) {
@@ -22,10 +22,22 @@ function RegisterScreen(props) {
   //  const {loading_m, request, error_m, clearError} = useHttp()
 
   useEffect(() => {
+    if (userInfo) {
+      message(userInfo.message)
+      props.history.push('/');
+    }
+
     message(error)
     //  clearError()
-  }, [error, message])
+  }, [error, message, userInfo])
   // }, [error, message, clearError])
+
+  // useEffect(() => {
+  //   message('Пользователь создан')
+  //   //  clearError()
+  //   props.history.push(redirect);
+  // }, [userInfo, message])
+  // // }, [error, message, clearError])
 
   useEffect(() => {
     window.M.updateTextFields()
@@ -33,27 +45,29 @@ function RegisterScreen(props) {
   //////////////EndMessage
 
   const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
-  useEffect(() => {
-    if (userInfo) {
-      props.history.push(redirect);
-    }
-    return () => {
-      //
-    };
-  }, [userInfo,     redirect,props.history]);
+
+  // после регистрации переход на главную стр
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     props.history.push(redirect);
+  //   }
+  //   return () => {
+  //     //
+  //   };
+  // }, [userInfo,     redirect,props.history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== rePassword) {
       alert('Password and confirm password are not match');
     } else {
-    dispatch(register(name, email, password));
+      dispatch(register(name, email, password));
     }
     // мой вариант редиректа
     //  document.location.href = '/';
-    if (userInfo) {
-      props.history.push('/');
-    }
+    // if (userInfo) {
+    // props.history.push('/');
+    // }
     // props.history.push("/")
   }
   return <div className="form">
