@@ -1,0 +1,42 @@
+
+.ff {
+}
+.ff__hh {
+}
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+     opacity: 0;
+     z-index: -1;
+
+    transform: translateY(-200px);
+    transition: transform .2s ease-in;
+  width: 100%;
+ 
+  background: #f0f0f0;
+  
+}
+.sidebar.open {
+    opacity: 1;
+    z-index: 1000;
+    transform: translateY(50px);
+}
+.sidebar.hide {
+    opacity: 1;
+    z-index: 1000;
+    transform: translateY(-200px);
+}
+
+
+.sidebar-close-button {
+  // border-radius: 50%;
+  // width: 3rem;
+  // height: 3rem;
+  // border: 1px solid black;
+  font-size: 3rem;
+  //  padding-top: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}

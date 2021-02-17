@@ -30,7 +30,8 @@ const Header = ({ openMenu }) => {
    }
 
    return (
-      <div className="header">
+      // <div className="container">
+         <div className="header">
          <div className="header-left">
             <button onClick={openMenu} className="hamburger">&#9776;</button>
             <div className="header__title">
@@ -76,7 +77,8 @@ const Header = ({ openMenu }) => {
                )}
             </Link>
          </div>
-      </div>
+         </div>
+      // </div>
 
    )
 }

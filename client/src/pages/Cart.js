@@ -15,9 +15,9 @@ function Cart(props) {
   // console.log('cat:',category);
 ////////////////////
 let ur = ''
- if (category === 1 ) {
+ if (category ===  2) {
    ur = 'pens/'
- } else if( category === 3) {
+ } else if( category === 1) {
    ur = 'doors/'   
  }
  else{

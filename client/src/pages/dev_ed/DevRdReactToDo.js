@@ -23,7 +23,7 @@ function DevRdReactToDo() {
     { name: 'Стеклянные' },
   ];
   const mezDoors = [
-    { name: 'Массив' },
+    { name: 'Массив', url: '/doors' },
     { name: 'Шпон' },
     { name: 'МДФ' },
   ];
@@ -41,7 +41,7 @@ function DevRdReactToDo() {
     { name: 'Квадрат' },
   ];
   const krugFurn = [
-    { name: 'Круг1' },
+    { name: 'Круг1', url: '/pens' },
     { name: 'Круг22' },
   ];
   const kvadrFurn = [
@@ -191,7 +191,7 @@ function DevRdReactToDo() {
                                 <Link
                                 //  className="sub-sub-menu__link"
                                 className={subSubCat === index +1 ? 'active' : 'sub-sub-menu__link'}
-                                  // to={obj.url}
+                                   to={obj.url}
                                   onClick={() => onClickInit(index+1)}
                                 >
                                   {obj.name}

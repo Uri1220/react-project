@@ -21,25 +21,15 @@ import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
 import MuMenu from '../../pages/dev_ed/MuMenu'
 
 
-// const styles ={ 
-//   ul:{
-//   display: 'flex',
-//   flexWrap:'wrap',
-//   justifyContent:' space-around',
-//   alignItems: 'center' }
-//   }
-
-// style={styles.ul}
-
-
-const Content = ({ category }) => {
+// const Content = ({ category }) => {
+const Content = () => {
 
   //  console.log(pens)
   return (
     <main className="main">
 
       <div className="content">
-        <h3>{category}</h3>
+        {/* <h3>{category}</h3> */}
         <Switch>
           <Route path="/" exact component={Main} />
           <Route path="/pens" exact component={Pens}  />

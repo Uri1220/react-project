@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
 import Header from '../src/components/my/Header'
 import Sidebar from '../src/components/my/Sidebar'
 import Aside from '../src/components/my/Aside'
@@ -9,58 +8,49 @@ import { BrowserRouter } from 'react-router-dom'
 import 'materialize-css'
 
 function App() {
+
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+
+
   function openMenu() {
-    document.querySelector(".sidebar").classList.add("open");
+    setVisiblePopup(true)
   }
   function closeMenu() {
-    document.querySelector(".sidebar").classList.remove("open");
+    setVisiblePopup(false)
   }
 
 
-  // const hranilishe = useSelector(state => state)
-  // console.log(hranilishe)
+  React.useEffect(() => {
+    if (visiblePopup) {
+      document.querySelector(".sidebar").classList.add("open");
 
-  // const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
-  const {  redux_category } = useSelector(({ pens, penFilters }) => {
-    //достаем данн из redux
-    return {
-      redux_items: pens.pens,
-      redux_category: penFilters.category
+    } else {
+      document.querySelector(".sidebar").classList.remove("open");
+      document.querySelector(".sidebar").classList.add("hide");
+      setTimeout(() => {
+        document.querySelector(".sidebar").classList.remove("hide")
+      }, 200)
     }
-  })
+  }, [visiblePopup]);
 
-  
-
-  const categories = [
-    { name:'Главная', url:'/'},
-    { name:'Фурнитура', url:'/pens'},
-    { name:'Плинтус', url:'/plintus'},
-    { name:'Двери', url:'/doors'}
-  ];
-
-  const category = categories[redux_category].name
 
   return (
     <BrowserRouter>
       <div className="wrapper">
         <div className="grid-container">
-          <Header openMenu={openMenu} />
+          <Header
+            openMenu={openMenu}
+          />
 
           <Sidebar
             closeMenu={closeMenu}
-            categories={categories}
-            activeCategory={redux_category}
+            setVisiblePopup={setVisiblePopup}
           />
 
-          <Aside
-            activeCategory={redux_category}
-            categories={categories}
-          />
+          <Aside/>
 
-            {/* Route here */}
-          <Content
-            category={category}
-          />
+          {/* Route here */}
+          <Content/>
 
           <Footer />
         </div>
@@ -70,3 +60,12 @@ function App() {
 }
 
 export default App;
+
+// // const { redux_items, redux_category } = useSelector(({ pens, penFilters }) => {
+  // const {  redux_category } = useSelector(({ pens, penFilters }) => {
+  //   //достаем данн из redux
+  //   return {
+  //     redux_items: pens.pens,
+  //     redux_category: penFilters.category
+  //   }
+  // })
