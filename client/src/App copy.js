@@ -44,35 +44,25 @@ function App() {
       { name: 'Плинтус', url: '/plintus' },
     ],
     //Doors subCat+1
-     // ' двери'
     doorsCat: [
-      { name: 'Входные',},
-      { name: 'Массив',},
-      { name: 'Эко Шпон' },
+      { name: 'Входные' },
+      { name: 'Межкомнатные' },
+      { name: 'Стеклянные' },
+    ],
+    // subSusbCat+1
+    mezDoors: [
+      { name: 'Массив', url: '/doors' },
+      { name: 'Шпон' },
       { name: 'МДФ' },
     ],
-    // subSusbCat+1 url: '/-------' 
-    vhod_door: [
-      { name: 'Сталь', url: '/stal'  },
-      { name: 'Броня', url: '/bron'  },
-    ],  
-    massDoors: [
-      { name: 'Classico', url: '/doors' },
-      { name: 'Поставы', url: '/' },
-      { name: 'Ока', url: '/' },
+    vhodDoor: [
+      { name: 'Сталь' },
+      { name: 'Броня' },
     ],
-    ecoDoors: [
-      { name: 'Porta X', url: '/' },
-      { name: 'Legno', url: '/' },
-      { name: 'Vetro', url: '/' },
+    glassDoo:[
+      { name: 'Хрусталь' },
+      { name: 'Стекло' },
     ],
-    mdfDoors: [
-      { name: 'МДФ Юркас', url: '/' },
-    ],
-    //Входные двери подкатегории нет!
-   
-   
-    
     //Furnitua
     furnCat: [
       { name: 'Круг' },

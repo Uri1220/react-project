@@ -1,42 +1,46 @@
+.ff {}
 
-.ff {
-}
-.ff__hh {
-}
+.ff__hh {}
+
 /* SIDEBAR */
 .sidebar {
-  position: fixed;
-     opacity: 0;
-     z-index: -1;
-
+     position: fixed;
+     padding: 25px 0;
+    // position: absolute;
+    // top: 106px;
+    // left: 0;
+    opacity: 0;
+    z-index: -1;
     transform: translateY(-200px);
     transition: transform .2s ease-in;
-  width: 100%;
- 
-  background: #f0f0f0;
-  
+    width: 100%;
+    background: #fbfbfb;
+    height: 100%;
+    overflow-y: scroll;
 }
+
 .sidebar.open {
     opacity: 1;
     z-index: 1000;
     transform: translateY(50px);
 }
+
 .sidebar.hide {
     opacity: 1;
     z-index: 1000;
     transform: translateY(-200px);
 }
 
-
 .sidebar-close-button {
-  // border-radius: 50%;
-  // width: 3rem;
-  // height: 3rem;
-  // border: 1px solid black;
-  font-size: 3rem;
-  //  padding-top: 0;
-  cursor: pointer;
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
+    // border-radius: 50%;
+    // width: 3rem;
+    // height: 3rem;
+    // border: 1px solid black;
+    font-size: 3rem;
+
+    //  padding-top: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 1.5rem;
+    top: .8rem;
 }

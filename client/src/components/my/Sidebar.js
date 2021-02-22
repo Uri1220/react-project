@@ -1,8 +1,8 @@
 import React from 'react'
-import CategoriesList from './Categories-list'
+import CategoriesListSidebar from './Categories-list-sidebar'
 import '../../scss/Sidebar.scss'
 
-const Sidebar = ({ closeMenu,setVisiblePopup}) => {
+const Sidebar = ({ closeMenu,setVisiblePopup,array}) => {
 
   const sortRef = React.useRef();
 
@@ -24,7 +24,10 @@ const Sidebar = ({ closeMenu,setVisiblePopup}) => {
                 onClick={closeMenu}
              >&times;</span> 
            
-            <CategoriesList/>
+            <CategoriesListSidebar
+            setVisiblePopup={setVisiblePopup}
+            array={array}
+            />
         </div>
        
         

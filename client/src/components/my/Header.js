@@ -1,18 +1,10 @@
 import React from 'react'
+import '../../scss/Header.scss'
 import { useSelector,useDispatch } from 'react-redux'
 import {signout} from '../../redux/actions/userA'
 import { Link } from 'react-router-dom';
 
-const styles = {
-   //   ul:{
-   //   display: 'flex',
-   //   flexWrap:'wrap',
-   //   justifyContent:' space-around',
-   //   alignItems: 'center' }
-  // marginRight: '0rem'
-}
 
-// style={styles.ul}
 
 const Header = ({ openMenu }) => {
 
@@ -34,21 +26,19 @@ const Header = ({ openMenu }) => {
          <div className="header">
          <div className="header-left">
             <button onClick={openMenu} className="hamburger">&#9776;</button>
-            <div className="header__title">
+             {/* <div className="header__title">
                Cozy
-      </div>
+             </div> */}
          </div>
 
-         <div >
-            {/* <div className="header__link "><a href="#">About the shelter</a></div> */}
-            <Link style={styles} to={"/register"}>
-               Register
-              
+         <div className="header-right" >
+            <Link className="header__link" to={"/register"}>
+               Register              
             </Link>
 
             {userInfo? (
-               <div className="dropdown">
-                  <Link style={styles} to="#">
+               <div className="dropdown header__link">
+                  <Link style = {{color:'#104e80'}} to="#">
                      {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                   </Link>
                   <ul className="dropdown-content1">
@@ -59,18 +49,18 @@ const Header = ({ openMenu }) => {
                         <Link to="/orderhistory">Order History</Link>
                      </li>
                      <li>
-                        <Link to="#signout" onClick={signoutHandler}>
+                        <Link  to="#signout" onClick={signoutHandler}>
                            Sign Out
                     </Link>
                      </li>
                   </ul>
                </div>
             ) : (
-                  <Link style={styles} to="/signin">Sign In</Link>
+                  <Link className="header__link" to="/signin">Sign In</Link>
                )}
 
 
-            <Link style={styles} to={"/cart/"}>
+            <Link className="header__link" to={"/cart/"}>
                Cart
                {cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>
@@ -83,3 +73,14 @@ const Header = ({ openMenu }) => {
    )
 }
 export default Header;
+
+// const styles = {
+   //   ul:{
+   //   display: 'flex',
+   //   flexWrap:'wrap',
+   //   justifyContent:' space-around',
+   //   alignItems: 'center' }
+  // marginRight: '0rem'
+// }
+
+// style={styles.ul}
