@@ -1,9 +1,17 @@
 import React, {  useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+// import {useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDoorDetail } from '../redux/actions/doorsA'
 
+
+
 function DoorOne(props) {
+
+  //  let { id } = useParams();
+  // in Content.js:
+  // <Route path="/doors/:id" exact component={DoorOne}  />
+
 
   const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
@@ -21,6 +29,9 @@ function DoorOne(props) {
 
   return (
     <div>
+   {/* <div>Now showing post {id}</div> */}
+
+
       <div className="back-to-result">
         <Link to="/doors/">Back to result</Link>
       </div>

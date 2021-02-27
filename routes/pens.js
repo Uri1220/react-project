@@ -28,7 +28,7 @@ router.post('/',async(req,res) => {
 router.get('/:penId',async(req,res) => {
     try {
         const pen = await Pens.findById(req.params.penId) 
-        res.json(pen)     
+        res.json(pen)
     } catch (error) {
         res.json({message:error})
     }   

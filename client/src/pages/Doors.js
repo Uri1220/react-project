@@ -1,17 +1,48 @@
 import React from 'react'
 import Door from './Door'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchDoors } from '../redux/actions/doorsA'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { fetchFilterDoors } from '../redux/actions/doorsA';
+import LoadingBox from '../components/my/LoadingBox';
+import MessageBox from '../components/my/MessageBox';
+
 
 function Doors() {
+  const {
+    category = 'all',
+    min = 0,
+    max = 0,
+  } = useParams();
+  const categories = [
+    'massiv', 'mdf'
+  ]
+
+  const prices = [
+    {
+      name: 'Any',
+      min: 0,
+      max: 0,
+    },
+    {
+      name: `$1 to $10`,
+      min: 1,
+      max: 10,
+    },
+    {
+      name: `$10 to $100`,
+      min: 10,
+      max: 100,
+    },
+    {
+      name: `$100 to $1000`,
+      min: 100,
+      max: 1000,
+    },
+  ];
 
   const dispatch = useDispatch();
 
-
-
   const [isAdm, setIsAdm] = React.useState(false);
-
 
   const doorDetail = useSelector(state => state.doors)
   const { doors, isLoading, error } = doorDetail;
@@ -19,58 +50,107 @@ function Doors() {
   const userS = useSelector(state => state.userSignin)
   const { userInfo } = userS;
 
+
+
   React.useEffect(() => {
-    // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
-    if (!doors.length) {
-      dispatch(fetchDoors())
-    }
+    dispatch(
+      fetchFilterDoors({
+        //тут при all идет пустота и эта пустота в doorRoute  даст весь список
+        category: category !== 'all' ? category : '',
+        min,
+        max,
+      })
+    )
     if (userInfo) {
-      // console.log("doors", userInfo.isAdmin)
       setIsAdm(userInfo.isAdmin)
     }
+  },
+    [category, min, max,userInfo]);
 
-  }, [])
+  const getFilterUrl = (filter) => {
+    const filterCategory = filter.category || category;
+    const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
+    const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
-  // React.useEffect(() => {
-  //   // dispatch(fetchPens()) ПОЛУЧАЕМ ДАННЫЕ
-  //   if (!doors.length) {
-  //     dispatch(fetchDoors())
-  //   }    
-  // }, [])
+    return `/search/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
+  };
+
+
+
 
 
 
   return (
     <div>
       <h2>Doors Page</h2>
-      { isAdm ? (
+      {isAdm ? (
         <div className="back-to-result">
           <Link to="/makedoor/">Редактирование</Link>
         </div>) : ('')
 
       }
 
-      {/* <div className="back-to-result">        
-        <Link to="/makedoor/">Редактирование</Link>
-      </div> */}
-
       {
         isLoading ? (
-          <div>Loading...</div>
+          <LoadingBox></LoadingBox>
         ) : error ? (
-          <div>{error} </div>
-        ) : (
-              <ul className="products" >
-                {
-                  doors &&
-                  doors.map((item) =>
-                    <li
-                      key={item._id}
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) :
+            (<>
+              <div>
+                <ul>
+                  <li>
+                    <Link
+                      className={'all' === category ? 'active' : ''}
+                      to={getFilterUrl({ category: 'all' })}
                     >
-                      <Door door={item} />
-                    </li>)
-                }
-              </ul>
+                      Any
+               </Link>
+                  </li>
+                  {categories.map((c) => (
+                    <li key={c}>
+                      <Link
+                        className={c === category ? 'active' : ''}
+                        to={getFilterUrl({ category: c })}
+                      >
+                        {c}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3>Price</h3>
+                <ul>
+                  {prices.map((p) => (
+                    <li key={p.name}>
+                      <Link
+                        to={getFilterUrl({ min: p.min, max: p.max })}
+                        className={
+                          `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
+                        }
+                      >
+                        {p.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <ul className="products" >
+                  {
+                    doors &&
+                    doors.map((item) =>
+                      <li
+                        key={item._id}
+                      >
+                        <Door door={item} />
+                      </li>)
+                  }
+                </ul>
+              </div>
+            </>
             )
       }
     </div>

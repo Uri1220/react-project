@@ -35,6 +35,27 @@ export const fetchDoors = () => async (dispatch) => {
     dispatch({ type: DOORS_LIST_FAIL, payload: error.message })
   }
 };
+
+export const fetchFilterDoors = ({
+  category = '',
+  min = 0,
+  max = 0,
+}) => async (dispatch) => {
+  try {
+    dispatch({ type: DOORS_LIST_REQUEST })
+    await axios.get(
+      `/api/doors/list?category=${category}&min=${min}&max=${max}`
+    )
+      .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
+
+  } catch (error) {
+    dispatch({ type: DOORS_LIST_FAIL, payload: error.message })
+  }
+};
+// &min=${min}
+// &max=${max}     
+
+
 //// асинх получаем  Один  ч-з thunk////////////
 export const fetchDoorDetail = (doorId) => async (dispatch) => {
   try {
@@ -51,21 +72,21 @@ export const fetchDoorDetail = (doorId) => async (dispatch) => {
 
 ////////////DELETE
 export const deleteProdcut = (productId) => async (dispatch, getState) => {
-   try {
-     const {
-       userSignin: { userInfo },
-     } = getState();
-     dispatch({ type: DOOR_DELETE_REQUEST, payload: productId });
-     const { data } = await axios.delete('/api/doors/' + productId, {
-       headers: {
-         Authorization: 'Bearer ' + userInfo.token,
-       },
-     });
-     dispatch({ type: DOOR_DELETE_SUCCESS, payload: data, success: true });
-   } catch (error) {
-     dispatch({ type: DOOR_DELETE_FAIL, payload: error.message });
-   }
- };
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    dispatch({ type: DOOR_DELETE_REQUEST, payload: productId });
+    const { data } = await axios.delete('/api/doors/' + productId, {
+      headers: {
+        Authorization: 'Bearer ' + userInfo.token,
+      },
+    });
+    dispatch({ type: DOOR_DELETE_SUCCESS, payload: data, success: true });
+  } catch (error) {
+    dispatch({ type: DOOR_DELETE_FAIL, payload: error.message });
+  }
+};
 
 ////////удаляет без проверок на наличие пользователя
 // export const deleteProdcut = (productId) => async (dispatch, getState) => {
@@ -80,39 +101,39 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
 // };
 
 ////////////SAVE
- export const saveProduct = (product) => async (dispatch, getState) => {
-   try {
-     dispatch({ type: DOOR_SAVE_REQUEST, payload: product });
-     const {
-       userSignin: { userInfo },
-     } = getState();
+export const saveProduct = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DOOR_SAVE_REQUEST, payload: product });
+    const {
+      userSignin: { userInfo },
+    } = getState();
 
 
-     if (!product._id) {
-       const { data } = await axios.post('/api/doors/', product, {
-         headers: {
-           Authorization: 'Bearer ' + userInfo.token,
-         },
-       });
-       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
-     } else {
-       const { data } = await axios.put(
-         '/api/doors/' + product._id,
-         product,
-         {
-           headers: {
-             Authorization: 'Bearer ' + userInfo.token,
-           },
-         }
-       );
-       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
-     }
+    if (!product._id) {
+      const { data } = await axios.post('/api/doors/', product, {
+        headers: {
+          Authorization: 'Bearer ' + userInfo.token,
+        },
+      });
+      dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+    } else {
+      const { data } = await axios.put(
+        '/api/doors/' + product._id,
+        product,
+        {
+          headers: {
+            Authorization: 'Bearer ' + userInfo.token,
+          },
+        }
+      );
+      dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+    }
 
 
-   } catch (error) {
-     dispatch({ type: DOOR_SAVE_FAIL, payload: error.message });
-   }
- };
+  } catch (error) {
+    dispatch({ type: DOOR_SAVE_FAIL, payload: error.message });
+  }
+};
 
 
 ///записывает без проверок на наличие пользователя
@@ -120,12 +141,12 @@ export const deleteProdcut = (productId) => async (dispatch, getState) => {
 //   try {
 //     dispatch({ type: DOOR_SAVE_REQUEST, payload: product });
 
-    // без PUT
-    //  const { data } = await axios.post('/api/doors/', product );
-    //  dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+// без PUT
+//  const { data } = await axios.post('/api/doors/', product );
+//  dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
 
 
-    //PUT
+//PUT
 //     if (!product._id) {
 //       const { data } = await axios.post('/api/doors/', product);
 //       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });

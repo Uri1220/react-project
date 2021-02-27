@@ -34,7 +34,7 @@ function Main() {
             <Link to="/deved/">DevEd</Link>
          </div>
          <div className="back-to-result">
-            <Link to="/mu-menu">Mu Memu</Link>
+            <Link to="/mu-search">Mu Search</Link>
          </div>
       </div>
    )

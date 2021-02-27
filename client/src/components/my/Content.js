@@ -15,10 +15,10 @@ import PlaceOrderScreen from '../../pages/PlaceOrderScreen'
 import OrdersList from '../../pages/OrdersList'
 import OrderHistoryScreen from '../../pages/OrderHistoryScreen'
 import OrderScreen from '../../pages/OrderScreen'
+import MySearch from '../../pages/MySearch'
 import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
-import MuMenu from '../../pages/dev_ed/MuMenu'
 
 
 // const Content = ({ category }) => {
@@ -38,8 +38,23 @@ const Content = () => {
           <Route path="/pens/:id" component={PenOne}  />
           <Route path="/cart/:id?" component={Cart}  />
           <Route path="/plintus" component={Plintus} />
-          <Route path="/doors" exact component={Doors} />
+
+          {/* <Route path="/doors" exact component={Doors} /> */}
+          <Route path="/doors" exact ><Doors/></Route>
           <Route path="/doors/:id" exact component={DoorOne}  />
+
+          {/* <Route
+            path="/search/category/:category"
+            component={MySearch}
+            exact
+          ></Route> */}
+           <Route
+            path="/search/category/:category/min/:min/max/:max"
+            component={Doors}
+            // component={MySearch}
+            exact
+          ></Route>
+
           <Route path="/makedoor" component={MakeDoorScreen} />
           <Route path="/orders" component={OrdersList} />
           <Route path="/shipping" component={ShippingAddressScreen} />
@@ -49,7 +64,7 @@ const Content = () => {
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/deved" component={DevRdReactToDo} />
-          <Route path="/mu-menu" component={MuMenu} />
+          <Route path="/mu-search" component={MySearch} />
         </Switch>
 
         {/* <ul className="products" >
