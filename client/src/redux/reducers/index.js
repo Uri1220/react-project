@@ -1,4 +1,5 @@
 import { penFilters } from './penFiltersR'
+import { catCreateReducer,catListReducer} from './CatReduser'
 import { pensListReducer, penDetailReducer } from './pensListReducer'
 import { doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,doorReviewSaveReducer} from './doorsListReducer'
 import {  userSigninReducer, userRegisterReducer,  userDetailsReducer,userUpdateProfileReducer, userUpdateReducer } from './userReducers'
@@ -27,5 +28,7 @@ export const rootReducer = combineReducers({
       order:orderDetailsReducer,
       userDetails:userDetailsReducer,
       userUpdateProfile:userUpdateProfileReducer,
-      orderDeliver:orderDeliverReducer
+      orderDeliver:orderDeliverReducer,
+      catCreate:catCreateReducer,
+      catsList:catListReducer
    })

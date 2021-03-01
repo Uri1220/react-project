@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import {saveProduct,fetchDoors,deleteProdcut,} from '../redux/actions/doorsA';
-
+import {
+  saveProduct,
+  fetchDoors,
+  deleteProdcut,
+} from '../redux/actions/doorsA';
 
 function MakeDoorScreen(props) {
 
@@ -24,6 +27,7 @@ function MakeDoorScreen(props) {
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
 
+  //console.log('doors:',doors)
   // console.log('isLoading:',isLoading)
 
   const doorSave = useSelector((state) => state.doorSave);
@@ -84,7 +88,6 @@ function MakeDoorScreen(props) {
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
   };
-  //
   const uploadFileHandler = (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -105,9 +108,11 @@ function MakeDoorScreen(props) {
         setUpisLoading(false);
       });
   };
-
-
-  
+  //   return(
+  //      <div>
+  //           <h3>Make Door</h3>
+  //      </div>
+  //   )
 
   return (
     <div className="content content-margined">
@@ -120,7 +125,7 @@ function MakeDoorScreen(props) {
       {modalVisible && (
         <div className="form">
           <form onSubmit={submitHandler}>
-            <ul className="form-container">              
+            <ul className="form-container">
               <li>
                 <h2>Create Product</h2>
               </li>
@@ -180,8 +185,16 @@ function MakeDoorScreen(props) {
                   id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
-              </li>              
-                <li>
+              </li>
+              <li>
+                {/* <label htmlFor="name">Category</label>
+                <input
+                  type="text"
+                  name="category"
+                  value={category}
+                  id="category"
+                  onChange={(e) => setCategory(e.target.value)}
+                ></input> */}
                 <div>
                   Category:{' '}
                   <select

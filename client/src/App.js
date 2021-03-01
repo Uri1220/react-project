@@ -5,6 +5,9 @@ import Aside from '../src/components/my/Aside'
 import Content from '../src/components/my/Content'
 import Footer from '../src/components/my/Footer'
 import { BrowserRouter } from 'react-router-dom'
+import {listCats} from '../src/redux/actions/categoryA'
+import { useSelector, useDispatch } from 'react-redux';
+
 import 'materialize-css'
 
 function App() {
@@ -32,11 +35,27 @@ function App() {
       }, 200)
     }
   }, [visiblePopup]);
+  /////////////////////////////////////
+  const dispatch = useDispatch();
+  const catslist = useSelector((state) => state.catsList);
+  const { loading_cat, cats, error_cat } = catslist;
+
+  React.useEffect(() => {
+    dispatch(listCats())
+  }, [])
+
+  const cat_arr = cats.map(el => {
+    return {name: el.cat}
+  }
+  )
+
+  //  console.log(cat_arr)
 
 
 
   const array = {
         //category 0-
+        // categories : cat_arr,
     categories: [
       { name: 'Распродажа', url: '/' },
       { name: 'Двери', },

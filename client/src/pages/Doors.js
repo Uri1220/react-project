@@ -13,8 +13,9 @@ function Doors() {
     min = 0,
     max = 0,
   } = useParams();
+  
   const categories = [
-    'massiv', 'mdf'
+    'ecoshpon','massiv', 'mdf'
   ]
 
   const prices = [
@@ -74,11 +75,6 @@ function Doors() {
 
     return `/search/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
   };
-
-
-
-
-
 
   return (
     <div>
