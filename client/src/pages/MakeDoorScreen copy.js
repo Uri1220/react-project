@@ -9,19 +9,26 @@ function MakeDoorScreen(props) {
   const categories = array.doorsCat.map(el => {
     return el.name
   })
-  // const categories = [ 'Входные','Массив','Эко Шпон' ,'МДФ']
+  categories.unshift('')
+  // console.log('cat',categories)
+  //пробелы чтоб в <select/> первая поз была пустая
+  // const categories = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
   const vhod_door = array.vhod_door.map(el => {
     return el.name
   })
+  vhod_door.unshift('')
   const massDoors = array.massDoors.map(el => {
     return el.name
   })
+  massDoors.unshift('')
   const ecoDoors = array.ecoDoors.map(el => {
     return el.name
   })
+  ecoDoors.unshift('')
   const mdfDoors = array.mdfDoors.map(el => {
     return el.name
   })
+  mdfDoors.unshift('')
 
   let sub_categories = []
 
@@ -37,23 +44,25 @@ function MakeDoorScreen(props) {
   const [description, setDescription] = useState('');
   const [upisLoading, setUpisLoading] = useState(false);
 
-  console.log(sub_categories)
-  if (category === array.doorsCat[1].name) {
-    sub_categories = vhod_door
-  } else if (category === array.doorsCat[2].name) {
+//   doorsCat: [
+//     { name: 'Входные', },
+//     { name: 'Массив', },
+//     { name: 'Эко Шпон' },
+//     { name: 'МДФ' },
+//  ],
+  // console.log('sub-array',sub_categories)
+  if (category === array.doorsCat[0].name) {
+    sub_categories = [...vhod_door]
+  } else if (category === array.doorsCat[1].name) {
     sub_categories = [...massDoors]
-  } else if (category === array.doorsCat[3].name) {
+  } else if (category === array.doorsCat[2].name) {
     sub_categories = [...ecoDoors]
-  } else if (category === array.doorsCat[4].name) {
+  } else if (category === array.doorsCat[3].name) {
     sub_categories = [...mdfDoors]
   }
 
-    console.log('cut',category)
-    console.log('sub',sub_category)
-
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
-
 
   const doorSave = useSelector((state) => state.doorSave);
   const {
@@ -91,8 +100,8 @@ function MakeDoorScreen(props) {
     setUrl(product.url);
     setColorId(product.color_id);
     //когда закомеитил пошли в базузначения по умолчанию
-     setCategory(product.category);
-     setSubCategory(product.sub_category);
+    setCategory(product.category);
+    setSubCategory(product.sub_category);
     setCountInStock(product.countInStock);
   };
   //SAVE////
@@ -137,9 +146,6 @@ function MakeDoorScreen(props) {
         setUpisLoading(false);
       });
   };
-
-
-
 
   return (
     <div className="content content-margined">
@@ -213,19 +219,8 @@ function MakeDoorScreen(props) {
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
               </li>
-              ////////////////////////////
-              <li>
-                <label htmlFor="category">category</label>
-                <input
-                  type="text"
-                  readOnly
-                  name="category"
-                  defaultValue={category || ''}
-                  id="category"
-                  // onChange={(e) => setCategory(e.target.value)}
-                ></input>
-              </li>
-              <li>
+              {/* //////////////////////////// */}
+              <li style={{ display: 'flex',marginLeft:'10' }}>
                 <div>
                   Category:
                   <select
@@ -234,41 +229,48 @@ function MakeDoorScreen(props) {
                       setCategory(e.target.value);
                     }}
                   >
-                    {categories.map((x,index) => (
-                      <option value={x}  key = {`${x}_${index}`}>
+                    {categories.map((x, index) => (
+                      <option value={x} key={`${x}_${index}`}>
                         {x}
                       </option>
                     ))}
                   </select>
                 </div>
+                <div style={{marginLeft:'10' }}>
+                  <label htmlFor="category"> : </label>
+                  <input
+                    type="text"
+                    readOnly
+                    name="category"
+                    value={category || ''}
+                  ></input>
+                </div>
               </li>
-              ////////////////////////////
-              <li>
-                <label htmlFor="sub_category">sub_category</label>
-                <input
-                  type="text"
-                  readOnly
-                  name="sub_category"
-                  defaultValue= {sub_category || ''}
-                  id="sub_category"
-                  // onChange={(e) => setSubCategory(e.target.value)}
-                ></input>
-              </li>
-              <li>
+              {/* //////////////////////////// */}
+              <li style={{ display: 'flex',marginLeft:'10' }}>
                 <div>
-                  Sub-Category:{' '}
+                  Sub-Category:
                   <select
                     value={sub_category || ''}
                     onChange={(e) => {
                       setSubCategory(e.target.value);
                     }}
                   >
-                    {sub_categories.map((x,index) => (
-                      <option value={x} key = {`${x}_${index}`}>
+                    {sub_categories.map((x, index) => (
+                      <option value={x} key={`${x}_${index}`}>
                         {x}
                       </option>
                     ))}
                   </select>
+                </div>
+                <div style={{marginLeft:'10' }}>
+                  <label htmlFor="category"> : </label>
+                  <input
+                    type="text"
+                    readOnly
+                    name="sub_category"
+                    value={sub_category || ''}
+                  ></input>
                 </div>
               </li>
               <li>

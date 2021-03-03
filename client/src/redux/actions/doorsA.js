@@ -38,13 +38,14 @@ export const fetchDoors = () => async (dispatch) => {
 
 export const fetchFilterDoors = ({
   category = '',
+  sub_category,
   min = 0,
   max = 0,
 }) => async (dispatch) => {
   try {
     dispatch({ type: DOORS_LIST_REQUEST })
     await axios.get(
-      `/api/doors/list?category=${category}&min=${min}&max=${max}`
+      `/api/doors/list?category=${category}&sub_category=${sub_category}&min=${min}&max=${max}`
     )
       .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
 

@@ -10,13 +10,14 @@ import MessageBox from '../components/my/MessageBox';
 function Doors() {
   const {
     category = 'all',
+    sub_category = '',
     min = 0,
     max = 0,
   } = useParams();
   
-  const categories = [
-    'vchod','ecoshpon','massiv', 'mdf'
-  ]
+  // const categories = [
+  //   'vchod','ecoshpon','massiv', 'mdf'
+  // ]
 
   const prices = [
     {
@@ -58,6 +59,7 @@ function Doors() {
       fetchFilterDoors({
         //тут при all идет пустота и эта пустота в doorRoute  даст весь список
         category: category !== 'all' ? category : '',
+        sub_category,
         min,
         max,
       })
@@ -66,14 +68,15 @@ function Doors() {
       setIsAdm(userInfo.isAdmin)
     }
   },
-    [category, min, max,userInfo]);
+    [category,sub_category, min, max,userInfo]);
 
   const getFilterUrl = (filter) => {
-    const filterCategory = filter.category || category;
+    // const filterCategory = filter.category || category;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
-    return `/search/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
+    // return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
+     return `/catalog/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
   };
 
   return (
@@ -93,7 +96,7 @@ function Doors() {
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
             (<>
-              <div>
+              {/* <div>
                 <ul>
                   <li>
                     <Link
@@ -114,7 +117,7 @@ function Doors() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
 
               <div>
                 <h3>Price</h3>
@@ -133,8 +136,9 @@ function Doors() {
                   ))}
                 </ul>
               </div>
-              
+
               <div>
+              <div>{doors.length} Results</div>
                 <ul className="products" >
                   {
                     doors &&

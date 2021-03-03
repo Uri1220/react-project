@@ -5,9 +5,11 @@ const { isAdmin, isAuth } = require('../util');
 
 router.get('/list', async (req, res) => {
 
-  const category = req.query.category || '';
-  
+  const category = req.query.category || '';  
   const categoryFilter = category ? { category } : {};
+
+  const sub_category = req.query.sub_category || '';  
+  const sub_categoryFilter = sub_category ? { sub_category} : {};
 
   const min =
     req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -19,6 +21,7 @@ router.get('/list', async (req, res) => {
   try {
     const doors = await Door.find({
       ...categoryFilter,
+      ...sub_categoryFilter,
       ...priceFilter,
     })
     res.json(doors)

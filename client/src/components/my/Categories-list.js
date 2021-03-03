@@ -184,7 +184,7 @@ const CategoriesList = ({ array }) => {
                                 <Link
                                   className="sub-sub-menu__link"
                                   className={subSubCat === index + 1 ? 'active-item' : 'sub-sub-menu__link'}
-                                  to={obj.url}
+                                  to={obj.url ? obj.url : '' }
                                   onClick={() => onClickInit(index + 1)}
                                 >
                                   {obj.name}

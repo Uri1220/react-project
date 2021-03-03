@@ -69,7 +69,7 @@ export default function MySearch(props) {
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;  
 
-    return `/search/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
+    return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
   };
     
   

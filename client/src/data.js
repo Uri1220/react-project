@@ -10,28 +10,28 @@ export const array = {
    //Doors subCat+1
    // ' двери'
    doorsCat: [
-      { name: 'Входные', },
-      { name: 'Массив', },
-      { name: 'Эко Шпон' },
-      { name: 'МДФ' },
+      { name: 'Входные', db:'vchod' },
+      { name: 'Массив', db:'massiv'},
+      { name: 'Эко Шпон', db:'ecoshpon'},
+      { name: 'МДФ', db:'mdf'},
    ],
    // subSusbCat+1 url: '/-------' 
    vhod_door: [
-      { name: 'Econom', url: '/vchod-econom' },
-      { name: 'Porta R-2', url: '/vchod-portaR2' },
+      { name: 'Econom', db:'econom', url: '/catalog/category/vchod/sub_category/econom' },
+      { name: 'Porta R-2',db:'porta-r2', url: '/catalog/category/vchod/sub_category/porta-r2' },
    ],
    massDoors: [
-      { name: 'Classico', url: '/doors' },
-      { name: 'Поставы', url: '/' },
-      { name: 'Ока', url: '/' },
+      { name: 'Classico', db:'classico', url: '/catalog/category/massiv/sub_category/classico' },
+      { name: 'Поставы', db:'postavy', url: '/catalog/category/massiv/sub_category/postavy' },
+      { name: 'Ока', db:'oka', url: '/catalog/category/massiv/sub_category/oka' },
    ],
    ecoDoors: [
-      { name: 'Porta X',  url: '/search/category/vchod' },
-      { name: 'Legno', url: '/' },
-      { name: 'Vetro', url: '/' },
+      { name: 'Porta X', db:'porta-x',  url: '/catalog/category/ecoshpon/sub_category/porta-x' },
+      { name: 'Legno',  db:'legno',url: '/catalog/category/ecoshpon/sub_category/legno' },
+      { name: 'Vetro', db:'vetro', url: '/catalog/category/ecoshpon/sub_category/vetro' },
    ],
    mdfDoors: [
-      { name: 'МДФ Юркас', url: '/' },
+      { name: 'МДФ Юркас',  db:'mdf-yurkas',url: '/catalog/category/mdf/sub_category/mdf-yurkas' },
    ],
    //Входные двери подкатегории нет!
 

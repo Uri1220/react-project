@@ -45,7 +45,13 @@ const Content = () => {
           <Route path="/doors/:id" exact component={DoorOne}  />
 
           <Route
-            path="/search/category/:category"
+            path="/catalog/category/:category"
+            component={Doors}
+            exact
+          ></Route>
+
+          <Route
+            path="/catalog/category/:category/sub_category/:sub_category"
             component={Doors}
             exact
           ></Route>
@@ -55,9 +61,13 @@ const Content = () => {
             exact
           ></Route> */}
            <Route
-            path="/search/category/:category/min/:min/max/:max"
+            path="/catalog/category/:category/min/:min/max/:max"
+            component={MySearch}
+            exact
+          ></Route>
+           <Route
+            path="/catalog/category/:category/sub_category/:sub_category/min/:min/max/:max"
             component={Doors}
-            // component={MySearch}
             exact
           ></Route>
 
