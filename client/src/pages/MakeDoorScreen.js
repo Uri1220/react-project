@@ -1,14 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import {saveProduct,fetchDoors,deleteProdcut,} from '../redux/actions/doorsA';
-
+import { saveProduct, fetchDoors, deleteProdcut, } from '../redux/actions/doorsA';
+import { array } from '../data.js'
 
 function MakeDoorScreen(props) {
 
-  const categories = [
-    'ecoshpon', 'massiv', 'mdf'
-  ]
+  const categories = array.doorsCat.map(el => {
+    return el.name
+  })
+  categories.unshift('')
+  // console.log('cat',categories)
+  //пробелы чтоб в <select/> первая поз была пустая
+  // const categories = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
+  const vhod_door = array.vhod_door.map(el => {
+    return el.name
+  })
+  vhod_door.unshift('')
+  const massDoors = array.massDoors.map(el => {
+    return el.name
+  })
+  massDoors.unshift('')
+  const ecoDoors = array.ecoDoors.map(el => {
+    return el.name
+  })
+  ecoDoors.unshift('')
+  const mdfDoors = array.mdfDoors.map(el => {
+    return el.name
+  })
+  mdfDoors.unshift('')
+
+  let sub_categories = []
 
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -16,15 +38,31 @@ function MakeDoorScreen(props) {
   const [price, setPrice] = useState('');
   const [url, setUrl] = useState('');
   const [color_id, setColorId] = useState('');
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState('');
+  const [sub_category, setSubCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const [upisLoading, setUpisLoading] = useState(false);
 
+//   doorsCat: [
+//     { name: 'Входные', },
+//     { name: 'Массив', },
+//     { name: 'Эко Шпон' },
+//     { name: 'МДФ' },
+//  ],
+  // console.log('sub-array',sub_categories)
+  if (category === array.doorsCat[0].name) {
+    sub_categories = [...vhod_door]
+  } else if (category === array.doorsCat[1].name) {
+    sub_categories = [...massDoors]
+  } else if (category === array.doorsCat[2].name) {
+    sub_categories = [...ecoDoors]
+  } else if (category === array.doorsCat[3].name) {
+    sub_categories = [...mdfDoors]
+  }
+
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
-
-  // console.log('isLoading:',isLoading)
 
   const doorSave = useSelector((state) => state.doorSave);
   const {
@@ -61,7 +99,9 @@ function MakeDoorScreen(props) {
     setDescription(product.description);
     setUrl(product.url);
     setColorId(product.color_id);
+    //когда закомеитил пошли в базузначения по умолчанию
     setCategory(product.category);
+    setSubCategory(product.sub_category);
     setCountInStock(product.countInStock);
   };
   //SAVE////
@@ -75,6 +115,7 @@ function MakeDoorScreen(props) {
         url,
         color_id,
         category,
+        sub_category,
         countInStock,
         description,
       })
@@ -106,9 +147,6 @@ function MakeDoorScreen(props) {
       });
   };
 
-
-  
-
   return (
     <div className="content content-margined">
       <div className="product-header">
@@ -120,7 +158,7 @@ function MakeDoorScreen(props) {
       {modalVisible && (
         <div className="form">
           <form onSubmit={submitHandler}>
-            <ul className="form-container">              
+            <ul className="form-container">
               <li>
                 <h2>Create Product</h2>
               </li>
@@ -134,7 +172,7 @@ function MakeDoorScreen(props) {
                 <input
                   type="text"
                   name="title"
-                  value={title}
+                  value={title || ''}
                   id="title"
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
@@ -144,7 +182,7 @@ function MakeDoorScreen(props) {
                 <input
                   type="text"
                   name="price"
-                  value={price}
+                  value={price || ''}
                   id="price"
                   onChange={(e) => setPrice(e.target.value)}
                 ></input>
@@ -154,7 +192,7 @@ function MakeDoorScreen(props) {
                 <input
                   type="text"
                   name="url"
-                  value={url}
+                  value={url || ''}
                   id="url"
                   onChange={(e) => setUrl(e.target.value)}
                 ></input>
@@ -166,7 +204,7 @@ function MakeDoorScreen(props) {
                 <input
                   type="text"
                   name="color_id"
-                  value={color_id}
+                  value={color_id || ''}
                   id="color_id"
                   onChange={(e) => setColorId(e.target.value)}
                 ></input>
@@ -176,31 +214,68 @@ function MakeDoorScreen(props) {
                 <input
                   type="text"
                   name="countInStock"
-                  value={countInStock}
+                  value={countInStock || ''}
                   id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
-              </li>              
-                <li>
+              </li>
+              {/* //////////////////////////// */}
+              <li style={{ display: 'flex',marginLeft:'10' }}>
                 <div>
-                  Category:{' '}
+                  Category:
                   <select
-                    value={category}
+                    value={category || ''}
                     onChange={(e) => {
                       setCategory(e.target.value);
                     }}
                   >
-                    {categories.map((x) => (
-                      <option value={x}>
+                    {categories.map((x, index) => (
+                      <option value={x} key={`${x}_${index}`}>
                         {x}
                       </option>
                     ))}
                   </select>
                 </div>
+                <div style={{marginLeft:'10' }}>
+                  <label htmlFor="category"> : </label>
+                  <input
+                    type="text"
+                    readOnly
+                    name="category"
+                    value={category || ''}
+                  ></input>
+                </div>
+              </li>
+              {/* //////////////////////////// */}
+              <li style={{ display: 'flex',marginLeft:'10' }}>
+                <div>
+                  Sub-Category:
+                  <select
+                    value={sub_category || ''}
+                    onChange={(e) => {
+                      setSubCategory(e.target.value);
+                    }}
+                  >
+                    {sub_categories.map((x, index) => (
+                      <option value={x} key={`${x}_${index}`}>
+                        {x}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div style={{marginLeft:'10' }}>
+                  <label htmlFor="category"> : </label>
+                  <input
+                    type="text"
+                    readOnly
+                    name="sub_category"
+                    value={sub_category || ''}
+                  ></input>
+                </div>
               </li>
               <li>
                 <label htmlFor="description">Description</label>
-                <textarea
+                <textarea cols="40" rows="3"
                   name="description"
                   value={description}
                   id="description"
@@ -230,10 +305,11 @@ function MakeDoorScreen(props) {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
+              {/* <th>ID</th> */}
               <th>Title</th>
               <th>Price</th>
               <th>Category</th>
+              <th>Sub-Category</th>
               <th>ColorId</th>
               <th>Action</th>
             </tr>
@@ -241,10 +317,11 @@ function MakeDoorScreen(props) {
           <tbody>
             {doors.map((product) => (
               <tr key={product._id}>
-                <td>{product._id}</td>
+                {/* <td>{product._id}</td> */}
                 <td>{product.title}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
+                <td>{product.sub_category}</td>
                 <td>{product.color_id}</td>
                 <td>
                   <button className="button" onClick={() => openModal(product)}>

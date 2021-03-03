@@ -10,6 +10,10 @@ const DoorSchema = mongoose.Schema({
         type: String,
         // required: true
     },
+    sub_category: {
+        type: String,
+        // required: true
+    },
     price: {
         type: Number,
         default: 0,

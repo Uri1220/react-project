@@ -16,7 +16,8 @@ const Door = ({ door }) => {
         </Link>
       </div>
       <div className="product-price">${door.price}</div>
-      <div className="product-price">${door.category}</div>
+      <div className="product-price">cat: {door.category}</div>
+      <div className="product-price">sub_cat: {door.sub_category}</div>
     </div>
 
 

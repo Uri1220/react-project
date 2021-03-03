@@ -30,5 +30,5 @@ export const rootReducer = combineReducers({
       userUpdateProfile:userUpdateProfileReducer,
       orderDeliver:orderDeliverReducer,
       catCreate:catCreateReducer,
-      catsList:catListReducer
+      catsList:catListReducer,
    })

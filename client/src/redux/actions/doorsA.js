@@ -116,6 +116,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
         },
       });
       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
+      // debugger
     } else {
       const { data } = await axios.put(
         '/api/doors/' + product._id,

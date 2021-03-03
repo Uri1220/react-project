@@ -40,6 +40,7 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
     url: req.body.url,
     color_id: req.body.color_id,
     category: req.body.category,
+    sub_category: req.body. sub_category,
     countInStock: req.body.countInStock,
     position: req.body.position,
     description: req.body.description,
@@ -84,6 +85,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
     product.url = req.body.url;
     product.color_id = req.body.color_id;
     product.category = req.body.category;
+    product.sub_category = req.body. sub_category;
     product.countInStock = req.body.countInStock;
     product.position = req.body.position;
     product.description = req.body.description;

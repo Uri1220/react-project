@@ -133,7 +133,6 @@ function Doors() {
                   ))}
                 </ul>
               </div>
-              
               <div>
                 <ul className="products" >
                   {

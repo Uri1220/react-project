@@ -122,8 +122,8 @@ const CategoriesList = ({ array }) => {
                 <Link
                   // className='menu__link'
                   className={category === index ? 'menu__link active-cat' : 'menu__link'}
-
-                  to={obj.url}
+                    to={''}
+                  // to={obj.url}
                   onClick={() => (onClickCat(index))}
                 >
                   {obj.name}
@@ -162,7 +162,7 @@ const CategoriesList = ({ array }) => {
                         <Link
                           //  className="sub-menu__link"
                           className={subCat === index + 1 ? 'sub-menu__link active-sub-cat' : 'sub-menu__link'}
-
+                            to={''}
                           // to={obj.url}
                           onClick={() => onClickSubCat(index + 1)}
                         >

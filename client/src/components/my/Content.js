@@ -44,6 +44,11 @@ const Content = () => {
           <Route path="/doors" exact ><Doors/></Route>
           <Route path="/doors/:id" exact component={DoorOne}  />
 
+          <Route
+            path="/search/category/:category"
+            component={Doors}
+            exact
+          ></Route>
           {/* <Route
             path="/search/category/:category"
             component={MySearch}
