@@ -36,6 +36,9 @@ function Main() {
          <div className="back-to-result">
             <Link to="/mu-search">Mu Search</Link>
          </div>
+         <div className="back-to-result">
+            <Link to="/select">Select</Link>
+         </div>
       </div>
    )
 }

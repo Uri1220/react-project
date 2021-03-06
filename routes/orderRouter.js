@@ -3,6 +3,54 @@ const express = require('express')
 const orderRouter = express.Router()
 const Order = require('../models/orderModel')
 const { isAdmin, isAuth } = require('../util');
+var dateFormat = require("dateformat");
+var now = new Date();
+dateFormat.i18n = {
+  dayNames: [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+  monthNames: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+    "Января",
+    "Февраля",
+    "Марта",
+    "Апреля",
+    "Мая",
+    "Июня",
+    "Июля",
+    "Августа",
+    "Сентября",
+    "Октября",
+    "Ноября",
+    "Декабря",
+  ],
+  timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
+};
+
 
 //LIST
 orderRouter.get('/list', async (req, res) => {
@@ -59,19 +107,8 @@ orderRouter.post('/', isAuth, async (req, res) => {
 
     orderItems: req.body.orderItems,
     shipping: req.body.shippingAddress,
-    orderDate: Date.now(),
-    // deliveredAt:Date.now(),
-    user: req.user._id,
-    // description:  req.body.description,
-    // completed: req.body.completed,
-
-    // shippingAddress: req.body.shippingAddress,
-    //   paymentMethod: req.body.paymentMethod,
-    //   itemsPrice: req.body.itemsPrice,
-    //   shippingPrice: req.body.shippingPrice,
-    //   taxPrice: req.body.taxPrice,
-    // totalPrice: req.body.totalPrice,
-    // ratings: req.body.ratings,             
+     orderDate : dateFormat(now,"dd mmmm, yyyy, HH:MM"),
+    user: req.user._id,              
 
   });
 
@@ -140,7 +177,6 @@ orderRouter.post('/', isAuth, async (req, res) => {
 
 orderRouter.put(
   '/:id/deliver',
-  // '/deliver',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -148,8 +184,9 @@ orderRouter.put(
     if (order) {
        order.completed = req.body.completed;
        order. description = req.body.description || order.description;
-       order.deliveredAt = req.body.deliverDate || null
-
+      //  order.deliveredAt = req.body.deliverDate || null
+       order.deliveredAt = dateFormat(req.body.deliverDate,"dd mmmm, yyyy") || null
+       
       const updatedOrder = await order.save();
       res.send({ message: 'Order Delivered', order: updatedOrder });
     } else {

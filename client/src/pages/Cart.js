@@ -34,8 +34,8 @@ let ur = ''
   // console.log('qty',props.match.url);
 
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
-
-  // console.log('prodId',productId);
+  const orderSumm = (cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)
+   console.log('prodId',orderSumm);
   // console.log('qty',qty);
 
   const removeFromCartHandler = (productId) => {
@@ -112,7 +112,8 @@ let ur = ''
         <h3>
           Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
         :
-         $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)}
+         {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
+         $ {orderSumm}
         </h3>
         <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
           Оформить заказ

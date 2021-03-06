@@ -26,7 +26,7 @@ const addToCart = (penId, qty, ur) => async (dispatch, getState) => {
         price: data.price,
         countInStock: data.countInStock,
         path: data.color_id,
-        qty
+        qty,
       }
     });
     ///COOKIE

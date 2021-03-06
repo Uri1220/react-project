@@ -13,7 +13,7 @@ const PensSchema = mongoose.Schema({
         type:Number,
     },
     color_id:{
-        type:String,
+        type:String,default:'pens/'
     },
     position:{
         type:Number,

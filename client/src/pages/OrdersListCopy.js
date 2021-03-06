@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    fontSize: 50
   },
 }));
 ////////
@@ -33,7 +32,8 @@ function OrdersList(props) {
   const dispatch = useDispatch();
 
   const orderslist = useSelector((state) => state.orderList);
-  const { loading, orders, error } = orderslist; 
+  const { loading, orders, error } = orderslist;
+  // console.log(orders)
 
   const productDelete = useSelector((state) => state.orderDelete);
   const {
@@ -42,7 +42,7 @@ function OrdersList(props) {
   //  console.log('succsess',successDelete)
 
   React.useEffect(() => {
-    dispatch(listOrders())
+      dispatch(listOrders())
   }, [successDelete])
 
   // Delete
@@ -55,12 +55,6 @@ function OrdersList(props) {
   const classes = useStyles();
   const [age, setAge] = React.useState(10);
   const [open, setOpen] = React.useState(false);
-
-  // const arr = filteredOrders.sort(function(a, b){
-  //   var dateA=new Date(a.orderDate), dateB=new Date(b.orderDate)
-  //   return dateB-dateA //сортировка по возрастающей дате
-  //   })
-  //  console.log('arr',arr)
 
   React.useEffect(() => {
     switch (age) {
@@ -100,15 +94,12 @@ function OrdersList(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
             <>
-              {/* Select */}
               <div>
-                {/* <Button className={classes.button} onClick={handleOpen}>
+                <Button className={classes.button} onClick={handleOpen}>
                   Open the select
-                </Button> */}
+                </Button>
                 <FormControl className={classes.formControl}>
-                   <InputLabel 
-                     id="demo-controlled-open-select-label">Заказы:
-                   </InputLabel>
+                  <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
                   <Select
                     labelId="demo-controlled-open-select-label"
                     id="demo-controlled-open-select"
@@ -122,7 +113,7 @@ function OrdersList(props) {
                     {/* <MenuItem value="">
                       <em>None</em>
                     </MenuItem> */}
-                    <MenuItem value={10}> <em>Все</em></MenuItem>
+                    <MenuItem value={10}> <em>All</em></MenuItem>
                     <MenuItem value={20}>Доставленные</MenuItem>
                     {/* <MenuItem value={completed}>Доставленные</MenuItem> */}
                     <MenuItem value={30}>Нет</MenuItem>
@@ -130,17 +121,16 @@ function OrdersList(props) {
                   </Select>
                 </FormControl>
               </div>
-              {/* endSelect */}
 
 
               <table className="table">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>DATE</th>
-                    <th>UserName</th>
-                    <th>Address</th>
-                    <th>Summ</th>
-                    <th>Phone</th>                  
+                    <th>User</th>
+                    {/* <th>TOTAL</th>
+              <th>PAID</th> */}
                     <th>DELIVERED</th>
                     <th>ACTIONS</th>
                   </tr>
@@ -149,15 +139,16 @@ function OrdersList(props) {
                   {filteredOrders.map((order) => (
 
                     <tr key={order._id}>
-                      {/* <td>{order._id}</td> */}
+                      <td>{order._id}</td>
                       {/* <td>{order.createdAt.substring(0, 10)}</td> */}
-                      <td>{order.orderDate}</td>
-                      {/* <td>{order.orderDate.substring(0, 10)}</td> */}
-                      <td>{order.shipping.fullName}</td>
-                      <td>{order.shipping.address}</td>
-                      <td>{ order.orderItems.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2)}</td>
-                      <td>{order.shipping.postalCode}</td>
-                      <td>{order.deliveredAt ? order.deliveredAt : 'No'}</td>
+                      <td>{order.orderDate.substring(0, 10)}</td>
+                      <td>{order.user}</td>
+                      {/* <td>{order.totalPrice.toFixed(2)}</td>
+                
+                    </td> */}
+
+
+                      <td>{order.deliveredAt ? order.deliveredAt.substring(0, 10) : 'No'}</td>
 
                       <td>
                         <button

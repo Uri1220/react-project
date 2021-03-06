@@ -20,7 +20,7 @@ const DoorSchema = mongoose.Schema({
         // required: true
     },
     color_id: {
-        type: String,
+        type: String,default:'/doors'
     },
     position: {
         type: Number,

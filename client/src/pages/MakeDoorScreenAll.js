@@ -4,29 +4,30 @@ import axios from 'axios';
 import { saveProduct, fetchDoors, deleteProdcut, } from '../redux/actions/doorsA';
 import { array } from '../data.js'
 
-function MakeDoorScreen(props) {
+function MakeDoorScreen() {
 
-  const categories = array.doorsCat.map(el => {
-    return el.name
+  ///////Select
+  const doorsCat = array.doorsCat.map(el => {
+    return el.db
   })
-  categories.unshift('')
-  // console.log('cat',categories)
+  doorsCat.unshift('')
+  // console.log('cat',doorsCat)
   //пробелы чтоб в <select/> первая поз была пустая
-  // const categories = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
+  // const doorsCat = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
   const vhod_door = array.vhod_door.map(el => {
-    return el.name
+    return el.db
   })
   vhod_door.unshift('')
   const massDoors = array.massDoors.map(el => {
-    return el.name
+    return el.db
   })
   massDoors.unshift('')
   const ecoDoors = array.ecoDoors.map(el => {
-    return el.name
+    return el.db
   })
   ecoDoors.unshift('')
   const mdfDoors = array.mdfDoors.map(el => {
-    return el.name
+    return el.db
   })
   mdfDoors.unshift('')
 
@@ -51,16 +52,16 @@ function MakeDoorScreen(props) {
 //     { name: 'МДФ' },
 //  ],
   // console.log('sub-array',sub_categories)
-  if (category === array.doorsCat[0].name) {
+  if (category === array.doorsCat[0].db) {
     sub_categories = [...vhod_door]
-  } else if (category === array.doorsCat[1].name) {
+  } else if (category === array.doorsCat[1].db) {
     sub_categories = [...massDoors]
-  } else if (category === array.doorsCat[2].name) {
+  } else if (category === array.doorsCat[2].db) {
     sub_categories = [...ecoDoors]
-  } else if (category === array.doorsCat[3].name) {
+  } else if (category === array.doorsCat[3].db) {
     sub_categories = [...mdfDoors]
   }
-
+//-------------------select-----------------
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
 
@@ -85,10 +86,11 @@ function MakeDoorScreen(props) {
     if (successSave) {
       setModalVisible(false);
     }
-    dispatch(fetchDoors());
-    return () => {
-      //
-    };
+    //без dispatch отображаемся уже отфильтрованные двери
+    //а с dispatch -все
+    
+     dispatch(fetchDoors());
+   
   }, [successSave, successDelete]);
 
   const openModal = (product) => {
@@ -219,7 +221,7 @@ function MakeDoorScreen(props) {
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
               </li>
-              {/* //////////////////////////// */}
+              {/* ////////CATEGORY//////////////////// */}
               <li style={{ display: 'flex',marginLeft:'10' }}>
                 <div>
                   Category:
@@ -229,7 +231,7 @@ function MakeDoorScreen(props) {
                       setCategory(e.target.value);
                     }}
                   >
-                    {categories.map((x, index) => (
+                    {doorsCat.map((x, index) => (
                       <option value={x} key={`${x}_${index}`}>
                         {x}
                       </option>
@@ -246,7 +248,7 @@ function MakeDoorScreen(props) {
                   ></input>
                 </div>
               </li>
-              {/* //////////////////////////// */}
+              {/* ///////////SUB__CATEGORY///////////////// */}
               <li style={{ display: 'flex',marginLeft:'10' }}>
                 <div>
                   Sub-Category:
@@ -273,6 +275,7 @@ function MakeDoorScreen(props) {
                   ></input>
                 </div>
               </li>
+              {/* ////////////////////////////////// */}
               <li>
                 <label htmlFor="description">Description</label>
                 <textarea cols="40" rows="3"

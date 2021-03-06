@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { saveProduct, fetchDoors, deleteProdcut, } from '../redux/actions/doorsA';
+import { saveProduct,fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
 import { array } from '../data.js'
 
-function MakeDoorScreen(props) {
+function MakeDoorScreen() {
 
+  ///////Select
   const doorsCat = array.doorsCat.map(el => {
     return el.db
   })
   doorsCat.unshift('')
-  // console.log('cat',doorsCat)
   //пробелы чтоб в <select/> первая поз была пустая
   // const doorsCat = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
   const vhod_door = array.vhod_door.map(el => {
@@ -60,9 +60,11 @@ function MakeDoorScreen(props) {
   } else if (category === array.doorsCat[3].db) {
     sub_categories = [...mdfDoors]
   }
-
+//-------------------select-----------------
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
+
+
 
   const doorSave = useSelector((state) => state.doorSave);
   const {
@@ -85,10 +87,19 @@ function MakeDoorScreen(props) {
     if (successSave) {
       setModalVisible(false);
     }
-    dispatch(fetchDoors());
-    return () => {
-      //
-    };
+    //без dispatch отображаемся уже отфильтрованные двери
+    //а с dispatch -все
+
+    // dispatch(fetchDoors());
+     dispatch(fetchFilterDoors(
+      {
+        category:v[0] ,
+        sub_category:s[0],
+        min:0,
+        max:0,
+      }
+     ));
+   
   }, [successSave, successDelete]);
 
   const openModal = (product) => {
@@ -99,7 +110,6 @@ function MakeDoorScreen(props) {
     setDescription(product.description);
     setUrl(product.url);
     setColorId(product.color_id);
-    //когда закомеитил пошли в базузначения по умолчанию
     setCategory(product.category);
     setSubCategory(product.sub_category);
     setCountInStock(product.countInStock);
@@ -146,12 +156,21 @@ function MakeDoorScreen(props) {
         setUpisLoading(false);
       });
   };
-
+//определяем кат и субкат чтоб задать значения по умолч стрю170
+// и для перерендера списка стр.93
+  const v = doors.map(el => {
+    return el.category
+  })
+  const s = doors.map(el => {
+    return el.sub_category
+  })
   return (
     <div className="content content-margined">
       <div className="product-header">
         <h3>Products</h3>
-        <button className="button primary" onClick={() => openModal({})}>
+        <button className="button primary" onClick={() => openModal(
+          {category:`${v[0]}`,sub_category:`${s[0]}`}
+          )}>
           Create Product
         </button>
       </div>
@@ -219,9 +238,9 @@ function MakeDoorScreen(props) {
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
               </li>
-              {/* //////////////////////////// */}
+              {/* ////////CATEGORY//////////////////// */}
               <li style={{ display: 'flex',marginLeft:'10' }}>
-                <div>
+                {/* <div>
                   Category:
                   <select
                     value={category || ''}
@@ -235,9 +254,9 @@ function MakeDoorScreen(props) {
                       </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 <div style={{marginLeft:'10' }}>
-                  <label htmlFor="category"> : </label>
+                  <label htmlFor="category"> Category:</label>
                   <input
                     type="text"
                     readOnly
@@ -246,9 +265,9 @@ function MakeDoorScreen(props) {
                   ></input>
                 </div>
               </li>
-              {/* //////////////////////////// */}
+              {/* ///////////SUB__CATEGORY///////////////// */}
               <li style={{ display: 'flex',marginLeft:'10' }}>
-                <div>
+                {/* <div>
                   Sub-Category:
                   <select
                     value={sub_category || ''}
@@ -262,9 +281,9 @@ function MakeDoorScreen(props) {
                       </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 <div style={{marginLeft:'10' }}>
-                  <label htmlFor="category"> : </label>
+                  <label htmlFor="category">Sub- Category: </label>
                   <input
                     type="text"
                     readOnly
@@ -273,6 +292,7 @@ function MakeDoorScreen(props) {
                   ></input>
                 </div>
               </li>
+              {/* ////////////////////////////////// */}
               <li>
                 <label htmlFor="description">Description</label>
                 <textarea cols="40" rows="3"

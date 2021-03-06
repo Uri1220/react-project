@@ -20,6 +20,7 @@ import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
 import DevRdReactToDoSelect from '../../pages/dev_ed/DevRdReactToDo-Select'
+import select from '../../pages/dev_ed/select'
 
 
 // const Content = ({ category }) => {
@@ -81,6 +82,7 @@ const Content = () => {
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/deved" component={DevRdReactToDoSelect} />
           <Route path="/mu-search" component={MySearch} />
+          <Route path="/select" component={select} />
         </Switch>
 
         {/* <ul className="products" >
