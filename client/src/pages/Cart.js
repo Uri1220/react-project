@@ -35,7 +35,7 @@ let ur = ''
 
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
   const orderSumm = (cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)
-   console.log('prodId',orderSumm);
+  //  console.log('prodId',orderSumm);
   // console.log('qty',qty);
 
   const removeFromCartHandler = (productId) => {

@@ -342,6 +342,7 @@ function MakeDoorScreen() {
                 <td>{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.sub_category}</td>
+                {/* <td>{product.description}</td> */}
                 <td>{product.color_id}</td>
                 <td>
                   <button className="button" onClick={() => openModal(product)}>

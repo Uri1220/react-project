@@ -19,8 +19,9 @@ import MySearch from '../../pages/MySearch'
 import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
-import DevRdReactToDoSelect from '../../pages/dev_ed/DevRdReactToDo-Select'
+import FlexCat from '../../pages/dev_ed/FlexCat'
 import select from '../../pages/dev_ed/select'
+import Breadcrumb from '../my/Breadcramb'
 
 
 // const Content = ({ category }) => {
@@ -31,6 +32,7 @@ const Content = () => {
     <main className="main">
 
       <div className="content">
+        <Breadcrumb/>
         {/* <h3>{category}</h3> */}
         <Switch>
           <Route path="/" exact component={Main} />
@@ -80,7 +82,7 @@ const Content = () => {
           <Route path="/order/:id/deliver" exact component={OrderDeliverScreen} />
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
-          <Route path="/deved" component={DevRdReactToDoSelect} />
+          <Route path="/deved-flex" component={FlexCat} />
           <Route path="/mu-search" component={MySearch} />
           <Route path="/select" component={select} />
         </Switch>

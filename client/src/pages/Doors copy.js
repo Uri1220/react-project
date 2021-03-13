@@ -1,6 +1,6 @@
 import React from 'react'
 import Door from './Door'
-import { useDispatch, useSelector } from 'react-redux';
+ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchFilterDoors } from '../redux/actions/doorsA';
 import LoadingBox from '../components/my/LoadingBox';
@@ -14,7 +14,7 @@ function Doors() {
     min = 0,
     max = 0,
   } = useParams();
-
+  
   // const categories = [
   //   'vchod','ecoshpon','massiv', 'mdf'
   // ]
@@ -68,7 +68,7 @@ function Doors() {
       setIsAdm(userInfo.isAdmin)
     }
   },
-    [category, sub_category, min, max, userInfo]);
+    [category,sub_category, min, max,userInfo]);
 
   const getFilterUrl = (filter) => {
     // const filterCategory = filter.category || category;
@@ -76,7 +76,7 @@ function Doors() {
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
     // return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
-    return `/catalog/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
+     return `/catalog/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
   };
 
   return (
@@ -96,8 +96,7 @@ function Doors() {
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
             (<>
-              {/*
-               <div>
+              {/* <div>
                 <ul>
                   <li>
                     <Link
@@ -118,8 +117,7 @@ function Doors() {
                     </li>
                   ))}
                 </ul>
-              </div> 
-              */}
+              </div> */}
 
               <div>
                 <h3>Price</h3>
@@ -140,14 +138,19 @@ function Doors() {
               </div>
 
               <div>
-                <div>{doors.length} Results</div>
-                <div className="products">
+              <div>{doors.length} Results</div>
+              <div   >
+                <ul className="products1">
                   {
                     doors &&
                     doors.map((item) =>
-                      <Door  key={item._id} door={item} />
-                    )
+                      <li
+                        key={item._id}
+                      >
+                        <Door door={item} />
+                      </li>)
                   }
+                </ul>
                 </div>
               </div>
             </>

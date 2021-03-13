@@ -22,23 +22,45 @@ function DoorOne(props) {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
   };
   // //////////////////////////////////////////////////
-  const arr = String(door.description).split('+')
+  const arr = String(door.description).split('=')
 
-  const ppp = arr.map(el => el.split('='))
+  const rrr = arr.map((el, i) => i % 2 === 0 ? { name: el } : { value: el }
 
-  const ppp1 = ppp.map((el) => el.map((x, i) => i % 2 === 0 ? { name: x } : { value: x }))
+  )
 
-  const ppp2 = ppp1.map((el) => {
-    return {
-      ...el[0], ...el[1]
-    }
-  })
+
+
+
+  // console.log(Array.from(arr));
+
+  // console.log(Array.from(arr, x => x + x));
+  // expected output: Array [2, 4, 6]
+
+
 
   const [des, setDes] = useState(
     {
       proper: '',
       val: ''
     })
+
+  // function twoPar(array) {
+  //   const result= []
+  //   const rab = []
+  //   for (var i = 0; i < array.length; i++) {
+
+  //     for (var j = 0; j < array.length; j++) {
+  //       rab.push(array[j])
+
+  //     }
+
+  //     }
+  //   }
+
+
+  //  const arrKeys = arr.map((el,i) => i%2 ? el : '')
+
+  // console.log('arr', des)
 
   function updateProp(p) {
     setDes(prev => {
@@ -123,28 +145,29 @@ function DoorOne(props) {
                     </div>
 
                     <div className='details-right-description'>
-                      {/* Description: */}
-                     {door.description &&
-                        <div className="">
-                          <table className="table">
-                            <thead>
-                              <tr>
-                                {/* <th>Title</th> */}
+                      Description:
+                      <div className="product-list">
+                        <table className="table">
+                          <thead>
+                            <tr>
+                              {/* <th>Title</th>
+                              <th>Price</th>
+                              <th>Category</th>
+                              <th>Sub-Category</th>
+                              <th>ColorId</th>
+                              <th>Action</th> */}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {rrr.map((el, i) => (
+                              <tr key={i}>
+                                <td><span>{el.name}</span> <span>{el.value}</span> </td>
                               </tr>
-                            </thead>
-                            <tbody>
-                              {ppp2.map((el, i) => (
-                                <tr key={i}>
-                                  <td>{el.name}</td>
-                                  <td>{el.value}</td>
-                                </tr>
-                              )
-                              )
-                              }
-                            </tbody>
-                          </table>
+                            ))}
+                          </tbody>
+                        </table>
 
-                        </div>}
+                      </div>
                     </div>
 
                     <div className="details-right-action">

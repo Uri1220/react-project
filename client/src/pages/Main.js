@@ -31,7 +31,7 @@ function Main() {
             <Link to="/orders/">Заказы</Link>
          </div> */}
          <div className="back-to-result">
-            <Link to="/deved/">DevEd</Link>
+            <Link to="/deved-flex">Flex My categories on redux    </Link>
          </div>
          <div className="back-to-result">
             <Link to="/mu-search">Mu Search</Link>

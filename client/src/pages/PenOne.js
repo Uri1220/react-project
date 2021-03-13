@@ -42,9 +42,7 @@ function PenOne(props) {
 
   return (
     <div>
-      <div className="back-to-result">
-        <Link to="/pens/">Back to result</Link>
-      </div>
+       <button onClick={props.history.goBack}>Back</button>     
       {
         isLoading ? (
           <div>Loading...</div>

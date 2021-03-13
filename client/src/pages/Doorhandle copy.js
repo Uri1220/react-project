@@ -6,20 +6,18 @@ const Doorhandle = ({ pen }) => {
   //  console.log(pen)
   return (
 
-    < >
-      <Link className="product" to={'/pens/' + pen._id}>
-        <div>
-          <img src={pen.url} alt="11" />
-        </div>
-
+    <div className="product">
+      <Link to={'/pens/' + pen._id}>
+        <img className="product-image" src={pen.url} alt="11" />
         {/* <img className="product-image" src={{ ...pen.pictures[0] }.medium} alt="11" /> */}
-
-        <div className="product-name">
-          {pen.title}
-        </div>
-        <div className="product-price">{pen.price} p.</div>
       </Link>
-    </>
+      <div className="product-name">
+        <Link to={'/pens/' + pen._id}>
+          {pen.title}
+        </Link>
+      </div>
+      <div className="product-price">${pen.price}</div>
+    </div>
 
 
   )
