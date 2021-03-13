@@ -61,7 +61,7 @@ const LinkRouter = (props) => <Link {...props} component={RouterLink} />;
 
 export default function RouterBreadcrumbs() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -97,8 +97,8 @@ export default function RouterBreadcrumbs() {
             );
           }}
         </Route>
-        <nav className={classes.lists} aria-label="mailbox folders">
-          {/* <List>
+        {/* <nav className={classes.lists} aria-label="mailbox folders">
+          <List>
             <ListItemLink to="/inbox"  open={open} onClick={handleClick} />
             <Collapse component="li" in={open} timeout="auto" unmountOnExit>
               <List disablePadding>
@@ -110,8 +110,8 @@ export default function RouterBreadcrumbs() {
             </Collapse>
             <ListItemLink to="/trash" />
             <ListItemLink to="/spam" />
-          </List> */}
-        </nav>
+          </List>
+        </nav> */}
       </div>
     </MemoryRouter>
   );

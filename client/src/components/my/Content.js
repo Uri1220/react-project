@@ -22,6 +22,7 @@ import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
 import FlexCat from '../../pages/dev_ed/FlexCat'
 import select from '../../pages/dev_ed/select'
 import Breadcrumb from '../my/Breadcramb'
+ import Descript from '../my/Descript'
 
 
 // const Content = ({ category }) => {
@@ -83,7 +84,7 @@ const Content = () => {
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/deved-flex" component={FlexCat} />
-          <Route path="/mu-search" component={MySearch} />
+          <Route path="/mu-search" component={Descript} />
           <Route path="/select" component={select} />
         </Switch>
 

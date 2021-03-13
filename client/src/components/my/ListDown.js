@@ -1,0 +1,81 @@
+/* eslint-disable no-nested-ternary */
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+// import Link from '@material-ui/core/Link';
+import ListItem from '@material-ui/core/ListItem';
+import Collapse from '@material-ui/core/Collapse';
+import ListItemText from '@material-ui/core/ListItemText';
+// import Typography from '@material-ui/core/Typography';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+// import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { MemoryRouter } from 'react-router';
+import { Link as RouterLink } from 'react-router-dom';
+import Descript from './Descript';
+
+const breadcrumbNameMap = {
+  '/desc': 'Описание', 
+};
+
+function ListItemLink(props) {
+  const { to, open, ...other } = props;
+  const primary = breadcrumbNameMap[to];
+
+  return (
+    <li>
+      <ListItem button component={RouterLink} to={to} {...other}>
+        <ListItemText primary={primary} />
+        {open != null ? open ? <ExpandLess /> : <ExpandMore /> : null}
+      </ListItem>
+    </li>
+  );
+}
+
+ListItemLink.propTypes = {
+  open: PropTypes.bool,
+  to: PropTypes.string.isRequired,
+};
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 360,
+  },
+  lists: {
+    backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing(1),
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
+
+
+export default function ListDown({des}) {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  return (
+    <MemoryRouter >
+      <div className={classes.root}>
+       
+        <nav className={classes.lists} aria-label="mailbox folders">
+          <List>
+            <ListItemLink to="/desc"  open={open} onClick={handleClick} />
+            <Collapse component="li" in={open} timeout="auto" unmountOnExit>
+              <Descript des = {des}/>             
+            </Collapse>
+          
+          </List>
+        </nav>
+      </div>
+    </MemoryRouter>
+  );
+}
