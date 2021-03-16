@@ -49,6 +49,9 @@ const Header = ({ openMenu }) => {
                         <Link to="/orderhistory">Order History</Link>
                      </li>
                      <li>
+                        <Link to="/colors">DoorColors</Link>
+                     </li>
+                     <li>
                         <Link  to="#signout" onClick={signoutHandler}>
                            Sign Out
                     </Link>

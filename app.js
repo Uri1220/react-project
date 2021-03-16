@@ -16,12 +16,14 @@ const userRoute = require('./routes/userRoute')
 const doorRoute = require('./routes/doorRoute')
 const orderRoute = require('./routes/orderRouter')
 const catRoute = require('./routes/catRoute')
+ const colorRoute = require('./routes/colorRoute')
 
  app.use('/api/pens',pensRoute)
  app.use('/api/doors',doorRoute)
  app.use('/api/users',userRoute)
  app.use('/api/orders',orderRoute)
  app.use('/api/cat',catRoute)
+  app.use('/api/color',colorRoute)
 
 // app.get('/pens',(req,res) => {
 //     res.send('pens page')

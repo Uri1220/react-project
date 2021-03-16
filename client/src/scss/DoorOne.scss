@@ -1,3 +1,25 @@
+.MuiTypography-body1 {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  font-family: Montserrat,Roboto, sans-serif !important;
+
+}
+.MuiSvgIcon-root {
+  width: 20px !important;
+  height: 20px !important;
+}
+.MuiListItem-root {
+  width: 70% !important;
+  border: 1px solid #eee !important; 
+  // border-radius:5px !important;
+   background:#f1f1eacf!important;
+  // margin-bottom: 5px; 
+  
+}
+
+
+
+
 .details-wrapper{
    height: 100%;
 }
@@ -35,8 +57,6 @@
     flex-direction: column;
      flex: 1 1 250px;
      width: 100%;
-    // border: 0.1rem #808080 solid;
-    // border-radius: 0.5rem;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
     padding: 10px;
 
@@ -46,16 +66,43 @@
     font-weight: 700;
     padding: 10px  0;
 
-    // margin-bottom: 10px;
-    // margin-top: 10px;
 }
   
   .details-right-price {
-    flex:1;
+    // flex:1;
+    margin-bottom: 20px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #eee;
+  }
+  .details-right-size{
+    display: flex;
+    flex: 0 1 50%;
+  }
+  .size{
+    margin-right: 20px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    color: #333;
+}  
+  .size-active{
+    border-bottom: 3px solid #f6c502;
+  }
+  .details-title{
+    margin-right: 30px;
+    font-weight: 500;
+  }
+  .details-right-colors {
+  
   }
   .details-right-description {
-    
-    flex:1;
+    // display: flex;
+    // flex:1;
+  }
+  .des1{
+    // flex:1 1 48%
+  }
+  .des2{
+    // flex:1 1 48%
   }
   
   ////////////////////

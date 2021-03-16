@@ -4,6 +4,7 @@ import { pensListReducer, penDetailReducer } from './pensListReducer'
 import { doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,doorReviewSaveReducer} from './doorsListReducer'
 import {  userSigninReducer, userRegisterReducer,  userDetailsReducer,userUpdateProfileReducer, userUpdateReducer } from './userReducers'
 import { orderCreateReducer,orderDetailsReducer,orderListReducer,orderDeleteReducer,orderDeliverReducer,orderMineListReducer } from './orderReducers'
+import { colorSaveReducer, colorsListReducer,colorDeleteReducer,} from './colorsReducer'
 import { cartReducer } from './cartReducer'
 
 import {combineReducers} from 'redux';
@@ -21,11 +22,19 @@ export const rootReducer = combineReducers({
       doorSave: doorSaveReducer,
       doorDelete: doorDeleteReducer,
       doorReviewSave: doorReviewSaveReducer,
+
       orderCreate:orderCreateReducer,
       orderList:orderListReducer,
       orderDelete:orderDeleteReducer,
       orderMineList:orderMineListReducer,
       order:orderDetailsReducer,
+      
+      colorCreate:colorSaveReducer,
+      colors:colorsListReducer,
+      colorDelete:colorDeleteReducer,
+      // colorMineList:orderMineListReducer,
+      // color:orderDetailsReducer,
+
       userDetails:userDetailsReducer,
       userUpdateProfile:userUpdateProfileReducer,
       orderDeliver:orderDeliverReducer,

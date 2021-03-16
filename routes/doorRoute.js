@@ -47,6 +47,8 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
     countInStock: req.body.countInStock,
     position: req.body.position,
     description: req.body.description,
+    complect: req.body.complect,
+    size: req.body.size,
   });
   const newProduct = await product.save();
   if (newProduct) {
@@ -92,6 +94,9 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
     product.countInStock = req.body.countInStock;
     product.position = req.body.position;
     product.description = req.body.description;
+    product.complect = req.body.complect
+    product.size = req.body.size
+
 
     const updatedProduct = await product.save();
     if (updatedProduct) {

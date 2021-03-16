@@ -5,9 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDoorDetail } from '../redux/actions/doorsA'
 import '../scss/DoorOne.scss'
 import ListDown from '../components/my/ListDown'
-// import Size from '../storage/'
-import Size from '../components/my/Size'
-import logo from '../storage/elporta.jpg' 
 
 
 function DoorOne(props) {
@@ -24,7 +21,7 @@ function DoorOne(props) {
 
   const handleAddToCart = () => {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
-  };
+  };  
 
   return (
     <div className='details-wrapper'>
@@ -47,48 +44,22 @@ function DoorOne(props) {
                     </div>
                   </div>
 
-
                   <div className="details-right">
                     <div className='details-right-price'>
-                      <span className='details-title'>
-                        Цена
-                      </span> <b>{door.price} р.</b>
-                    </div>
-                    <div className='details-right-size'>
-                      <span className='details-title'>
-                        Размер
-                      </span>
-                      {door.size &&
-                        <Size size={door.size} />}
-                    </div>
-                    <div className='details-right-colors'>
-                      <span className='details-title'>
-                        Цвет
-                      </span>
-                      <div className="colors-list">
-                     
-                         <img style ={{height:'100px'}} src={logo}/>
-
-                      </div>
-                      {/* {door.size &&
-                        <Size size={door.size} />} */}
+                      Цена: <b>{door.price}р.</b>
                     </div>
 
                     <div className='details-right-description'>
-                      <div className="des1">
-                        {door.description &&
-                          <ListDown des={door.description} poz={1} />
+                      {/* Description: */}
+                     {door.description &&                    
+                        <ListDown des={door.description} poz={1} />
                         }
-                      </div>
-                      <div className='des2'>
-                        {door.complect &&
-                          <ListDown des={door.complect} poz={0}
-                          />
-                        }
-                      </div>
-
                     </div>
-
+                    <div className='details-right-description'>
+                     {door.complect &&                    
+                        <ListDown des ={door.complect}  poz={2}/>
+                        }
+                    </div>
 
                     <div className="details-right-action">
                       <ul>

@@ -4,20 +4,20 @@ const DoorSchema = mongoose.Schema({
 
     title: {
         type: String,
-        // required: true
+         required: true
     },
     category: {
         type: String,
-        // required: true
+         required: true
     },
     sub_category: {
         type: String,
-        // required: true
+         required: true
     },
     price: {
         type: Number,
         default: 0,
-        // required: true
+         required: true
     },
     color_id: {
         type: String,default:'/doors'
@@ -31,6 +31,14 @@ const DoorSchema = mongoose.Schema({
     },
     description: {
         type: String,
+        //  required: true 
+    },
+    complect: {
+        type: String,
+        //  required: true 
+    },
+    size: {
+        type: String,default:'200*60=200*70=200*80=200*90'
         //  required: true 
     },
     countInStock: {

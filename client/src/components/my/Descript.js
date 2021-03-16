@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Descript({des}) {
+export default function Descript({ des }) {
 
 
   // const door = {
@@ -21,33 +21,36 @@ export default function Descript({des}) {
     }
   })
 
-// console.log(typeof(des))
-// console.log(des)
-// console.log(arr)
+  // console.log(typeof(des))
+  // console.log(des)
+  // console.log(arr)
   return (
 
     <div className="details">
       <div className='details-right-description'>
-          <div className="">
-            <table className="table">
-              <thead>
-                <tr>
-                  {/* <th>Title</th> */}
+        <div className="">
+          <table className="table">
+            <thead>
+              <tr>
+                {/* <th>Title</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {ppp2.map((el, i) => (
+                <tr key={`${el}_${i}`}>
+                  <td style={{ width: '35%',fontWeight:'500'}}>
+                    {el.name}
+                  </td>
+                  {el.value &&
+                  <td>{el.value}</td>}
                 </tr>
-              </thead>
-              <tbody>
-                {ppp2.map((el, i) => (
-                  <tr key={i}>
-                    <td>{el.name}</td>
-                    <td>{el.value}</td>
-                  </tr>
-                )
-                )
-                }
-              </tbody>
-            </table>
+              )
+              )
+              }
+            </tbody>
+          </table>
 
-          </div>
+        </div>
       </div>
     </div>
   )
