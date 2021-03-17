@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
+import MessageBox from '../components/my/MessageBox';
+import { useMessage } from '../hooks/message.hook'
+
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
 
 
@@ -22,10 +25,11 @@ export default function Color() {
   }
   const colorRegister = useSelector(state => state.colorCreate);
   const { isLoading: loadingCreate,
-     message:messageCreate,
-     error: errorCreate,
+    message: messageCreate,
+    error: errorCreate,
     success: successCreate
   } = colorRegister;
+
 
   const colorslist = useSelector((state) => state.colors);
   const { loading, colors } = colorslist;
@@ -34,20 +38,16 @@ export default function Color() {
   const {
     //redux    //так обозвал
     isLoading: isLoadingDelete,
-     success: successDelete,
+    success: successDelete,
     // error: errorDelete,
-    color: messadeDelete
+    color: messageDelete
   } = productDelete;
 
-
-  React.useEffect(() => {
-    // if (successSave) {
-    //   setModalVisible(false);    // }
-    dispatch(fetchColors());
-  },
-    [successCreate, successDelete]
-
-  );
+  // React.useEffect(() => {
+  //   dispatch(fetchColors());
+  // },
+  //   [successCreate, successDelete]
+  // );
 
   const openModal = (product) => {
     setId(product._id);
@@ -59,7 +59,39 @@ export default function Color() {
   const deleteHandler = (product) => {
     dispatch(deleteColor(product._id));
   };
+  /////////////////////////////////////////////
+  const dataDelete = useSelector(state => state.colorDelete.color);
+  let del = ''
+  if (dataDelete) { del = dataDelete.message }
 
+  const dataCreate = useSelector(state => state.colorCreate.message);
+  let cre = ''
+  if (dataCreate) { cre = dataCreate.message }
+
+  const message = useMessage()
+//create
+  React.useEffect(() => {
+    dispatch(fetchColors());
+     message(cre)
+  },
+    [successCreate]
+  );
+  //error
+  React.useEffect(() => {
+    message(errorCreate)
+  },
+    [errorCreate]
+  );
+  //delete
+  React.useEffect(() => {
+    dispatch(fetchColors());
+    message(del)
+
+  },
+    [successDelete]
+  );
+
+  
   return (
     <>
       <div className="form">
@@ -72,9 +104,15 @@ export default function Color() {
             </li>
             <li>
               {loadingCreate || isLoadingDelete && <LoadingBox></LoadingBox>}
-              {errorCreate && <div style={{ background: 'red', display: 'inline' }}>{errorCreate}</div>}
-              {messageCreate && <div style={{ background: 'green', display: 'inline' }}>{messageCreate.message}</div>}
-              {messadeDelete && <div style={{ background: 'green', display: 'inline' }}>{messadeDelete.message}</div>}
+              {/* {errorCreate && <div style={{ background: 'red', display: 'inline' }}>{errorCreate}</div>} */}
+              {/* {errorCreate && message(errorCreate)} */}
+              {/* {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>} */}
+              {/* {messageCreate && message(messageCreate.message)} */}
+              {/* {messageCreate && <MessageBox  variant="success">{messageCreate.message}</MessageBox>} */}
+              {/* {messageCreate && <div style={{ background: 'green', display: 'inline' }}>{messageCreate.message}</div>} */}
+              {/* { messageDelete  && <MessageBox  variant="success">{messageDelete.message}</MessageBox>} */}
+              {/* {messageDelete && message(messageDelete.message)} */}
+              {/* {messageDelete && <div style={{ background: 'green', display: 'inline' }}>{messageDelete.message}</div>} */}
             </li>
             <li>
               <label htmlFor="name"> New Color:</label>

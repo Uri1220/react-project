@@ -63,7 +63,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
     const removedColor = await Color.deleteOne({ _id: req.params.id })
     res.json({
       message:'Цвет удален',
-      // color:removedColor
+       color:removedColor
     })
   } catch (error) {
     res.json({ message: error })

@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import { addToCart, removeFromCart } from '../redux/actions/cartA';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import MessageBox from '../components/my/MessageBox';
-
 // import ShippingAddressScreen from './ShippingAddressScreen';
 
 
@@ -15,19 +13,19 @@ function Cart(props) {
   const cat = useSelector(state => state.penFilters);
   const { category } = cat;
   // console.log('cat:',category);
-  ////////////////////
-  let ur = ''
-  if (category === 2) {
-    ur = 'pens/'
-  } else if (category === 1) {
-    ur = 'doors/'
-  }
-  else {
-    ur = ''
-  }
-  //////////////// 
-  //  console.log(ur); 
-
+////////////////////
+let ur = ''
+ if (category ===  2) {
+   ur = 'pens/'
+ } else if( category === 1) {
+   ur = 'doors/'   
+ }
+ else{
+   ur = ''
+ } 
+ //////////////// 
+//  console.log(ur); 
+ 
 
   const dispatch = useDispatch();
 
@@ -47,7 +45,7 @@ function Cart(props) {
   useEffect(() => {
     if (productId) {
       // dispatch(addToCart(productId, qty));
-      dispatch(addToCart(productId, qty, ur));
+      dispatch(addToCart(productId, qty,ur));
     }
   }, []);
 
@@ -61,39 +59,40 @@ function Cart(props) {
         <ul className="cart-list-container">
           <li>
             <h3>
-              Корзина
+              Shopping Cart
           </h3>
             <div>
-              Цена
+              Price
           </div>
           </li>
-          {cartItems.length === 0 ? (
-            <MessageBox>
-              В корзине нет товаров.
-            </MessageBox>
-          ) : (
+          {
+            cartItems.length === 0 ?
+              <div>
+                Cart is empty
+          </div>
+              :
               cartItems.map(item =>
-                <li key={item.productId}>
-
+                <li  key={item.productId}>
+                  
                   <div className="cart-image">
                     <img src={item.image} alt="product" />
                   </div>
                   <div className="cart-name">
                     <div>
-                      <Link to={"/" + item.path + item.productId}>
-                        {/* <Link to={"/pens/" + item.productId}> */}
+                      <Link to={"/"+item.path + item.productId}>
+                      {/* <Link to={"/pens/" + item.productId}> */}
                         {item.name}
                       </Link>
 
                     </div>
                     <div>
                       Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value), item.path))}>
+                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value),item.path))}>
                         {[...Array(item.countInStock).keys()].map(x =>
                           <option key={x + 1} value={x + 1}>{x + 1}</option>
                         )}
                       </select>
-
+                    
                       <button type="button" className="button"
                         onClick={() => removeFromCartHandler(item.productId)} >
                         Delete
@@ -105,46 +104,23 @@ function Cart(props) {
                   </div>
                 </li>
               )
-            )
           }
         </ul>
 
       </div>
-      <div className="col-1">
-        <div className="card card-body">
-          <ul>
-            <li>
-              <h2>
-              Стоимость заказа ({cartItems.reduce((a, c) => a + c.qty, 0)} единиц) на {orderSumm} руб.
-              </h2>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={checkoutHandler}
-                className="primary block"
-                disabled={cartItems.length === 0}
-              >
-                 Оформить заказ
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-      {/* <div className="cart-action">
+      <div className="cart-action">
         <h3>
-          Стоимость заказа ( {cartItems.reduce((a, c) => a + c.qty, 0)} единиц)
-
-          {orderSumm} р.
+          Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
+        :
+         {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
+         $ {orderSumm}
         </h3>
         <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
           Оформить заказ
-        </button>
+      </button>
 
-      </div> */}
-      {/* <ShippingAddressScreen/> */}
-               {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
-
+      </div>
+          {/* <ShippingAddressScreen/> */}
     </div>
   )
 }
