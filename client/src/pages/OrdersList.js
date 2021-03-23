@@ -75,6 +75,7 @@ function OrdersList(props) {
         break
     }
   }, [age, orders,])
+  console.log(filteredOrders)
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -138,6 +139,7 @@ function OrdersList(props) {
                   <tr>
                     <th>DATE</th>
                     <th>UserName</th>
+                    <th>UserRegistrationName</th>
                     <th>Address</th>
                     <th>Summ</th>
                     <th>Phone</th>                  
@@ -154,6 +156,7 @@ function OrdersList(props) {
                       <td>{order.orderDate}</td>
                       {/* <td>{order.orderDate.substring(0, 10)}</td> */}
                       <td>{order.shipping.fullName}</td>
+                      <td>{order.user.name}</td>
                       <td>{order.shipping.address}</td>
                       <td>{ order.orderItems.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2)}</td>
                       <td>{order.shipping.postalCode}</td>

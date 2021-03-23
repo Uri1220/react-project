@@ -12,6 +12,21 @@ export default function Color() {
   const [id, setId] = useState('');
   const [colorName, setColorName] = useState('');
   const [colorUrl, setColorUrl] = useState('');
+  const [checkColorId, setCheckColorId] = useState('');
+  const [aaa, setAaa] = useState([]);
+  //  console.log(checkColorId)
+
+  // const setCheckId = (product) => {
+  //   setCheckColorId(product)
+  // };
+
+  const setCheckId = (product) => {
+    setAaa([
+      ...aaa, { color_id: product }
+    ])
+  };
+  // console.log(aaa)
+
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
@@ -59,7 +74,7 @@ export default function Color() {
   const deleteHandler = (product) => {
     dispatch(deleteColor(product._id));
   };
-  /////////////////////////////////////////////
+  ///////////////useMessage Hook//////////////////////////////
   const dataDelete = useSelector(state => state.colorDelete.color);
   let del = ''
   if (dataDelete) { del = dataDelete.message }
@@ -69,10 +84,10 @@ export default function Color() {
   if (dataCreate) { cre = dataCreate.message }
 
   const message = useMessage()
-//create
+  //create
   React.useEffect(() => {
     dispatch(fetchColors());
-     message(cre)
+    message(cre)
   },
     [successCreate]
   );
@@ -90,8 +105,8 @@ export default function Color() {
   },
     [successDelete]
   );
+  /////////////////////end useMessage Hook/////////////
 
-  
   return (
     <>
       <div className="form">
@@ -104,12 +119,10 @@ export default function Color() {
             </li>
             <li>
               {loadingCreate || isLoadingDelete && <LoadingBox></LoadingBox>}
-              {/* {errorCreate && <div style={{ background: 'red', display: 'inline' }}>{errorCreate}</div>} */}
               {/* {errorCreate && message(errorCreate)} */}
-              {/* {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>} */}
+              {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
               {/* {messageCreate && message(messageCreate.message)} */}
-              {/* {messageCreate && <MessageBox  variant="success">{messageCreate.message}</MessageBox>} */}
-              {/* {messageCreate && <div style={{ background: 'green', display: 'inline' }}>{messageCreate.message}</div>} */}
+              {messageCreate && <MessageBox variant="success">{messageCreate.message}</MessageBox>}
               {/* { messageDelete  && <MessageBox  variant="success">{messageDelete.message}</MessageBox>} */}
               {/* {messageDelete && message(messageDelete.message)} */}
               {/* {messageDelete && <div style={{ background: 'green', display: 'inline' }}>{messageDelete.message}</div>} */}
@@ -131,6 +144,7 @@ export default function Color() {
                 name="colorUrl"
                 value={colorUrl}
                 id="colorUrl"
+                size="50"
                 onChange={(e) => setColorUrl(e.target.value)}
               ></input>
             </li>
@@ -145,34 +159,48 @@ export default function Color() {
         loading || isLoadingDelete || loadingCreate ? (
           <LoadingBox></LoadingBox>
         ) : (
-            <div className="product-list">
-              <table className="table">
-                <thead>
-                  <tr>
-                    {/* <th>ColorId</th> */}
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {colors.map((product) => (
-                    <tr key={product._id}>
-                      <td>{<img style={{ height: '60px' }} src={product.colorUrl} alt="11" />}</td>
-                      <td>{product.colorName}</td>
-                      <td>
-                        <button className="button" onClick={() => openModal(product)}>
-                          Edit
+            <div className="colors-list">
+
+              {colors.map((product) => (
+                <ul className='colors-item ' key={product._id}>
+                  <li>{<img style={{ height: '80px' }} src={product.colorUrl} alt="11" />}</li>
+                  <li>
+                    {/* <span>
+                      <input
+                        type="checkbox"
+                        id="chetyre"
+                      />
+                      </span> */}
+                    {/* <span>
+                      <form action="/complete" method="POST">
+                        <label>
+                          <input
+                            type="checkbox"
+                            value={product._id}
+                            name="color_id"
+                            onChange={(e) => setCheckId(e.target.value)}
+                          />
+                          <button class="btn btn-small" type="submit">Save</button>
+                        </label>
+                      </form>
+                    </span> */}
+
+                    <span style={{ marginLeft: '3px' }}>{product.colorName}</span>
+                  </li>
+                  <li>
+                    <button className="button" onClick={() => openModal(product)}>
+                      Edit
                   </button>{' '}
-                        <button
-                          className="button"
-                          onClick={() => deleteHandler(product)}
-                        >
-                          Delete
+                    <button
+                      className="button"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
                   </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </li>
+                </ul>
+              ))}
+
             </div>
           )
       }
@@ -180,3 +208,5 @@ export default function Color() {
 
   )
 }
+
+// /home/uri/.nvm/versions/node/v12.18.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/lammp/bin/php:/snap/bin

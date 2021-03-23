@@ -24,6 +24,8 @@ import select from '../../pages/dev_ed/select'
 import Breadcrumb from '../my/Breadcramb'
 import SideMenu from '../../pages/MU/SideMenu'
 import Color from '../../pages/Color'
+import { ColorsFormik } from '../../pages/dev_ed/ColorsFormik'
+import { NestedArray } from '../../pages/dev_ed/NestedArray'
 
 
 // const Content = ({ category }) => {
@@ -46,7 +48,7 @@ const Content = () => {
           <Route path="/plintus" component={Plintus} />
 
           {/* <Route path="/doors" exact component={Doors} /> */}
-          <Route path="/doors" exact ><Doors/></Route>
+          <Route path="/doors" exact> <Doors/> </Route>
           <Route path="/doors/:id" exact component={DoorOne}  />
 
           <Route
@@ -84,23 +86,15 @@ const Content = () => {
           <Route path="/order/:id/deliver" exact component={OrderDeliverScreen} />
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
-          <Route path="/deved-flex" component={FlexCat} />
+          <Route path="/flex-cat" component={FlexCat} />
           <Route path="/mu-search" component={SideMenu} />
           <Route path="/select" component={select} />
           <Route path="/colors" component={Color} />
+          <Route path="/colors-formik" component={ColorsFormik} />
+          <Route path="/nested-array" component={NestedArray} />
         </Switch>
 
-        {/* <ul className="products" >
-          {
-            pens &&
-            pens.map((item) =>
-              <li
-                key={item._id}
-              >
-                <Doorhandle pen={item} />
-              </li>)
-          }
-        </ul> */}
+        
       </div>
     </main>
 

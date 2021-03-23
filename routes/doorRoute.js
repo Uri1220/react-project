@@ -36,7 +36,10 @@ router.get('/list', async (req, res) => {
 })
 
 //Создать
-router.post('/', isAuth, isAdmin, async (req, res) => {
+router.post('/',
+ isAuth,
+  isAdmin,
+   async (req, res) => {
   const product = new Door({
     title: req.body.title,
     price: req.body.price,
@@ -49,6 +52,7 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
     description: req.body.description,
     complect: req.body.complect,
     size: req.body.size,
+    colors: req.body.colors
   });
   const newProduct = await product.save();
   if (newProduct) {
@@ -81,7 +85,10 @@ router.delete('/:doorId', isAuth, isAdmin, async (req, res) => {
 })
 
 //Update PUT
-router.put('/:id', isAuth, isAdmin, async (req, res) => {
+router.put('/:id',
+//  isAuth,
+//   isAdmin,
+   async (req, res) => {
   const productId = req.params.id;
   const product = await Door.findById(productId);
   if (product) {
@@ -96,6 +103,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
     product.description = req.body.description;
     product.complect = req.body.complect
     product.size = req.body.size
+    product.colors = req.body.colors
 
 
     const updatedProduct = await product.save();

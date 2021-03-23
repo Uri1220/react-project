@@ -131,7 +131,8 @@ function MakeDoorScreen() {
         sub_category,
         countInStock,
         description,
-        complect
+        complect,
+        // colors
       })
     );
   };
@@ -364,13 +365,13 @@ function MakeDoorScreen() {
                         <td>
                           <button className="button" onClick={() => openModal(product)}>
                             Edit
-                  </button>{' '}
+                          </button>{' '}
                           <button
                             className="button"
                             onClick={() => deleteHandler(product)}
-                          >
+                           >
                             Delete
-                  </button>
+                          </button>
                         </td>
                       </tr>
                     ))}

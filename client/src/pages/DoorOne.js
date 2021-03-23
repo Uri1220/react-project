@@ -7,7 +7,7 @@ import '../scss/DoorOne.scss'
 import ListDown from '../components/my/ListDown'
 // import Size from '../storage/'
 import Size from '../components/my/Size'
-import logo from '../storage/elporta.jpg' 
+import logo from '../storage/elporta.jpg'
 
 
 function DoorOne(props) {
@@ -20,7 +20,6 @@ function DoorOne(props) {
 
   const doorDetail = useSelector(state => state.door)
   const { door, isLoading, error } = doorDetail;
-
 
   const handleAddToCart = () => {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
@@ -49,6 +48,33 @@ function DoorOne(props) {
 
 
                   <div className="details-right">
+
+                    <div className='details-right-colors'>
+                      <span className='details-title'>
+                        Цвета
+                      </span>
+                      <span>
+                      {
+                        Object.keys(door)
+                          .filter((x) => Array.isArray(door[x]))
+                          .map((key) => (<div key={door._id}>
+                            <li>
+                              {/* <b>{key}:</b> */}
+                            </li>
+                            <ul style = {{display:'flex'}}>
+                              {door[key].map((item) => (
+                                <li  style = {{marginRight:'10px'}} key={item._id}>
+                                  {/* <div>{item.colorName}</div> */}
+                                  <img style={{ height: '50px' }} src={item.colorUrl} />
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          ))
+                      }
+                      </span>
+                    </div>
+
                     <div className='details-right-price'>
                       <span className='details-title'>
                         Цена
@@ -60,19 +86,7 @@ function DoorOne(props) {
                       </span>
                       {door.size &&
                         <Size size={door.size} />}
-                    </div>
-                    <div className='details-right-colors'>
-                      <span className='details-title'>
-                        Цвет
-                      </span>
-                      <div className="colors-list">
-                     
-                         <img style ={{height:'100px'}} src={logo}/>
-
-                      </div>
-                      {/* {door.size &&
-                        <Size size={door.size} />} */}
-                    </div>
+                    </div>                   
 
                     <div className='details-right-description'>
                       <div className="des1">
@@ -89,7 +103,7 @@ function DoorOne(props) {
 
                     </div>
 
-
+                    {/* ACTION */}
                     <div className="details-right-action">
                       <ul>
                         <li>

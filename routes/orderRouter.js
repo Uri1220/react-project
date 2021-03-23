@@ -55,7 +55,10 @@ dateFormat.i18n = {
 //LIST
 orderRouter.get('/list', async (req, res) => {
   try {
-    const orders = await Order.find()
+    const orders = await Order.find().populate(
+      'user',
+      'name email isAdmin',
+    )
     res.json(orders)
   } catch (error) {
     res.json({ message: error })

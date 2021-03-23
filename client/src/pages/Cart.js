@@ -54,7 +54,7 @@ function Cart(props) {
   const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
   }
-
+// debugger
   return (
     <div className="cart">
       <div className="cart-list">

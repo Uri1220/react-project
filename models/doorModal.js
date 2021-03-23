@@ -2,32 +2,14 @@ const mongoose = require('mongoose')
 
 const DoorSchema = mongoose.Schema({
 
-    title: {
-        type: String,
-         required: true
-    },
-    category: {
-        type: String,
-         required: true
-    },
-    sub_category: {
-        type: String,
-         required: true
-    },
-    price: {
-        type: Number,
-        default: 0,
-         required: true
-    },
-    color_id: {
-        type: String,default:'/doors'
-    },
-    position: {
-        type: Number,
-    },
+    title: { type: String, required: true },
+    category: { type: String, required: true },
+    sub_category: { type: String, required: true},
+    price: { type: Number, default: 0, required: true },
+    color_id: { type: String, default: 'doors/' },
+    position: { type: Number, },
     url: {
-        type: String,
-        // required: true
+        type: String,// required: true
     },
     description: {
         type: String,
@@ -37,8 +19,15 @@ const DoorSchema = mongoose.Schema({
         type: String,
         //  required: true 
     },
+    // colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color' }],
+    colors: [{
+        colorName: String,
+        colorUrl: String,
+        cheked: Boolean, default: false
+    }],
+
     size: {
-        type: String,default:'200*60=200*70=200*80=200*90'
+        type: String, default: '200*60=200*70=200*80=200*90'
         //  required: true 
     },
     countInStock: {
@@ -50,6 +39,12 @@ const DoorSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
+
+    // Post.findOne({ _id: 123 })
+    //     .populate('postedBy')
+    //     .exec(function (err, post) {
+    //         // do stuff with post
+    //     });
 
     // const prodctSchema = new mongoose.Schema({
     //     name: { type: String, required: true },
