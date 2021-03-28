@@ -1,5 +1,18 @@
 const mongoose = require('mongoose')
 
+const colorSchema = new mongoose.Schema({
+
+    colorName: { type: String ,
+        // required : true
+    },
+   
+    colorUrl: { type: String,
+        //  required:true 
+        },
+  
+    // cheked:{type: Boolean, default : false}
+  });
+
 const DoorSchema = mongoose.Schema({
 
     title: { type: String, required: true },
@@ -19,12 +32,14 @@ const DoorSchema = mongoose.Schema({
         type: String,
         //  required: true 
     },
-    // colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color' }],
-    colors: [{
-        colorName: String,
-        colorUrl: String,
-        cheked: Boolean, default: false
-    }],
+      colors:[colorSchema],
+    //    colors:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Color'}],
+    // colors: [{
+    //     colorName: String,
+    //     colorUrl: String,
+    //     cheked: Boolean, default: false
+    // }],
+
 
     size: {
         type: String, default: '200*60=200*70=200*80=200*90'

@@ -24,6 +24,10 @@ router.get('/list', async (req, res) => {
       ...sub_categoryFilter,
       ...priceFilter,
     })
+    // .populate(
+    //   'colors',
+    //   'colorName colorUrl',
+    // )
     res.json(doors)
 
   } catch (error) {
@@ -67,6 +71,7 @@ router.post('/',
 router.get('/:doorId', async (req, res) => {
   try {
     const door = await Door.findById(req.params.doorId)
+    
     res.json(door)
   } catch (error) {
     res.json({ message: error })

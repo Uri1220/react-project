@@ -10,9 +10,7 @@ import { Formik, Field, Form } from 'formik';
 
 
 export const ColorsFormik = () => {
-  const [aaa, setAaa] = React.useState([]);
-
-  // console.log('aaa', aaa)
+  const [aaa, setAaa] = React.useState([]); 
 
   // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -38,20 +36,22 @@ export const ColorsFormik = () => {
       }
       return arrr
     }
+
   }
+ 
 
   if (aaa.length && colors.length) {
     ggg()
   }
-  //  console.log('arrr', arrr)
+    console.log('arrr', arrr)
+
 
    const setColors = () => {
-    console.log('arrr', arrr)
 
     dispatch(
       saveProduct({
-        title:'GHFHGFG',
-        price:'898989',
+        title:'1111111',
+        price:'6666666',
         category:'ecoshpon',
         sub_category:'legno',
         colors:arrr
@@ -65,7 +65,9 @@ export const ColorsFormik = () => {
       <div className="checked-items">
       <button
                   type="button"
+
                   onClick={() =>setColors()}
+
                   // className="button secondary"
                 >
                   Сохранить

@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDoorDetail } from '../redux/actions/doorsA'
 import '../scss/DoorOne.scss'
 import ListDown from '../components/my/ListDown'
-// import Size from '../storage/'
 import Size from '../components/my/Size'
-import logo from '../storage/elporta.jpg'
 
 
 function DoorOne(props) {

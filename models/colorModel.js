@@ -6,7 +6,7 @@ const colorSchema = new mongoose.Schema({
  
   colorUrl: { type: String, required: true },
 
-  cheked:{type: Boolean, default : false}
+  // cheked:{type: Boolean, default : false}
 });
 
 module.exports = mongoose.model('Color', colorSchema);

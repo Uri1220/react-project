@@ -314,9 +314,9 @@ tbody > tr:nth-child(odd) {
 }
 .colors-item{
   display:flex;
-  flex: 0 1 180px; 
-  margin: 10px;
-  padding: 10px;
+  flex: 0 1 90px; 
+  margin: 5px;
+  padding: 5px;
   flex-direction: column;
   // height: 100%;
   text-align: center;
@@ -411,7 +411,7 @@ tbody > tr:nth-child(odd) {
 
 /* Form */
 .form {
-  max-width: 60rem;
+   max-width: 120rem;
   margin: 0 auto;
 }
 
