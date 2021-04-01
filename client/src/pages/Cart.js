@@ -34,8 +34,15 @@ function Cart(props) {
   const productId = props.match.params.id;
   //  const productId = props.match.url;
   // console.log('qty',props.match.url);
+  // console.log('props.location.search', props.location.search);
 
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
+  const sz = props.location.search ? String(props.location.search.split("=")[3]) : 'no-size';
+  const cl = props.location.search ? String(props.location.search.split("=")[5]) : '';
+  console.log('qty', qty);
+   console.log('sz', sz);
+   console.log('cl', cl);
+
   const orderSumm = (cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)
   //  console.log('prodId',orderSumm);
   // console.log('qty',qty);
@@ -47,14 +54,14 @@ function Cart(props) {
   useEffect(() => {
     if (productId) {
       // dispatch(addToCart(productId, qty));
-      dispatch(addToCart(productId, qty, ur));
+      dispatch(addToCart(productId, qty, ur , sz ,cl));
     }
   }, []);
 
   const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
   }
-// debugger
+  // debugger
   return (
     <div className="cart">
       <div className="cart-list">
@@ -74,10 +81,13 @@ function Cart(props) {
           ) : (
               cartItems.map(item =>
                 <li key={item.productId}>
-
+                  {/* path = doors/ из БД */}
                   <div className="cart-image">
-                    <img src={item.image} alt="product" />
+                    <Link to={"/" + item.path + item.productId}>
+                      <img src={item.image} alt="product" />
+                    </Link>
                   </div>
+
                   <div className="cart-name">
                     <div>
                       <Link to={"/" + item.path + item.productId}>
@@ -88,7 +98,7 @@ function Cart(props) {
                     </div>
                     <div>
                       Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value), item.path))}>
+                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value), item.path ,sz,cl))}>
                         {[...Array(item.countInStock).keys()].map(x =>
                           <option key={x + 1} value={x + 1}>{x + 1}</option>
                         )}
@@ -115,7 +125,7 @@ function Cart(props) {
           <ul>
             <li>
               <h2>
-              Стоимость заказа ({cartItems.reduce((a, c) => a + c.qty, 0)} единиц) на {orderSumm} руб.
+                Стоимость заказа ({cartItems.reduce((a, c) => a + c.qty, 0)} единиц) на {orderSumm} руб.
               </h2>
             </li>
             <li>
@@ -125,7 +135,7 @@ function Cart(props) {
                 className="primary block"
                 disabled={cartItems.length === 0}
               >
-                 Оформить заказ
+                Оформить заказ
               </button>
             </li>
           </ul>
@@ -143,7 +153,7 @@ function Cart(props) {
 
       </div> */}
       {/* <ShippingAddressScreen/> */}
-               {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
+      {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
 
     </div>
   )

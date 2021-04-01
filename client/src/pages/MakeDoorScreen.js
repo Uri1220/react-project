@@ -64,7 +64,7 @@ function MakeDoorScreen() {
   //     { name: 'МДФ' },
   //  ],
   //  console.log('colors', colors)
-     console.log('colFinish', colFinish)
+    //  console.log('colFinish', colFinish)
   if (category === array.doorsCat[0].db) {
     sub_categories = [...vhod_door]
   } else if (category === array.doorsCat[1].db) {

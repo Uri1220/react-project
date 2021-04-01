@@ -1,12 +1,17 @@
 import React from 'react';
 
-export default function Size({ size }) {
+export default function Size({ size,setSz }) {
 
   const arr = size.split('=')
   const [s,setS] = React.useState(0)
   const onClickSize = (i) => {
+    setSz(arr[i])
     setS(i)
   }
+  React.useEffect(() => {
+    setSz(arr[0])
+  }, [])
+
 
   return (
     <div style={{ display: 'flex' }} className="">

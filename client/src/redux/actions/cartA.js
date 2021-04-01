@@ -9,14 +9,21 @@ import {
 }
   from "../constants/cartConstans";
 
+  // const config = require('../../../../config')
+  // const PORT = config.get('port') || 5000
+  // const baseUrl = config.get('baseUrl') 
+
+
 // const ddd = 'pens/'
-const addToCart = (penId, qty, ur) => async (dispatch, getState) => {
+const addToCart = (penId, qty, ur,sz,cl) => async (dispatch, getState) => {
   try {
     //  const { data } = await Axios.get('http://localhost:5000/doors/' + penId);
-    const { data } = await Axios.get('http://localhost:5000/api/' + ur + penId);
+     const { data } = await Axios.get('http://localhost:5000/api/' + ur + penId);
+    // const { data } = await Axios.get(baseUrl + 'api/' + PORT + ur + penId);
     //  console.log(data)
     //  console.log(data.url)
     //  console.log(data.color_id)
+    // debugger
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
@@ -27,6 +34,8 @@ const addToCart = (penId, qty, ur) => async (dispatch, getState) => {
         countInStock: data.countInStock,
         path: data.color_id,
         qty,
+        sz,
+        cl
       }
     });
     ///COOKIE

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
-// import MessageBox from '../components/my/MessageBox';
-// import { saveProduct } from '../redux/actions/doorsA';
 
 
 import { fetchColors } from '../redux/actions/colorsA';
@@ -56,7 +54,8 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish}) => {
     }
 
   }
-// col_add_completed полный массив для добавления
+// col_add_completed полный массив для добавления по выбранным
+//чекбоксам
 
   if (col_add.length && colors_list.length) {
     ggg()
