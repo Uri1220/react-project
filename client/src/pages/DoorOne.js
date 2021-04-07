@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import LoadingBox from '../components/my/LoadingBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDoorDetail } from '../redux/actions/doorsA'
 import '../scss/DoorOne.scss'
 import ListDown from '../components/my/ListDown'
 import Size from '../components/my/Size'
-import { DOORS_LIST_FAIL } from '../redux/constants/doorsConstants';
+// import { DOORS_LIST_FAIL } from '../redux/constants/doorsConstants';
+///////Tooltip//////////
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.black,
+    // color: 'rgba(0, 0, 0, 0.87)',
+     color: 'white',
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip);
+
+//////////////////EndTolltip/////////////
 
 
 function DoorOne(props) {
@@ -14,11 +29,12 @@ function DoorOne(props) {
   const [qty, setQty] = useState(1)
   const [sz, setSz] = useState('')
   const [cl, setCl] = useState('')
-  const [s,setS] = React.useState(0) //для цвета active
+  const [s, setS] = React.useState(0) //для цвета active
 
+  console.log('s', s)
   // console.log('sz', sz)
   // console.log('qty', qty)
-  // console.log('cl', cl)
+  console.log('cl', cl)
 
   const dispatch = useDispatch()
   React.useEffect(() => {
@@ -27,7 +43,7 @@ function DoorOne(props) {
 
   const doorDetail = useSelector(state => state.door)
   const { door, isLoading, error } = doorDetail;
-  //  if(door.colors){
+  ////  if(door.colors){
   //  console.log('dd', door.colors.length)}
 
   // console.log((Object.keys(door))
@@ -45,7 +61,8 @@ function DoorOne(props) {
     if (door.colors && door.colors.length !== 0) {
       const firstColor = Object.keys(door)
         .filter((x) => Array.isArray(door[x]))
-        .map((key) => (((door[key][0])._id)))
+        .map((key) => (((door[key][0]).colorName)))
+      // .map((key) => (((door[key][0])._id)))
       return firstColor[0]
     } else {
       return 'no-color'
@@ -53,16 +70,16 @@ function DoorOne(props) {
   }
   first()
 
-  const firstColorId = first()
+  const firstColorName = first()
 
   //  console.log('fc',firstColorId)
 
   React.useEffect(() => {
-    setCl(firstColorId)
-  }, [firstColorId])
+    setCl(firstColorName)
+  }, [firstColorName])
 
-  const onClickColor = (id,i) => {
-    setCl(id)
+  const onClickColor = (colorN, i) => {
+    setCl(colorN)
     setS(i)
   }
 
@@ -80,125 +97,127 @@ function DoorOne(props) {
         ) : error ? (
           <div>{error} </div>
         ) : (
-              <>
-                <button className='button' onClick={props.history.goBack}>Вернуться назад</button>
-                <div className='details-info-title'>
-                  <h1>{door.title}</h1>
+          <>
+            <button className='button' onClick={props.history.goBack}>Вернуться назад</button>
+            <div className='details-info-title'>
+              <h1>{door.title}</h1>
+            </div>
+
+            <div className="details">
+              <div className='details-left'>
+                <div className="details-image">
+                  <img src={door.url} alt="11" />
                 </div>
-
-                <div className="details">
-                  <div className='details-left'>
-                    <div className="details-image">
-                      <img src={door.url} alt="11" />
-                    </div>
-                  </div>
+              </div>
 
 
-                  <div className="details-right">
+              <div className="details-right">
 
-                    <div className='details-right-colors'>
-                      <span className='details-title'>
-                        Цвета
+                <div className='details-right-colors'>
+                  <span className='details-title'>
+                    Цвета
                       </span>
-                      <span>
-                        {
-                          Object.keys(door)
-                            .filter((x) => Array.isArray(door[x]))
-                            .map((key) => (
-                              <div key={door._id}>
-                                <li>
-                                  {/* <b>{key}:</b> */}
+                  <span>
+                    {
+                      Object.keys(door)
+                        .filter((x) => Array.isArray(door[x]))
+                        .map((key) => (
+                          <div key={door._id}>
+                            <li>
+                              {/* <b>{key}:</b> */}
+                            </li>
+                            <ul style={{ display: 'flex' }}>
+                              {door[key].map((item, i) => (
+                                <li
+                                  className={s === i ? 'color color-active' : 'color'}
+
+                                  key={item._id}
+                                >
+                                  <LightTooltip title={item.colorName}  placement="top">
+                                    <img
+                                      src={item.colorUrl}
+                                      onClick={() => onClickColor(item.colorName, i)}
+                                    />
+                                  </LightTooltip>
+
                                 </li>
-                                <ul style={{ display: 'flex' }}>
-                                  {door[key].map((item,i) => (
-                                    <li
-                                     className={s === i ? 'color color-active' : 'color'}
+                              ))}
+                            </ul>
+                          </div>
+                        ))
+                    }
+                  </span>
+                </div>
 
-                                      key={item._id}
-                                      >
-                                      {/* <div>{item.colorName}</div> */}
-                                      <img
-                                        src={item.colorUrl}
-                                        onClick={() => onClickColor(item._id,i)}
-                                      />
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))
-                        }
-                      </span>
-                    </div>
-
-                    <div className='details-right-price'>
-                      <span className='details-title'>
-                        Цена
+                <div className='details-right-price'>
+                  <span className='details-title'>
+                    Цена
                       </span> <b>{door.price} р.</b>
-                    </div>
-                    <div className='details-right-size'>
-                      <span className='details-title'>
-                        Размер
+                </div>
+                <div className='details-right-size'>
+                  <span className='details-title'>
+                    Размер
                       </span>
-                      {door.size &&
-                        <Size size={door.size} setSz={setSz} />}
-                    </div>
+                  {door.size &&
+                    <Size size={door.size} setSz={setSz} />}
+                </div>
 
-                    <div className='details-right-description'>
-                      <div className="des1">
-                        {door.description &&
-                          <ListDown des={door.description} poz={1} />
-                        }
-                      </div>
-                      <div className='des2'>
-                        {door.complect &&
-                          <ListDown des={door.complect} poz={0}
-                          />
-                        }
-                      </div>
-
-                    </div>
-
-                    {/* ACTION */}
-                    <div className="details-right-action">
-                      <ul>
-                        <li>
-                          Наличие:{' '}
-                          {door.countInStock > 0 ? 'Имеется на складе' : 'Под заказ'}
-                        </li>
-
-                        <li>
-                          Количество:{' '}
-                          <select
-                            value={qty}
-                            onChange={(e) => {
-                              setQty(e.target.value);
-                            }}
-                          >
-                            {[...Array(door.countInStock).keys()].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </option>
-                            ))}
-                          </select>
-                        </li>
-
-                        <li>
-                          {door.countInStock > 0 && (
-                            <button
-                              onClick={handleAddToCart}
-                              className="btn button primary"
-                            >
-                              В корзину
-                            </button>
-                          )}
-                        </li>
-                      </ul>
-                    </div>
+                <div className='details-right-description'>
+                  <div className="des1">
+                    {door.description &&
+                      <ListDown des={door.description} poz={1} />
+                    }
+                  </div>
+                  <div className='des2'>
+                    {door.complect &&
+                      <ListDown des={door.complect} poz={0}
+                      />
+                    }
                   </div>
 
                 </div>
-              </>
-            )
+
+                {/* ACTION */}
+                <div className="details-right-action">
+                  <ul>
+                    <li>
+                      Наличие:{' '}
+                      {door.countInStock > 0 ? 'Имеется на складе' : 'Под заказ'}
+                    </li>
+
+                    <li>
+                      Количество:{' '}
+                      <select
+                        value={qty}
+                        onChange={(e) => {
+                          setQty(e.target.value);
+                        }}
+                      >
+                        {[...Array(door.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </li>
+
+                    <li>
+                      {door.countInStock > 0 && (
+                        <button
+                          onClick={handleAddToCart}
+                          className="btn button primary"
+                        >
+                          В корзину
+                        </button>
+                      )}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </>
+        )
       }
 
 

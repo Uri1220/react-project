@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
-import Tooltip from '@material-ui/core/Tooltip';
+
 
 import { fetchColors } from '../redux/actions/colorsA';
 import { Formik, Field, Form } from 'formik';
@@ -111,10 +111,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
             <li style={{ marginRight: '10px', border: '1px solid red' }} key={item._id}>
               <div style={{ fontSize: '15px' }}>{item.colorName}</div>
               <div style={{ display: 'flex' }}>
-              <Tooltip title={item.colorName}>
                 <img style={{ height: '40px', border: '1px solid blue' }} src={item.colorUrl} />
-                </Tooltip>
-
                 <button
                   className="small"
                   onClick={() => deleteHandler(item._id)}

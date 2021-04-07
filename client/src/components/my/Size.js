@@ -32,4 +32,3 @@ export default function Size({ size,setSz }) {
   )
 }
 
-

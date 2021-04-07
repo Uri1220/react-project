@@ -91,20 +91,20 @@ function OrderDeliverScreen(props) {
         <div>
           <button onClick={props.history.goBack}>Back</button>
           {/* <Link to="/orderhistory">Вернуть к сниску заказов</Link> */}
-          {/* <h1>DELIVER</h1> */}
+          <h1>DELIVER</h1>
           {/* <h2>Order {order._id}</h2> */}
-          {/* <h2>Доставлено: {order.deliveredAt}</h2> */}
+          <h2>Доставлено: {order.deliveredAt}</h2>
           {/* <div className="row top"> */}
           {/* <div className="col-2"> */}
 
           <ul>
             <li>
               <div className="card card-body">
-                <h2>Информация о покупателе:</h2>
+                <h2>Shippring</h2>
                 <p>
-                  <strong>Имя:</strong> {order.shipping.fullName} <br />
-                  <strong>Адрес: </strong> {order.shipping.address},
-                  <strong>Телефон: </strong> {order.shipping.postalCode},
+                  <strong>Name:</strong> {order.shipping.fullName} <br />
+                  <strong>Address: </strong> {order.shipping.address},
+                  <strong>Phone: </strong> {order.shipping.postalCode},
                   <strong>Des: </strong> {order.description},
                 </p>
                 {order.completed ? (
@@ -135,12 +135,6 @@ function OrderDeliverScreen(props) {
                           {/* <Link to={`/product/${item.product}`}> */}
                           {item.name}
                           {/* </Link> */}
-                        </div>
-                        <div className="min-30">
-                          {( item.cl !== 'undefined') ? item.cl : '--' }
-                        </div>
-                        <div className="min-30">
-                          {( item.sz !== 'undefined') ? item.sz : '--'}
                         </div>
 
                         <div>

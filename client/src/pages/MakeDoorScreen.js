@@ -51,7 +51,7 @@ function MakeDoorScreen() {
    
    const [colFinish, setColFinish] = React.useState(colors);
 // colors - цвета из БД рабочие
-// colFinish - новые цвета после редактирования
+// colFinish - старые + новые цвета после редактирования
    React.useEffect(() => {
     setColFinish(colors)
   }, [colors]

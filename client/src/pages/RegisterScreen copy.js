@@ -74,7 +74,7 @@ function RegisterScreen(props) {
     <form onSubmit={submitHandler} >
       <ul className="form-container">
         <li>
-          <h2>Регистрация</h2>
+          <h2></h2>
         </li>
         <li>
           {loading && <div>Loading...</div>}

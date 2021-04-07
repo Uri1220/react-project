@@ -39,9 +39,9 @@ function Cart(props) {
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
   const sz = props.location.search ? String(props.location.search.split("=")[3]) : 'no-size';
   const cl = props.location.search ? String(props.location.search.split("=")[5]) : '';
-  console.log('qty', qty);
-   console.log('sz', sz);
-   console.log('cl', cl);
+  // console.log('qty', qty);
+  //  console.log('sz', sz);
+  //  console.log('cl', cl);
 
   const orderSumm = (cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)
   //  console.log('prodId',orderSumm);

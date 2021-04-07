@@ -5,9 +5,6 @@ const orderSchema = new mongoose.Schema(
     orderItems: [
       {
         name: { type: String, required: false },
-        sz: { type: String, required: false, default:'' },
-        // cl: { type: mongoose.Schema.Types.ObjectId, ref: 'Color'},
-         cl: { type: String, required: false,  default:''},
         qty: { type: Number, required: false },
         image: { type: String, required: false },
         price: { type: Number, required: false },
