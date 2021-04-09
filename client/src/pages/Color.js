@@ -209,4 +209,3 @@ export default function Color() {
   )
 }
 
-// /home/uri/.nvm/versions/node/v12.18.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/lammp/bin/php:/snap/bin

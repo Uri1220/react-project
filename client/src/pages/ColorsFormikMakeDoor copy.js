@@ -2,12 +2,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
 
-
 import { fetchColors } from '../redux/actions/colorsA';
 import { Formik, Field, Form } from 'formik';
 
 
 export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
+
+     console.log('colFinish', colFinish)
+
 
   // из Formika
   const [col_add, setColAdd] = React.useState([]);
@@ -24,7 +26,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
   const { loading, colors: colors_list } = colorslist;
   const dispatch = useDispatch();
   // color_list - цвета из коллекции возможных цветов
-
+  //  console.log('colors_list', colors_list)
 
   React.useEffect(() => {
     dispatch(fetchColors());
@@ -112,6 +114,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
               <div style={{ fontSize: '15px' }}>{item.colorName}</div>
               <div style={{ display: 'flex' }}>
                 <img style={{ height: '40px', border: '1px solid blue' }} src={item.colorUrl} />
+
                 <button
                   className="small"
                   onClick={() => deleteHandler(item._id)}
@@ -123,8 +126,8 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
           ))}
         </ul>
       </div>
-      <div className="checked-items">
 
+      <div className="checked-items">
         <button
           type="button"
           onClick={() => setColors()}
@@ -135,7 +138,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
 
         {/* <div>Выбранные цвета:</div> */}
         {col_add_completed.map((product) => (
-          <ul className='checked-item ' key={product._id}>
+          <ul style={{display:'flex'}} className='checked-item ' key={product._id}>
             <li>{<img style={{ height: '40px' }} src={product.colorUrl} alt="11" />}</li>
             <li>
 

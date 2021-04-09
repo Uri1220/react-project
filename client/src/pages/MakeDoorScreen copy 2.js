@@ -51,7 +51,7 @@ function MakeDoorScreen() {
    
    const [colFinish, setColFinish] = React.useState(colors);
 // colors - цвета из БД рабочие
-// colFinish - новые цвета после редактирования
+// colFinish - старые + новые цвета после редактирования
    React.useEffect(() => {
     setColFinish(colors)
   }, [colors]
@@ -63,8 +63,8 @@ function MakeDoorScreen() {
   //     { name: 'Эко Шпон' },
   //     { name: 'МДФ' },
   //  ],
-    console.log('colors', colors)
-      console.log('colFinish', colFinish)
+  //  console.log('colors', colors)
+    //  console.log('colFinish', colFinish)
   if (category === array.doorsCat[0].db) {
     sub_categories = [...vhod_door]
   } else if (category === array.doorsCat[1].db) {

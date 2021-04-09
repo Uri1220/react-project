@@ -109,7 +109,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
 
-
+        // создать
     if (!product._id) {
       const { data } = await axios.post('/api/doors/', product, {
         headers: {
@@ -117,8 +117,8 @@ export const saveProduct = (product) => async (dispatch, getState) => {
         },
       });
       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
-      //  debugger
     } else {
+      //обновить
       const { data } = await axios.put(
         '/api/doors/' + product._id,
         product,
@@ -128,6 +128,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
           },
         }
       );
+      // debugger
       dispatch({ type: DOOR_SAVE_SUCCESS, payload: data });
     }
 

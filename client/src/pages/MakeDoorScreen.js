@@ -3,38 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import LoadingBox from '../components/my/LoadingBox';
 import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
-import { array } from '../data.js'
 import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor'
 
 
 function MakeDoorScreen() {
 
-  ///////Select
-  const doorsCat = array.doorsCat.map(el => {
-    return el.db
-  })
-  doorsCat.unshift('')
-  //пробелы чтоб в <select/> первая поз была пустая
-  // const doorsCat = ['', 'Входные','Массив','Эко Шпон' ,'МДФ']
-  const vhod_door = array.vhod_door.map(el => {
-    return el.db
-  })
-  vhod_door.unshift('')
-  const massDoors = array.massDoors.map(el => {
-    return el.db
-  })
-  massDoors.unshift('')
-  const ecoDoors = array.ecoDoors.map(el => {
-    return el.db
-  })
-  ecoDoors.unshift('')
-  const mdfDoors = array.mdfDoors.map(el => {
-    return el.db
-  })
-  mdfDoors.unshift('')
-
-  let sub_categories = []
-
+ 
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
@@ -51,30 +25,13 @@ function MakeDoorScreen() {
    
    const [colFinish, setColFinish] = React.useState(colors);
 // colors - цвета из БД рабочие
-// colFinish - старые + новые цвета после редактирования
+// colFinish - новые цвета после редактирования
    React.useEffect(() => {
     setColFinish(colors)
   }, [colors]
   )
 
-  //   doorsCat: [
-  //     { name: 'Входные', },
-  //     { name: 'Массив', },
-  //     { name: 'Эко Шпон' },
-  //     { name: 'МДФ' },
-  //  ],
-  //  console.log('colors', colors)
-    //  console.log('colFinish', colFinish)
-  if (category === array.doorsCat[0].db) {
-    sub_categories = [...vhod_door]
-  } else if (category === array.doorsCat[1].db) {
-    sub_categories = [...massDoors]
-  } else if (category === array.doorsCat[2].db) {
-    sub_categories = [...ecoDoors]
-  } else if (category === array.doorsCat[3].db) {
-    sub_categories = [...mdfDoors]
-  }
-  //-------------------select-----------------
+ 
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
 
@@ -130,6 +87,8 @@ function MakeDoorScreen() {
     setCountInStock(product.countInStock);
     setColors(product.colors);
   };
+     console.log('colFinish', colFinish)
+
   //SAVE////
   const submitHandler = (e) => {
     e.preventDefault();

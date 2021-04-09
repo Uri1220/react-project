@@ -15,7 +15,7 @@ const LightTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.black,
     // color: 'rgba(0, 0, 0, 0.87)',
-     color: 'white',
+    color: 'white',
     boxShadow: theme.shadows[1],
     fontSize: 14,
   },
@@ -31,10 +31,10 @@ function DoorOne(props) {
   const [cl, setCl] = useState('')
   const [s, setS] = React.useState(0) //для цвета active
 
-  console.log('s', s)
+  // console.log('s', s)
   // console.log('sz', sz)
   // console.log('qty', qty)
-  console.log('cl', cl)
+  // console.log('cl', cl)
 
   const dispatch = useDispatch()
   React.useEffect(() => {
@@ -57,6 +57,37 @@ function DoorOne(props) {
   //   .map((key) => (console.log((door[key][0])._id))) =60505827e8a42c15a25e2de8
   // .map((key) => (console.log('fff',key)))   = colors
 
+  //возвр массив полных картинок
+
+  function imageArr() {
+    const image_arr = []
+    Object.keys(door)
+      .filter((x) => Array.isArray(door[x]))
+      .map((key) => (
+        door[key].map((item) => (
+          // console.log('image',item.image)
+          image_arr.push(item.image)
+        ))
+      ))
+    return image_arr
+  }
+  function titleArr() {
+    const title_arr = []
+    Object.keys(door)
+      .filter((x) => Array.isArray(door[x]))
+      .map((key) => (
+        door[key].map((item) => (
+          // console.log('image',item.image)
+           title_arr.push(item.colorName)
+        ))
+      ))
+    return title_arr
+  }
+
+  const ima = imageArr()
+  const tit = titleArr()
+  //  console.log('image', tit)
+
   function first() {
     if (door.colors && door.colors.length !== 0) {
       const firstColor = Object.keys(door)
@@ -72,7 +103,7 @@ function DoorOne(props) {
 
   const firstColorName = first()
 
-  //  console.log('fc',firstColorId)
+  // console.log('fc', firstColorName)
 
   React.useEffect(() => {
     setCl(firstColorName)
@@ -100,54 +131,55 @@ function DoorOne(props) {
           <>
             <button className='button' onClick={props.history.goBack}>Вернуться назад</button>
             <div className='details-info-title'>
-              <h1>{door.title}</h1>
+              <h1>{door.title}{tit[s]}</h1>
+              {/* <h1>{door.title}</h1> */}
             </div>
 
             <div className="details">
               <div className='details-left'>
                 <div className="details-image">
-                  <img src={door.url} alt="11" />
+                  <img src={ima[s]} alt="11" />
+                  {/* <img src={door.url} alt="11" /> */}
                 </div>
               </div>
 
 
               <div className="details-right">
-
+                {/* Color */}
                 <div className='details-right-colors'>
-                  <span className='details-title'>
+                  <div className='details-title'>
                     Цвета
-                      </span>
-                  <span>
+                  </div>
+                  <div className='details-color-items'>
                     {
                       Object.keys(door)
                         .filter((x) => Array.isArray(door[x]))
                         .map((key) => (
-                          <div key={door._id}>
-                            <li>
-                              {/* <b>{key}:</b> */}
-                            </li>
-                            <ul style={{ display: 'flex' }}>
-                              {door[key].map((item, i) => (
-                                <li
-                                  className={s === i ? 'color color-active' : 'color'}
+                          // <div   key={door._id}>                            
+                          <ul key={door._id} >
+                            {door[key].map((item, i) => (
+                              <li
+                                className={s === i ? 'color color-active' : 'color'}
 
-                                  key={item._id}
-                                >
-                                  <LightTooltip title={item.colorName}  placement="top">
-                                    <img
-                                      src={item.colorUrl}
-                                      onClick={() => onClickColor(item.colorName, i)}
-                                    />
-                                  </LightTooltip>
+                                key={item._id}
+                              >
+                                <LightTooltip title={item.colorName} placement="top">
+                                  <img
+                                    src={item.colorUrl}
+                                    onClick={() => onClickColor(item.colorName, i)}
+                                  />
+                                </LightTooltip>
 
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+
+                              </li>
+                            ))}
+                          </ul>
+                          // </div>
                         ))
                     }
-                  </span>
+                  </div>
                 </div>
+                {/* EndColor */}
 
                 <div className='details-right-price'>
                   <span className='details-title'>

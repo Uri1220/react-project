@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { array } from '../../data.js'
 
+
+
+
 function Myselect() {
   const [category, setCategory] = useState('');
   const [sub_category, setSubCategory] = useState('');
   const [sub_categories, setSubCategories] = useState([]);
   const [filteredDoors, setFilteredDoors] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [newcat, setNewcat] = useState('');
-
+   const [colors, setColors] = useState([]);
 
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
@@ -51,15 +52,15 @@ function Myselect() {
   //     { name: 'МДФ', db:'mdf'},
   //  ],
 
-  // console.log('category', newcat)
+  //  console.log('category',category)
   //  console.log('e',ecoDoors)
   //  console.log('sub_categories',sub_categories)
-  console.log('colors', ...colors)
+  // console.log('filteredDoors',filteredDoors)
 
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  // };
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
 
   React.useEffect(() => {
     // const doorsCat = ["", "vchod", "massiv", "ecoshpon", "mdf"]
@@ -83,90 +84,37 @@ function Myselect() {
     // чистим инпут Sub-Category
     setSubCategory('')
 
-  }, [category])
-  /////////////////////////////////////////////////
+  }, [category])  
+/////////////////////////////////////////////////
   const addColor = () => {
-    setColors([...colors, {
-      item: category,
-      columnType: sub_category
+    setColors  ([...colors,{
+      item:category,
+       columnType:sub_category
     }])
   }
-
-  const deleteHandler = (id) => {
-    setColors(colors.filter((_, i) => i !== id))
-  }
-
-  const updateHandler = (id) => {
-      setColors(colors.map((el, i) => (i === id ? { ...el, item: newcat } : el)))
-      setNewcat('')
-  }
+  // console.log('m', colors)
 
   return (
     <div>
-
       <span>{`Cat: ${category}  Sub-Cat: ${sub_category}`}</span>
       <h2>Array:</h2>
-
-                <label htmlFor="newcat"> NewCat </label>
-                  <input
-                    id="a"
-                    type="text"
-                    name="newcat"
-                     value={newcat || ''}
-                    onChange={(e) => setNewcat(e.target.value)}
-                  ></input>
-               
-
-
       <ul>
-        {colors.map((el, i) => (
-          <li key={i}>
-            {`${i + 1}:  cut: ${el.item} sub: ${el.columnType}`}
-
-            <button
-              className="small"
-              onClick={() => deleteHandler(i)}
-            >
-              Delete
-                </button>
-
-            <button
-              className="small"
-              onClick={() => updateHandler(i)}
-            >
-              Update
-                </button>
-
-            {/* <form >
-              <ul>
-                <li>
-                <label htmlFor="newcat"> NewCat </label>
-                  <input
-                    id="a"
-                    type="text"
-                    name="newcat"
-                     value={newcat || ''}
-                    onChange={(e) => setNewcat(e.target.value)}
-                  ></input>
-                </li>
-                <li>
-                  <button type="submit" className="button primary">
-                  update
-                </button>
-                </li>
-              </ul>
-            </form> */}
-          </li>
-
-
-        ))}
-      </ul>
-
-
-      
+          {colors.map((el,i)=>(
+            <li key = {i}>
+              {`${i+1}:  cut: ${el.item} sub: ${el.columnType}`}
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          onClick={() => addColor()}
+          className="small"
+        >
+          Сохранить
+        </button>
 
       <div className="form">
-        <form >
+        <form onSubmit={submitHandler}>
           <ul className="form-container">
             {/* ////////CATEGORY//////////////////// */}
             <li style={{ display: 'flex', marginLeft: '10' }}>
@@ -225,14 +173,7 @@ function Myselect() {
             {/* ////////////////////////////////// */}
           </ul>
         </form>
-        <button
-        type="button"
-        onClick={() => addColor()}
-        className="small"
-      >
-        Сохранить
-        </button>
-
+       
       </div>
     </div>
   )

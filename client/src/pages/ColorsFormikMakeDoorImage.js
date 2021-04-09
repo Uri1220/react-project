@@ -8,18 +8,19 @@ import { Formik, Field, Form } from 'formik';
 
 export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
 
-
-
+  const [title, setTitle] = React.useState('');
   // из Formika
   const [col_add, setColAdd] = React.useState([]);
-  const [door_image, setDoorImage] = React.useState('');
 
+  const submitHandler = () => {}
+
+  console.log('colFinish', colFinish)
 
   // col_add цвета для добавления типа
   //["60505827e8a42c15a25e2de8", "60505988f338d7174aefb40e"]
   // только id
 
-   console.log('door_image', door_image)
+  // console.log('col_add', col_add)
 
   // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -29,7 +30,6 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
   // color_list - цвета из коллекции возможных цветов
   //  console.log('colors_list', colors_list)
 
-  //загрузка в redux state возможных цветов
   React.useEffect(() => {
     dispatch(fetchColors());
   }, []
@@ -39,14 +39,9 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
   const deleteHandler = (id) => {
     setColFinish(colFinish.filter(c => c._id !== id))
   }
-
-  const updateHandler = (id) => {
-    setColFinish(colFinish.map((el) => (el._id === id ? { ...el, image: door_image } : el)))
-    setDoorImage('')
-  }
-
   //--------------------------------------------------------
   //   ф-ция ggg() получает  полный массив цветов для добавления по выбранным чекбоксам
+  // не использую
   let col_add_completed = []
   function ggg() {
     for (let index = 0; index < colors_list.length; index++) {
@@ -97,8 +92,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
         for (let index = 0; index < colors_list.length; index++) {
           for (let j = 0; j < un.length; j++) {
             if (colors_list[index]._id === un[j]) {
-              col_a.push({ ...colors_list[index], image: '' })
-              // col_a.push(colors_list[index])
+              col_a.push(colors_list[index])
               // col_add_completed.push({ ...colors_list[index], cheked: true })
             }
           }
@@ -115,25 +109,15 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
 
   return (
     <>
+      <div >
+        <h1> Цвета рабочие</h1>
 
-      <label htmlFor="newcat"> DoorImage </label>
-      <input
-        id="a"
-        type="text"
-        name="door_image"
-        value={door_image || ''}
-        onChange={(e) => setDoorImage(e.target.value)}
-      ></input>
-
-
-      <div className='details-right-colors'>
-        <ul style={{ display: 'flex' }}>
+        <ul >
           {colFinish.map((item) => (
-            <li style={{ marginRight: '10px', border: '1px solid red' }} key={item._id}>
+            <li style={{ margin: '5px', border: '1px solid red' }} key={item._id}>
               <div style={{ fontSize: '15px' }}>{item.colorName}</div>
               <div style={{ display: 'flex' }}>
-                <img style={{ height: '40px' }} src={item.colorUrl} alt='no image' />
-                image:<img style={{ height: '50px', margin: '0px 10px' }} src={item.image} alt='no image' />
+                <img style={{ height: '40px', border: '1px solid blue' }} src={item.colorUrl} />
 
                 <button
                   className="small"
@@ -141,19 +125,41 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
                 >
                   Delete
                 </button>
-
-                <button
-                  className="small"
-                  onClick={() => updateHandler(item._id)}
-                >
-                  Update
-                </button>
               </div>
+              <div className="form">
+                <form onSubmit={submitHandler}>
+                  <ul className="form-container">
+
+                    <li>
+                      <label htmlFor="title">Image</label>
+                      <input
+                        type="text"
+                        name="title"
+                        value={item.image}
+                        id="title"
+                        // onChange={(e) => setTitle(e.target.value)}
+                      ></input>
+                    </li>
+
+
+                    <li>
+                      <button type="submit" className="button primary">
+                        Привязать картинку
+                      </button>
+                    </li>
+
+                  </ul>
+                </form>
+
+
+              </div>
+
+
+              {/* /////////////////////////////////// */}
             </li>
           ))}
         </ul>
       </div>
-
       <div className="checked-items">
 
         <button
@@ -165,19 +171,18 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
         </button>
 
         {/* <div>Выбранные цвета:</div> */}
-        <ul style={{ display: 'flex' }}>
-          {col_add_completed.map((item) => (
-            <li style={{ marginRight: '10px', border: '1px solid red' }} key={item._id}>
-              <div style={{ fontSize: '15px' }}>{item.colorName}</div>
-              <div style={{ display: 'flex' }}>
-                <img style={{ height: '40px', border: '1px solid blue' }} src={item.colorUrl} />
-                <div>image:{item.image}</div>
-              </div>
+        {col_add_completed.map((product) => (
+          <ul className='checked-item ' key={product._id}>
+            <li>{<img style={{ height: '40px' }} src={product.colorUrl} alt="11" />}</li>
+            <li>
+
+              <span style={{ marginLeft: '3px', fontSize: '10px' }}>
+                {product.colorName}
+              </span>
             </li>
-          ))}
-        </ul>
 
-
+          </ul>
+        ))}
       </div>
 
 
