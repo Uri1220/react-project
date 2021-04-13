@@ -58,7 +58,7 @@ function DoorOne(props) {
   // .map((key) => (console.log('fff',key)))   = colors
 
   //возвр массив полных картинок
-
+  //Обработка COLORS
   function imageArr() {
     const image_arr = []
     Object.keys(door)
@@ -78,15 +78,17 @@ function DoorOne(props) {
       .map((key) => (
         door[key].map((item) => (
           // console.log('image',item.image)
-           title_arr.push(item.colorName)
+          title_arr.push(item.colorName)
         ))
       ))
     return title_arr
+    // ["Snow Veralinga ", "Bianco Veralinga"]
+
   }
 
   const ima = imageArr()
   const tit = titleArr()
-  //  console.log('image', tit)
+  // console.log('image', tit)
 
   function first() {
     if (door.colors && door.colors.length !== 0) {
@@ -95,15 +97,17 @@ function DoorOne(props) {
         .map((key) => (((door[key][0]).colorName)))
       // .map((key) => (((door[key][0])._id)))
       return firstColor[0]
+      //Snow Veralinga 
     } else {
       return 'no-color'
     }
   }
-  first()
 
   const firstColorName = first()
+    //  console.log('fc', firstColorName)
+  //End Обработка COLORS
 
-  // console.log('fc', firstColorName)
+
 
   React.useEffect(() => {
     setCl(firstColorName)
@@ -131,7 +135,7 @@ function DoorOne(props) {
           <>
             <button className='button' onClick={props.history.goBack}>Вернуться назад</button>
             <div className='details-info-title'>
-              <h1>{door.title}{tit[s]}</h1>
+              <h1>{door.title} {tit[s]}</h1>
               {/* <h1>{door.title}</h1> */}
             </div>
 

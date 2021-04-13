@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core";
 
-
+//////////SideMenu
 const useStylesqq = makeStyles({
     sideMenu: {
         display: 'flex',
@@ -23,6 +23,7 @@ const SideMenu = () => {
         </div>
     )
 }
+//////////Dialog//////
 
 export default SideMenu;
 

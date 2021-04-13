@@ -44,12 +44,13 @@ function App() {
             openMenu={openMenu}
           />
 
+            {/* Вверху на малом экране */}
           <Sidebar
             array={array}
             closeMenu={closeMenu}
             setVisiblePopup={setVisiblePopup}
           />
-
+            {/* Слева на большом экране */}
           <Aside array={array} />
 
           {/* Route here */}

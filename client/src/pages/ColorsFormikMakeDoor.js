@@ -127,7 +127,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
 
 
       <div className='details-right-colors'>
-        <ul style={{ display: 'flex' }}>
+        <ul style={{ display: 'flex',flexWrap:'wrap' }}>
           {colFinish.map((item) => (
             <li style={{ marginRight: '10px', border: '1px solid red' }} key={item._id}>
               <div style={{ fontSize: '15px' }}>{item.colorName}</div>
