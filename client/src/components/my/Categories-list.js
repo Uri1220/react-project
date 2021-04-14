@@ -16,7 +16,7 @@ const CategoriesList = ({ array }) => {
   const dispatch = useDispatch();
   /////////////Category/////////////////////
   const [catArray, setCatArray] = React.useState([])
-  // console.log(...catArray)
+  //  console.log('catArray',...catArray)
 
   const onClickCat = (ind) => {
 
@@ -41,7 +41,7 @@ const CategoriesList = ({ array }) => {
   }
   ////////////SUB-Category///////////////////////////
   const [subCatArray, setSubCatArray] = React.useState([])
-  // console.log(...subCatArray)
+  //  console.log('subCatArray',...subCatArray)
 
   const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
@@ -52,10 +52,10 @@ const CategoriesList = ({ array }) => {
     {
       switch (subCat) {
         case 1:
-          setSubCatArray(array.krugFurn)
+          setSubCatArray(array.ruchFurn)
           break
         case 2:
-          setSubCatArray(array.kvadrFurn)
+          setSubCatArray(array.petFurn)
           break
         default:
           setSubCatArray([])
@@ -221,14 +221,3 @@ const CategoriesList = ({ array }) => {
 
 export default CategoriesList
 
-const styles = {
-  //   ul:{
-  //   display: 'flex',
-  //   flexWrap:'wrap',
-  //   justifyContent:' space-around',
-  //   alignItems: 'center' }
-  marginLeft: '2rem',
-  transform: 'rotate(180deg)'
-}
-
-// style={styles.ul}

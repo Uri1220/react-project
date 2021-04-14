@@ -40,7 +40,10 @@ const Content = () => {
         {/* <h3>{category}</h3> */}
         <Switch>
           <Route path="/" exact component={Main} />
-          <Route path="/pens" exact component={Pens}  />
+          {/* <Route path="/pens" exact component={Pens}  /> */}
+          <Route 
+           path="/implements/category/:category/sub_category/:sub_category" 
+           exact component={Pens}  />
           <Route path="/signin" exact component={SigninScreen}  />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/pens/:id" component={PenOne}  />
@@ -52,13 +55,13 @@ const Content = () => {
           <Route path="/doors/:id" exact component={DoorOne}  />
 
           <Route
-            path="/catalog/category/:category"
+            path="/doors/category/:category"
             component={Doors}
             exact
           ></Route>
 
           <Route
-            path="/catalog/category/:category/sub_category/:sub_category"
+            path="/doors/category/:category/sub_category/:sub_category"
             component={Doors}
             exact
           ></Route>
@@ -67,13 +70,13 @@ const Content = () => {
             component={MySearch}
             exact
           ></Route> */}
-           <Route
-            path="/catalog/category/:category/min/:min/max/:max"
+           {/* <Route
+            path="/doors/category/:category/min/:min/max/:max"
             component={MySearch}
             exact
-          ></Route>
+          ></Route> */}
            <Route
-            path="/catalog/category/:category/sub_category/:sub_category/min/:min/max/:max"
+            path="/doors/category/:category/sub_category/:sub_category/min/:min/max/:max"
             component={Doors}
             exact
           ></Route>

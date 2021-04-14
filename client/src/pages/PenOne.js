@@ -68,8 +68,8 @@ function PenOne(props) {
   const ima = imageArr()
   const tit = titleArr()
   // console.log('titles', tit)
-   console.log('ima', ima)
-   console.log('s', s)
+  //  console.log('ima', ima)
+  //  console.log('s', s)
 
   function first() {
     if (pen.colors && pen.colors.length !== 0) {
@@ -85,7 +85,7 @@ function PenOne(props) {
   }
 
   const firstColorName = first()
-  console.log('firstColorName', firstColorName)
+  // console.log('firstColorName', firstColorName)
   //End Обработка COLORS
 
   React.useEffect(() => {

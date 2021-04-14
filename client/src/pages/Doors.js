@@ -8,6 +8,8 @@ import MessageBox from '../components/my/MessageBox';
 
 
 function Doors() {
+  //получаем пар-ры они пойдут в fetchFilterDoors для запроса 
+  //из БД нужных данных
   const {
     category = 'all',
     sub_category = '',
@@ -70,14 +72,21 @@ function Doors() {
   },
     [category, sub_category, min, max, userInfo]);
 
+  // getFilterUrl нужен для фильтрации по цене
   const getFilterUrl = (filter) => {
+
+    //фильтрация по категории
     // const filterCategory = filter.category || category;
+
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
     // return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
-    return `/catalog/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
+    return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
   };
+
+  // см. ниже:   <Link                    10          100
+  //              to={getFilterUrl({ min: p.min, max: p.max })}
 
   return (
     <div className="doors">
@@ -95,8 +104,8 @@ function Doors() {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
-            (<>
-              {/*
+          (<>
+            {/*  //фильтрация по категории
                <div>
                 <ul>
                   <li>
@@ -121,37 +130,37 @@ function Doors() {
               </div> 
               */}
 
-              <div>
-                <h3>Price</h3>
-                <ul>
-                  {prices.map((p) => (
-                    <li key={p.name}>
-                      <Link
-                        to={getFilterUrl({ min: p.min, max: p.max })}
-                        className={
-                          `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
-                        }
-                      >
-                        {p.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div>
+              <h3>Price</h3>
+              <ul>
+                {prices.map((p) => (
+                  <li key={p.name}>
+                    <Link
+                      to={getFilterUrl({ min: p.min, max: p.max })}
+                      className={
+                        `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
+                      }
+                    >
+                      {p.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div>
-                <div>{doors.length} Results</div>
-                <div className="products">
-                  {
-                    doors &&
-                    doors.map((item) =>
-                      <Door  key={item._id} door={item} />
-                    )
-                  }
-                </div>
+            <div>
+              <div>{doors.length} Results</div>
+              <div className="products">
+                {
+                  doors &&
+                  doors.map((item) =>
+                    <Door key={item._id} door={item} />
+                  )
+                }
               </div>
-            </>
-            )
+            </div>
+          </>
+          )
       }
     </div>
   )

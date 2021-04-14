@@ -17,21 +17,21 @@ export const array = {
    ],
    // subSusbCat+1 url: '/-------' 
    vhod_door: [
-      { name: 'Econom', db:'econom', url: '/catalog/category/vchod/sub_category/econom' },
-      { name: 'Porta R-2',db:'porta-r2', url: '/catalog/category/vchod/sub_category/porta-r2' },
+      { name: 'Econom', db:'econom', url: '/doors/category/vchod/sub_category/econom' },
+      { name: 'Porta R-2',db:'porta-r2', url: '/doors/category/vchod/sub_category/porta-r2' },
    ],
    massDoors: [
-      { name: 'Classico', db:'classico', url: '/catalog/category/massiv/sub_category/classico' },
-      { name: 'Поставы', db:'postavy', url: '/catalog/category/massiv/sub_category/postavy' },
-      { name: 'Ока', db:'oka', url: '/catalog/category/massiv/sub_category/oka' },
+      { name: 'Classico', db:'classico', url: '/doors/category/massiv/sub_category/classico' },
+      { name: 'Поставы', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
+      { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
    ],
    ecoDoors: [
-      { name: 'Porta X', db:'porta-x',  url: '/catalog/category/ecoshpon/sub_category/porta-x' },
-      { name: 'Legno',  db:'legno',url: '/catalog/category/ecoshpon/sub_category/legno' },
-      { name: 'Vetro', db:'vetro', url: '/catalog/category/ecoshpon/sub_category/vetro' },
+      { name: 'Porta X', db:'porta-x',  url: '/doors/category/ecoshpon/sub_category/porta-x' },
+      { name: 'Legno',  db:'legno',url: '/doors/category/ecoshpon/sub_category/legno' },
+      { name: 'Vetro', db:'vetro', url: '/doors/category/ecoshpon/sub_category/vetro' },
    ],
    mdfDoors: [
-      { name: 'МДФ Юркас',  db:'mdf-yurkas',url: '/catalog/category/mdf/sub_category/mdf-yurkas' },
+      { name: 'МДФ Юркас',  db:'mdf-yurkas',url: '/doors/category/mdf/sub_category/mdf-yurkas' },
    ],
    //Входные двери подкатегории нет!
 
@@ -39,16 +39,18 @@ export const array = {
 
    //Furnitua
    furnCat: [
-      { name: 'Круг' },
-      { name: 'Квадрат' },
+      { name: 'Ручки', db:'pens' },
+      { name: 'Петли', db:'petly' },
    ],
-   krugFurn: [
-      { name: 'Круг1', url: '/pens' },
-      { name: 'Круг22' },
+   ruchFurn: [
+      { name: 'На квадратной розетке', db:'kvadr', url: '/implements/category/pens/sub_category/kvadr' },
+      { name: 'На круглой розетке', db:'krug', url: '/implements/category/pens/sub_category/krug' },
+      { name: 'Ручки-защелки', db:'zaschelk', url: '/implements/category/pens/sub_category/zaschelk' },
    ],
-   kvadrFur: [
-      { name: 'Квадрат11' },
-      { name: 'Квадрат22' },
+   petFurn: [
+      { name: 'Врезные' },
+      { name: 'Без врезки' },
+      { name: 'Скрытые' },
    ],
 
 }

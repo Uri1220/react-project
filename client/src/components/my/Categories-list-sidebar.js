@@ -16,7 +16,7 @@ const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
   const dispatch = useDispatch();
   /////////////Category/////////////////////
   const [catArray, setCatArray] = React.useState([])
-  // console.log(...catArray)
+  //  console.log('cat',...catArray)
 
   const onClickCat = (ind) => {
 
@@ -41,7 +41,7 @@ const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
   }
   ////////////SUB-Category///////////////////////////
   const [subCatArray, setSubCatArray] = React.useState([])
-  // console.log(...subCatArray)
+  //  console.log('subcat',...subCatArray)
 
   const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
@@ -52,10 +52,10 @@ const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
     {
       switch (subCat) {
         case 1:
-          setSubCatArray(array.krugFurn)
+          setSubCatArray(array.ruchFurn)
           break
         case 2:
-          setSubCatArray(array.kvadrFurn)
+          setSubCatArray(array.petFurn)
           break
         default:
           setSubCatArray([])

@@ -13,10 +13,20 @@ import {
 
 //     асинх получаем  все д ч-з thunk
 // вызываем в Pens.js
-export const fetchPens = () => async (dispatch) => {
+// export const fetchPens = () => async (dispatch) => {
+//    try {
+//       dispatch({ type: PENS_LIST_REQUEST })
+//       await axios.get('http://localhost:5000/api/pens/list')
+//          .then(data => { dispatch({ type: PENS_LIST_SUCCESS, payload: data.data }) });
+
+//    } catch (error) {
+//       dispatch({ type: PENS_LIST_FAIL, payload: error.message })
+//    }
+// };
+export const fetchPens = ({category,sub_category}) => async (dispatch) => {
    try {
       dispatch({ type: PENS_LIST_REQUEST })
-      await axios.get('http://localhost:5000/api/pens/list')
+      await axios.get(`/api/pens/list?category=${category}&sub_category=${sub_category}`)
          .then(data => { dispatch({ type: PENS_LIST_SUCCESS, payload: data.data }) });
 
    } catch (error) {
