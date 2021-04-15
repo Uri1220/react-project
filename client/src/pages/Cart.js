@@ -34,8 +34,8 @@ function Cart(props) {
   const productId = props.match.params.id;
   //  const productId = props.match.url;
   // console.log('qty',props.match.url);
-  // console.log('props.location.search', props.location.search);
-
+  //  console.log('props.location.search:', props.location.search);
+  //  props.location.search: ?qty=1=sz=200*60=cl=no-color
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
   const sz = props.location.search ? String(props.location.search.split("=")[3]) : 'no-size';
   const cl = props.location.search ? String(props.location.search.split("=")[5]) : '';

@@ -41,7 +41,7 @@ const CategoriesList = ({ array }) => {
   }
   ////////////SUB-Category///////////////////////////
   const [subCatArray, setSubCatArray] = React.useState([])
-  //  console.log('subCatArray',...subCatArray)
+    // console.log('subCatArray',subCatArray)
 
   const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
@@ -112,6 +112,12 @@ const CategoriesList = ({ array }) => {
         {/* /////////111111//////// */}
         <ul className='menu__list' >
           {
+          //   categories: [
+          //     { name: 'Распродажа', url: '/' },
+          //     { name: 'Двери', },
+          //     { name: 'Фурнитура', },
+          //     { name: 'Плинтус', url: '/plintus' },
+          //  ],
             array.categories &&
             array.categories.map((obj, index) => (
               <li

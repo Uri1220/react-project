@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 import LoadingBox from '../components/my/LoadingBox';
 import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
 import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor'
+// import MakeDoorScreenUpdate from './MakeDoorScreenUpdate';
 
 
-function MakeDoorScreen() {
+function MakeDoorScreen(props) {
 
- 
+
   const [modalVisible, setModalVisible] = useState(false);
+  const [tableVisible, setTableVisible] = useState(true);
+
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -22,16 +27,23 @@ function MakeDoorScreen() {
   const [complect, setComplect] = useState('');
   const [upisLoading, setUpisLoading] = useState(false);
   const [colors, setColors] = useState([]);
-   
-   const [colFinish, setColFinish] = React.useState(colors);
-// colors - цвета из БД рабочие
-// colFinish - новые цвета после редактирования
-   React.useEffect(() => {
+  const [colFinish, setColFinish] = React.useState(colors);
+  // colors - цвета из БД рабочие
+  // colFinish - новые цвета после редактирования
+
+ // console.log('props.location.search:', props.location.search);
+  // props.location.search: ?cat=massiv=sub=classico
+  const cat = props.location.search ? String(props.location.search.split("=")[1]) : '';
+  const sub = props.location.search ? String(props.location.search.split("=")[3]) : '';
+  // console.log('CAT', cat)
+  // console.log('sub', sub)
+
+  React.useEffect(() => {
     setColFinish(colors)
   }, [colors]
   )
 
- 
+
   const doorslist = useSelector((state) => state.doors);
   const { isLoading, doors, error } = doorslist;
 
@@ -64,8 +76,8 @@ function MakeDoorScreen() {
     // dispatch(fetchDoors());
     dispatch(fetchFilterDoors(
       {
-        category: v[0],
-        sub_category: s[0],
+        category: cat,
+        sub_category: sub,
         min: 0,
         max: 0,
       }
@@ -74,6 +86,7 @@ function MakeDoorScreen() {
   }, [successSave, successDelete]);
 
   const openModal = (product) => {
+    setTableVisible(false)
     setModalVisible(true);
     setId(product._id);
     setTitle(product.title);
@@ -87,7 +100,7 @@ function MakeDoorScreen() {
     setCountInStock(product.countInStock);
     setColors(product.colors);
   };
-     console.log('colFinish', colFinish)
+  // console.log('colFinish', colFinish)
 
   //SAVE////
   const submitHandler = (e) => {
@@ -104,10 +117,16 @@ function MakeDoorScreen() {
         countInStock,
         description,
         complect,
-        colors:colFinish
+        colors: colFinish
       })
-    );
+    )
+    setTableVisible(true)
   };
+
+  const clickBack = () =>{
+    {setModalVisible(false)
+      setTableVisible(true)}
+  }
   //Delete
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
@@ -135,19 +154,19 @@ function MakeDoorScreen() {
   };
   //определяем кат и субкат чтоб задать значения по умолч стрю170
   // и для перерендера списка стр.93
-  const v = doors.map(el => {
-    return el.category
-  })
-  const s = doors.map(el => {
-    return el.sub_category
-  })
+  // const v = doors.map(el => {
+  //   return el.category
+  // })
+  // const s = doors.map(el => {
+  //   return el.sub_category
+  // })
 
   return (
     <div className="content content-margined">
       <div className="product-header">
         <h3>Products</h3>
         <button className="button primary" onClick={() => openModal(
-          { category: `${v[0]}`, sub_category: `${s[0]}` }
+          { category: `${cat}`, sub_category: `${sub}` }
         )}>
           Create Product
         </button>
@@ -262,7 +281,7 @@ function MakeDoorScreen() {
                   onChange={(e) => setComplect(e.target.value)}
                 ></textarea>
               </li>
-              
+
               <li>
                 <button type="submit" className="button primary">
                   {id ? 'Update' : 'Create'}
@@ -271,7 +290,7 @@ function MakeDoorScreen() {
               <li>
                 <button
                   type="button"
-                  onClick={() => setModalVisible(false)}
+                  onClick={() => clickBack()}
                   className="button secondary"
                 >
                   Back
@@ -280,65 +299,68 @@ function MakeDoorScreen() {
             </ul>
           </form>
 
-        {colFinish &&
-          <ColorsFormikMakeDoor
-          setColFinish = {setColFinish} 
-          colFinish = {colFinish}
-          />}
+          {colFinish &&
+            <ColorsFormikMakeDoor
+              setColFinish={setColFinish}
+              colFinish={colFinish}
+            />}
 
         </div>
       )}
-          
+
       {/* ///////////////////////////////////////////////////////// */}
       {
         isLoading ? (
           <LoadingBox></LoadingBox>
-        ) : (
-            <div className="product-list">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Action</th>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Sub-Category</th>
-                    <th>Colors</th>
+        ) : tableVisible && (
+          <div className="product-list">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Sub-Category</th>
+                  <th>Colors</th>
 
 
-                  </tr>
-                </thead>
-                <tbody>
-                  {doors.map((product) => (
+                </tr>
+              </thead>
+              <tbody>
+                {doors.map((product) => (
 
 
-                    <tr key={product._id}>
-                      <td>
-                        <button className="button" onClick={() => openModal(product)}>
-                          Edit
-                          </button>{' '}
-                        <button
-                          className="button"
-                          onClick={() => deleteHandler(product)}
-                        >
-                          Delete
+                  <tr key={product._id}>
+                    <td>
+
+                      <button className="button" onClick={() => openModal(product)}>
+                        Edit
+                      </button>{' '}
+
+
+                      <button
+                        className="button"
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
                           </button>
-                      </td>
-                      <td>{<img style={{ height: '60px' }} src={product.url} alt="11" />}</td>
-                      <td>{product.title}</td>
-                      <td>{product.price}</td>
-                      <td>{product.category}</td>
-                      <td>{product.sub_category}</td>
-                      <td>
-                        {product.colors.length}                        
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
+                    </td>
+                    <td>{<img style={{ height: '60px' }} src={product.url} alt="11" />}</td>
+                    <td>{product.title}</td>
+                    <td>{product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.sub_category}</td>
+                    <td>
+                      {product.colors.length}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
       }
     </div>
   );

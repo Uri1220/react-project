@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import { useMessage } from '../hooks/message.hook'
- import RadioColors from '../components/my/RadiuoColors'
-
 
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
 
@@ -14,16 +12,22 @@ export default function Color() {
   const [id, setId] = useState('');
   const [colorName, setColorName] = useState('');
   const [colorUrl, setColorUrl] = useState('');
-  const [value, setValue] = React.useState('door');//door,pen,plint
+  const [checkColorId, setCheckColorId] = useState('');
+  const [aaa, setAaa] = useState([]);
+  //  console.log(checkColorId)
 
- //из RadioColors компонента
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  // const setCheckId = (product) => {
+  //   setCheckColorId(product)
+  // };
+
+  const setCheckId = (product) => {
+    setAaa([
+      ...aaa, { color_id: product }
+    ])
   };
-  //  console.log('v',value)
-  //  console.log('arr',colors_arr)
+  // console.log(aaa)
 
- 
+
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault()
@@ -31,7 +35,6 @@ export default function Color() {
       _id: id,
       colorName,
       colorUrl,
-       cat:value
     }))
     setColorUrl('')
   }
@@ -45,11 +48,7 @@ export default function Color() {
 
   const colorslist = useSelector((state) => state.colors);
   const { loading, colors } = colorslist;
-  console.log('colors',colors)
 
-
-
-  // console.log(colors)
   const productDelete = useSelector((state) => state.colorDelete);
   const {
     //redux    //так обозвал
@@ -59,12 +58,18 @@ export default function Color() {
     color: messageDelete
   } = productDelete;
 
-  // для редактирования(я убрал)
-  // const openModal = (product) => {
-  //   setId(product._id);
-  //   setColorName(product.colorName);
-  //   setColorUrl(product.colorUrl);
-  // };
+  // React.useEffect(() => {
+  //   dispatch(fetchColors());
+  // },
+  //   [successCreate, successDelete]
+  // );
+
+  const openModal = (product) => {
+    setId(product._id);
+    setColorName(product.colorName);
+    setColorUrl(product.colorUrl);
+
+  };
   //Delete
   const deleteHandler = (product) => {
     dispatch(deleteColor(product._id));
@@ -84,7 +89,7 @@ export default function Color() {
     dispatch(fetchColors());
     message(cre)
   },
-    [successCreate,value]
+    [successCreate]
   );
   //error
   React.useEffect(() => {
@@ -97,13 +102,13 @@ export default function Color() {
     dispatch(fetchColors());
     message(del)
 
-  }, [successDelete]);
-  
+  },
+    [successDelete]
+  );
   /////////////////////end useMessage Hook/////////////
 
   return (
     <>
-    <RadioColors value = {value} handleChange={handleChange}/>
       <div className="form">
         <form
           onSubmit={submitHandler}
@@ -156,25 +161,44 @@ export default function Color() {
         ) : (
             <div className="colors-list">
 
-              {colors.filter(el=>el.cat === value).map((product) => (
-                <div className='colors-item ' key={product._id}>
-                  <div><img style={{ height: '80px' }} src={product.colorUrl} alt="11" /></div>
-                  <div>
+              {colors.map((product) => (
+                <ul className='colors-item ' key={product._id}>
+                  <li>{<img style={{ height: '80px' }} src={product.colorUrl} alt="11" />}</li>
+                  <li>
+                    {/* <span>
+                      <input
+                        type="checkbox"
+                        id="chetyre"
+                      />
+                      </span> */}
+                    {/* <span>
+                      <form action="/complete" method="POST">
+                        <label>
+                          <input
+                            type="checkbox"
+                            value={product._id}
+                            name="color_id"
+                            onChange={(e) => setCheckId(e.target.value)}
+                          />
+                          <button class="btn btn-small" type="submit">Save</button>
+                        </label>
+                      </form>
+                    </span> */}
+
                     <span style={{ marginLeft: '3px' }}>{product.colorName}</span>
-                  </div>
-                  <div>
-                    {/* <button className="button" onClick={() => openModal(product)}>
+                  </li>
+                  <li>
+                    <button className="button" onClick={() => openModal(product)}>
                       Edit
-                  </button>{' '} */}
-                 
+                  </button>{' '}
                     <button
                       className="button"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete
                   </button>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               ))}
 
             </div>

@@ -1,5 +1,5 @@
 import Axios from "axios";
-// import Cookie from 'js-cookie';
+//  import Cookie from 'js-cookie';
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -51,7 +51,7 @@ const signin = (email, password) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     //вижу в том числе и токен
     //  console.log(data)
-    localStorage.setItem('userInfo', JSON.stringify(data));
+     localStorage.setItem('userInfo', JSON.stringify(data));
     //загружаю в куки далее  в store.js  userInfo подгружается в initialstate
     //  Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {

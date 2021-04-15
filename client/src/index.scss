@@ -30,6 +30,7 @@
 // style={styles.ul}
 //=================================
 
+
 .smaller {
   width: 20px;
 }
@@ -331,24 +332,21 @@ tbody > tr:nth-child(odd) {
   margin: 5px;
   padding: 5px;
   flex-direction: column;
-  // height: 100%;
-  text-align: center;
-  // box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  // transition: 0.2s ease;
-  // cursor: pointer;
-     border: 1px solid #eee;
+  justify-content: space-between;
+  text-align: center; 
+  border: 1px solid #eee;
 
 }
-.checked-item{
-  display:flex;
-  flex: 0 1 80px; 
-  margin: 5px;
-  padding: 5px;
-  flex-direction: column;
-  text-align: center;
-     border: 1px solid #eee;
+// .checked-item{
+//   display:flex;
+//   flex: 0 1 80px; 
+//   margin: 5px;
+//   padding: 5px;
+//   flex-direction: column;
+//   text-align: center;
+//      border: 1px solid #eee;
 
-}
+// }
 .colors-item:hover {
   border: 1px solid #000;
 

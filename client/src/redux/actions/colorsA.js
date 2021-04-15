@@ -33,40 +33,40 @@ export const fetchColors = () => async (dispatch) => {
   }
 };
 
-export const fetchFilterDoors = ({
-  category = '',
-  sub_category,
-  min = 0,
-  max = 0,
-}) => async (dispatch) => {
-  try {
-    dispatch({ type: COLOR_LIST_REQUEST })
-    await axios.get(
-      `/api/doors/list?category=${category}&sub_category=${sub_category}&min=${min}&max=${max}`
-    )
-      .then(data => { dispatch({ type: COLOR_LIST_SUCCESS, payload: data.data }) });
+// export const fetchFilterDoors = ({
+//   category = '',
+//   sub_category,
+//   min = 0,
+//   max = 0,
+// }) => async (dispatch) => {
+//   try {
+//     dispatch({ type: COLOR_LIST_REQUEST })
+//     await axios.get(
+//       `/api/doors/list?category=${category}&sub_category=${sub_category}&min=${min}&max=${max}`
+//     )
+//       .then(data => { dispatch({ type: COLOR_LIST_SUCCESS, payload: data.data }) });
 
-  } catch (error) {
-    dispatch({ type: COLOR_LIST_FAIL, payload: error.message })
-  }
-};
-// &min=${min}
-// &max=${max}     
+//   } catch (error) {
+//     dispatch({ type: COLOR_LIST_FAIL, payload: error.message })
+//   }
+// };
+// // &min=${min}
+// // &max=${max}     
 
 
-//// асинх получаем  Один  ч-з thunk////////////
-export const fetchDoorDetail = (doorId) => async (dispatch) => {
-  try {
-    dispatch({ type: COLOR_DETAILS_REQUEST, payload: doorId })
-    await axios.get('/api/doors/' + doorId)
-      // await axios.get('http://localhost:5000/api/doors/' + doorId)
-      .then(data => { dispatch({ type: COLOR_DETAILS_SUCCESS, payload: data.data }) })
-    //  .then(data =>  console.log('ddooors',data.data.title));
+// //// асинх получаем  Один  ч-з thunk////////////
+// export const fetchDoorDetail = (doorId) => async (dispatch) => {
+//   try {
+//     dispatch({ type: COLOR_DETAILS_REQUEST, payload: doorId })
+//     await axios.get('/api/doors/' + doorId)
+//       // await axios.get('http://localhost:5000/api/doors/' + doorId)
+//       .then(data => { dispatch({ type: COLOR_DETAILS_SUCCESS, payload: data.data }) })
+//     //  .then(data =>  console.log('ddooors',data.data.title));
 
-  } catch (error) {
-    dispatch({ type: COLOR_DETAILS_FAIL, payload: error.message })
-  }
-};
+//   } catch (error) {
+//     dispatch({ type: COLOR_DETAILS_FAIL, payload: error.message })
+//   }
+// };
 
 ////////////DELETE
 export const deleteColor = (productId) => async (dispatch, getState) => {
@@ -115,7 +115,7 @@ export const saveColor = (product) => async (dispatch, getState) => {
         },
       });
       dispatch({ type: COLOR_SAVE_SUCCESS, payload: data });
-        // debugger
+        //  debugger
     } else {
               //Update
       const { data } = await axios.put(

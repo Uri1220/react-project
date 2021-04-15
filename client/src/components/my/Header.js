@@ -3,6 +3,7 @@ import '../../scss/Header.scss'
 import { useSelector,useDispatch } from 'react-redux'
 import {signout} from '../../redux/actions/userA'
 import { Link } from 'react-router-dom';
+import CartInHeader from './CartInHeader'
 
 
 
@@ -64,10 +65,11 @@ const Header = ({ openMenu }) => {
 
 
             <Link className="header__link" to={"/cart/"}>
-               Cart
+               {/* Cart
                {cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>
-               )}
+               )} */}
+               <CartInHeader total = {cartItems.length}/>
             </Link>
          </div>
          </div>

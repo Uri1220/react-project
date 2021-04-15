@@ -11,14 +11,15 @@ router.post(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     try {
-      const { colorName, colorUrl } = req.body
+      const { colorName, colorUrl,cat } = req.body
       const candidate = await Color.findOne({ colorName })
       if (candidate) {
         return res.status(400).json({ message: 'Такой цвет уже существует' })
       }
       const newColor = new Color({
         colorName,
-        colorUrl
+        colorUrl,
+        cat
       })
       await newColor.save()
       res.status(201).json({

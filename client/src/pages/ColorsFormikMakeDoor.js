@@ -19,7 +19,7 @@ export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
   //["60505827e8a42c15a25e2de8", "60505988f338d7174aefb40e"]
   // только id
 
-   console.log('door_image', door_image)
+  //  console.log('door_image', door_image)
 
   // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

@@ -5,6 +5,7 @@ const colorSchema = new mongoose.Schema({
   colorName: { type: String, required: true },
  
   colorUrl: { type: String, required: true },
+   cat: { type: String }
 
   // initImage: { type: String, required: true },
 
