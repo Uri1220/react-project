@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 import LoadingBox from '../components/my/LoadingBox';
 import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
 import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor'
-// import MakeDoorScreenUpdate from './MakeDoorScreenUpdate';
 
 
 function MakeDoorScreen(props) {
@@ -152,15 +150,7 @@ function MakeDoorScreen(props) {
         setUpisLoading(false);
       });
   };
-  //определяем кат и субкат чтоб задать значения по умолч стрю170
-  // и для перерендера списка стр.93
-  // const v = doors.map(el => {
-  //   return el.category
-  // })
-  // const s = doors.map(el => {
-  //   return el.sub_category
-  // })
-
+  
   return (
     <div className="content content-margined">
       <div className="product-header">

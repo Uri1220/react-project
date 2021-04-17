@@ -26,6 +26,7 @@ import SideMenu from '../../pages/MU/SideMenu'
 import Color from '../../pages/Color'
 import { ColorsFormik } from '../../pages/dev_ed/ColorsFormik'
 import { NestedArray } from '../../pages/dev_ed/NestedArray'
+import SelectMU from '../MU/SelectMU'
 
 
 // const Content = ({ category }) => {
@@ -90,7 +91,7 @@ const Content = () => {
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/flex-cat" component={FlexCat} />
-          <Route path="/mu-search" component={SideMenu} />
+          <Route path="/mu-search" component={SelectMU} />
           <Route path="/select" component={select} />
           <Route path="/colors" component={Color} />
           <Route path="/colors-formik" component={ColorsFormik} />

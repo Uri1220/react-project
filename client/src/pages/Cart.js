@@ -3,6 +3,8 @@ import { addToCart, removeFromCart } from '../redux/actions/cartA';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MessageBox from '../components/my/MessageBox';
+import '../scss/Cart.scss'
+
 
 // import ShippingAddressScreen from './ShippingAddressScreen';
 
@@ -97,7 +99,7 @@ function Cart(props) {
 
                     </div>
                     <div>
-                      Qty:
+                      Количество:
                   <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value), item.path ,sz,cl))}>
                         {[...Array(item.countInStock).keys()].map(x =>
                           <option key={x + 1} value={x + 1}>{x + 1}</option>
@@ -111,7 +113,7 @@ function Cart(props) {
                     </div>
                   </div>
                   <div className="cart-price">
-                    ${item.price}
+                    {item.price} руб.
                   </div>
                 </li>
               )

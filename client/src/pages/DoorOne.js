@@ -4,7 +4,7 @@ import LoadingBox from '../components/my/LoadingBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDoorDetail } from '../redux/actions/doorsA'
 import '../scss/DoorOne.scss'
-import ListDown from '../components/my/ListDown'
+import ListDown from '../components/MU/ListDown'
 import Size from '../components/my/Size'
 // import { DOORS_LIST_FAIL } from '../redux/constants/doorsConstants';
 ///////Tooltip//////////

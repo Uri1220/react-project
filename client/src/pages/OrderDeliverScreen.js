@@ -77,7 +77,7 @@ function OrderDeliverScreen(props) {
         })
       )
     )
-
+    props.history.push("/orders");
    
   };
 

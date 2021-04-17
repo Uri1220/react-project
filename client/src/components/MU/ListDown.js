@@ -10,7 +10,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { MemoryRouter } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
-import Descript from './Descript';
+import Descript from '../my/Descript';
 
 const breadcrumbNameMap = {
   '/desc': 'Описание', 
