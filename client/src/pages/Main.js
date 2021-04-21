@@ -21,7 +21,7 @@ function Main() {
    return (
       <div>
          <h2>Main page</h2>
-         { isAdm ? (
+          { isAdm ? (
         <div className="back-to-result">
           <Link to="/orders/">Заказы</Link>
         </div> ) : ('')

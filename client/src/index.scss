@@ -427,24 +427,24 @@ tbody > tr:nth-child(odd) {
 }
 /* forms */
 /* Form1 */
-.form1 {
-  max-width: 60rem;
-  margin: 0 auto;
-}
+// .form1 {
+//   max-width: 60rem;
+//   margin: 0 auto;
+// }
 
-.form1 > div {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-}
+// .form1 > div {
+//   display: flex;
+//   flex-direction: column;
+//   margin: 1rem;
+// }
 
-.form1 label {
-  margin: 1rem 0;
-}
+// .form1 label {
+//   margin: 1rem 0;
+// }
 
 /* Form */
 .form {
-   max-width: 120rem;
+   max-width: 60rem;
   margin: 0 auto;
 }
 

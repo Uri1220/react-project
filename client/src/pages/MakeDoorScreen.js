@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import MessageBox from '../components/my/MessageBox';
+
 
 import LoadingBox from '../components/my/LoadingBox';
 import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
@@ -150,6 +152,8 @@ function MakeDoorScreen(props) {
         setUpisLoading(false);
       });
   };
+
+  
   
   return (
     <div className="content content-margined">
@@ -161,6 +165,9 @@ function MakeDoorScreen(props) {
           Create Product
         </button>
       </div>
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+      {errorSave && <MessageBox variant="danger">{errorSave}</MessageBox>}
+
       {modalVisible && (
 
         <div className="form">

@@ -13,8 +13,8 @@ function Pens() {
     // max = 0,
   } = useParams();
 
-  console.log('cat', category)
-  console.log('sub', sub_category)
+  // console.log('cat', category)
+  // console.log('sub', sub_category)
   const dispatch = useDispatch();
 
 

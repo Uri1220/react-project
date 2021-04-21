@@ -7,6 +7,7 @@ import CartInHeader from './CartInHeader'
 
 
 
+
 const Header = ({ openMenu }) => {
 
    const cart = useSelector((state) => state.cart);

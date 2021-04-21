@@ -42,6 +42,10 @@ router.post(
     check('password', 'Введите пароль').exists()
   ],
   async (req, res) => {
+
+    // const token = req.headers.authorization;
+    //   console.log('onlyToken',token)
+;
     try {
       const errors = validationResult(req)
 
@@ -55,7 +59,6 @@ router.post(
       const { email, password } = req.body
 
       const user = await User.findOne({ email })
-
       if (!user) {
         return res.status(400).json({ message: 'Пользователь не найден' })
       }
@@ -134,8 +137,8 @@ router.post(
   '/register',
   [
     check('email', 'Некорректный email').isEmail(),
-    check('password', 'Минимальная длина пароля 6 символов')
-      .isLength({ min: 6 })
+    check('password', 'Минимальная длина пароля 3 символов')
+      .isLength({ min:3 , max:8})
   ],
   async (req, res) => {
     try {
@@ -171,11 +174,6 @@ router.post(
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
   })
-
-
-
-
-
 
 //// END REGISTER
 

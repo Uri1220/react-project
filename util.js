@@ -11,7 +11,9 @@ const getToken = (user) => {
     },
     config.get('jwtSecret'),
     {
-      expiresIn: '48h',
+      // expiresIn: '1m',
+      //  expiresIn: '48h',
+       expiresIn: '30d',
     }
   );
 };

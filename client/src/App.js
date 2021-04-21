@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import {array} from './data.js'
 
 
+
 import 'materialize-css'
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
     setVisiblePopup(false)
   }
 
+ 
+
 
   React.useEffect(() => {
     if (visiblePopup) {
@@ -35,7 +38,7 @@ function App() {
       }, 200)
     }
   }, [visiblePopup]);  
-
+  
   return (
     <BrowserRouter>
       <div className="wrapper">

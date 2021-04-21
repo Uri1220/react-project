@@ -5,6 +5,7 @@ import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import SelectMU from '../components/MU/SelectMU';
 
+
 export default function OrdersList(props) {
   const [filteredOrders, setFilteredOrders] = React.useState([]);
   //In SelectMU props//////////////////////////////
@@ -25,6 +26,7 @@ export default function OrdersList(props) {
   const productDelete = useSelector((state) => state.orderDelete);
   const {
     success: successDelete,
+    error: errorDelete
   } = productDelete;
 
   React.useEffect(() => {
@@ -50,6 +52,8 @@ export default function OrdersList(props) {
     }
   }, [age, orders,])
 
+  
+
 
   return (
     <div>
@@ -61,13 +65,15 @@ export default function OrdersList(props) {
       ) : (
         <>
           <SelectMU age={age} setAge={setAge} arr={arr} />
+          {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+
 
           <table className="table">
             <thead>
               <tr>
                 <th>Дата заказа</th>
                 <th>Заказщик</th>
-                {/* <th>UserRegistrationName</th> */}
+                {/* <th>Зарегистрированный<br></br>Пользователь</th> */}
                 <th>Адрес</th>
                 <th>Сумма заказа</th>
                 <th>Телефон</th>

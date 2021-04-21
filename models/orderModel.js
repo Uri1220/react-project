@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema(
     shipping: {
       fullName: { type: String, required: false },
       address: { type: String, required: false },
-      postalCode: { type: Number, required: false },
+      postalCode: { type: String, required: false },
     },
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
       deliveredAt: { type:String,default:null},
