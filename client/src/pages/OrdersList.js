@@ -64,7 +64,7 @@ export default function OrdersList(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <SelectMU age={age} setAge={setAge} arr={arr} />
+          <SelectMU age={age} setAge={setAge} arr={arr} title ='Заказы:'/>
           {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
 
 

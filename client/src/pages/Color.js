@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import { useMessage } from '../hooks/message.hook'
- import RadioColors from '../components/my/RadiuoColors'
+import RadioColors from '../components/my/RadiuoColors'
+import Divider from '@material-ui/core/Divider';
 
 
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
+import SearchBox from '../components/my/SearchBox';
 
-
+//Фильтрация в строеке 160
 export default function Color() {
 
   const [id, setId] = useState('');
@@ -16,14 +18,20 @@ export default function Color() {
   const [colorUrl, setColorUrl] = useState('');
   const [value, setValue] = React.useState('door');//door,pen,plint
 
- //из RadioColors компонента
+  const [searchText, setSearchText] = React.useState('');
+  // console.log(searchText)
+
+
+
+  //из RadioColors компонента
   const handleChange = (event) => {
     setValue(event.target.value);
+    setSearchText('')
   };
-  //  console.log('v',value)
+    // console.log('render')
   //  console.log('arr',colors_arr)
 
- 
+
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault()
@@ -31,7 +39,7 @@ export default function Color() {
       _id: id,
       colorName,
       colorUrl,
-       cat:value
+      cat: value
     }))
     setColorUrl('')
   }
@@ -45,7 +53,18 @@ export default function Color() {
 
   const colorslist = useSelector((state) => state.colors);
   const { loading, colors } = colorslist;
-  console.log('colors',colors)
+
+
+  //  console.log('colors', colors)
+
+   const colors_by_type = colors.filter(el => el.cat === value)
+
+   const searched_colors = colors_by_type.filter(el =>{
+     return el.colorName.toLowerCase().includes(searchText.toLowerCase())
+   })
+
+      //  console.log('v',searched_colors)
+
 
 
 
@@ -84,7 +103,7 @@ export default function Color() {
     dispatch(fetchColors());
     message(cre)
   },
-    [successCreate,value]
+    [successCreate, value]
   );
   //error
   React.useEffect(() => {
@@ -98,13 +117,27 @@ export default function Color() {
     message(del)
 
   }, [successDelete]);
-  
+
+  //   const ColoredLine = ({ color }) => (
+  //     <hr
+  //         style={{
+  //             color: color,
+  //             backgroundColor: color,
+  //             height: 5
+  //         }}
+  //     />
+  // );
+
   /////////////////////end useMessage Hook/////////////
 
   return (
     <>
-    <RadioColors value = {value} handleChange={handleChange}/>
+      <RadioColors value={value} handleChange={handleChange} />
+      <Divider light />
+
       <div className="form">
+        {/* <ColoredLine color="red" /> */}
+
         <form
           onSubmit={submitHandler}
         >
@@ -150,35 +183,39 @@ export default function Color() {
         </form>
       </div>
 
+      <SearchBox
+       text={searchText} setText={setSearchText}
+       val ='Найти цвет...'/>
+
       {
         loading || isLoadingDelete || loadingCreate ? (
           <LoadingBox></LoadingBox>
         ) : (
-            <div className="colors-list">
+          <div className="colors-list">
 
-              {colors.filter(el=>el.cat === value).map((product) => (
-                <div className='colors-item ' key={product._id}>
-                  <div><img style={{ height: '80px' }} src={product.colorUrl} alt="11" /></div>
-                  <div>
-                    <span style={{ marginLeft: '3px' }}>{product.colorName}</span>
-                  </div>
-                  <div>
-                    {/* <button className="button" onClick={() => openModal(product)}>
+            {searched_colors.map((product) => (
+              <div className='colors-item ' key={product._id}>
+                <div><img style={{ height: '80px' }} src={product.colorUrl} alt="11" /></div>
+                <div>
+                  <span style={{ marginLeft: '3px' }}>{product.colorName}</span>
+                </div>
+                <div>
+                  {/* <button className="button" onClick={() => openModal(product)}>
                       Edit
                   </button>{' '} */}
-                 
-                    <button
-                      className="button"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                  </button>
-                  </div>
-                </div>
-              ))}
 
-            </div>
-          )
+                  <button
+                    className="button"
+                    onClick={() => deleteHandler(product)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+
+          </div>
+        )
       }
     </>
 

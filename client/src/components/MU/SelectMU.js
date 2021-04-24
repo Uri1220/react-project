@@ -9,15 +9,15 @@ const useStyles = makeStyles((theme) => ({
 
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 250,
+    minWidth: 200,
   },
   //размер шрифта
   sizeFont: {
-    fontSize: 16
+    fontSize: 16,
   }
 }));
 
-export default function SelectMU({ age, setAge, arr }) {
+export default function SelectMU({ age, setAge, arr,title }) {
 
   const classes = useStyles();
   //Должно быть в родителе
@@ -40,7 +40,7 @@ export default function SelectMU({ age, setAge, arr }) {
     <div style={{ marginBottom: '20px' }}>
       <FormControl className={classes.formControl}>
         <InputLabel className={classes.sizeFont}
-          id="demo-controlled-open-select-label">Заказы:
+          id="demo-controlled-open-select-label">{title}
            </InputLabel>
         <Select
           className={classes.sizeFont}

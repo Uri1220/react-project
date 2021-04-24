@@ -164,8 +164,8 @@ const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
                         <Link style={{ padding: '0px 60px' }}
                           //  className="sub-menu__link"
                           className={subCat === index + 1 ? 'sub-menu__link active-sub-cat' : 'sub-menu__link'}
-                            to={''}
-                          //  to={obj.url}
+                            // to={''}
+                            to={obj.url}
                           onClick={() => onClickSubCat(index + 1)}
                         >
                           {obj.name}

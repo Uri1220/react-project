@@ -10,10 +10,10 @@ export const array = {
    //Doors subCat+1
    // ' двери'
    doorsCat: [
-      { name: 'Входные', db:'vchod' },
-      { name: 'Массив', db:'massiv'},
-      { name: 'Эко Шпон', db:'ecoshpon'},
-      { name: 'МДФ', db:'mdf'},
+      { name: 'Входные', db:'vchod', url: '/doors/category/vchod' },
+      { name: 'Массив', db:'massiv',url: '/doors/category/massiv'},
+      { name: 'Эко Шпон', db:'ecoshpon',url: '/doors/category/ecoshpon'},
+      // { name: 'МДФ', db:'mdf'},
    ],
    // subSusbCat+1 url: '/-------' 
    vhod_door: [
@@ -22,8 +22,8 @@ export const array = {
    ],
    massDoors: [
       { name: 'Classico', db:'classico', url: '/doors/category/massiv/sub_category/classico' },
-      { name: 'Поставы', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
-      { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
+      { name: 'Porta X', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
+      // { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
    ],
    ecoDoors: [
       { name: 'Porta X', db:'porta-x',  url: '/doors/category/ecoshpon/sub_category/porta-x' },
@@ -39,7 +39,7 @@ export const array = {
 
    //Furnitua
    furnCat: [
-      { name: 'Ручки', db:'pens' },
+      { name: 'Ручки', db:'pens' ,url: '/implements/category/pens'},
       { name: 'Петли', db:'petly' },
    ],
    ruchFurn: [

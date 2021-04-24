@@ -7,7 +7,7 @@ import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 
 
-function Doors() {
+function Doors(props) {
   //получаем пар-ры они пойдут в fetchFilterDoors для запроса 
   //из БД нужных данных
   const {
@@ -87,8 +87,12 @@ function Doors() {
 
   // см. ниже:   <Link                    10          100
   //              to={getFilterUrl({ min: p.min, max: p.max })}
-  console.log('CAT',category)
-console.log('sub',sub_category)
+  // console.log('CAT', category)
+  // console.log('sub', sub_category)
+
+  const handleReduct = () => {
+    props.history.push('/makedoor/' + '?cat=' + category + '=sub=' + sub_category);
+  };
 
 
 
@@ -97,7 +101,13 @@ console.log('sub',sub_category)
       <h2>Doors Page</h2>
       {isAdm ? (
         <div className="back-to-result">
-          <Link to="/makedoor/">Редактирование</Link>
+          {/* <Link to="/makedoor/">Редактирование</Link> */}
+          <button
+            onClick={handleReduct}
+            className="btn button primary"
+          >
+            Редактировать
+                        </button>
         </div>) : ('')
 
       }

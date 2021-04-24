@@ -24,6 +24,7 @@ const DoorSchema = mongoose.Schema({
     price: { type: Number, default: 0, required: true },
     color_id: { type: String, default: 'doors/' },
     position: { type: Number, },
+    typ: { type: String, },
     url: {
         type: String,// required: true
     },

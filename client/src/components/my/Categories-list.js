@@ -16,7 +16,10 @@ const CategoriesList = ({ array }) => {
   const dispatch = useDispatch();
   /////////////Category/////////////////////
   const [catArray, setCatArray] = React.useState([])
-  //  console.log('catArray',...catArray)
+    // console.log('catArray',...catArray)
+    // {name: "Входные", db: "vchod", url: "/doors/category/vchod"}
+    //  {name: "Массив", db: "massiv", url: "/doors/category/massiv"} 
+    //  {name: "Эко Шпон", db: "ecoshpon", url: "/doors/category/ecoshpon"}
 
   const onClickCat = (ind) => {
 
@@ -41,7 +44,21 @@ const CategoriesList = ({ array }) => {
   }
   ////////////SUB-Category///////////////////////////
   const [subCatArray, setSubCatArray] = React.useState([])
-    // console.log('subCatArray',subCatArray)
+    //  console.log('subCatArray',subCatArray)
+  //    vhod_door: [
+  //     { name: 'Econom', db:'econom', url: '/doors/category/vchod/sub_category/econom' },
+  //     { name: 'Porta R-2',db:'porta-r2', url: '/doors/category/vchod/sub_category/porta-r2' },
+  //  ],
+  //  massDoors: [
+  //     { name: 'Classico', db:'classico', url: '/doors/category/massiv/sub_category/classico' },
+  //     { name: 'Porta X', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
+  //     // { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
+  //  ],
+  //  ecoDoors: [
+  //     { name: 'Porta X', db:'porta-x',  url: '/doors/category/ecoshpon/sub_category/porta-x' },
+  //     { name: 'Legno',  db:'legno',url: '/doors/category/ecoshpon/sub_category/legno' },
+  //     { name: 'Vetro', db:'vetro', url: '/doors/category/ecoshpon/sub_category/vetro' },
+  //  ],
 
   const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
@@ -157,7 +174,9 @@ const CategoriesList = ({ array }) => {
 
                 >
                   {
-                    //Входные межкомн или круг квадрат
+                // {name: "Входные", db: "vchod", url: "/doors/category/vchod"}
+                //  {name: "Массив", db: "massiv", url: "/doors/category/massiv"} 
+                //  {name: "Эко Шпон", db: "ecoshpon", url: "/doors/category/ecoshpon"}
                     catArray &&
                     catArray.map((obj, index) => (
                       <li
@@ -168,8 +187,8 @@ const CategoriesList = ({ array }) => {
                         <Link
                           //  className="sub-menu__link"
                           className={subCat === index + 1 ? 'sub-menu__link active-sub-cat' : 'sub-menu__link'}
-                            to={''}
-                          // to={obj.url}
+                            // to={''}
+                           to={obj.url}
                           onClick={() => onClickSubCat(index + 1)}
                         >
                           {obj.name}

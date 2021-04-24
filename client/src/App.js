@@ -26,6 +26,15 @@ function App() {
  
 
 
+  // React.useEffect(() => {
+  //   // localStorage.removeItem('userInfo');
+  //   return(()=>{
+  //     localStorage.removeItem('userInfo');
+  //   })
+   
+  // }, []);  
+  
+
   React.useEffect(() => {
     if (visiblePopup) {
       document.querySelector(".sidebar").classList.add("open");

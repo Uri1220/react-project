@@ -48,6 +48,7 @@ router.post('/',
     title: req.body.title,
     price: req.body.price,
     url: req.body.url,
+    typ: req.body.typ,
     color_id: req.body.color_id,
     category: req.body.category,
     sub_category: req.body. sub_category,
@@ -100,6 +101,7 @@ router.put('/:id',
     product.title = req.body.title;
     product.price = req.body.price;
     product.url = req.body.url;
+    product.typ = req.body.typ;
     product.color_id = req.body.color_id;
     product.category = req.body.category;
     product.sub_category = req.body. sub_category;

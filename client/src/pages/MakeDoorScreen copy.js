@@ -19,7 +19,6 @@ function MakeDoorScreen(props) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [url, setUrl] = useState('');
-  const [typ, setTyp] = useState('');
   const [size, setSize] = useState('');
   const [category, setCategory] = useState('');
   const [sub_category, setSubCategory] = useState('');
@@ -95,7 +94,6 @@ function MakeDoorScreen(props) {
     setDescription(product.description);
     setComplect(product.complect);
     setUrl(product.url);
-    setTyp(product.typ);
     setSize(product.size);
     setCategory(product.category);
     setSubCategory(product.sub_category);
@@ -113,7 +111,6 @@ function MakeDoorScreen(props) {
         title,
         price,
         url,
-        typ,
         size,
         category,
         sub_category,
@@ -215,17 +212,6 @@ function MakeDoorScreen(props) {
                 ></input>
                 <input type="file" onChange={uploadFileHandler}></input>
                 {upisLoading && <div>UpisLoading...</div>}
-              </li>
-              <li>
-                <label htmlFor="typ">Type</label>
-                <input
-                  type="text"
-                  name="typ"
-                  value={typ || ''}
-                  id="typ"
-                  maxLength='4'
-                  onChange={(e) => setTyp(e.target.value)}
-                ></input>               
               </li>
               <li>
                 <label htmlFor="size">Size</label>
