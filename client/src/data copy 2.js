@@ -22,7 +22,7 @@ export const array = {
    ],
    massDoors: [
       { name: 'Classico', db:'classico', url: '/doors/category/massiv/sub_category/classico' },
-      { name: 'Porta X', db:'porta-x', url: '/doors/category/massiv/sub_category/porta-x' },
+      { name: 'Porta X', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
       // { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
    ],
    ecoDoors: [

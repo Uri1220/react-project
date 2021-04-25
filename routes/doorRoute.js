@@ -22,7 +22,7 @@ router.get('/list', async (req, res) => {
     const doors = await Door.find({
       ...categoryFilter,
       ...sub_categoryFilter,
-      ...priceFilter,
+       ...priceFilter,
     })
     // .populate(
     //   'colors',

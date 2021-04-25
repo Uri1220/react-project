@@ -1,22 +1,24 @@
 import React from 'react'
 import Door from './Door'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { fetchFilterDoors } from '../redux/actions/doorsA';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import SelectMU from '../components/MU/SelectMU';
 
-
+//  ПЕРВОЕ: получаем URL из data.js--->CategoriesList
+// там без min max , далее в поле default стр.147 к URL
+//прикручивается min=0 max=0
 
 function Doors(props) {
-  //получаем пар-ры они пойдут в fetchFilterDoors для запроса 
+  //  ВТОРОЕ: - получаем пар-ры они пойдут в fetchFilterDoors для запроса 
   //из БД нужных данных
   const {
     category = 'all',
     sub_category = '',
-    min = 0,
-    max = 0,
+     min ,
+     max ,
   } = useParams();
 
   // const categories = [
@@ -24,10 +26,15 @@ function Doors(props) {
   // ]
   //In SelectMU props//////////////////////////////
   const [type, setType] = React.useState(10);//10  20 30
+  const [priceType, setPriceType] = React.useState(10)
+  const [mi, setMin] = React.useState(0)
+  const [ma, setMax] = React.useState(0)
   // const [typeVchod, setTypeVchod] = React.useState(10);//глухие стекло
-  const [filteredDoors, setFilteredDoors] = React.useState([]);
+  const [filteredDoors, setFilteredDoors] = React.useState([])
 
-  console.log('age', category)
+  // console.log('mi', mi)
+  // console.log('ma', ma)
+  // console.log('priceType', priceType)
   const arr = [
     { id: 1, name: 'Все', ag: 10 },
     { id: 2, name: 'Глухие', ag: 20 },
@@ -39,32 +46,15 @@ function Doors(props) {
     { id: 3, name: 'Металл/панель', ag: 30 },
     { id: 4, name: 'Панель/панель', ag: 40 },
   ]
-  //===============================================
-
-
-  const prices = [
-    {
-      name: 'Any',
-      min: 0,
-      max: 0,
-    },
-    {
-      name: `$1 to $10`,
-      min: 1,
-      max: 10,
-    },
-    {
-      name: `$10 to $100`,
-      min: 10,
-      max: 100,
-    },
-    {
-      name: `$100 to $1000`,
-      min: 100,
-      max: 1000,
-    },
-  ];
-
+  const pr = [
+    { id: 1, name: 'Все', ag: 10 },
+    { id: 2, name: 'до 100руб.', ag: 20 },
+    { id: 3, name: '100-299руб.', ag: 30 },
+    { id: 4, name: '300-500руб.', ag: 40 },
+    { id: 5, name: 'свыше 500руб.', ag: 50 },
+  ]
+  //==============================================
+ 
   const dispatch = useDispatch();
 
   const [isAdm, setIsAdm] = React.useState(false);
@@ -77,40 +67,108 @@ function Doors(props) {
 
   //===============type ==============
   React.useEffect(() => {
-if(category === 'ecoshpon' || category === 'massiv' ){
-    switch (type) {
-      case 20:
-        setFilteredDoors(doors.filter(el => el.typ === 'mg'))
-        break
-      case 30:
-        setFilteredDoors(doors.filter(el => el.typ === 'ms'))
-        break
-      default:
-        setFilteredDoors(doors)
-        break
+    if (category === 'ecoshpon' || category === 'massiv') {
+      switch (type) {
+        case 20:
+          setFilteredDoors(doors.filter(el => el.typ === 'mg'))
+          break
+        case 30:
+          setFilteredDoors(doors.filter(el => el.typ === 'ms'))
+          break
+        default:
+          setFilteredDoors(doors)
+          break
+      }
+    } else if (category === 'vchod') {
+      switch (type) {
+        case 20:
+          setFilteredDoors(doors.filter(el => el.typ === 'vmm'))
+          break
+        case 30:
+          setFilteredDoors(doors.filter(el => el.typ === 'vmp'))
+          break
+        case 40:
+          setFilteredDoors(doors.filter(el => el.typ === 'vpp'))
+          break
+        default:
+          setFilteredDoors(doors)
+          break
+      }
+
     }
-  }else if(category === 'vchod'){
-    switch (type) {
+  }, [type, doors, category])
+//================================================
+//=======================Price==============
+//ТРЕТЬЕ: тут меняем цену и URL соответственно
+React.useEffect(() => {
+    switch (priceType) {
       case 20:
-        setFilteredDoors(doors.filter(el => el.typ === 'vmm'))
+        setMin(10)
+        setMax(99) 
+        if (sub_category) {
+          props.history.push( `/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
+
+        } else {
+          props.history.push( `/doors/category/${category}/min/${mi}/max/${ma}`)    
+        }
+     
         break
       case 30:
-        setFilteredDoors(doors.filter(el => el.typ === 'vmp'))
+        setMin(100)
+        setMax(299) 
+        if (sub_category) {
+          props.history.push( `/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
+
+        } else {
+          props.history.push( `/doors/category/${category}/min/${mi}/max/${ma}`)    
+        }
+     
         break
       case 40:
-        setFilteredDoors(doors.filter(el => el.typ === 'vpp'))
+        setMin(300)
+        setMax(500) 
+        if (sub_category) {
+          props.history.push( `/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
+
+        } else {
+          props.history.push( `/doors/category/${category}/min/${mi}/max/${ma}`)    
+        }
+     
+        break
+      case 50:
+        setMin(500)
+        setMax(10000)
+        if (sub_category) {
+          props.history.push( `/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
+
+        } else {
+          props.history.push( `/doors/category/${category}/min/${mi}/max/${ma}`)    
+        }
+      
         break
       default:
-        setFilteredDoors(doors)
+        setMin(0)
+        setMax(0) 
+        if (sub_category) {
+          props.history.push( `/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
+
+        } else {
+          props.history.push( `/doors/category/${category}/min/${mi}/max/${ma}`)    
+        }
+     
         break
-    }      
-
     }
-  }, [type, doors,category])
-
+}, [priceType,category, sub_category, mi, ma,])
+//=============================================
   React.useEffect(() => {
-   setType(10)
-  },[category])
+    setType(10)
+    setPriceType(10)
+  }, [category,sub_category])
+
+  const resetFilter =()=>{
+    setType(10)
+    setPriceType(10)
+  }
   //=====================================================
 
   React.useEffect(() => {
@@ -129,47 +187,21 @@ if(category === 'ecoshpon' || category === 'massiv' ){
   },
     [category, sub_category, min, max, userInfo]);
 
-  // getFilterUrl нужен для фильтрации по цене
-  const getFilterUrl = (filter) => {
-
-    //фильтрация по категории
-    // const filterCategory = filter.category || category;
-
-    const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
-    const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-
-    // return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
-    if (sub_category) {
-      return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
-
-    } else {
-      return `/doors/category/${category}/min/${filterMin}/max/${filterMax}`;
-
-    }
-
-    // return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
-  };
-
-  // см. ниже:   <Link                    10          100
-  //              to={getFilterUrl({ min: p.min, max: p.max })}
-  // console.log('CAT', category)
-  // console.log('sub', sub_category)
-
-  const handleReduct = () => {
-    props.history.push('/makedoor/' + '?cat=' + category + '=sub=' + sub_category);
-  };
-
-
+  
+    const handleReduct = () => {
+      props.history.push('/makedoor/' + '?cat=' + category + '=sub=' + sub_category);
+    };
+  
 
   return (
     <div className="doors">
       <h2>Doors Page</h2>
-      {isAdm ? (
+      {isAdm && sub_category? (
         <div className="back-to-result">
           {/* <Link to="/makedoor/">Редактирование</Link> */}
           <button
             onClick={handleReduct}
-            className="btn button primary"
+            className="door-filter-button"
           >
             Редактировать
                         </button>
@@ -184,66 +216,35 @@ if(category === 'ecoshpon' || category === 'massiv' ){
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
           (<>
-            {
-              (category === 'ecoshpon' || category === 'massiv') &&
-              <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
-            }
-            { category === 'vchod' &&
-              <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
-            }
+            <div style={{ display: 'flex',flexWrap:'wrap',alignItems:'center'}}>
+              <div style={{ marginRight: '10px' }}>
+                <SelectMU age={priceType} setAge={setPriceType} arr={pr} title='Цена:' />
+              </div>
+              <div>
+                {
+                  (category === 'ecoshpon' || category === 'massiv') &&
+                  <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
+                }
+                {category === 'vchod' &&
+                  <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
+                }
+              </div>
+              <div>
+                <button
+                 className ='door-filter-button'
+                 onClick={resetFilter}
+                 >
+                   Разгруппировать </button>
+              </div>
 
-            {/*  //фильтрация по категории
-               <div>
-                <ul>
-                  <li>
-                    <Link
-                      className={'all' === category ? 'active' : ''}
-                      to={getFilterUrl({ category: 'all' })}
-                    >
-                      Any
-               </Link>
-                  </li>
-                  {categories.map((c) => (
-                    <li key={c}>
-                      <Link
-                        className={c === category ? 'active' : ''}
-                        to={getFilterUrl({ category: c })}
-                      >
-                        {c}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div> 
-              */}
-
-            <div>
-              <h3>Price</h3>
-              <ul>
-                {prices.map((p) => (
-                  <li key={p.name}>
-                    <Link
-                      to={getFilterUrl({ min: p.min, max: p.max })}
-                      className={
-                        `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
-                      }
-                    >
-                      {p.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
 
+           
             <div>
-              <div>{filteredDoors.length} Results</div>
+              <div>Выбрано: {filteredDoors.length} шт.</div>
+
               <div className="products">
-                {/* {
-                  result_doors &&
-                  result_doors.map((item) =>
-                    <Door key={item._id} door={item} />
-                  )
-                } */}
+               
                 {
                   filteredDoors &&
                   filteredDoors.map((item) =>

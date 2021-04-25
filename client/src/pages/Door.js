@@ -9,6 +9,9 @@ const Door = ({ door }) => {
     // <div className="product1">
     < >
       <Link className="product" to={'/doors/' + door._id}>
+      <div className="sub-cat-name">
+          {door.sub_category}
+        </div>
         <div >
           <img src={door.url} alt="11" />
         </div>

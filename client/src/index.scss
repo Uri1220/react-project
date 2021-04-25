@@ -102,6 +102,22 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
+.door-filter-button {
+  width: 167px;
+  height: 36px;
+   font-size: 1.4rem ;
+   border-radius: 0;
+
+  background: #f3f3f3;
+  margin-left: 25px;
+   margin-bottom: 11px;
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  // cursor: pointer;
+}
 
 /*Обнуление*/
 * {
@@ -404,10 +420,20 @@ tbody > tr:nth-child(odd) {
   max-width: 100%;
   height: 170px;
 }
+.sub-cat-name {
+   flex: 1 1 auto;
+  font-family: Geometria,sans-serif;
+  line-height: 20px;
+  margin-bottom: 5px; 
+}
+.sub-cat-name::first-letter {
+  text-transform: uppercase  
+}
 .product-name {
    flex: 1 1 auto;
   font-family: Geometria,sans-serif;
-  line-height: 20px; 
+  line-height: 20px;
+  margin-bottom: 5px; 
 }
 .product-price {
   font-family: Geometria,sans-serif;

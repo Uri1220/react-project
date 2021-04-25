@@ -5,6 +5,8 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchFilterDoors } from '../redux/actions/doorsA';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
+import SelectMU from '../components/MU/SelectMU';
+
 
 
 function Doors(props) {
@@ -20,6 +22,37 @@ function Doors(props) {
   // const categories = [
   //   'vchod','ecoshpon','massiv', 'mdf'
   // ]
+  //In SelectMU props//////////////////////////////
+  const [type, setType] = React.useState(10);//10  20 30
+  const [priceType, setPriceType] = React.useState(10);//10  20 30
+  const [mi, setMi] = React.useState(0);
+  const [ma, setMa] = React.useState(0);
+  // const [typeVchod, setTypeVchod] = React.useState(10);//глухие стекло
+  const [filteredDoors, setFilteredDoors] = React.useState([]);
+
+  console.log('mi', mi)
+  console.log('ma', ma)
+  console.log('priceType', priceType)
+  const arr = [
+    { id: 1, name: 'Все', ag: 10 },
+    { id: 2, name: 'Глухие', ag: 20 },
+    { id: 3, name: 'Остекленные', ag: 30 },
+  ]
+  const arr_vchod = [
+    { id: 1, name: 'Все', ag: 10 },
+    { id: 2, name: 'Металл/металл', ag: 20 },
+    { id: 3, name: 'Металл/панель', ag: 30 },
+    { id: 4, name: 'Панель/панель', ag: 40 },
+  ]
+  const pr = [
+    { id: 1, name: 'Все', ag: 10 },
+    { id: 2, name: 'до 100руб.', ag: 20 },
+    { id: 3, name: '100-299руб.', ag: 30 },
+    { id: 4, name: '300-500руб.', ag: 40 },
+    { id: 5, name: 'свыше 500руб.', ag: 50 },
+  ]
+  //===============================================
+
 
   const prices = [
     {
@@ -27,20 +60,25 @@ function Doors(props) {
       min: 0,
       max: 0,
     },
-    {
-      name: `$1 to $10`,
-      min: 1,
-      max: 10,
-    },
+    // {
+    //   name: `$1 to $10`,
+    //   min: 1,
+    //   max: 10,
+    // },
     {
       name: `$10 to $100`,
       min: 10,
       max: 100,
     },
     {
-      name: `$100 to $1000`,
+      name: `$100 to $300`,
       min: 100,
-      max: 1000,
+      max: 300,
+    },
+    {
+      name: `$300 to $500`,
+      min: 300,
+      max: 500,
     },
   ];
 
@@ -54,7 +92,69 @@ function Doors(props) {
   const userS = useSelector(state => state.userSignin)
   const { userInfo } = userS;
 
+  //===============type ==============
+  React.useEffect(() => {
+    if (category === 'ecoshpon' || category === 'massiv') {
+      switch (type) {
+        case 20:
+          setFilteredDoors(doors.filter(el => el.typ === 'mg'))
+          break
+        case 30:
+          setFilteredDoors(doors.filter(el => el.typ === 'ms'))
+          break
+        default:
+          setFilteredDoors(doors)
+          break
+      }
+    } else if (category === 'vchod') {
+      switch (type) {
+        case 20:
+          setFilteredDoors(doors.filter(el => el.typ === 'vmm'))
+          break
+        case 30:
+          setFilteredDoors(doors.filter(el => el.typ === 'vmp'))
+          break
+        case 40:
+          setFilteredDoors(doors.filter(el => el.typ === 'vpp'))
+          break
+        default:
+          setFilteredDoors(doors)
+          break
+      }
 
+    }
+  }, [type, doors, category])
+//================================================
+//=======================Price==============
+React.useEffect(() => {
+    switch (priceType) {
+      case 20:
+        setMi(0)
+        setMa(99)
+        break
+      case 30:
+        setMi(100)
+        setMa(299) 
+        break
+      case 40:
+        setMi(300)
+        setMa(500) 
+        break
+      case 50:
+        setMi(500)
+        setMa(10000) 
+        break
+      default:
+        setMi(0)
+        setMa(0) 
+        break
+    }
+}, [priceType])
+//=============================================
+  React.useEffect(() => {
+    setType(10)
+  }, [category,sub_category])
+  //=====================================================
 
   React.useEffect(() => {
     dispatch(
@@ -82,7 +182,18 @@ function Doors(props) {
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
     // return `/catalog/category/${filterCategory}/min/${filterMin}/max/${filterMax}`;
-    return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
+
+    //тут формируется запрос , min max идут из перебора в price 
+    //потом это в url  а из urla в  fetchFilterDoors
+    if (sub_category) {
+      return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
+
+    } else {
+      return `/doors/category/${category}/min/${filterMin}/max/${filterMax}`;
+
+    }
+
+    // return `/doors/category/${category}/sub_category/${sub_category}/min/${filterMin}/max/${filterMax}`;
   };
 
   // см. ниже:   <Link                    10          100
@@ -119,6 +230,22 @@ function Doors(props) {
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
           (<>
+            <div style={{ display: 'flex',flexWrap:'wrap'}}>
+              <div style={{ marginRight: '10px' }}>
+                <SelectMU age={priceType} setAge={setPriceType} arr={pr} title='Цена:' />
+              </div>
+              <div>
+                {
+                  (category === 'ecoshpon' || category === 'massiv') &&
+                  <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
+                }
+                {category === 'vchod' &&
+                  <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
+                }
+              </div>
+
+            </div>
+
             {/*  //фильтрация по категории
                <div>
                 <ul>
@@ -163,11 +290,17 @@ function Doors(props) {
             </div>
 
             <div>
-              <div>{doors.length} Results</div>
+              <div>{filteredDoors.length} Results</div>
               <div className="products">
+                {/* {
+                  result_doors &&
+                  result_doors.map((item) =>
+                    <Door key={item._id} door={item} />
+                  )
+                } */}
                 {
-                  doors &&
-                  doors.map((item) =>
+                  filteredDoors &&
+                  filteredDoors.map((item) =>
                     <Door key={item._id} door={item} />
                   )
                 }
