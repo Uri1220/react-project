@@ -170,7 +170,7 @@ const CategoriesList = ({ array }) => {
                 {/* /////////222222222 ////////*/}
                 <ul
                   className="sub-menu__list"
-                  className={category === index ? 'sub-menu__list open' : 'sub-menu__list'}
+                  className={category === index ? 'sub-menu__list open ' : 'sub-menu__list'}
 
                 >
                   {

@@ -7,8 +7,8 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
 
 
-//разница//////
- const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
+                                //разница//////
+const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
 
   const cat = useSelector(state => state.penFilters);
   const { category, subCat, subSubCat } = cat;
@@ -27,7 +27,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
     switch (ind) {
       case 1:// двери'
         setCatArray(array.doorsCat)
-        break
+        break     
       case 2:// 'Фурнитура',
         setCatArray(array.furnCat)
         break
@@ -43,11 +43,8 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
   const [subCatArray, setSubCatArray] = React.useState([])
   //  console.log('subcat',...subCatArray)
 
-  const onClickSubCat = (ind) => { //входные массив экошпон
+  const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
-    //при выборе закрывается окно
-    //РАЗНИЦА с обычн Categories-list
-    setVisiblePopup(false)
   }
 
   React.useEffect(() => {
@@ -128,7 +125,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                 <Link style={{ padding: '8px 45px' }}
                   // className='menu__link'
                   className={category === index ? 'menu__link active-cat' : 'menu__link'}
-                  to={''}
+                    to={''}
                   // to={obj.url}
                   onClick={() => (onClickCat(index))}
                 >
@@ -167,8 +164,8 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                         <Link style={{ padding: '0px 60px' }}
                           //  className="sub-menu__link"
                           className={subCat === index + 1 ? 'sub-menu__link active-sub-cat' : 'sub-menu__link'}
-                          // to={''}
-                          to={obj.url}
+                            // to={''}
+                            to={obj.url}
                           onClick={() => onClickSubCat(index + 1)}
                         >
                           {obj.name}
@@ -189,7 +186,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                                 <Link style={{ padding: '0px 80px' }}
                                   className="sub-sub-menu__link"
                                   className={subSubCat === index + 1 ? 'active-item' : 'sub-sub-menu__link'}
-                                  to={obj.url ? obj.url : ''}
+                                  to={obj.url ? obj.url : '' }
                                   onClick={() => onClickInit(index + 1)}
                                 >
                                   {obj.name}
@@ -218,7 +215,22 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
       </div>
     </div>
+
+
   )
 }
+
+
 export default CategoriesListSidebar
 
+const styles = {
+  //   ul:{
+  //   display: 'flex',
+  //   flexWrap:'wrap',
+  //   justifyContent:' space-around',
+  //   alignItems: 'center' }
+  marginLeft: '2rem',
+  transform: 'rotate(180deg)'
+}
+
+// style={styles.ul}

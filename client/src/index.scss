@@ -30,15 +30,15 @@
 // style={styles.ul}
 //=================================
 //ListDown
-// .MuiTypography-body1 {
-//   font-size: 16px !important;//Шрифт Описание
-//   font-weight: 500 !important;
-//   font-family: Montserrat,Roboto, sans-serif !important;
+.MuiTypography-body1 {
+  font-size: 16px !important;//Шрифт Описание
+   font-weight: 500 !important;
+  font-family: Montserrat,Roboto, sans-serif !important;
 
-// }
+}
 .MuiSvgIcon-root {
-  width: 20px !important; //размер стреки вверх вниз
-  height: 20px !important;
+  width: 25px !important; //размер стреки вверх вниз
+  height: 25px !important;
 }
 .MuiListItem-root {
   // width: 70% !important; 
@@ -82,7 +82,10 @@ button {
 button {
   background-color: #f8f8f8;
   cursor: pointer;
+   font-family: Montserrat,Helvetica, Arial, sans-serif;
+
 }
+
 
 input:hover,
 select:hover,
@@ -144,6 +147,7 @@ height: 100vh;
   margin: 0px auto;
   font: 1.6rem Montserrat, Roboto,Helvetica,sans-serif;
   height: 100vh;
+  // max-width: 1200px;
 }
 .content{
   min-height: 100%;

@@ -13,8 +13,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import Descript from '../my/Descript';
 
 const breadcrumbNameMap = {
-  '/desc': 'Описание', 
- '/comp': 'Комплектующие', 
+  '/desc': 'Описание',
+  '/comp': 'Комплектующие',
 };
 
 function ListItemLink(props) {
@@ -24,7 +24,7 @@ function ListItemLink(props) {
   return (
     <li>
       <ListItem button component={RouterLink} to={to} {...other}>
-        <ListItemText primary={primary} />
+        <ListItemText style={{fontSize:30}} primary={primary} />
         {open != null ? open ? <ExpandLess /> : <ExpandMore /> : null}
       </ListItem>
     </li>
@@ -35,7 +35,7 @@ ListItemLink.propTypes = {
   open: PropTypes.bool,
   to: PropTypes.string.isRequired,
 };
-        ///////MU styles
+///////MU styles
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing(1),
   },
+  headerItem: {
+    // fontSize: 20,
+  },
   // nested: {
   //   paddingLeft: theme.spacing(4),
   //   backgroundColor:'blue',
@@ -54,12 +57,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 //------
 
-export default function ListDown({des,poz}) {
-  
-         ///////////////////     
+export default function ListDown({ des, poz }) {
+
+  ///////////////////     
   const classes = useStyles();
 
-   const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -67,17 +70,21 @@ export default function ListDown({des,poz}) {
 
   return (
     <MemoryRouter >
-                     {/* // */}
-      <div className={classes.root}> 
-                         {/* // */}
+      {/* // */}
+      <div className={classes.root}>
+        {/* // */}
         <nav className={classes.lists} aria-label="mailbox folders">
           <List>
-            <ListItemLink to={poz ? '/desc' : '/comp'}  open={open} onClick={handleClick} />
+            <ListItemLink className={classes.headerItem}
+              to={poz ? '/desc' : '/comp'}
+              open={open}
+              onClick={handleClick}
+            />
             <Collapse component="li" in={open} timeout="auto" unmountOnExit>
-              <Descript des = {des}/>             
+              <Descript des={des} />
             </Collapse>
-           
-          
+
+
           </List>
         </nav>
       </div>

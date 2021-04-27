@@ -13,7 +13,7 @@ function Main() {
   React.useEffect(() => {
    
    if (userInfo) {
-      // console.log("doors", userInfo.isAdmin)
+      //  console.log("doors", userInfo)
      setIsAdm(userInfo.isAdmin)
    }
   },[isAdm,    userInfo])
@@ -21,10 +21,14 @@ function Main() {
    return (
       <div>
          <h2>Main page</h2>
-          { isAdm ? (
+           { userInfo && userInfo.isAdmin ? (
         <div className="back-to-result">
           <Link to="/orders/">Заказы</Link>
         </div> ) : ('')
+      //      { isAdm ? (
+      //   <div className="back-to-result">
+      //     <Link to="/orders/">Заказы</Link>
+      //   </div> ) : ('')
 
         }
          {/* <div className="back-to-result">

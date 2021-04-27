@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBox({text,setText,val}) {
+export default function SearchBox({text,setText,place_holder_text}) {
   const classes = useStyles();
 
 
@@ -68,7 +68,7 @@ export default function SearchBox({text,setText,val}) {
               value={text}
               onChange={(e) => setText(e.target.value)}
 
-              placeholder={val}
+              placeholder={place_holder_text}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

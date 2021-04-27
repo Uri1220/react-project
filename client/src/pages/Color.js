@@ -8,15 +8,15 @@ import Divider from '@material-ui/core/Divider';
 
 
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
-import SearchBox from '../components/my/SearchBox';
+import SearchBox from '../components/MU/SearchBox';
 
-//Фильтрация в строеке 160
 export default function Color() {
 
   const [id, setId] = useState('');
   const [colorName, setColorName] = useState('');
   const [colorUrl, setColorUrl] = useState('');
   const [value, setValue] = React.useState('door');//door,pen,plint
+//Фильтрация в строеке 60
 
   const [searchText, setSearchText] = React.useState('');
   // console.log(searchText)
@@ -56,7 +56,7 @@ export default function Color() {
 
 
   //  console.log('colors', colors)
-
+                                     // cat- для дверей ручек плинтуса
    const colors_by_type = colors.filter(el => el.cat === value)
 
    const searched_colors = colors_by_type.filter(el =>{
@@ -185,7 +185,7 @@ export default function Color() {
 
       <SearchBox
        text={searchText} setText={setSearchText}
-       val ='Найти цвет...'/>
+       place_holder_text ='Найти цвет...'/>
 
       {
         loading || isLoadingDelete || loadingCreate ? (

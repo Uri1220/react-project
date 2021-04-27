@@ -7,8 +7,8 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
 
 
-//разница//////
- const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
+
+const CategoriesList = ({ array }) => {
 
   const cat = useSelector(state => state.penFilters);
   const { category, subCat, subSubCat } = cat;
@@ -16,18 +16,21 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
   const dispatch = useDispatch();
   /////////////Category/////////////////////
   const [catArray, setCatArray] = React.useState([])
-  //  console.log('cat',...catArray)
+    // console.log('catArray',...catArray)
+    // {name: "Входные", db: "vchod", url: "/doors/category/vchod"}
+    //  {name: "Массив", db: "massiv", url: "/doors/category/massiv"} 
+    //  {name: "Эко Шпон", db: "ecoshpon", url: "/doors/category/ecoshpon"}
 
   const onClickCat = (ind) => {
 
     dispatch(setCategory(ind))
 
-    //////copy-----------
-
+    ///////copy-------------------
+    
     switch (ind) {
       case 1:// двери'
         setCatArray(array.doorsCat)
-        break
+        break     
       case 2:// 'Фурнитура',
         setCatArray(array.furnCat)
         break
@@ -41,13 +44,24 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
   }
   ////////////SUB-Category///////////////////////////
   const [subCatArray, setSubCatArray] = React.useState([])
-  //  console.log('subcat',...subCatArray)
+    //  console.log('subCatArray',subCatArray)
+  //    vhod_door: [
+  //     { name: 'Econom', db:'econom', url: '/doors/category/vchod/sub_category/econom' },
+  //     { name: 'Porta R-2',db:'porta-r2', url: '/doors/category/vchod/sub_category/porta-r2' },
+  //  ],
+  //  massDoors: [
+  //     { name: 'Classico', db:'classico', url: '/doors/category/massiv/sub_category/classico' },
+  //     { name: 'Porta X', db:'postavy', url: '/doors/category/massiv/sub_category/postavy' },
+  //     // { name: 'Ока', db:'oka', url: '/doors/category/massiv/sub_category/oka' },
+  //  ],
+  //  ecoDoors: [
+  //     { name: 'Porta X', db:'porta-x',  url: '/doors/category/ecoshpon/sub_category/porta-x' },
+  //     { name: 'Legno',  db:'legno',url: '/doors/category/ecoshpon/sub_category/legno' },
+  //     { name: 'Vetro', db:'vetro', url: '/doors/category/ecoshpon/sub_category/vetro' },
+  //  ],
 
-  const onClickSubCat = (ind) => { //входные массив экошпон
+  const onClickSubCat = (ind) => {
     dispatch(setSubCategory(ind))
-    //при выборе закрывается окно
-    //РАЗНИЦА с обычн Categories-list
-    setVisiblePopup(false)
   }
 
   React.useEffect(() => {
@@ -102,13 +116,10 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
     dispatch(setSub2Cat(0))
   }, [subCat])
 
+
   const onClickInit = (ind) => {
     dispatch(setSub2Cat(ind))
-    //при выборе закрывается окно
-    //РАЗНИЦА с обычн Categories-list
-    setVisiblePopup(false)
   }
-
 
   return (
     <div >
@@ -118,6 +129,12 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
         {/* /////////111111//////// */}
         <ul className='menu__list' >
           {
+          //   categories: [
+          //     { name: 'Распродажа', url: '/' },
+          //     { name: 'Двери', },
+          //     { name: 'Фурнитура', },
+          //     { name: 'Плинтус', url: '/plintus' },
+          //  ],
             array.categories &&
             array.categories.map((obj, index) => (
               <li
@@ -125,10 +142,10 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
               // style={{backgroundColor :'red'}} 
               >
 
-                <Link style={{ padding: '8px 45px' }}
+                <Link
                   // className='menu__link'
                   className={category === index ? 'menu__link active-cat' : 'menu__link'}
-                  to={''}
+                    to={''}
                   // to={obj.url}
                   onClick={() => (onClickCat(index))}
                 >
@@ -137,6 +154,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                   {!!index &&
                     <svg
                       className={category === index ? 'rotated' : ''}
+
                       width="10"
                       height="6"
                       viewBox="0 0 10 6"
@@ -156,7 +174,9 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
                 >
                   {
-                    //Входные межкомн или круг квадрат
+                // {name: "Входные", db: "vchod", url: "/doors/category/vchod"}
+                //  {name: "Массив", db: "massiv", url: "/doors/category/massiv"} 
+                //  {name: "Эко Шпон", db: "ecoshpon", url: "/doors/category/ecoshpon"}
                     catArray &&
                     catArray.map((obj, index) => (
                       <li
@@ -164,11 +184,11 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                         key={`${obj.name}_${index}`}
                       >
 
-                        <Link style={{ padding: '0px 60px' }}
+                        <Link
                           //  className="sub-menu__link"
                           className={subCat === index + 1 ? 'sub-menu__link active-sub-cat' : 'sub-menu__link'}
-                          // to={''}
-                          to={obj.url}
+                            // to={''}
+                           to={obj.url}
                           onClick={() => onClickSubCat(index + 1)}
                         >
                           {obj.name}
@@ -186,10 +206,10 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                                 key={`${obj.name}_${index}`}
 
                               >
-                                <Link style={{ padding: '0px 80px' }}
+                                <Link
                                   className="sub-sub-menu__link"
                                   className={subSubCat === index + 1 ? 'active-item' : 'sub-sub-menu__link'}
-                                  to={obj.url ? obj.url : ''}
+                                  to={obj.url ? obj.url : '' }
                                   onClick={() => onClickInit(index + 1)}
                                 >
                                   {obj.name}
@@ -218,7 +238,11 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
       </div>
     </div>
+
+
   )
 }
-export default CategoriesListSidebar
+
+
+export default CategoriesList
 

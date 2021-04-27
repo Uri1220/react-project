@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   //размер шрифта
   sizeFont: {
     fontSize: 16,
+    fontFamily:'Montserrat',
   }
 }));
 
