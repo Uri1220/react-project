@@ -7,7 +7,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
 
 
-//разница//////
+                                  //разница//
  const CategoriesListSidebar = ({ setVisiblePopup, array }) => {
 
   const cat = useSelector(state => state.penFilters);
@@ -19,8 +19,8 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
   //  console.log('cat',...catArray)
 
   const onClickCat = (ind) => {
-
     dispatch(setCategory(ind))
+    // setVisiblePopup(false)
 
     //////copy-----------
 
@@ -43,13 +43,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
   const [subCatArray, setSubCatArray] = React.useState([])
   //  console.log('subcat',...subCatArray)
 
-  const onClickSubCat = (ind) => { //входные массив экошпон
-    dispatch(setSubCategory(ind))
-    //при выборе закрывается окно
-    //РАЗНИЦА с обычн Categories-list
-    setVisiblePopup(false)
-  }
-
+  
   React.useEffect(() => {
     if (category === 2)//Фурн
     {
@@ -90,7 +84,16 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
     }
   }, [category, subCat])
 
-  ////////////copy//////////////////////
+  ////////////end copy//////////////////////
+  
+ //входные, массив, экошпон
+  const onClickSubCat = (ind) => {
+    dispatch(setSubCategory(ind))
+    //при выборе закрывается окно
+    //РАЗНИЦА с обычн Categories-list
+    setVisiblePopup(false)
+  }
+
 
 
   //при переходе на друг категорию
@@ -128,7 +131,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
                 <Link style={{ padding: '8px 45px' }}
                   // className='menu__link'
                   className={category === index ? 'menu__link active-cat' : 'menu__link'}
-                  to={''}
+                   to={''}
                   // to={obj.url}
                   onClick={() => (onClickCat(index))}
                 >

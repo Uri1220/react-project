@@ -6,6 +6,8 @@ import { fetchFilterDoors } from '../redux/actions/doorsA';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import SelectMU from '../components/MU/SelectMU';
+import SearchBox from '../components/MU/SearchBox';
+
 
 //  ПЕРВОЕ: получаем URL из data.js--->CategoriesList
 // там без min max , далее в поле default стр.147 к URL
@@ -32,6 +34,14 @@ function Doors(props) {
   const [ma, setMax] = React.useState(0)
   // const [typeVchod, setTypeVchod] = React.useState(10);//глухие стекло
   const [filteredDoors, setFilteredDoors] = React.useState([])
+
+  const [searchText, setSearchText] = React.useState('');
+
+  const searched_doors = filteredDoors.filter(el =>{
+    return el.title.toLowerCase().includes(searchText.toLowerCase())
+  })
+
+
 
   // console.log('fn', fn)
   // console.log('priceType', priceType)
@@ -61,8 +71,6 @@ function Doors(props) {
   //==============================================
 
   const dispatch = useDispatch();
-
-  const [isAdm, setIsAdm] = React.useState(false);
 
   const doorDetail = useSelector(state => state.doors)
   const { doors, isLoading, error } = doorDetail;
@@ -202,9 +210,8 @@ function Doors(props) {
         max,
       })
     )
-    if (userInfo) {
-      setIsAdm(userInfo.isAdmin)
-    }
+   
+    setSearchText('')
   },
     [category, sub_category, min, max, userInfo]);
 
@@ -217,7 +224,12 @@ function Doors(props) {
   return (
     <div className="doors">
       <h2>Doors Page</h2>
-      {isAdm && sub_category ? (
+
+      <SearchBox
+       text={searchText} setText={setSearchText}
+       place_holder_text ='Найти название модели...'/>
+
+      {userInfo && userInfo.isAdmin && sub_category ? (
         <div className="back-to-result">
           {/* <Link to="/makedoor/">Редактирование</Link> */}
           <button
@@ -290,12 +302,12 @@ function Doors(props) {
 
 
             <div>
-              <div>Выбрано: {filteredDoors.length} шт.</div>
+              <div>Выбрано: {searched_doors.length} шт.</div>
 
               <div className="products">
                 {
-                  filteredDoors &&
-                  filteredDoors.map((item) =>
+                  searched_doors &&
+                  searched_doors.map((item) =>
                     <Door key={item._id} door={item} />
                   )
                 }

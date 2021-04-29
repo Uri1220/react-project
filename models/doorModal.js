@@ -37,7 +37,7 @@ const DoorSchema = mongoose.Schema({
         //  required: true 
     },
       colors:[colorSchema],
-    //    colors:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Color'}],
+        // colors:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Color'}],
     // colors: [{
     //     colorName: String,
     //     colorUrl: String,

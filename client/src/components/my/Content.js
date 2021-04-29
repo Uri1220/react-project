@@ -2,6 +2,7 @@ import React from 'react'
 import Pens from '../../pages/Pens'
 import Plintus from '../../pages/Plintus'
 import Doors from '../../pages/Doors'
+import DoorsMain from '../../pages/DoorsMain'
 import Main from '../../pages/Main'
 import { Route, Switch } from 'react-router-dom'
 import PenOne from '../../pages/PenOne'
@@ -34,7 +35,7 @@ const Content = () => {
 
   //  console.log(pens)
   return (
-    <main className="main">
+    <main  className="main">
 
       <div className="content">
         <Breadcrumb/>
@@ -55,19 +56,24 @@ const Content = () => {
           <Route path="/plintus" component={Plintus} />
 
           {/* <Route path="/doors" exact component={Doors} /> */}
-          <Route path="/doors" exact> <Doors/> </Route>
+          {/* <Route path="/doors" exact> <Doors/> </Route> */}
           <Route path="/doors/:id" exact component={DoorOne}  />
 
           <Route
             path="/doors/category/:category"
             component={Doors}
-            exact
+             exact
+          ></Route>
+          <Route
+            path="/doors/colorId/:colorsId"
+            component={DoorsMain}
+              // exact
           ></Route>
 
           <Route
             path="/doors/category/:category/sub_category/:sub_category"
             component={Doors}
-            exact
+            // exact
           ></Route>
           {/* <Route
             path="/search/category/:category"
@@ -77,12 +83,12 @@ const Content = () => {
            <Route
             path="/doors/category/:category/min/:min/max/:max"
             component={Doors}
-            exact
+             exact
           ></Route>
            <Route
             path="/doors/category/:category/sub_category/:sub_category/min/:min/max/:max"
             component={Doors}
-            exact
+             exact
           ></Route>
 
           <Route path="/makedoor" component={MakeDoorScreen} />

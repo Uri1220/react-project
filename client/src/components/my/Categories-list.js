@@ -60,9 +60,6 @@ const CategoriesList = ({ array }) => {
   //     { name: 'Vetro', db:'vetro', url: '/doors/category/ecoshpon/sub_category/vetro' },
   //  ],
 
-  const onClickSubCat = (ind) => {
-    dispatch(setSubCategory(ind))
-  }
 
   React.useEffect(() => {
     if (category === 2)//Фурн
@@ -104,7 +101,12 @@ const CategoriesList = ({ array }) => {
     }
   }, [category, subCat])
 
-  ////////////copy//////////////////////
+  ////////////end copy//////////////////////
+
+//входные, массив, экошпон
+  const onClickSubCat = (ind) => { 
+    dispatch(setSubCategory(ind))
+  }
 
 
   //при переходе на друг категорию
@@ -145,8 +147,8 @@ const CategoriesList = ({ array }) => {
                 <Link
                   // className='menu__link'
                   className={category === index ? 'menu__link active-cat' : 'menu__link'}
-                    to={''}
-                  // to={obj.url}
+                    // to={''}
+                   to={obj.url}
                   onClick={() => (onClickCat(index))}
                 >
                   {obj.name}

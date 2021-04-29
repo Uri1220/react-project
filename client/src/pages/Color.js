@@ -5,8 +5,6 @@ import MessageBox from '../components/my/MessageBox';
 import { useMessage } from '../hooks/message.hook'
 import RadioColors from '../components/my/RadiuoColors'
 import Divider from '@material-ui/core/Divider';
-
-
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
 import SearchBox from '../components/MU/SearchBox';
 
@@ -16,8 +14,8 @@ export default function Color() {
   const [colorName, setColorName] = useState('');
   const [colorUrl, setColorUrl] = useState('');
   const [value, setValue] = React.useState('door');//door,pen,plint
-//Фильтрация в строеке 60
 
+//Фильтрация в строеке 60
   const [searchText, setSearchText] = React.useState('');
   // console.log(searchText)
 

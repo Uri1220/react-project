@@ -28,7 +28,7 @@ function DoorOne(props) {
 
   const [qty, setQty] = useState(1)
   const [sz, setSz] = useState('')
-  const [cl, setCl] = useState('')
+  const [cl, setCl] = useState('')//выбранный colorName идет в корзину
   const [s, setS] = React.useState(0) //для цвета active
 
   // console.log('s', s)
@@ -43,22 +43,28 @@ function DoorOne(props) {
 
   const doorDetail = useSelector(state => state.door)
   const { door, isLoading, error } = doorDetail;
+
   ////  if(door.colors){
   //  console.log('dd', door.colors.length)}
+    // console.log(door['colors'])
 
-  // console.log((Object.keys(door))
-  //  .filter((x) => Array.isArray(door[x])
-  //  ))
-  // = ["colors"]
-
+  // ["price", "color_id", "size", "countInStock", "_id", 
+  // "title", "url", "typ", "category", "sub_category",
+  //  "description", "colors", "date", "__v"]
+  // Object.keys(door)
+  //   .filter((x) => Array.isArray(door[x]))//["colors"]
 
   // Object.keys(door)
-  //  .filter((x) => Array.isArray(door[x]))
-  //   .map((key) => (console.log((door[key][0])._id))) =60505827e8a42c15a25e2de8
-  // .map((key) => (console.log('fff',key)))   = colors
+  //   .filter((x) => Array.isArray(door[x]))
+  //   .map((key) => (console.log(key))) // -> colors
+
+  // const arr_name = String(Object.keys(door)
+  //   .filter((x) => Array.isArray(door[x]))[0]) //  = colors
+
 
   //возвр массив полных картинок
   //Обработка COLORS
+ 
   function imageArr() {
     const image_arr = []
     Object.keys(door)
@@ -68,9 +74,13 @@ function DoorOne(props) {
           // console.log('image',item.image)
           image_arr.push(item.image)
         ))
-      ))
+      )
+      )
     return image_arr
   }
+ 
+
+  
   function titleArr() {
     const title_arr = []
     Object.keys(door)
@@ -104,7 +114,7 @@ function DoorOne(props) {
   }
 
   const firstColorName = first()
-    //  console.log('fc', firstColorName)
+  //  console.log('fc', firstColorName)
   //End Обработка COLORS
 
 
@@ -149,6 +159,7 @@ function DoorOne(props) {
 
 
               <div className="details-right">
+
                 {/* Color */}
                 <div className='details-right-colors'>
                   <div className='details-title'>
@@ -157,9 +168,9 @@ function DoorOne(props) {
                   <div className='details-color-items'>
                     {
                       Object.keys(door)
-                        .filter((x) => Array.isArray(door[x]))
+                        .filter((x) => Array.isArray(door[x]))//["colors"]
                         .map((key) => (
-                          // <div   key={door._id}>                            
+                          // key === colors                           
                           <ul key={door._id} >
                             {door[key].map((item, i) => (
                               <li
@@ -178,13 +189,12 @@ function DoorOne(props) {
                               </li>
                             ))}
                           </ul>
-                          // </div>
                         ))
                     }
                   </div>
                 </div>
                 {/* EndColor */}
-
+                
                 <div className='details-right-price'>
                   <span className='details-title'>
                     Цена

@@ -8,6 +8,15 @@ import SelectMU from '../components/MU/SelectMU';
 
 export default function OrdersList(props) {
   const [filteredOrders, setFilteredOrders] = React.useState([]);
+
+console.log(filteredOrders)
+  filteredOrders.sort(function(a,b){
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.orderDate) - new Date(a.orderDate);
+  });
+
+
   //In SelectMU props//////////////////////////////
   const [age, setAge] = React.useState(10);
   const arr = [

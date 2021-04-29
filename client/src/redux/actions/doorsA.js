@@ -48,13 +48,31 @@ export const fetchFilterDoors = ({
       `/api/doors/list?category=${category}&sub_category=${sub_category}&min=${min}&max=${max}`
     )
       .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
+                    // debugger
+
 
   } catch (error) {
     dispatch({ type: DOORS_LIST_FAIL, payload: error.message })
   }
 };
 // &min=${min}
-// &max=${max}     
+// &max=${max}  
+
+export const fetchColoredDoors = ({
+ colorId
+}) => async (dispatch) => {
+  try {
+    dispatch({ type: DOORS_LIST_REQUEST })
+    await axios.get(
+      `/api/doors/list?colorId=${colorId}`
+    )
+      .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
+            //  debugger      
+
+  } catch (error) {
+    dispatch({ type: DOORS_LIST_FAIL, payload: error.message })
+  }
+};
 
 
 //// асинх получаем  Один  ч-з thunk////////////

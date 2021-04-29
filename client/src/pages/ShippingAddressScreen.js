@@ -93,7 +93,7 @@ export default function ShippingAddressScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-     if(!postalCodeError){
+    //  if(!postalCodeError){
     dispatch(
       saveShippingAddress({
         fullName,
@@ -102,7 +102,7 @@ export default function ShippingAddressScreen(props) {
       })
     );
     props.history.push('/order');
-     }
+    //  }
   };
   return (
     <div>

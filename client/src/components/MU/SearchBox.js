@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
+
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
@@ -39,14 +40,19 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    fontSize:'16px',//
+    fontSize:16,// плэйсходдер и ввод
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    border:'1px solid #a4a4a4',
+    borderRadius:0,
+    '&:hover': {
+      border:'1px solid #404040',    },
+
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '30ch',
       '&:focus': {
-        width: '20ch',
+        width: '35ch',//ширина при фокусе
       },
     },
   },
