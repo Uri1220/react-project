@@ -19,8 +19,8 @@ function Doors(props) {
   const {
     category = 'all',
     sub_category = '',
-    min,
-    max,
+    min = '',
+    max = '',
   } = useParams();
 
   // const categories = [
@@ -28,7 +28,7 @@ function Doors(props) {
   // ]
   //In SelectMU props//////////////////////////////
   const [type, setType] = React.useState(10);//10  20 30
-  const [priceType, setPriceType] = React.useState(10)
+  const [priceType, setPriceType] = React.useState(10) // 100-299,300-500
   const [fn, setFn] = React.useState(20)
   const [mi, setMin] = React.useState(0)
   const [ma, setMax] = React.useState(0)
@@ -43,8 +43,14 @@ function Doors(props) {
 
 
 
-  // console.log('fn', fn)
-  // console.log('priceType', priceType)
+  //  console.log('cat',category)
+  //  console.log('sub',sub_category)
+  //  console.log('priceType', priceType)
+  //  console.log('min', min)
+  //  console.log('max', max)
+  // console.log(' rendrer')   
+
+
   const arr = [
     { id: 1, name: 'Все', ag: 10 },
     { id: 2, name: 'Глухие', ag: 20 },
@@ -140,7 +146,7 @@ function Doors(props) {
         } else {
           props.history.push(`/doors/category/${category}/min/${mi}/max/${ma}`)
         }
-
+      // debugger
         break
       case 30:
         setMin(100)

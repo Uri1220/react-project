@@ -1,9 +1,9 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom';
 
-const Door = ({ door , color}) => {
-  // console.log({...door.pictures[0]}.medium)
-  //  console.log(door)
+const DoorMain = ({ door, color, word }) => {
+    console.log('render in door')   
 
 
   return (
@@ -14,32 +14,35 @@ const Door = ({ door , color}) => {
         <div className="sub-cat-name">
           {door.sub_category}
         </div>
-        <div >
-          {
-            Object.keys(door)
-              .filter((x) => Array.isArray(door[x]))//["colors"]
-              .map((key) => (
-                // key === colors                           
-                <ul key={door._id} >
-                  {door[key].filter(el=>el._id === color).map((item) => (
-                    <li
+        { !word  ? (
+          <div >
+            {
+              Object.keys(door)
+                .filter((x) => Array.isArray(door[x]))//["colors"]
+                .map((key) => (
+                  // key === colors                           
+                  <ul key={door._id} >
+                    {door[key].filter(el => el._id === color).map((item) => (
+                      <li
 
-                      key={item._id}
-                    >
+                        key={item._id}
+                      >
                         <img
                           src={item.image}
                         />
 
 
-                    </li>
-                  ))}
-                </ul>
-              ))
-          }
-        </div>
-        {/* <div >
-          <img src={door.url} alt="11" />
-        </div> */}
+                      </li>
+                    ))}
+                  </ul>
+                ))
+            }
+          </div>
+        ) : (
+          <div >
+            <img src={door.url} alt="11" />
+          </div>)
+        }
         <div className="product-name">
           {door.title}
         </div>
@@ -52,4 +55,4 @@ const Door = ({ door , color}) => {
 
   )
 }
-export default Door;
+export default DoorMain;

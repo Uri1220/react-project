@@ -30,9 +30,9 @@ function Doors(props) {
   // const [typeVchod, setTypeVchod] = React.useState(10);//глухие стекло
   const [filteredDoors, setFilteredDoors] = React.useState([]);
 
-  console.log('mi', mi)
-  console.log('ma', ma)
-  console.log('priceType', priceType)
+  console.log('min', min)
+  console.log('max', max)
+  // console.log('priceType', priceType)
   const arr = [
     { id: 1, name: 'Все', ag: 10 },
     { id: 2, name: 'Глухие', ag: 20 },

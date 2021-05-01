@@ -65,15 +65,20 @@ const Content = () => {
              exact
           ></Route>
           <Route
-            path="/doors/colorId/:colorsId"
+            path="/door/word/:word?"
             component={DoorsMain}
-              // exact
+             exact
+          ></Route>
+          <Route
+            path="/door/colorId/:colorId?"
+            component={DoorsMain}
+               exact
           ></Route>
 
           <Route
             path="/doors/category/:category/sub_category/:sub_category"
             component={Doors}
-            // exact
+             exact
           ></Route>
           {/* <Route
             path="/search/category/:category"
@@ -86,7 +91,8 @@ const Content = () => {
              exact
           ></Route>
            <Route
-            path="/doors/category/:category/sub_category/:sub_category/min/:min/max/:max"
+            // path="/doors/category/{category}/sub_category/{sub_category}/min/{min}/max/{max}"
+             path="/doors/category/:category/sub_category/:sub_category/min/:min/max/:max"
             component={Doors}
              exact
           ></Route>

@@ -3,6 +3,11 @@ import {
    DOORS_LIST_SUCCESS,
    DOORS_LIST_FAIL,
 
+   DOORS_MAIN_LIST_REQUEST,
+   DOORS_MAIN_LIST_SUCCESS,
+   DOORS_MAIN_LIST_FAIL,
+   DOORS_MAIN_LIST_RESET,
+
    DOOR_DETAILS_REQUEST,
    DOOR_DETAILS_SUCCESS,
    DOOR_DETAILS_FAIL,
@@ -44,6 +49,44 @@ function doorsListReducer(state = initialState, action) {
          };
 
       case DOORS_LIST_FAIL:
+         return {
+            ...state,
+            isLoading: false,
+            error: action.payload
+         };
+
+      default:
+         return state;
+
+
+   }
+
+}
+function doorsForMainReducer(state = { doorsMain: [],color:'' }, action) {
+
+   switch (action.type) {
+      case DOORS_MAIN_LIST_REQUEST:
+         return {
+            ...state,
+            color:action.payload,
+            isLoading: true
+         };
+
+      case DOORS_MAIN_LIST_SUCCESS:
+         return {
+            ...state,
+            isLoading: false,
+            doorsMain: action.payload
+         };
+      case DOORS_MAIN_LIST_RESET:
+         return {
+            ...state,
+            isLoading: false,
+            doorsMain:[],
+            color:''
+         };
+
+      case DOORS_MAIN_LIST_FAIL:
          return {
             ...state,
             isLoading: false,
@@ -135,5 +178,6 @@ export {
    doorDetailReducer,
    doorDeleteReducer,
    doorSaveReducer,
-   doorReviewSaveReducer
+   doorReviewSaveReducer,
+   doorsForMainReducer
 } 

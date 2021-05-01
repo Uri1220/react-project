@@ -34,7 +34,8 @@ function DoorOne(props) {
   // console.log('s', s)
   // console.log('sz', sz)
   // console.log('qty', qty)
-  // console.log('cl', cl)
+  // console.log('cl', cl)  
+  //  console.log('props.match.params.id', props.match.params.id)  //6083bb058f0d641e390cb5d7
 
   const dispatch = useDispatch()
   React.useEffect(() => {
@@ -43,6 +44,8 @@ function DoorOne(props) {
 
   const doorDetail = useSelector(state => state.door)
   const { door, isLoading, error } = doorDetail;
+    //  console.log('door', door)
+
 
   ////  if(door.colors){
   //  console.log('dd', door.colors.length)}

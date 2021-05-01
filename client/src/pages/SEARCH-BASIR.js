@@ -8,6 +8,13 @@ import Product from '../components/Product';
 import Rating from '../components/Rating';
 import { prices, ratings } from '../utils';
 
+// in App.js:
+//  <Route
+// render={({ history }) => (
+//   <SearchBox history={history}></SearchBox>
+// )}
+// ></Route> 
+
 export default function SearchScreen(props) {
   const {
     name = 'all',
@@ -18,9 +25,7 @@ export default function SearchScreen(props) {
     order = 'newest',
     pageNumber = 1,
   } = useParams();
-
   const dispatch = useDispatch();
-  // productList: productListReducer,
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
@@ -30,7 +35,6 @@ export default function SearchScreen(props) {
     error: errorCategories,
     categories,
   } = productCategoryList;
-  
   useEffect(() => {
     dispatch(
       listProducts({
@@ -53,13 +57,7 @@ export default function SearchScreen(props) {
     const sortOrder = filter.order || order;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-    return `/search/category/${filterCategory}
-    /name/${filterName}
-    /min/${filterMin}
-    /max/${filterMax}
-    /rating/${filterRating}
-    /order/${sortOrder}
-    /pageNumber/${filterPage}`;
+    return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div>

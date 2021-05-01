@@ -3,7 +3,7 @@ export const array = {
    // categories : cat_arr,
    categories: [
       { name: 'Распродажа', url: '/' },
-      { name: 'Двери', url: '/doors/colorId/a' },
+      { name: 'Двери', url: '/door/colorId/' },
       { name: 'Фурнитура', },
       { name: 'Плинтус', url: '/plintus' },
    ],

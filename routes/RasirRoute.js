@@ -207,7 +207,7 @@ productRouter.get(
         ...ratingFilter,
       });
       const products = await Product.find({
-        ...seller Filter,
+        ...sellerFilter,
         ...nameFilter,
         ...categoryFilter,
         ...priceFilter,

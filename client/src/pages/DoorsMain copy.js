@@ -9,7 +9,6 @@ import DoorMain from './DoorMain'
 import MessageBox from '../components/my/MessageBox';
 import SearchBox from '../components/my/SearchBox'
 import { Route } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
 
 import { DOORS_MAIN_LIST_RESET } from '../redux/constants/doorsConstants';
 
@@ -38,27 +37,38 @@ function DoorsMain() {
   } = useParams();
 
   const [s, setS] = React.useState(null) //для цвета active
+  const [color, setColor] = React.useState('') // в DoorMain _id нужного цвета
+
+
 
   const colorslist = useSelector((state) => state.colors);
   const { loading, colors } = colorslist;
 
-  
+  // console.log(color)
+  // console.log(word)
+  // const aaa = Object.values(Object(colors[0]))
+  // // aaa.filter(el)
+  // console.log(aaa[0])
+  // console.log((Object.values(Object(colors[0]))[0]))
+
   const doorDetail = useSelector(state => state.doorsMain)
-  const { doorsMain,color, isLoading, error } = doorDetail;
-  // color - id выбранного из списка цветов цвет для отобр
-  // картинок дверей нужного цвета.Храню в redux чтоб при рендере не терялось
-  // console.log('color',color)
+  const { doorsMain, isLoading, error } = doorDetail;
+
+
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(fetchColors())
     //демонтаж компонента
-      // return () => {
-      //   dispatch({ type: DOORS_MAIN_LIST_RESET })
-      // } 
+    return () => {
+      dispatch({ type: DOORS_MAIN_LIST_RESET })
+    }
 
   }, [])
+  // console.log('render')
+
+
 
   const onClickColor = (colorId, i) => {
     dispatch(
@@ -66,15 +76,16 @@ function DoorsMain() {
         colorId
       })
     )
+    setColor(colorId)
     setS(i)
   }
 
+
   return (
     <>
-     <Container maxWidth="lg">
-      <div className = 'door-main-top'>
-        <h2>Входные и межкомнатные двери</h2>
-        <div className = 'door-main-top-search'>
+      <div>
+        <h1>DoorsMain</h1>
+        <div>
           <Route
             render={({ history }) => (
               <SearchBox history={history}></SearchBox>
@@ -98,7 +109,7 @@ function DoorsMain() {
                   <LightTooltip title={item.colorName} placement="top">
                     <Link
                       //  className="product"
-                      to={'/door/colorId/' + item._id}>
+                      to={'/doors/colorId/' + item._id}>
                       <img
                         src={item.colorUrl}
                         onClick={() => onClickColor(item._id, i)}
@@ -116,7 +127,6 @@ function DoorsMain() {
           )
         }
       </div>
-
       <div className="doors">
         {/* <h2>Doors Page</h2> */}
 
@@ -152,7 +162,6 @@ function DoorsMain() {
             )
         }
       </div>
-      </Container>
     </>
 
 

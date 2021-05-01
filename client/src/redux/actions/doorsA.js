@@ -3,6 +3,9 @@ import {
   DOORS_LIST_REQUEST,
   DOORS_LIST_SUCCESS,
   DOORS_LIST_FAIL,
+  DOORS_MAIN_LIST_REQUEST,
+  DOORS_MAIN_LIST_SUCCESS,
+  DOORS_MAIN_LIST_FAIL,
   DOOR_DETAILS_REQUEST,
   DOOR_DETAILS_SUCCESS,
   DOOR_DETAILS_FAIL,
@@ -57,22 +60,39 @@ export const fetchFilterDoors = ({
 };
 // &min=${min}
 // &max=${max}  
-
+//=================for DoorsMaim
 export const fetchColoredDoors = ({
  colorId
 }) => async (dispatch) => {
   try {
-    dispatch({ type: DOORS_LIST_REQUEST })
+    dispatch({ type: DOORS_MAIN_LIST_REQUEST,payload:colorId })
     await axios.get(
       `/api/doors/list?colorId=${colorId}`
     )
-      .then(data => { dispatch({ type: DOORS_LIST_SUCCESS, payload: data.data }) });
+      .then(data => { dispatch({ type: DOORS_MAIN_LIST_SUCCESS, payload: data.data }) });
             //  debugger      
 
   } catch (error) {
-    dispatch({ type: DOORS_LIST_FAIL, payload: error.message })
+    dispatch({ type: DOORS_MAIN_LIST_FAIL, payload: error.message })
   }
 };
+export const fetchWordDoors = ({
+ word
+}) => async (dispatch) => {
+  try {
+    dispatch({ type: DOORS_MAIN_LIST_REQUEST })
+    await axios.get(
+      `/api/doors/list?word=${word}`
+    )
+      .then(data => { dispatch({ type: DOORS_MAIN_LIST_SUCCESS, payload: data.data }) });
+            //  debugger      
+
+  } catch (error) {
+    dispatch({ type: DOORS_MAIN_LIST_FAIL, payload: error.message })
+  }
+};
+//=================for DoorsMaim
+
 
 
 //// асинх получаем  Один  ч-з thunk////////////

@@ -26,13 +26,19 @@ router.get('/list', async (req, res) => {
   // const colorsFilter = color ? { colors: { $elemMatch: { colorName: color } } } : {};
   //  const colorsFilter =  {colors:{$elemMatch:{colorName:"Virgin"}}} ;
 
+      const word = req.query.word || '';
+
+    //  const searchFilter = word ? {$text: {$search: word}} : {}
+     const searchFilter = word ? { title: { $regex: word, $options: 'i' } } : {};
+
 
   try {
     const doors = await Door.find({
       ...categoryFilter,
       ...sub_categoryFilter,
       ...priceFilter,
-      ...colorsFilter
+      ...colorsFilter,
+       ...searchFilter
     })
     // .populate(
     //   'colors',
