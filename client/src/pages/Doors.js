@@ -32,18 +32,38 @@ function Doors(props) {
   const [fn, setFn] = React.useState(20)
   const [mi, setMin] = React.useState(0)
   const [ma, setMax] = React.useState(0)
+  const [pageTitle, setPageTitle] = React.useState('')
+
   // const [typeVchod, setTypeVchod] = React.useState(10);//глухие стекло
   const [filteredDoors, setFilteredDoors] = React.useState([])
 
   const [searchText, setSearchText] = React.useState('');
 
-  const searched_doors = filteredDoors.filter(el =>{
+  const searched_doors = filteredDoors.filter(el => {
     return el.title.toLowerCase().includes(searchText.toLowerCase())
   })
 
+  React.useEffect(() => {
+    switch (category) {
+      case 'vchod':
+       setPageTitle('Входные двери')
+        break
+      case 'ecoshpon':
+       setPageTitle('Двери с отделкой Эко Шпоном')
+        break
+      case 'massiv':
+       setPageTitle('Двери из массива')
+        break
+      case 'mdf':
+       setPageTitle('Двери из МДФ')
+        break
+      
+    }
+  }, [category])
 
 
-  //  console.log('cat',category)
+
+   // console.log('cat',category)
   //  console.log('sub',sub_category)
   //  console.log('priceType', priceType)
   //  console.log('min', min)
@@ -84,17 +104,17 @@ function Doors(props) {
   React.useEffect(() => {
     switch (fn) {
       case 10:
-          doors.sort(function (a, b) {
-          return a.price - b.price         
-        })       
+        doors.sort(function (a, b) {
+          return a.price - b.price
+        })
         break
       case 20:
         doors.sort(function (a, b) {
-          return b.price - a.price        
-        })       
-        break     
+          return b.price - a.price
+        })
+        break
     }
-  }, [fn,doors]) 
+  }, [fn, doors])
   //=====================================
 
   const userS = useSelector(state => state.userSignin)
@@ -130,9 +150,9 @@ function Doors(props) {
           break
       }
     }
-  }, [type, doors, category,fn])
+  }, [type, doors, category, fn])
   //================================================
-  
+
   //=======================Price==============
   //ТРЕТЬЕ: тут меняем цену и URL соответственно
   React.useEffect(() => {
@@ -146,7 +166,7 @@ function Doors(props) {
         } else {
           props.history.push(`/doors/category/${category}/min/${mi}/max/${ma}`)
         }
-      // debugger
+        // debugger
         break
       case 30:
         setMin(100)
@@ -193,7 +213,7 @@ function Doors(props) {
 
         break
     }
-  }, [priceType, category, sub_category, mi, ma,fn])
+  }, [priceType, category, sub_category, mi, ma, fn])
   //=============================================
   React.useEffect(() => {
     setType(10)
@@ -216,7 +236,7 @@ function Doors(props) {
         max,
       })
     )
-   
+
     setSearchText('')
   },
     [category, sub_category, min, max, userInfo]);
@@ -229,18 +249,21 @@ function Doors(props) {
 
   return (
     <div className="doors">
-      <h2>Doors Page</h2>
+      <div className="doors__title">
+        <h1><p>{pageTitle}</p>{'\u00A0'} <p>{sub_category}</p></h1>
+      </div>
+      <div className="doors__search">
+        <SearchBox
+          text={searchText} setText={setSearchText}
+          place_holder_text='Найти название модели...' />
+      </div>
 
-      <SearchBox
-       text={searchText} setText={setSearchText}
-       place_holder_text ='Найти название модели...'/>
 
       {userInfo && userInfo.isAdmin && sub_category ? (
-        <div className="back-to-result">
+        <div className="doors__reduct-button">
           {/* <Link to="/makedoor/">Редактирование</Link> */}
           <button
             onClick={handleReduct}
-            className="door-filter-button"
           >
             Редактировать
                         </button>
@@ -255,60 +278,42 @@ function Doors(props) {
           <MessageBox variant="danger">{error}</MessageBox>
         ) :
           (<>
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-              <div style={{ marginRight: '10px' }}>
-                <SelectMU age={priceType} setAge={setPriceType} arr={pr} title='Цена:' />
+            <div className='doors__filter-list'>
+              <div className='doors__filter-list__left'>
+                <div style={{marginRight:15}}>
+                  <SelectMU age={priceType} setAge={setPriceType} arr={pr} title='Цена:' />
+                </div>
+                <div>
+                  {
+                    (category === 'ecoshpon' || category === 'massiv') &&
+                    <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
+                  }
+                  {category === 'vchod' &&
+                    <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
+                  }
+                </div>
+                <div style={{margin:'0px 0px 12px 12px'}} className='doors__regrupp-button'>
+                  <button
+                    onClick={resetFilter}
+                  >
+                    Разгруппировать </button>
+                </div>
               </div>
-              <div>
-                {
-                  (category === 'ecoshpon' || category === 'massiv') &&
-                  <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
-                }
-                {category === 'vchod' &&
-                  <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
-                }
-              </div>
-              <div>
-                <button
-                  className='door-filter-button'
-                  onClick={resetFilter}
-                >
-                  Разгруппировать </button>
-              </div>
-              <div style={{ marginLeft: '300px' }}>
-                <SelectMU age={fn} setAge={setFn} arr={pr1} title='' />
+              <div className='doors__filter-list__right'>
+
+                <div >
+                  <SelectMU age={fn} setAge={setFn} arr={pr1} title='' />
+                </div>
               </div>
 
             </div>
-            {/* <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-              <div style={{ marginRight: '10px' }}>
-                <SelectMU age={priceType} setAge={setPriceType} arr={pr} title='Цена:' />
-              </div>
-              <div>
-                {
-                  (category === 'ecoshpon' || category === 'massiv') &&
-                  <SelectMU age={type} setAge={setType} arr={arr} title='Тип:' />
-                }
-                {category === 'vchod' &&
-                  <SelectMU age={type} setAge={setType} arr={arr_vchod} title='Тип:' />
-                }
-              </div>
-              <div>
-                <button
-                  className='door-filter-button'
-                  onClick={resetFilter}
-                >
-                  Разгруппировать </button>
-              </div>
-              <div style={{ marginLeft: '300px' }}>
-                <SelectMU age={fn} setAge={setFn} arr={pr1} title='' />
-              </div>
-
-            </div> */}
+            <div className='doors__searched'>
+              Выбрано: {searched_doors.length} шт.
+            </div>
 
 
-            <div>
-              <div>Выбрано: {searched_doors.length} шт.</div>
+
+            <div className='doors__products'>
 
               <div className="products">
                 {

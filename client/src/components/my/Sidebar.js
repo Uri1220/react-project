@@ -1,6 +1,5 @@
 import React from 'react'
 import CategoriesListSidebar from './Categories-list-sidebar'
-import '../../scss/Sidebar.scss'
 
 const Sidebar = ({ closeMenu,setVisiblePopup,array}) => {
 

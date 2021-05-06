@@ -25,7 +25,7 @@ const LightTooltip = withStyles((theme) => ({
     // color: 'rgba(0, 0, 0, 0.87)',
     color: 'white',
     boxShadow: theme.shadows[1],
-    fontSize: 14,
+    fontSize: 12,
   },
 }))(Tooltip);
 
@@ -70,11 +70,11 @@ function DoorsMain() {
   }
 
   return (
-    <>
+    <div className='doors-main'>
      <Container maxWidth="lg">
-      <div className = 'door-main-top'>
-        <h2>Входные и межкомнатные двери</h2>
-        <div className = 'door-main-top-search'>
+      <div className = 'doors-main__top'>
+        <h1>Входные и межкомнатные двери</h1>
+        <div className = 'doors-main__top__search'>
           <Route
             render={({ history }) => (
               <SearchBox history={history}></SearchBox>
@@ -86,12 +86,10 @@ function DoorsMain() {
             <LoadingBox></LoadingBox>
           ) : (
 
-            <div className="colors-list">
-
-
+            <ul >
               {colors.map((item, i) => (
                 <li
-                  className={s === i ? 'color color-active' : 'color'}
+                  className={s === i ? 'active' : ''}
 
                   key={item._id}
                 >
@@ -104,20 +102,17 @@ function DoorsMain() {
                         onClick={() => onClickColor(item._id, i)}
                       />
                     </Link>
-
                   </LightTooltip>
-
-
                 </li>
-              ))}
+              ))}            
 
-            </div>
+            </ul>
 
           )
         }
       </div>
 
-      <div className="doors">
+      <div className="">
         {/* <h2>Doors Page</h2> */}
 
      {doorsMain.length ? (
@@ -153,7 +148,7 @@ function DoorsMain() {
         }
       </div>
       </Container>
-    </>
+    </div>
 
 
   )

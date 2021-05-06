@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios'
 import MessageBox from '../components/my/MessageBox'
 import LoadingBox from '../components/my/LoadingBox'
 import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/doorsA';
-import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor'
+import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor22'
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,31 +14,18 @@ import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SaveIcon from '@material-ui/icons/Save';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
 
-     maxWidth: 1200,
-    margin: '0 auto',
-    //  display: 'flex',
-    //  flexWrap: 'wrap',
-    //  '& > *': {
-    //    margin: theme.spacing(1),
-    //    width: theme.spacing(16),
-    //    height: theme.spacing(16),
-    //  },
+  form: {
+    margin: theme.spacing(1),
+
   },
-
- 
   input: {
     width: '50ch',
     fontSize: 16,
     padding: ' 5px 0px',
-    marginLeft:15,
     '& .MuiInputBase-root ': {
       fontSize: 16,
     },
@@ -89,25 +77,21 @@ function MakeDoorScreen(props) {
   const [complect, setComplect] = useState('');
   const [upisLoading, setUpisLoading] = useState(false);
   const [colors, setColors] = useState([]);
-  const [visible, setVisible] = React.useState([]);
-
+  const [colFinish, setColFinish] = React.useState(colors);
   // colors - цвета из БД рабочие
   // colFinish - новые цвета после редактирования
 
   // console.log('props.location.search:', props.location.search);
-  //  console.log('modalVisible',modalVisible);
-  //  console.log('tableVisible',tableVisible);
-   //  console.log('visible',visible);
   // props.location.search: ?cat=massiv=sub=classico
   const cat = props.location.search ? String(props.location.search.split("=")[1]) : '';
   const sub = props.location.search ? String(props.location.search.split("=")[3]) : '';
   // console.log('CAT', modalVisible)
   // console.log('sub', sub)
 
-  // React.useEffect(() => {
-  //   setColFinish(colors)
-  // }, [colors]
-  // )
+  React.useEffect(() => {
+    setColFinish(colors)
+  }, [colors]
+  )
 
 
   const doorslist = useSelector((state) => state.doors);
@@ -185,7 +169,7 @@ function MakeDoorScreen(props) {
         countInStock,
         description,
         complect,
-        colors: visible
+        colors: colFinish
       })
     )
     setTableVisible(true)
@@ -202,6 +186,26 @@ function MakeDoorScreen(props) {
     dispatch(deleteProdcut(product._id));
   };
   //
+  const uploadFileHandler = (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('url', file);
+    setUpisLoading(true);
+    axios
+      .post('/api/uploads', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        setUrl(response.data);
+        setUpisLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setUpisLoading(false);
+      });
+  };
 
 
 
@@ -223,172 +227,155 @@ function MakeDoorScreen(props) {
 
       {modalVisible && (
 
-        <div
-          // className="form"
-          className={classes.root}
-        >
-          <Paper elevation={4}>
-              <form  onSubmit={submitHandler}>               
-                 
-                  <li>
-                    {isLoadingSave && <div>isLoading...</div>}
-                    {errorSave && <div>{errorSave}</div>}
-                  </li>
-                  
-                  <Paper style={{marginBottom:10,padding:5,display:'flex',justifyContent:'center'}} elevation={1}>
+        <div className="form">
+          <form onSubmit={submitHandler}>
+            <ul className="form-container">
+              <li>
+                Категория: <b>{category}</b>  Подкатегория: <b>{sub_category} </b>
+              </li>
+              <li>
+                {isLoadingSave && <div>isLoading...</div>}
+                {errorSave && <div>{errorSave}</div>}
+              </li>
 
-                    <Button
-                      style={{ marginRight: 20 }}
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      size="large"
-                      className={classes.button}
-                      startIcon={<SaveIcon />}
-                    >
-                      {id ? 'Обновить' : 'Создать'}
-                    </Button>
+              <li>
 
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                      onClick={() => clickBack()}
-                      className={classes.button}
-                    >
-                      Назад
-                    </Button>
-                  </Paper>
+                <TextField
+                  label="Название"
+                  type="search"
+                  defaultValue={title || ''}
+                  required
+                  onChange={(e) => setTitle(e.target.value)}
+                  className={classes.input}
+                />
+              </li>
+              <li>
 
-                  <Paper elevation={4}>
+                <TextField
+                  label="Цена"
+                  type="number"
+                  defaultValue={price}
+                  required
+                  onChange={(e) => setPrice(e.target.value)}
+                  className={classes.input}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">Руб.</InputAdornment>,
+                  }}
+                />
+              </li>
+              <li>
 
-                  <li style={{padding:15}}>
-                    Категория: <b>{category}</b>  Подкатегория: <b>{sub_category} </b>
-                  </li>
-                  <Divider/>
-
-
-                  <li>
-
-                    <TextField
-                      label="Название"
-                      type="search"
-                      defaultValue={title || ''}
-                      required
-                      onChange={(e) => setTitle(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
-
-                    <TextField
-                      label="Цена"
-                      type="number"
-                      defaultValue={price}
-                      required
-                      onChange={(e) => setPrice(e.target.value)}
-                      className={classes.input}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">Руб.</InputAdornment>,
-                      }}
-                    />
-                  </li>
-                  <li>
-
-                    <TextField
-                      label="Url изображения"
-                      type="url"
-                      defaultValue={url || ''}
-                      required
-                      onChange={(e) => setUrl(e.target.value)}
-                      className={classes.input}
-                    />
-                    {/* <input type="file" onChange={uploadFileHandler}></input>
+                <TextField
+                  label="Url изображения"
+                  type="url"
+                  defaultValue={url || ''}
+                  required
+                  onChange={(e) => setUrl(e.target.value)}
+                  className={classes.input}
+                />
+                {/* <input type="file" onChange={uploadFileHandler}></input>
                 {upisLoading && <div>UpisLoading...</div>} */}
-                  </li>
-                  <li>
+              </li>
+              <li>
 
-                    <TextField
-                      label="Тип"
-                      type="search"
-                      defaultValue={typ || ''}
-                      onChange={(e) => setTyp(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
+                <TextField
+                  label="Тип"
+                  type="search"
+                  defaultValue={typ || ''}
+                  onChange={(e) => setTyp(e.target.value)}
+                  className={classes.input}
+                />
+              </li>
+              <li>
 
 
-                    <TextField
-                      label="Размеры"
-                      type="search"
-                      defaultValue={size || ''}
-                      onChange={(e) => setSize(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
+                <TextField
+                  label="Размеры"
+                  type="search"
+                  defaultValue={size || ''}
+                  onChange={(e) => setSize(e.target.value)}
+                  className={classes.input}
+                />
+              </li>
+              <li>
 
-                    <TextField
-                      label="Количество на складе"
-                      type="number"
-                      defaultValue={countInStock}
-                      // required
-                      onChange={(e) => setCountInStock(e.target.value)}
-                      className={classes.input}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">Шт.</InputAdornment>,
-                      }}
-                    />
-                  </li>
+                <TextField
+                  label="Количество на складе"
+                  type="number"
+                  defaultValue={countInStock}
+                  // required
+                  onChange={(e) => setCountInStock(e.target.value)}
+                  className={classes.input}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">Шт.</InputAdornment>,
+                  }}
+                />
+              </li>
 
-                  <li>
+              <li>
 
-                    <TextField
-                      label="Описание"
-                      defaultValue={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      // placeholder="Placeholder"
-                      className={classes.input}
-                      rows={6}
-                      multiline
-                      variant="outlined"
-                    />
-                  </li>
-                  <li>
+                <TextField
+                  label="Описание"
+                  defaultValue={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  // placeholder="Placeholder"
+                  className={classes.input}
+                  rows={6}
+                  multiline
+                  variant="outlined"
+                />
+              </li>
+              <li>
 
-                    <TextField
-                      label="Характеристики"
-                      defaultValue={complect}
-                      onChange={(e) => setComplect(e.target.value)}
-                      className={classes.input}
-                      // rows={6}
-                      multiline
-                      variant="outlined"
-                    />
-                  </li> 
-                  </Paper>
-              
-              </form>
-          </Paper>
+                <TextField
+                  label="Характеристики"
+                  defaultValue={complect}
+                  onChange={(e) => setComplect(e.target.value)}
+                  className={classes.input}
+                  // rows={6}
+                  multiline
+                  variant="outlined"
+                />
+              </li>
 
-          {/*=================ColorForm ======== */}
-          <Paper elevation={4} style={{ marginTop: 20 }}>
-            {colors &&
-              <ColorsFormikMakeDoor
-                setVisible={setVisible}
-                visible={visible}
-                colors={colors}
-              />
-              }
-          </Paper>
-          {/* =================================== */}
+              <li>
+               
+                <Button
+                  style={{marginRight:20}}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  size="large"
+                  className={classes.button}
+                  startIcon={<SaveIcon />}
+                >
+                   {id ? 'Обновить' : 'Создать'}
+                </Button>
+
+                 <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  onClick={() => clickBack()}
+                  className={classes.button}
+                >
+                  Назад
+                </Button>
+              </li>
+            </ul>
+          </form>
+
+          {colFinish &&
+            <ColorsFormikMakeDoor
+              setColFinish={setColFinish}
+              colFinish={colFinish}
+            />}
 
         </div>
       )}
@@ -429,7 +416,7 @@ function MakeDoorScreen(props) {
                       {product.colors.length}
                     </td>
                     <td >
-                      {/* открываем окно */}
+
                       <IconButton
                         color="primary"
                         className={classes.button}

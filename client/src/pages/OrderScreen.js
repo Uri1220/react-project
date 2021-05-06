@@ -44,26 +44,26 @@ function OrderScreen(props) {
               <ul>
                 <li>
                   <div className="card card-body">
-                    <h2>Shippring</h2>
+                    <h2>Информация о заказчике</h2>
                     <p>
-                      <strong>Name:</strong> {order.shipping.fullName} <br />
-                      <strong>Address: </strong> {order.shipping.address},
-                  <strong>Phone: </strong> {order.shipping.postalCode},
+                      <strong>Имя:</strong> {order.shipping.fullName} <br />
+                      <strong>Адрес: </strong> {order.shipping.address},
+                  <strong>Телефон: </strong> {order.shipping.postalCode},
                 </p>
                     {/* {order.isDelivered ? ( */}
                     {isDelivered ? (
                       <MessageBox variant="success">
-                        Delivered at {order.deliveredAt}
+                        Доставлено: {order.deliveredAt}
                       </MessageBox>
                     ) : (
-                        <MessageBox variant="danger">Not Delivered</MessageBox>
+                        <MessageBox variant="danger">Не доставлено</MessageBox>
                       )}
                   </div>
                 </li>
 
                 <li>
                   <div className="card card-body">
-                    <h2>Order Items</h2>
+                    {/* <h2>Order Items</h2> */}
                     <ul>
                       {order.orderItems.map((item) => (
                         <li key={item._id}>
@@ -93,77 +93,7 @@ function OrderScreen(props) {
               </ul>
             </div>
 
-            {/* <div className="col-1">           
-          <div className="card card-body">
-            <ul>
-              <li>
-                <h2>Order Summary</h2>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Items</div>
-                  <div>${order.itemsPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Shipping</div>
-                  <div>${order.shippingPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${order.taxPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>
-                    <strong> Order Total</strong>
-                  </div>
-                  <div>
-                    <strong>${order.totalPrice.toFixed(2)}</strong>
-                  </div>
-                </div>
-              </li>
-              {!order.isPaid && (
-                <li>
-                  {!sdkReady ? (
-                    <LoadingBox></LoadingBox>
-                  ) : (
-                    <>
-                      {errorPay && (
-                        <MessageBox variant="danger">{errorPay}</MessageBox>
-                      )}
-                      {loadingPay && <LoadingBox></LoadingBox>}
-
-                      <PayPalButton
-                        amount={order.totalPrice}
-                        onSuccess={successPaymentHandler}
-                      ></PayPalButton>
-                    </>
-                  )}
-                </li>
-              )}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                <li>
-                  {loadingDeliver && <LoadingBox></LoadingBox>}
-                  {errorDeliver && (
-                    <MessageBox variant="danger">{errorDeliver}</MessageBox>
-                  )}
-                  <button
-                    type="button"
-                    className="primary block"
-                    onClick={deliverHandler}
-                  >
-                    Deliver Order
-                  </button>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div> */}
+           
           </div>
         </div>
       )

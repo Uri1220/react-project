@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../scss/Header.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import CartInHeader from '../MU/CartInHeader'

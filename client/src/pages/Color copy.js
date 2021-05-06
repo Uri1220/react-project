@@ -121,14 +121,22 @@ export default function Color() {
   /////////////////////end useMessage Hook/////////////
 
   return (
-    <>
-      <div className='colors-make' >
-        <div className='colors-make_left'>
-          <RadioColors value={value} handleChange={handleChange} />
-        </div>
+    <div>
+      <div>
+        <RadioColors value={value} handleChange={handleChange} />
+      </div>
+      <Divider light />
 
-        <div className='colors-make_right'>
-            <div style={{marginBottom:0}}>
+      <div className="form">
+
+        <form
+          onSubmit={submitHandler}
+        >
+          <ul className="form-container">
+            {/* <li>
+              <h2>Create Color</h2>
+            </li> */}
+            <li>
               {loadingCreate || isLoadingDelete && <LoadingBox></LoadingBox>}
               {/* {errorCreate && message(errorCreate)} */}
               {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
@@ -137,42 +145,34 @@ export default function Color() {
               {/* { messageDelete  && <MessageBox  variant="success">{messageDelete.message}</MessageBox>} */}
               {/* {messageDelete && message(messageDelete.message)} */}
               {/* {messageDelete && <div style={{ background: 'green', display: 'inline' }}>{messageDelete.message}</div>} */}
-            </div>
-
-          <form  onSubmit={submitHandler} >           
-
-            <div>
-              <label htmlFor="name"> </label>
+            </li>
+            <li>
+              <label htmlFor="name">  Цвет:  </label>
               <input
                 type="text"
-                placeholder="Введите название цвета"
                 name="colorName"
                 value={colorName}
+                // id="colorName"
                 onChange={(e) => setColorName(e.target.value)}
               ></input>
-            </div>
-            <div>
-              <label htmlFor="name"> </label>
+            </li>
+            <li>
+              <label htmlFor="name">  Url цвета:  </label>
               <input
-                type="url"
-                placeholder="Введите Url цвета"
+                type="text"
                 name="colorUrl"
                 value={colorUrl}
-                //  size="50"
+                // id="colorUrl"
+                size="50"
                 onChange={(e) => setColorUrl(e.target.value)}
               ></input>
-            </div>
-            <div>
-              <label />
-              <button className="primary" type="submit">
-                Создать
-          </button>
-            </div>
-          </form>
-
-        </div>
+            </li>
+            <li style={{ marginTop: 5 }}>
+              <button type="submit" className="button primary">Создать</button>
+            </li>
+          </ul>
+        </form>
       </div>
-      <Divider light />
 
       <SearchBox
         text={searchText} setText={setSearchText}
@@ -186,7 +186,7 @@ export default function Color() {
 
             {searched_colors.map((product) => (
               <div className='colors-item ' key={product._id}>
-                <div><img style={{ height: '70px' }} src={product.colorUrl} alt="11" /></div>
+                <div><img style={{ height: '80px' }} src={product.colorUrl} alt="11" /></div>
                 <div>
                   <span style={{ marginLeft: '3px' }}>{product.colorName}</span>
                 </div>
@@ -208,7 +208,7 @@ export default function Color() {
           </div>
         )
       }
-    </>
+    </div>
 
   )
 }

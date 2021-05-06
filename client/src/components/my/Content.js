@@ -16,18 +16,16 @@ import PlaceOrderScreen from '../../pages/PlaceOrderScreen'
 import OrdersList from '../../pages/OrdersList'
 import OrderHistoryScreen from '../../pages/OrderHistoryScreen'
 import OrderScreen from '../../pages/OrderScreen'
-import MySearch from '../../pages/MySearch'
 import OrderDeliverScreen from '../../pages/OrderDeliverScreen'
 import ProfileScreen from '../../pages/ProfileScreen'
 import DevRdReactToDo from '../../pages/dev_ed/DevRdReactToDo'
 import FlexCat from '../../pages/dev_ed/FlexCat'
 import select from '../../pages/dev_ed/select'
 import Breadcrumb from '../my/Breadcramb'
-import SideMenu from '../../pages/MU/SideMenu'
 import Color from '../../pages/Color'
 import { ColorsFormik } from '../../pages/dev_ed/ColorsFormik'
 import { NestedArray } from '../../pages/dev_ed/NestedArray'
-import SelectMU from '../MU/SelectMU'
+import StepperMU  from '../../pages/dev_ed/StepperMU'
 
 
 // const Content = ({ category }) => {
@@ -106,7 +104,7 @@ const Content = () => {
           <Route path="/orderhistory" component={OrderHistoryScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/flex-cat" component={FlexCat} />
-          <Route path="/mu-search" component={SelectMU} />
+          <Route path="/mu-search" component={StepperMU} />
           <Route path="/select" component={select} />
           <Route path="/colors" component={Color} />
           <Route path="/colors-formik" component={ColorsFormik} />

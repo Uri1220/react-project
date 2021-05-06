@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Size({ size,setSz }) {
+export default function Size({ size, setSz }) {
 
   const arr = size.split('=')
-  const [s,setS] = React.useState(0)
+  const [s, setS] = React.useState(0)
   const onClickSize = (i) => {
     setSz(arr[i])
     setS(i)
@@ -14,7 +14,7 @@ export default function Size({ size,setSz }) {
 
 
   return (
-    <div style={{ display: 'flex' }} className="">
+    <div style={{ display: 'flex' }} >
       {arr.map((el, index) => (
         <div key={`${el}_${index}`}
           className={s === index ? 'size size-active' : 'size'}
@@ -28,7 +28,7 @@ export default function Size({ size,setSz }) {
       }
 
     </div>
-  
+
   )
 }
 

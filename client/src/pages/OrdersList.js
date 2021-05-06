@@ -4,17 +4,41 @@ import { listOrders, deleteOrder } from '../redux/actions/orderActions';
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import SelectMU from '../components/MU/SelectMU';
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import DirectionsIcon from '@material-ui/icons/Directions';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '8px',
+    lineHeight: 1.5,
+    borderColor: '#eee',
+    '&:hover': {
+      border: 'none',
+      opacity: 'none',
+    },
+    // '&:focus': {
+    //   boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    // },
+  },
+}));
 
 
 export default function OrdersList(props) {
+  const classes = useStyles();
+
   const [filteredOrders, setFilteredOrders] = React.useState([]);
 
-console.log(filteredOrders)
-  filteredOrders.sort(function(a,b){
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return new Date(b.orderDate) - new Date(a.orderDate);
-  });
+  console.log(filteredOrders)
+  // filteredOrders.sort(function (a, b) {
+  //   // Turn your strings into dates, and then subtract them
+  //   // to get a value that is either negative, positive, or zero.
+  //   return new Date(a.orderDate) - new Date(b.orderDate);
+  // });
 
 
   //In SelectMU props//////////////////////////////
@@ -61,7 +85,7 @@ console.log(filteredOrders)
     }
   }, [age, orders,])
 
-  
+
 
 
   return (
@@ -73,7 +97,7 @@ console.log(filteredOrders)
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <SelectMU age={age} setAge={setAge} arr={arr} title ='Заказы:'/>
+          <SelectMU age={age} setAge={setAge} arr={arr} title='Заказы:' />
           {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
 
 
@@ -90,7 +114,7 @@ console.log(filteredOrders)
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {filteredOrders.map((order) => (
 
                 <tr key={order._id}>
@@ -106,7 +130,7 @@ console.log(filteredOrders)
                   <td>{order.deliveredAt ? order.deliveredAt : 'No'}</td>
 
                   <td>
-                    <button
+                    {/* <button
                       type="button"
                       className="small"
                       onClick={() => {
@@ -115,14 +139,35 @@ console.log(filteredOrders)
                       }}
                     >
                       Details
-                         </button>
+                         </button> */}
+                    <IconButton
+                      color="primary"
+                      className={classes.button}
+                      aria-label="directions"
+                      onClick={() => {
+                        props.history.push(`/order/${order._id}/deliver`);
+                        // props.history.push(`/order/${order._id}`);
+                      }}
+                    >
 
-                    <button style={{marginLeft:'5px'}}
+                      <DirectionsIcon />
+                    </IconButton>
+
+                    {/* <button style={{marginLeft:'5px'}}
                       className="small"
                       onClick={() => deleteHandler(order)}
                     >
                       Del
-                         </button>
+                         </button> */}
+                    <IconButton
+                      aria-label="delete"
+                      className={classes.button}
+                      color="secondary"
+                      onClick={() => deleteHandler(order)}
+                    >
+                      <DeleteIcon fontSize="large" />
+
+                    </IconButton>
                   </td>
                 </tr>
               ))}

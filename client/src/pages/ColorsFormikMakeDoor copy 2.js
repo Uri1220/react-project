@@ -5,73 +5,60 @@ import LoadingBox from '../components/my/LoadingBox';
 import { fetchColors } from '../redux/actions/colorsA';
 import { Formik, Field, Form } from 'formik';
 
-
-export const ColorsFormikMakeDoor = ({ colors,visible, setVisible }) => {
-
-
+export const ColorsFormikMakeDoor = ({ colFinish, setColFinish }) => {
 
   // из Formika
   const [col_add, setColAdd] = React.useState([]);
 
+  const [re, setRe] = React.useState([]);//окончат массив со всеми картинками
+
   const [door_image, setDoorImage] = React.useState('');
-  const [prom, setProm] = React.useState([]);
-  
-  //  console.log('col_add',col_add)
-  //    console.log('prom',prom)
+  // door_image-url картинки двери для добавления
 
   // col_add цвета для добавления типа
   //["60505827e8a42c15a25e2de8", "60505988f338d7174aefb40e"]
   // только id
 
-  // из Formika
+   console.log('colFinish', colFinish)
+  //  console.log('re', re)
+   console.log('col_add', col_add)
+
   // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   const colorslist = useSelector((state) => state.colors);
   const { loading, colors: colors_list } = colorslist;
   const dispatch = useDispatch();
   // color_list - цвета из коллекции возможных цветов
-    // console.log('colors_list', colors_list)
-    // console.log('colors', colors)
+  //  console.log('colors_list', colors_list)
 
   //загрузка в redux state возможных цветов
   React.useEffect(() => {
     dispatch(fetchColors());
-  }, [] )
-
-  //////////////////////////////////////////////
-
-  React.useEffect(() => {
-    setVisible(colors)
-  }, [colors] )
+  }, []
+  )
 
   React.useEffect(() => {
-    setProm(ggg()) 
-    
-  }, [col_add] )
-
-  React.useEffect(() => {
-    if(prom){
-      setVisible([...colors,...prom]) 
-    }    
-    
-  }, [prom,colors] )
-////////////////////////////////////////////////////
+    setColFinish(re)
+    setColAdd([])
+  }, [re]
+  )
 
   const deleteHandler = (id) => {
-    setVisible(visible.filter(c => c._id !== id))
+    setColFinish(colFinish.filter(c => c._id !== id))
   }
-//тут добавляем картинку двери
+  //тут добавляем картинку двери
   const updateHandler = (id) => {
-    setVisible(visible.map((el) => (el._id === id ? { ...el, image: door_image } : el)))
+    setRe(result.map((el) => (el._id === id ? { ...el, image: door_image } : el)))
+    // setColFinish(result.map((el) => (el._id === id ? { ...el, image: door_image } : el)))
     setDoorImage('')
   }
 
   //--------------------------------------------------------
   //   ф-ция ggg() получает  полный массив цветов для добавления
-  // по выбранным чекбоксам но еще без картинки двери
-  // let col_add_completed = []
-  function ggg() {
-       let col_add_completed = []
+  // по выбранным чекбоксам но еще без картинки двери и без проверки
+  // на уникальность
+   let col_add_completed = []
+  function ggg() {    
 
     for (let index = 0; index < colors_list.length; index++) {
 
@@ -79,29 +66,49 @@ export const ColorsFormikMakeDoor = ({ colors,visible, setVisible }) => {
         for (let j = 0; j < col_add.length; j++) {
           if (colors_list[index]._id === col_add[j]) {
             col_add_completed.push({ ...colors_list[index], image: '' })
+
           }
         }
       }
       return col_add_completed
     }
+  }
 
-  }  
+  if (col_add.length && colors_list.length) {
+    ggg()
+  }
+   console.log('col_add_completed', col_add_completed)
+// -----------------------------------------------------
+// ddd складыват м из базы с картинками дверей
+// с м в кот еще нет картинок
+    let result = [...colFinish]
+  function ddd() { 
 
-  // получить массив без повторения id
-  // const a = [
-  //   {id: 123, randomvalue: 'hello'}
-  //   ]; 
-    
-  //   const b = [
-  //   {id: 123, randomvalue: 'hello', othervalue: 'sup'},
-  //   {id: 125, randomvalue: 'sup', othervalue: 'hello'}
-  //   ];
+    if(colFinish.length) {
 
-  //  console.log( b.filter(o => !a.find(o2 => o.id === o2.id)))
+      for (let index = 0; index < colFinish.length; index++) {
+
+        for (let index = 0; index < colFinish.length; index++) {
+          for (let j = 0; j < col_add_completed.length; j++) {
+            if (colFinish[index]._id !== col_add_completed[j]._id) {
+               result.push(col_add_completed[j])           
+  
+            }
+          }
+        }
+      }
+    } else{
+       result = [...col_add_completed]
+    } 
+     return result 
+  }
+ ddd()
+
+ console.log('result', result)  
 
   return (
     <>
-
+      {/* ==================Input for image============== */}
       <label htmlFor="newcat"> DoorImage </label>
       <input
         id="a"
@@ -111,10 +118,10 @@ export const ColorsFormikMakeDoor = ({ colors,visible, setVisible }) => {
         onChange={(e) => setDoorImage(e.target.value)}
       ></input>
 
-
+      {/* ===================Форма============== */}
       <div className='details-right-colors'>
-        <ul style={{ display: 'flex',flexWrap:'wrap' }}>
-          {visible.map((item) => (
+        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {result.map((item,i) => (
             <li style={{ marginRight: '10px', border: '1px solid red' }} key={item._id}>
               <div style={{ fontSize: '15px' }}>{item.colorName}</div>
               <div style={{ display: 'flex' }}>
@@ -138,12 +145,9 @@ export const ColorsFormikMakeDoor = ({ colors,visible, setVisible }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </div>     
 
-      <div className="checked-items">       
-
-
-      </div>
+      {/* ====================Выбор цвета======================== */}
       {
         loading ? (
           <LoadingBox></LoadingBox>
@@ -165,11 +169,10 @@ export const ColorsFormikMakeDoor = ({ colors,visible, setVisible }) => {
                 <button type="submit">Выбрать</button>
 
                 <div className="colors-list" role="group" aria-labelledby="checkbox-group">
-               
-                {/* без повторения */}
-                  {
-                  ( colors_list.filter(o => !colors.find(o2 => o._id === o2._id))).map((product) => (
-                    <ul className='colors-item ' key={product._id}>
+
+
+                  {colors_list.map((product,i) => (
+                    <ul className='colors-item '  key={`${product._id}_${i}`}>
                       <li>{<img style={{ height: '80px' }} src={product.colorUrl} alt="11" />}</li>
                       <li>
                         <span>

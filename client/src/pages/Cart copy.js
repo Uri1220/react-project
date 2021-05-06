@@ -3,7 +3,7 @@ import { addToCart, removeFromCart } from '../redux/actions/cartA';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MessageBox from '../components/my/MessageBox';
-// import '../scss/Cart.scss'
+import '../scss/Cart.scss'
 
 
 // import ShippingAddressScreen from './ShippingAddressScreen';
@@ -102,7 +102,7 @@ function Cart(props) {
                       </Link>
 
                     </div>
-                    <div className="cart-quantity">
+                    <div>
                       Количество:
                   <select value={item.qty} onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value), item.path ,sz,cl))}>
                         {[...Array(item.countInStock).keys()].map(x =>
@@ -110,7 +110,7 @@ function Cart(props) {
                         )}
                       </select>
 
-                      <button type="button" style={{marginLeft:10}} className="button"
+                      <button type="button" className="button"
                         onClick={() => removeFromCartHandler(item.productId)} >
                         Delete
                     </button>
@@ -147,7 +147,19 @@ function Cart(props) {
           </ul>
         </div>
       </div>
-     
+      {/* <div className="cart-action">
+        <h3>
+          Стоимость заказа ( {cartItems.reduce((a, c) => a + c.qty, 0)} единиц)
+
+          {orderSumm} р.
+        </h3>
+        <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
+          Оформить заказ
+        </button>
+
+      </div> */}
+      {/* <ShippingAddressScreen/> */}
+      {/* $ {(cartItems.reduce((a, c) => a + c.price * c.qty, 0)).toFixed(2)} */}
 
     </div>
   )

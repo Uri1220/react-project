@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   sizeFont: {
     fontSize: 16,
-    fontFamily: 'Montserrat',
+    fontFamily: 'Montserrat',    
+
   },
   butt: {
     fontSize: 20,
@@ -36,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginRight: theme.spacing(2),
+   
+
   },
 }));
 
