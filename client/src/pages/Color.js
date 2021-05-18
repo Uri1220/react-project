@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import { saveColor, fetchColors, deleteColor } from '../redux/actions/colorsA';
 import SearchBox from '../components/MU/SearchBox';
 
+
 export default function Color() {
 
   const [id, setId] = useState('');
@@ -17,7 +18,7 @@ export default function Color() {
 
   //Фильтрация в строеке 60
   const [searchText, setSearchText] = React.useState('');
-  // console.log(searchText)
+   console.log(value)
 
 
 

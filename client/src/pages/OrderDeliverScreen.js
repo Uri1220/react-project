@@ -1,28 +1,53 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { detailsOrder, deleteOrder, deliverOrder } from '../redux/actions/orderActions'
+import { listOrders, detailsOrder, createOrder } from '../redux/actions/orderActions'
 import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// import { registerLocale, setDefaultLocale } from "react-datepicker";
-// import ru from 'date-fns/locale/ru';
-// registerLocale('ru', ru)
+const useStyles = makeStyles((theme) => ({ 
 
+  input: {
+    width: '60ch',
+    fontSize: 16,
+    padding: ' 5px 0px',
+    marginLeft: 15,
+    '& .MuiInputBase-root ': {
+      fontSize: 16,
+    },
+    '& .MuiFormLabel-root': {
+      fontSize: 16,
+    },
+
+  },
+
+  button: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px',
+    lineHeight: 1.5,
+    borderColor: '#eee',
+    '&:hover': {
+      border: 'none',
+      opacity: 'none',
+    },
+  },
+ 
+}));
 
 
 
 function OrderDeliverScreen(props) {
+  const classes = useStyles();
 
   const dispatch = useDispatch()
 
-  // const productDelete = useSelector((state) => state.orderDelete);
-  // const {
-  //   success: successDelete,
-  // } = productDelete;
   const orderDetail = useSelector(state => state.order)
   const { order, loading, error } = orderDetail;
 
@@ -33,52 +58,29 @@ function OrderDeliverScreen(props) {
   React.useEffect(() => {
     if (order) {
       setDescription(order.description)
-      setCompleted(order.completed)
-      // setDeliverDate(order.deliveredAt)
     }
-  }, [order])
+  }, [order]) 
 
-  // Delete
-  const deleteHandler = (order) => {
-    dispatch(deleteOrder(order._id));
-    props.history.push(`/orders`);
-  };
+  const [description, setDescription] = useState('')
+  const [deliverDate, setDeliverDate] = useState(null)  
 
-  const [description, setDescription] = useState(``);
-  const [completed, setCompleted] = useState(false);
-  const [deliverDate, setDeliverDate] = useState(new Date());
-
-
-  //  console.log(`order: ${order.description}`)
-  // console.log('isLoading', isLoading)
-  //  console.log('date', deliverDate)
-
+  // console.log('date', deliverDate)
 
   //SAVE////
   const submitHandler = (e) => {
-    e.preventDefault();
-    completed ? (
-      dispatch(
-        deliverOrder({
-          _id: order._id,
-          description,
-          completed,
-          deliverDate  
-  
-        })
-      )
-    ) : (
-      dispatch(
-        deliverOrder({
-          _id: order._id,
-          description,
-          completed,
-  
-        })
-      )
+    e.preventDefault()
+    dispatch(
+      createOrder({
+        _id: order._id,
+        description,
+        deliverDate
+      })
     )
-    props.history.push("/orders");
-   
+
+    dispatch(listOrders())//пока это не добавил-не работало дата доставки была старая
+
+    props.history.push("/orders")
+
   };
 
   // debugger
@@ -88,143 +90,109 @@ function OrderDeliverScreen(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-        <div>
-          <button onClick={props.history.goBack}>Back</button>
-          {/* <Link to="/orderhistory">Вернуть к сниску заказов</Link> */}
-          {/* <h1>DELIVER</h1> */}
-          {/* <h2>Order {order._id}</h2> */}
-          {/* <h2>Доставлено: {order.deliveredAt}</h2> */}
-          {/* <div className="row top"> */}
-          {/* <div className="col-2"> */}
+    <div>
+      <Button
+       style={{ marginLeft: 10}}
+        variant="contained"
+        color="secondary"
+        size="large"
+        onClick={props.history.goBack}
+        className={classes.button}
+      >
+        Назад
+      </Button>
 
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Информация о покупателе:</h2>
-                <p>
-                  <strong>Имя:</strong> {order.shipping.fullName} <br />
-                  <strong>Адрес: </strong> {order.shipping.address},
-                  <strong>Телефон: </strong> {order.shipping.postalCode},
-                  <strong>Des: </strong> {order.description},
-                </p>
-                {order.completed ? (
-                  <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
-                  </MessageBox>
-                ) : (
-                    <MessageBox variant="danger">Not Delivered</MessageBox>
-                  )}
+      <div className="card card-body">
+        <h2>Информация о покупателе:</h2>
+        <p>
+          <strong>Имя:</strong> {order.shipping.fullName} <br />
+          <strong>Адрес: </strong> {order.shipping.address} <br />
+          <strong>Телефон: </strong> {order.shipping.postalCode} <br />
+          <strong>Дополнительная информация: </strong> {order.description}
+        </p>
+        {order.deliveredAt ? (
+          <MessageBox variant="success">
+            Доставлено: {order.deliveredAt}
+          </MessageBox>
+        ) : (
+          <MessageBox variant="danger">Не доставлено</MessageBox>
+        )}
+      </div>
+
+      <div className="card card-body">
+        <h2>Информация о товаре:</h2>
+        <ul>
+          {order.orderItems.map((item) => (
+            <li key={item._id}>
+              <div className="row">
+                <div>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="small"
+                  ></img>
+                </div>
+                <div className="min-30">
+                  {/* <Link to={`/product/${item.product}`}> */}
+                  {item.name}
+                  {/* </Link> */}
+                </div>
+                <div className="min-30">
+                  {(item.cl !== 'undefined') ? item.cl : '--'}
+                </div>
+                <div className="min-30">
+                  {(item.sz !== 'undefined') ? item.sz : '--'}
+                </div>
+
+                <div>
+                  {item.qty} x {item.price}  = {item.qty * item.price} руб.
+                </div>
               </div>
             </li>
+          ))}
+        </ul>
+      </div>
 
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item._id}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="small"
-                          ></img>
-                        </div>
-                        <div className="min-30">
-                          {/* <Link to={`/product/${item.product}`}> */}
-                          {item.name}
-                          {/* </Link> */}
-                        </div>
-                        <div className="min-30">
-                          {( item.cl !== 'undefined') ? item.cl : '--' }
-                        </div>
-                        <div className="min-30">
-                          {( item.sz !== 'undefined') ? item.sz : '--'}
-                        </div>
+      <div className="form">
 
-                        <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
+        <form onSubmit={submitHandler}>
 
-          </ul>
-          <div className="form">
-
-            <form onSubmit={submitHandler}>
-              <ul className="form-container">
+          <TextField
+            label="Дополнительная информация"
+            defaultValue={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className={classes.input}
+            // rows={4}
+            multiline
+            variant="outlined"
+          />
 
 
-                <li className="todo">
-                  <label>
-                    <input
-                      type="checkbox"
-                      // defaultChecked={false}
-                      name="completed"
-                      //  value={finished}
-                      checked={completed}
-                      id="completed"
-                      onChange={() => setCompleted(!completed)}
-                    />
-                    <span>{order._id}</span>
+          <span>Укажите дату доставки:</span>
+          <DatePicker
+            selected={deliverDate}
+            onChange={date => setDeliverDate(date)}
+            dateFormat="dd MMMM, yyyy"
+
+          />
+          <Button
+            style={{ marginTop: 5}}
+            variant="contained"
+            color="primary"
+            size="small"
+            type="submit"
+            className={classes.button}
+          >
+              Подтвердить доставку
+                    </Button>
 
 
 
-                    <button
-                      className="small"
-                      onClick={() => deleteHandler(order)}
-                    >
-                      Delete
-                  </button>
-                   
-                  </label>
-                </li>
-               
-  {/* //////////////////////////////////////// ///////////                             */}
-                {!completed ? (
-                  <div>
-                  <span>Укажите дату доставки:</span>
-                  <DatePicker
-                    selected={deliverDate}
-                    onChange={date => setDeliverDate(date)}
-                    // locale="ru"
-                    dateFormat="dd MMMM, yyyy"          
+        </form>
+      </div>
 
-                  />
-                  </div>
-                ) : 
-                // ( <h2>Доставлено: {order.deliveredAt}</h2>)
-                ( '')
-                }                  
-                <li>
-                  <div className="input-field">
-                    <input type="text"
-                      name="description"
-                      value={description}
-                      id="description"
-                      onChange={(e) => setDescription(e.target.value)} />
-
-                    <label>Описание</label>
-                  </div>
-                </li>
-
-                <li>
-                  <button type="submit" className="button primary">
-                    Create
-                  </button>
-                </li>
-
-              </ul>
-            </form>
-          </div>
-
-        </div>
-      )
+    </div>
+  )
 }
 
 export default OrderDeliverScreen

@@ -5,7 +5,7 @@ import LoadingBox from '../components/my/LoadingBox';
 import MessageBox from '../components/my/MessageBox';
 import SelectMU from '../components/MU/SelectMU';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import DirectionsIcon from '@material-ui/icons/Directions';
 
@@ -33,7 +33,7 @@ export default function OrdersList(props) {
 
   const [filteredOrders, setFilteredOrders] = React.useState([]);
 
-  console.log(filteredOrders)
+  // console.log(filteredOrders)
   // filteredOrders.sort(function (a, b) {
   //   // Turn your strings into dates, and then subtract them
   //   // to get a value that is either negative, positive, or zero.
@@ -74,10 +74,10 @@ export default function OrdersList(props) {
   React.useEffect(() => {
     switch (age) {
       case 20:
-        setFilteredOrders(orders.filter(order => order.completed === true))
+        setFilteredOrders(orders.filter(order => order.deliveredAt !== null))
         break
       case 30:
-        setFilteredOrders(orders.filter(order => order.completed === false))
+        setFilteredOrders(orders.filter(order => order.deliveredAt === null))
         break
       default:
         setFilteredOrders(orders)
@@ -105,7 +105,7 @@ export default function OrdersList(props) {
             <thead>
               <tr>
                 <th>Дата заказа</th>
-                <th>Заказщик</th>
+                <th>Заказчик</th>
                 {/* <th>Зарегистрированный<br></br>Пользователь</th> */}
                 <th>Адрес</th>
                 <th>Сумма заказа</th>
@@ -145,8 +145,8 @@ export default function OrdersList(props) {
                       className={classes.button}
                       aria-label="directions"
                       onClick={() => {
-                        props.history.push(`/order/${order._id}/deliver`);
-                        // props.history.push(`/order/${order._id}`);
+                         props.history.push(`/order/${order._id}/deliver`);
+                        //  props.history.push(`/order/${order._id}`);
                       }}
                     >
 
@@ -165,7 +165,7 @@ export default function OrdersList(props) {
                       color="secondary"
                       onClick={() => deleteHandler(order)}
                     >
-                      <DeleteIcon fontSize="large" />
+                      <DeleteOutlinedIcon fontSize="large" />
 
                     </IconButton>
                   </td>

@@ -43,6 +43,11 @@
 
 //ListDown
 
+//DatePicker
+.react-datepicker {
+    font-size: 1.2rem !important;
+}
+
 
 
 .smaller {
@@ -79,12 +84,12 @@ button {
     font-family: Montserrat,Helvetica, Arial, sans-serif;
 }
 
-// input:hover,
-select:hover,
-// textarea:hover,
-button:hover {
-    border: 0.1rem #404040 solid;
-}
+// // input:hover,
+// select:hover,
+// // textarea:hover,
+// // button:hover {
+//     border: 0.1rem #404040 solid;
+// }
 
 button.primary {
     background-color: #f0c040;
@@ -322,38 +327,14 @@ tbody > tr:nth-child(odd) {
     // padding:  1rem;
 }
 
-//////////////
-.colors-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.checked-items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.colors-item {
-    display: flex;
-    flex: 0 1 60px;
-    margin: 5px;
-    padding: 5px;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    border: 1px solid #eee;
-}
-
-.colors-item img {
-    border: 1px solid #a4a4a4;
-}
 
 
-.colors-item:hover {
-    border: 1px solid #000;
-}
+// .checked-items {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: center;
+// }
+
 
 ///////Product
 .products {

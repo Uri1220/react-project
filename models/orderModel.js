@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema(
       deliveredAt: { type:String,default:null},
       orderDate: { type: String },
       description: { type: String,default:''},
-      completed:{type:Boolean, default:false},
+      // completed:{type:Boolean, default:false},
   },
   //  {
   //    timestamps: false,

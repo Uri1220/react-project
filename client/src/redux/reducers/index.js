@@ -3,7 +3,7 @@ import { catCreateReducer,catListReducer} from './CatReduser'
 import { pensListReducer, penDetailReducer } from './pensListReducer'
 import { doorsForMainReducer,doorsListReducer, doorDetailReducer, doorSaveReducer, doorDeleteReducer,doorReviewSaveReducer} from './doorsListReducer'
 import {  userSigninReducer, userRegisterReducer,  userDetailsReducer,userUpdateProfileReducer, userUpdateReducer } from './userReducers'
-import { orderCreateReducer,orderDetailsReducer,orderListReducer,orderDeleteReducer,orderDeliverReducer,orderMineListReducer } from './orderReducers'
+import { orderCreateReducer,orderDetailsReducer,orderListReducer,orderDeleteReducer,orderMineListReducer } from './orderReducers'
 import { colorSaveReducer, colorsListReducer,colorDeleteReducer,} from './colorsReducer'
 import { cartReducer } from './cartReducer'
 
@@ -38,7 +38,7 @@ export const rootReducer = combineReducers({
 
       userDetails:userDetailsReducer,
       userUpdateProfile:userUpdateProfileReducer,
-      orderDeliver:orderDeliverReducer,
+      // orderDeliver:orderDeliverReducer,
       catCreate:catCreateReducer,
       catsList:catListReducer,
    })

@@ -113,6 +113,7 @@ orderRouter.post('/',
     orderItems: req.body.orderItems,
     shipping: req.body.shippingAddress,
      orderDate : dateFormat(now,"dd mmmm, yyyy, HH:MM"),
+    //  orderDate : dateFormat(now,"dd mmmm, yyyy, HH:MM"),
     user: req.user._id,              
 
   });
@@ -181,16 +182,24 @@ orderRouter.post('/',
 
 
 orderRouter.put(
-  '/:id/deliver',
+   '/:id/deliver',
+  //  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
-       order.completed = req.body.completed;
+      //  order.completed = req.body.completed;
        order. description = req.body.description || order.description;
+
+       if(req.body.deliverDate){
+        order.deliveredAt = dateFormat(req.body.deliverDate,"dd mmmm, yyyy") 
+
+       }else{
+        order.deliveredAt =  null
+       }
       //  order.deliveredAt = req.body.deliverDate || null
-       order.deliveredAt = dateFormat(req.body.deliverDate,"dd mmmm, yyyy") || null
+      //  order.deliveredAt = dateFormat(req.body.deliverDate,"dd mmmm, yyyy") || null
        
       const updatedOrder = await order.save();
       res.send({ message: 'Order Delivered', order: updatedOrder });

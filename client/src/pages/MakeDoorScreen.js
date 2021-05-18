@@ -6,6 +6,8 @@ import { saveProduct, fetchFilterDoors, deleteProdcut, } from '../redux/actions/
 import { ColorsFormikMakeDoor } from './ColorsFormikMakeDoor'
 
 import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import DirectionsIcon from '@material-ui/icons/Directions';
@@ -21,49 +23,46 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles((theme) => ({
   root: {
 
-     maxWidth: 1200,
-    margin: '0 auto',
-    //  display: 'flex',
-    //  flexWrap: 'wrap',
-    //  '& > *': {
-    //    margin: theme.spacing(1),
-    //    width: theme.spacing(16),
-    //    height: theme.spacing(16),
-    //  },
+    maxWidth: 1200,
+    margin: '0 auto',   
   },
 
- 
   input: {
-    width: '50ch',
+    width: '60ch',
     fontSize: 16,
     padding: ' 5px 0px',
-    marginLeft:15,
+    marginLeft: 15,
     '& .MuiInputBase-root ': {
       fontSize: 16,
     },
     '& .MuiFormLabel-root': {
       fontSize: 16,
-      // fontFamily: "Helvetica Arial sans-serif"
     },
 
-  },
-  divider: {
-    height: 28,
-    margin: 4,
   },
 
   button: {
     boxShadow: 'none',
     textTransform: 'none',
     fontSize: 16,
-    padding: '8px',
+    padding: '6px',
     lineHeight: 1.5,
     borderColor: '#eee',
     '&:hover': {
       border: 'none',
       opacity: 'none',
     },
-
+  },
+  button1: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 12,
+    padding: '5px',
+    lineHeight: 1.5,
+    '&:hover': {
+      border: 'none',
+      opacity: 'none',
+    },
   },
 }));
 
@@ -87,17 +86,16 @@ function MakeDoorScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const [complect, setComplect] = useState('');
-  const [upisLoading, setUpisLoading] = useState(false);
   const [colors, setColors] = useState([]);
   const [visible, setVisible] = React.useState([]);
 
   // colors - цвета из БД рабочие
-  // colFinish - новые цвета после редактирования
+  // visible - новые цвета после редактирования
 
   // console.log('props.location.search:', props.location.search);
   //  console.log('modalVisible',modalVisible);
   //  console.log('tableVisible',tableVisible);
-   //  console.log('visible',visible);
+  //  console.log('visible',visible);
   // props.location.search: ?cat=massiv=sub=classico
   const cat = props.location.search ? String(props.location.search.split("=")[1]) : '';
   const sub = props.location.search ? String(props.location.search.split("=")[3]) : '';
@@ -201,21 +199,25 @@ function MakeDoorScreen(props) {
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
   };
-  //
-
-
 
   return (
     <div className="content content-margined">
       <div className="product-header">
         {/* <h3>Products</h3> */}
         {!modalVisible &&
-          <button className="button primary" onClick={() => openModal(
-            { category: `${cat}`, sub_category: `${sub}` }
-          )}>
-            Создать продукт
-        </button>
 
+          <Button
+            style={{ marginBottom: 15 }}
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<SaveIcon />}
+            onClick={() => openModal({ category: `${cat}`, sub_category: `${sub}` })}
+            className={classes.button}
+          // startIcon={<SaveIcon />}
+          >
+            Создать продукт
+          </Button>
         }
       </div>
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
@@ -228,154 +230,162 @@ function MakeDoorScreen(props) {
           className={classes.root}
         >
           <Paper elevation={4}>
-              <form  onSubmit={submitHandler}>               
-                 
-                  <li>
-                    {isLoadingSave && <div>isLoading...</div>}
-                    {errorSave && <div>{errorSave}</div>}
-                  </li>
-                  
-                  <Paper style={{marginBottom:10,padding:5,display:'flex',justifyContent:'center'}} elevation={1}>
+            <form onSubmit={submitHandler}>
 
-                    <Button
-                      style={{ marginRight: 20 }}
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      size="large"
-                      className={classes.button}
-                      startIcon={<SaveIcon />}
-                    >
-                      {id ? 'Обновить' : 'Создать'}
+              <li>
+                {isLoadingSave && <div>isLoading...</div>}
+                {errorSave && <div>{errorSave}</div>}
+              </li>
+
+              <Paper style={{ marginBottom: 10, padding: 5, display: 'flex', justifyContent: 'center' }} elevation={1}>
+
+                <Button
+                  style={{ marginRight: 20 }}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  size="large"
+                  className={classes.button}
+                  startIcon={<SaveIcon />}
+                >
+                  {id ? 'Обновить' : 'Создать'}
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  onClick={() => clickBack()}
+                  className={classes.button}
+                >
+                  Назад
                     </Button>
 
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                      onClick={() => clickBack()}
-                      className={classes.button}
-                    >
-                      Назад
-                    </Button>
-                  </Paper>
+              </Paper>
 
-                  <Paper elevation={4}>
+              <Paper elevation={4}>
+                <h2 style={{ marginLeft: 20, fontSize: 25 }}>
+                  {id ? 'Корректировка данных :' : ''}
+                </h2>
 
-                  <li style={{padding:15}}>
-                    Категория: <b>{category}</b>  Подкатегория: <b>{sub_category} </b>
-                  </li>
-                  <Divider/>
+                <li style={{ padding: 15 }}>
+                  Категория: <b>{category}</b>  Подкатегория: <b>{sub_category} </b>
+                </li>
+                <Divider />
 
 
-                  <li>
+                <li>
 
-                    <TextField
-                      label="Название"
-                      type="search"
-                      defaultValue={title || ''}
-                      required
-                      onChange={(e) => setTitle(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
+                  <TextField
+                    label="Название"
+                    type="search"
+                    defaultValue={title || ''}
+                    required
+                    onChange={(e) => setTitle(e.target.value)}
+                    className={classes.input}
+                  />
+                </li>
+                <li>
 
-                    <TextField
-                      label="Цена"
-                      type="number"
-                      defaultValue={price}
-                      required
-                      onChange={(e) => setPrice(e.target.value)}
-                      className={classes.input}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">Руб.</InputAdornment>,
-                      }}
-                    />
-                  </li>
-                  <li>
+                  <TextField
+                    label="Цена"
+                    type="number"
+                    defaultValue={price}
+                    required
+                    onChange={(e) => setPrice(e.target.value)}
+                    className={classes.input}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">Руб.</InputAdornment>,
+                    }}
+                  />
+                </li>
+                <li>
 
-                    <TextField
-                      label="Url изображения"
-                      type="url"
-                      defaultValue={url || ''}
-                      required
-                      onChange={(e) => setUrl(e.target.value)}
-                      className={classes.input}
-                    />
-                    {/* <input type="file" onChange={uploadFileHandler}></input>
+                  <TextField
+                    label="Url изображения"
+                    type="url"
+                    defaultValue={url || ''}
+                    required
+                    onChange={(e) => setUrl(e.target.value)}
+                    className={classes.input}
+                  />
+                  {/* <input type="file" onChange={uploadFileHandler}></input>
                 {upisLoading && <div>UpisLoading...</div>} */}
-                  </li>
-                  <li>
+                </li>
+                <li>
 
-                    <TextField
-                      label="Тип"
-                      type="search"
-                      defaultValue={typ || ''}
-                      onChange={(e) => setTyp(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
+                  <TextField
+                    label="Тип"
+                    type="search"
+                    defaultValue={typ || ''}
+                    onChange={(e) => setTyp(e.target.value)}
+                    className={classes.input}
+                  />
+                </li>
+                <li>
 
 
-                    <TextField
-                      label="Размеры"
-                      type="search"
-                      defaultValue={size || ''}
-                      onChange={(e) => setSize(e.target.value)}
-                      className={classes.input}
-                    />
-                  </li>
-                  <li>
+                  <TextField
+                    label="Размеры"
+                    type="search"
+                    defaultValue={size || ''}
+                    onChange={(e) => setSize(e.target.value)}
+                    className={classes.input}
+                  />
+                </li>
+                <li>
 
-                    <TextField
-                      label="Количество на складе"
-                      type="number"
-                      defaultValue={countInStock}
-                      // required
-                      onChange={(e) => setCountInStock(e.target.value)}
-                      className={classes.input}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">Шт.</InputAdornment>,
-                      }}
-                    />
-                  </li>
+                  <TextField
+                    label="Количество на складе"
+                    type="number"
+                    defaultValue={countInStock}
+                    // required
+                    onChange={(e) => setCountInStock(e.target.value)}
+                    className={classes.input}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">Шт.</InputAdornment>,
+                    }}
+                  />
+                </li>
 
-                  <li>
+                <li>
 
-                    <TextField
-                      label="Описание"
-                      defaultValue={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      // placeholder="Placeholder"
-                      className={classes.input}
-                      rows={6}
-                      multiline
-                      variant="outlined"
-                    />
-                  </li>
-                  <li>
+                  <TextField
+                    label="Описание"
+                    defaultValue={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                     placeholder="Введите описание в формате: Свойство= Значение+,
+                     например: Цвет=белый+"                     
+                    className={classes.input}
+                    rows={4}
+                    multiline
+                    variant="outlined"
+                  />
+                </li>
+                <li>
 
-                    <TextField
-                      label="Характеристики"
-                      defaultValue={complect}
-                      onChange={(e) => setComplect(e.target.value)}
-                      className={classes.input}
-                      // rows={6}
-                      multiline
-                      variant="outlined"
-                    />
-                  </li> 
-                  </Paper>
-              
-              </form>
+                  <TextField
+                    label="Характеристики"
+                    defaultValue={complect}
+                    onChange={(e) => setComplect(e.target.value)}
+                    className={classes.input}
+                    placeholder="Введите характеристики в формате: Свойство= Значение+,
+                    например: Цвет=белый+"
+
+                    // rows={6}
+                    multiline
+                    variant="outlined"
+                  />
+                </li>
+              </Paper>
+
+            </form>
           </Paper>
 
           {/*=================ColorForm ======== */}
@@ -386,7 +396,7 @@ function MakeDoorScreen(props) {
                 visible={visible}
                 colors={colors}
               />
-              }
+            }
           </Paper>
           {/* =================================== */}
 
@@ -430,14 +440,18 @@ function MakeDoorScreen(props) {
                     </td>
                     <td >
                       {/* открываем окно */}
-                      <IconButton
+
+                      <Button
+                        style={{ marginRight: 20 }}
+                        variant="contained"
                         color="primary"
-                        className={classes.button}
-                        aria-label="directions"
+                        size="small"
                         onClick={() => openModal(product)}
+                        className={classes.button1}
+                      // startIcon={<SaveIcon />}
                       >
-                        <DirectionsIcon />
-                      </IconButton>
+                        Редактировать
+                    </Button>
 
                       <IconButton
                         aria-label="delete"
@@ -445,7 +459,7 @@ function MakeDoorScreen(props) {
                         color="secondary"
                         onClick={() => deleteHandler(product)}
                       >
-                        <DeleteIcon fontSize="large" />
+                        <DeleteOutlinedIcon fontSize="large" />
                       </IconButton>
 
                     </td>

@@ -158,7 +158,7 @@ function Doors(props) {
   React.useEffect(() => {
     switch (priceType) {
       case 20:
-        setMin(10)
+        setMin(1)
         setMax(99)
         if (sub_category) {
           props.history.push(`/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
@@ -192,7 +192,7 @@ function Doors(props) {
         break
       case 50:
         setMin(500)
-        setMax(10000)
+        setMax(100000)
         if (sub_category) {
           props.history.push(`/doors/category/${category}/sub_category/${sub_category}/min/${mi}/max/${ma}`)
 
