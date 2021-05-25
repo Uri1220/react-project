@@ -5,7 +5,7 @@ import { fetchDoorDetail } from '../redux/actions/doorsA'
 import ListDown from '../components/MU/ListDown'
 import Size from '../components/my/Size'
 // import { DOORS_LIST_FAIL } from '../redux/constants/doorsConstants';
-///////Tooltip//////////
+///////Tooltip////////// 
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -99,7 +99,7 @@ function DoorOne(props) {
 
   const ima = imageArr()
   const tit = titleArr()
-  // console.log('image', tit)
+  //  console.log('image', ima)
 
   function first() {
     if (door.colors && door.colors.length !== 0) {
@@ -151,9 +151,10 @@ function DoorOne(props) {
             </div>
 
             <div className="details">
+
               <div className='details__left'>
                 <div className="details__left_image">
-                  <img src={ima[s]} alt="11" />
+                  <img src={ima.length ? ima[s] : door.url} alt="11" />
                   {/* <img src={door.url} alt="11" /> */}
                 </div>
               </div>
@@ -166,6 +167,7 @@ function DoorOne(props) {
                   <div className='details__right_title'>
                     Цвета
                   </div>
+
                     {
                       Object.keys(door)
                         .filter((x) => Array.isArray(door[x]))//["colors"]
@@ -258,6 +260,7 @@ function DoorOne(props) {
                     </li>
                   </ul>
                 </div>
+                
               </div>
 
             </div>

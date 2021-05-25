@@ -2,17 +2,17 @@ export const array = {
    //category 0-
    // categories : cat_arr,
    categories: [
-      { name: 'Распродажа', url: '/' },
+        { name: 'Распродажа', url: '/' },
       { name: 'Двери', url: '/door/colorId/' },
       { name: 'Фурнитура', },
-      { name: 'Плинтус', url: '/plintus' },
+      // { name: 'Плинтус', url: '/plintus' },
    ],
    //Doors subCat+1
    // ' двери'
    doorsCat: [
-      { name: 'Входные', db:'vchod', url: '/doors/category/vchod' },
-      { name: 'Массив', db:'massiv',url: '/doors/category/massiv'},
-      { name: 'Эко Шпон', db:'ecoshpon',url: '/doors/category/ecoshpon'},
+      { name: 'Входные', db:'vchod', url: '/doors/category/vchod',image:'/img/vchod.png' },
+      { name: 'Массив', db:'massiv',url: '/doors/category/massiv',image:'/img/mass.png' },
+      { name: 'Эко Шпон', db:'ecoshpon',url: '/doors/category/ecoshpon',image:'/img/yurkas-eco.png' },
       // { name: 'МДФ', db:'mdf'},
    ],
    // subSusbCat+1 url: '/-------' 
@@ -40,12 +40,12 @@ export const array = {
    //Furnitua
    furnCat: [
       { name: 'Ручки', db:'pens' ,url: '/implements/category/pens'},
-      { name: 'Петли', db:'petly' },
+      // { name: 'Петли', db:'petly' },
    ],
    ruchFurn: [
       { name: 'На квадратной розетке', db:'kvadr', url: '/implements/category/pens/sub_category/kvadr' },
       { name: 'На круглой розетке', db:'krug', url: '/implements/category/pens/sub_category/krug' },
-      { name: 'Ручки-защелки', db:'zaschelk', url: '/implements/category/pens/sub_category/zaschelk' },
+      // { name: 'Ручки-защелки', db:'zaschelk', url: '/implements/category/pens/sub_category/zaschelk' },
    ],
    petFurn: [
       { name: 'Врезные' },

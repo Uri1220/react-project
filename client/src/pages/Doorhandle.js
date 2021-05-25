@@ -8,15 +8,16 @@ const Doorhandle = ({ pen }) => {
 
     < >
       <Link className="product" to={'/pens/' + pen._id}>
-        <div>
-          <img src={pen.url} alt="11" />
+        <div  style={{height:15}} className="product-name">
+          {pen.title}
+        </div>
+        <div style={{ maxWidth: 170, width: 170 }} >
+          <img style={{ maxWidth: 170, height: 'auto' }} src={pen.url} alt="11" />
         </div>
 
         {/* <img className="product-image" src={{ ...pen.pictures[0] }.medium} alt="11" /> */}
 
-        <div className="product-name">
-          {pen.title}
-        </div>
+
         <div className="product-price">{pen.price} p.</div>
       </Link>
     </>

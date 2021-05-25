@@ -3,7 +3,7 @@ import Pens from '../../pages/Pens'
 import Plintus from '../../pages/Plintus'
 import Doors from '../../pages/Doors'
 import DoorsMain from '../../pages/DoorsMain'
-import Main from '../../pages/Main'
+import Home from '../../pages/Home'
 import { Route, Switch } from 'react-router-dom'
 import PenOne from '../../pages/PenOne'
 import DoorOne from '../../pages/DoorOne'
@@ -26,21 +26,19 @@ import Color from '../../pages/Color'
 import { ColorsFormik } from '../../pages/dev_ed/ColorsFormik'
 import { NestedArray } from '../../pages/dev_ed/NestedArray'
 import StepperMU  from '../../pages/dev_ed/StepperMU'
+import Delivery from './Delivery'
+import Payment from './Payment'
 
 
-// const Content = ({ category }) => {
 const Content = () => {
 
-  //  console.log(pens)
   return (
     <main  className="main">
 
       <div className="content">
-        <Breadcrumb/>
-        {/* <h3>{category}</h3> */}
+        {/* <Breadcrumb/> */}
         <Switch>
-          <Route path="/" exact component={Main} />
-          {/* <Route path="/pens" exact component={Pens}  /> */}
+          <Route path="/" exact component={Home} />
           <Route 
            path="/implements/category/:category/sub_category/:sub_category" 
            exact component={Pens}  />
@@ -52,6 +50,8 @@ const Content = () => {
           <Route path="/pens/:id" component={PenOne}  />
           <Route path="/cart/:id?" component={Cart}  />
           <Route path="/plintus" component={Plintus} />
+          <Route path="/delivery" component={Delivery} />
+          <Route path="/payment" component={Payment} />
 
           {/* <Route path="/doors" exact component={Doors} /> */}
           {/* <Route path="/doors" exact> <Doors/> </Route> */}

@@ -13,10 +13,10 @@ export default function PlaceOrderScreen(props) {
   // const { shipping } = cart;
 
   // console.log(shipping)
-  
-//   if (!cart.paymentMethod) {
-//     props.history.push('/payment');
-//   }
+
+  //   if (!cart.paymentMethod) {
+  //     props.history.push('/payment');
+  //   }
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
@@ -27,9 +27,9 @@ export default function PlaceOrderScreen(props) {
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
   );
 
-//   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-//   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-//   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  //   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
+  //   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
+  //   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
@@ -38,7 +38,7 @@ export default function PlaceOrderScreen(props) {
     if (success) {
       alert('Ваш заказ принят')
       // props.history.push(`/order/${order._id}`);
-       props.history.push(`/`);
+      props.history.push(`/`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [dispatch, order, props.history, success]);
@@ -51,14 +51,14 @@ export default function PlaceOrderScreen(props) {
           <ul>
             <li>
               <div className="card card-body">
-                <h2>Shipping</h2>
+                <h2>Информация о покупателе:</h2>
                 <p>
-                 
-                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
-                  <strong>Phone: </strong>  {cart.shippingAddress.postalCode},
-                  
-                  
+
+                  <strong>Имя:</strong> {cart.shippingAddress.fullName} <br />
+                  <strong>Адрес: </strong> {cart.shippingAddress.address}<br />
+                  <strong>Телефон: </strong>  {cart.shippingAddress.postalCode},
+
+
                 </p>
               </div>
             </li>
@@ -72,7 +72,7 @@ export default function PlaceOrderScreen(props) {
             </li> */}
             <li>
               <div className="card card-body">
-                <h2>Order Items</h2>
+                <h2>Информация о товаре:</h2>
                 <ul>
                   {cart.cartItems.map((item) => (
                     <li key={item.productId}>
@@ -86,12 +86,12 @@ export default function PlaceOrderScreen(props) {
                         </div>
                         <div className="min-30">
                           {/* <Link to={`/product/${item.productId}`}> */}
-                            {item.name}
+                          {item.name}
                           {/* </Link> */}
                         </div>
 
                         <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.qty} x {item.price} = {item.qty * item.price} руб.
                         </div>
                       </div>
                     </li>
@@ -110,7 +110,7 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Сумма заказа</div>
-                  <div>${cart.itemsPrice.toFixed(2)}</div>
+                  <div>{cart.itemsPrice.toFixed(2)} руб.</div>
                 </div>
               </li>
               {/* <li>
@@ -125,7 +125,7 @@ export default function PlaceOrderScreen(props) {
                   <div>${cart.taxPrice.toFixed(2)}</div>
                 </div>
               </li> */}
-               {/* <li>
+              {/* <li>
                 <div className="row">
                   <div>
                     <strong> Order Total</strong>
@@ -135,14 +135,14 @@ export default function PlaceOrderScreen(props) {
                   </div>
                 </div>
               </li>  */}
-              <li> 
+              <li>
                 <button
                   type="button"
                   onClick={placeOrderHandler}
                   className="primary block"
                   disabled={cart.cartItems.length === 0}
                 >
-                  Place Order
+                  Разместить заказ
                 </button>
               </li>
               {loading && <LoadingBox></LoadingBox>}

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPenDetail } from '../redux/actions/pensA'
 import ListDown from '../components/MU/ListDown'
 
-///////Tooltip//////////
+///////Tooltip////////// 
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -121,32 +121,31 @@ function PenOne(props) {
 
 
             <div className="details">
-              {/* <div className="details-image">
-                <img className="product-image" src={pen.url} alt="11" />
 
-              </div> */}
-              <div className='details-left'>
-                <div className="details-image">
-                  <img src={ima[s]} alt="11" />
+             
+              <div className='details__left'>
+                <div className="details__left_image">
+                  <img src={ima.length ? ima[s] : pen.url} alt="11" />
+                  {/* <img src={door.url} alt="11" /> */}
                 </div>
               </div>
 
-              <div className="details-right">
+              <div className="details__right">
                 {/* Color */}
-                <div className='details-right-colors'>
-                  <div className='details-title'>
+                <div className='details__right_colors'>
+                  <div className='details__right_title'>
                     Цвета
                   </div>
-                  <div className='details-color-items'>
-                    {
+                 
+                   {
                       Object.keys(pen)
-                        .filter((x) => Array.isArray(pen[x]))
+                        .filter((x) => Array.isArray(pen[x]))//["colors"]
                         .map((key) => (
-                          // <div   key={pen._id}>                            
+                          // key === colors                           
                           <ul key={pen._id} >
                             {pen[key].map((item, i) => (
                               <li
-                                className={s === i ? 'color color-active' : 'color'}
+                                className={s === i ? 'active' : ''}
 
                                 key={item._id}
                               >
@@ -161,32 +160,31 @@ function PenOne(props) {
                               </li>
                             ))}
                           </ul>
-                          // </div>
                         ))
                     }
-                  </div>
                 </div>
                 {/* EndColor */}
 
-                <div className='details-right-price'>
-                  <span className='details-title'>
+                <div className='details__right_price'>
+                <span className='details__right_title'>
                     Цена
                       </span> <b>{pen.price} р.</b>
                 </div>
-                
 
-                <div className='details-right-description'>
-                  <div className="des1">
+
+               
+                <div className='details__right_description'>
+                  <div >
                     {pen.description &&
                       <ListDown des={pen.description} poz={1} />
                     }
                   </div>
-                  
+                 
 
                 </div>
 
                 {/* ACTION */}
-                <div className="details-right-action">
+                 <div className="details__right_action">
                   <ul>
                     <li>
                       Наличие:{' '}
@@ -221,10 +219,9 @@ function PenOne(props) {
                     </li>
                   </ul>
                 </div>
-              </div>
 
-              
-             
+
+              </div>
             </div>
           </>
         )

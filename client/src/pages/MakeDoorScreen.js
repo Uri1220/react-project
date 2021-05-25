@@ -190,10 +190,10 @@ function MakeDoorScreen(props) {
   };
 
   const clickBack = () => {
-    {
+    
       setModalVisible(false)
       setTableVisible(true)
-    }
+    
   }
   //Delete
   const deleteHandler = (product) => {

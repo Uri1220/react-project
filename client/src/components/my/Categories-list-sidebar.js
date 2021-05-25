@@ -113,8 +113,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
 
 
   return (
-    <div >
-      {/* <h1>Menu</h1> */}
+    // <div >
 
       <div className='menu'>
         {/* /////////111111//////// */}
@@ -219,7 +218,7 @@ import { setCategory, setSubCategory, setSub2Cat } from '../../redux/actions/pen
         {/* ////////1111111/////// */}
 
       </div>
-    </div>
+    // </div>
   )
 }
 export default CategoriesListSidebar

@@ -2,6 +2,9 @@
 .menu {
     width: 300px;
     margin-top: 20px;
+    @media (max-width: 768px) {
+       width: 100%;
+     }
 }
 
 /* .menu__list>li:hover .sub-menu__list {

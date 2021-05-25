@@ -119,7 +119,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             name="fullName"
-            placeholder="Enter full name"
+            placeholder="Введите имя"
             value={fullName}
             // onChange={e => fullNameHandler(e)}
              onChange={(e) => setFullName(e.target.value)}
@@ -132,7 +132,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             name="address"
-            placeholder="Enter address"
+            placeholder="Введите адрес"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required

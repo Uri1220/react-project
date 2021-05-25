@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     textTransform: 'none',
     fontFamily: 'Montserrat',
-    color: '#dae8f1',
+    // color: '#dae8f1',
     "&:hover": {
       border: 'none',
       color: 'blue'
@@ -101,7 +101,10 @@ export default function MenuListComposition() {
             </Button>
 
 
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal
+            // перекрывает
+            style={{zIndex:1000}}
+            >
               {({ TransitionProps, placement }) => (
                 <Grow
                   {...TransitionProps}
